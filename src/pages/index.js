@@ -19,7 +19,8 @@ export default function Home() {
         <AppContainer>
           <Stack gap="15px" textAlign="center" my="60px">
             <Heading as="h1" size="text40">
-              Redirect Services Performance Comparison
+              Redirect Services Performance Comparison Redirect Services Performance Comparison Redirect Services
+              Performance Comparison
             </Heading>
             <Text>
               Discover which redirect service delivers the fastest response times and highest uptime with our real-time
