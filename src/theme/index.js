@@ -2,7 +2,7 @@ import { extendTheme } from "@chakra-ui/react";
 import { themeHeading } from "@/theme/components/heading";
 import { themeText } from "@/theme/components/text";
 import { themeButton } from "@/theme/components/button";
-import { Inter } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +23,7 @@ const colors = {
   tertiary: "#3B3838",
 
   // state
-  info: "#211DF1",
+  info: "#007bff",
   success: "#00F668",
   warning: "#D29A0A",
   error: "#F50A0A",
@@ -49,7 +49,7 @@ export default extendTheme({
       body: {
         WebkitFontSmoothing: "antialiased",
         MozOsxFontSmoothing: "grayscale",
-        textWrap: "balance",
+        fontWeight: 300
       },
     }),
   },

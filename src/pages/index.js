@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { Box, Flex, HStack, Heading, Stack, Text } from "@chakra-ui/react";
+import {Box, Flex, HStack, Heading, Stack, Text, Image} from "@chakra-ui/react";
 import { AppContainer } from "@/components/AppContainer";
 import { Link } from "@chakra-ui/next-js";
 import { getFluidFontSize } from "@/utils";
@@ -33,14 +33,14 @@ export default function Home() {
       </Head>
       <main>
         <AppContainer>
-          <Stack gap="20px" textAlign="center" my="60px" mx="auto">
+          <Stack maxWidth="450px" gap="20px" textAlign="center" my="60px" mx="auto">
             <Heading as="h1" fontSize={getFluidFontSize(28, 32)} fontWeight="600">
               Redirect Services Performance Comparison
             </Heading>
-            {/* <Text>
+             <Text maxWidth="90%">
               Discover which redirect service delivers the fastest response times and highest uptime with our real-time
               comparison tool.
-            </Text> */}
+            </Text>
           </Stack>
           <CardList />
           <Flex my="50px" alignItems="center" justifyContent="center">

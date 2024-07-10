@@ -22,7 +22,7 @@ export default function DataSources() {
 
   return (
     <>
-      <Box maxW="80%" mx="auto" mt="50px" p="20px">
+      <Box maxW="90%" mx="auto" mt="50px" p="20px">
         <Stack>
           <Heading fontSize={getFluidFontSize(20, 26)} fontWeight="500">
             Data Sources

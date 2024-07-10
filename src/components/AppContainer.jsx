@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import {Box, Image} from "@chakra-ui/react";
 
 export function AppContainer({ children, ...rest }) {
   return (

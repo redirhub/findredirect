@@ -75,7 +75,7 @@ export default function CardList() {
               borderBlockEnd="1px solid var(--chakra-colors-gray-200)"
             >
               <HStack
-                maxW="80%"
+                maxW="90%"
                 mx="auto"
                 alignItems="center"
                 justifyContent="space-between"
@@ -142,8 +142,8 @@ export default function CardList() {
                   <Link
                     href={`https://updown.io/${token}`}
                     target="_blank"
-                    color="blue.400"
-                    fontSize={getFluidFontSize(16, 18)}
+                    color="info"
+                    fontSize={getFluidFontSize(16, 17)}
                   >
                     Details →
                   </Link>
