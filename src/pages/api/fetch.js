@@ -14,10 +14,18 @@ async function fetchData() {
   
   axios.defaults.baseURL = API_BASE;
   
-  const sitesData = await Promise.all(sites.map( token => {
+  const sitesData = await Promise.all(
+   sites.map( token => {
     return Promise.all([axios.get(`checks/${token}`), axios.get(`checks/${token}/metrics`)])
-  }));
-  return JSON.stringify(sitesData.map( check => check.map( c => c.data) ));
+   })
+  );
+  
+  // const nodes = await fetchNodes....
+  
+  return JSON.stringify({
+    sites: sitesData.map( check => check.map( c => c.data) ),
+    // nodes:
+  });
 }
 
 
