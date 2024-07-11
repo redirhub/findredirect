@@ -6,11 +6,14 @@ import { getFluidFontSize } from "@/utils";
 
 export default function DataSources() {
   const [dataSources, setDataSources] = useState([]);
+  const [sitesData, setSitesData] = useState({});
 
   async function fetchDataSources() {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_UPDOWN_BASE_URL}/api/nodes`);
-      setDataSources(response.data);
+      const apiRouteResponse = await axios.get("api/data");
+      setSitesData(apiRouteResponse.data.data.nodes);
+
+      console.log(apiRouteResponse.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -27,11 +30,11 @@ export default function DataSources() {
           <Heading fontSize={getFluidFontSize(20, 26)} fontWeight="500">
             Data Sources
           </Heading>
-          <Text>Performance data are tested by updown.io from {Object.keys(dataSources)?.length} locations.</Text>
+          <Text>Performance data are tested by updown.io from {Object?.keys(sitesData)?.length} locations.</Text>
         </Stack>
         <Grid mt="30px" gap="15px" gridTemplateColumns="repeat(auto-fit, minmax(250px, 1fr))">
-          {Object.keys(dataSources)?.map((sourceKey) => {
-            const { city, country, country_code } = dataSources[sourceKey];
+          {Object?.keys(sitesData)?.map((sourceKey) => {
+            const { city, country, country_code } = sitesData[sourceKey];
 
             return (
               <GridItem key={sourceKey} display="flex" gap="10px">
