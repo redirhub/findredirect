@@ -6,6 +6,8 @@ import { Link } from "@chakra-ui/next-js";
 import { getFluidFontSize } from "@/utils";
 import CardList from "@/components/CardList";
 import DataSources from "@/components/DataSources";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function Home() {
   const stylesBtnCta = {
@@ -19,7 +21,25 @@ export default function Home() {
     color: "#fff",
     backgroundColor: "#17b96e",
   };
-
+  
+  const [sitesData, setSitesData] = useState({
+    nodes: {},
+    sites: []
+  })
+  
+  async function fetchDataSources() {
+    try {
+      const apiRouteResponse = await axios.get("api/data");
+      setSitesData(apiRouteResponse.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  useEffect(() => {
+    fetchDataSources();
+  }, [])
+  
   return (
     <>
       <Head>
@@ -42,13 +62,13 @@ export default function Home() {
               comparison tool.
             </Text>
           </Stack>
-          <CardList />
+          <CardList sitesData={ sitesData?.sites } />
           <Flex my="50px" alignItems="center" justifyContent="center">
             <Link href="https://www.redirhub.com" {...stylesBtnCta}>
               Get started with RedirHub today
             </Link>
           </Flex>
-          <DataSources />
+          <DataSources sitesData={ sitesData?.nodes } />
         </AppContainer>
       </main>
     </>

@@ -34,7 +34,6 @@ export default async function handler(req, res) {
 
     if (JSON.parse(content).sites[0][0].token) {
       outputFileSync(path.join(__dirname, "/checks.json"), content);
-
       return res.json({ msg: "Successfully saved" });
     }
 

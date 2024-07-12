@@ -5,28 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CardListSkeleton from "./CardListSkeleton";
 
-export default function CardList() {
-  const [sitesData, setSitesData] = useState({});
-  const [maxResponseItem, setMaxResponseItem] = useState(null);
-
-  async function fetchChecks() {
-    try {
-      const apiRouteResponse = await axios.get("api/data");
-      setSitesData(apiRouteResponse.data.data);
-
-      // Find the element with the maximum data.timings.total
-      const maxResponseTiming = apiRouteResponse.data.data.sites
-        .map((site) => site)
-        .reduce((prev, current) => (prev[1].timings.total > current[1].timings.total ? prev : current));
-      setMaxResponseItem(maxResponseTiming);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    fetchChecks();
-  }, []);
+export default function CardList({ sitesData = [] }) {
 
   const stylesBigTag = {
     display: "flex",
@@ -48,12 +27,13 @@ export default function CardList() {
     borderRadius: "3px",
     backgroundColor: "#ffd831",
   };
+  
 
   return (
     <Box mx="auto" borderBlockStart="1px solid var(--chakra-colors-gray-200)">
-      {sitesData?.sites?.length > 0 ? (
+      {sitesData?.length > 0 ? (
         <>
-          {sitesData?.sites?.map((site) => {
+          {sitesData?.map((site) => {
             const { token, url, alias, last_check_at, uptime } = site[0];
             const { timings } = site[1];
 

@@ -1,25 +1,7 @@
 import { Box, Flex, Grid, GridItem, Heading, Image, Stack, Text } from "@chakra-ui/react";
-import { AppContainer } from "./AppContainer";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { getFluidFontSize } from "@/utils";
 
-export default function DataSources() {
-  const [sitesData, setSitesData] = useState({});
-
-  async function fetchDataSources() {
-    try {
-      const apiRouteResponse = await axios.get("api/data");
-      setSitesData(apiRouteResponse.data.data.nodes);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    fetchDataSources();
-  }, []);
-
+export default function DataSources({ sitesData = {} }) {
   return (
     <>
       <Box maxW="90%" mx="auto" mt="50px" p="20px">
