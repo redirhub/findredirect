@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       throw Error("Something went wrong!!!");
     }
 
-    if (Date.now() > content.timestamp + parseInt(process.env.FETCH_INTERVAL || 300) * 1000) {
+    if (Date.now() > content.timestamp + parseInt(process.env.CACHE_EXPIRES_AFTER_SECONDS || 300) * 1000) {
       throw Error("Cache expired!");
     }
 
