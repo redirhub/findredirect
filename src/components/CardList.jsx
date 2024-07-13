@@ -6,7 +6,6 @@ import axios from "axios";
 import CardListSkeleton from "./CardListSkeleton";
 
 export default function CardList({ sitesData = [] }) {
-
   const stylesBigTag = {
     display: "flex",
     fontSize: getFluidFontSize(14, 16),
@@ -27,7 +26,6 @@ export default function CardList({ sitesData = [] }) {
     borderRadius: "3px",
     backgroundColor: "#ffd831",
   };
-  
 
   return (
     <Box mx="auto" borderBlockStart="1px solid var(--chakra-colors-gray-200)">
@@ -85,8 +83,16 @@ export default function CardList({ sitesData = [] }) {
                         </Heading>
                       )}
 
-                      <Heading as="h5" className="uptime-card-subtitle" fontSize={getFluidFontSize(15, 17)}>
-                        <Link href="https://updown.io/fzba" target="_blank" color="gray.500">
+                      <Heading
+                        as="h5"
+                        className="uptime-card-subtitle"
+                        fontSize={getFluidFontSize(15, 17)}
+                      >
+                        <Link
+                          href={`https://updown.io/${token}`}
+                          target="_blank"
+                          color="gray.500"
+                        >
                           Last check: {getFormattedTimeDiff(last_check_at)}
                         </Link>
                       </Heading>
@@ -94,7 +100,10 @@ export default function CardList({ sitesData = [] }) {
                   </HStack>
                   <HStack gap={{ base: "30px", md: "60px" }} flexWrap="wrap">
                     <Box className="uptime-card-uptime">
-                      <Text color="gray.500" fontSize={getFluidFontSize(20, 24)}>
+                      <Text
+                        color="gray.500"
+                        fontSize={getFluidFontSize(20, 24)}
+                      >
                         Uptime
                       </Text>
                       <Box as="span" fontSize={getFluidFontSize(26, 32)}>
@@ -102,7 +111,10 @@ export default function CardList({ sitesData = [] }) {
                       </Box>
                     </Box>
                     <Box className="uptime-card-uptime">
-                      <Text color="gray.500" fontSize={getFluidFontSize(20, 24)}>
+                      <Text
+                        color="gray.500"
+                        fontSize={getFluidFontSize(20, 24)}
+                      >
                         Response
                       </Text>
                       <Box as="span" fontSize={getFluidFontSize(26, 32)}>
