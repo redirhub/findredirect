@@ -1,15 +1,7 @@
 import axios from 'axios';
+import corsMiddleware from '@/middleware/corsMiddleware';
 
-export default async function handler(req, res) {
-    // Set CORS headers
-    res.setHeader('Access-Control-Allow-Origin', 'https://content-build.urlredirectservice.com, https://www.redirhub.com');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end(); // OPTIONS request handled
-    }
-
+async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
@@ -71,8 +63,10 @@ export default async function handler(req, res) {
             }
         }
 
-        return res.status(200).json({ data: results });
+        return res.status(200).json(results);
     } catch (error) {
         return res.status(500).json({ error: 'An error occurred', details: error.message });
     }
 }
+
+export default corsMiddleware(handler);
