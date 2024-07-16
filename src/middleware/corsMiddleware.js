@@ -6,6 +6,7 @@ export default function corsMiddleware(handler) {
         const whitelist = [
             'urlredirectservice.com',
             'redirhub.com',
+            'localhost',
         ];
 
         // Function to check if origin is in whitelist
