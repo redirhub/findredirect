@@ -16,18 +16,18 @@ export default function corsMiddleware(handler) {
         }
 
         // Set CORS headers dynamically based on request origin
+        const requestOrigin = headers.origin || headers.referer || ''; // Get request origin from headers
+
+        if (isOriginAllowed(requestOrigin)) {
+            res.setHeader('Access-Control-Allow-Origin', requestOrigin);
+        } else {
+            res.setHeader('Access-Control-Allow-Origin', ''); // Disallow if not in whitelist
+        }
+
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
         if (method === 'OPTIONS') {
-            const requestOrigin = headers.origin || headers.referer || ''; // Get request origin from headers
-
-            if (isOriginAllowed(requestOrigin)) {
-                res.setHeader('Access-Control-Allow-Origin', requestOrigin);
-            } else {
-                res.setHeader('Access-Control-Allow-Origin', ''); // Disallow if not in whitelist
-            }
-
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
             return res.status(200).end(); // OPTIONS request handled
         }
 
