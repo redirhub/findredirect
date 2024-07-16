@@ -65,7 +65,7 @@ async function handler(req, res) {
 
         return res.status(200).json(results);
     } catch (error) {
-        return res.status(200).json({ error: 'An error occurred', details: error.message });
+        return res.status(400).json({ error: 'An error occurred', details: error.message });
     }
 }
 

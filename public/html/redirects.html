@@ -216,6 +216,7 @@
                         </div>`;
                         return noresult;
                     }
+                    
                     const headerInfoHtml = Object.entries(obj.header).map(([key, value]) => {
                         return `
                             <div class="p-4 border-b border-solid border-gray-200">
@@ -231,12 +232,9 @@
                         `;
                     });
                     // add server badge if server header exist
-                    const serverBadge = obj.header.server
-                        ? `<span class="mr-4 text-sm font-heading font-semibold text-black">
-                            <span>Server:</span>
-                            <span class="ml-2 text-gray-400 font-body">${obj.header.server}</span>
-                        </span>`
-                        : "";
+                    // badge looks green background 
+                    const serverBadge = obj.header.edge
+                        ? `<span class="inline-block ml-2 px-2 py-1 text-xs font-semibold text-white bg-green-500 rounded">${obj.header.server}</span>` : "";
                     
                         
 
@@ -259,7 +257,6 @@
                                         ${obj.url.split("?")[0]}
                                         </a>
                                         <div class="flex flex-wrap">
-                                            ${serverBadge}
                                             <p class="mr-4 text-sm font-heading font-semibold text-black">
                                                 <span>${labelStatusCode}</span>
                                                 <span class="ml-2 text-gray-400 font-body">${
@@ -278,6 +275,7 @@
                                                     obj.ip
                                                 }</span>
                                             </p> 
+                                            ${serverBadge}
                                         </div>
                                     </div>
                                 </div>
