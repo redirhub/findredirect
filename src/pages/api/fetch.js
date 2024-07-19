@@ -10,17 +10,20 @@ export async function fetchData() {
   try {
     const { SITES } = process.env;
     const sites = JSON.parse(SITES);
+    // Calculate "yesterday" date and time
+    const now = new Date();
+    const yesterday = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+    const formattedYesterday = yesterday.toISOString().replace('T', ' ').replace(/\..*$/, '') + ' UTC';
 
-    // Fetch data for each site and metrics asynchronously
+    // Fetch data for each site and metrics asynchronously, including the "from" parameter for metrics
     const sitesData = await Promise.all(
       sites.map((token) => {
         return Promise.all([
           axios.get(`checks/${token}`),
-          axios.get(`checks/${token}/metrics`),
+          axios.get(`checks/${token}/metrics`, { params: { from: formattedYesterday } }),
         ]);
       })
     );
-
     // Fetch nodes data
     const nodes = await axios.get(`/nodes`);
 
