@@ -4,10 +4,6 @@ import { getFluidFontSize } from "@/utils";
 const styles = {
   card: {
     transition: "all 0.3s ease",
-    _hover: {
-      boxShadow: "xl",
-      transform: "translateY(-2px)",
-    },
   },
   statItem: {
     display: "flex",
