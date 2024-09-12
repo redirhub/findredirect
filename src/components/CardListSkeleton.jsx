@@ -1,57 +1,65 @@
-import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Flex, HStack, Skeleton, Stack } from "@chakra-ui/react";
+import { getFluidFontSize } from "@/utils";
+
+const styles = {
+  card: {
+    transition: "all 0.3s ease",
+    _hover: {
+      boxShadow: "xl",
+      transform: "translateY(-2px)",
+    },
+  },
+  statItem: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    bg: "gray.50",
+    borderRadius: "md",
+    p: 4,
+    minWidth: "120px",
+  },
+};
 
 export default function CardListSkeleton() {
-  const bgColor = { bg: "var(--chakra-colors-gray-200)" };
-  const stylesBigTag = {
-    className: "btn-tag-big",
-    display: "flex",
-    width: "30px",
-    height: "30px",
-    padding: "5px",
-    borderRadius: "3px",
-    ...bgColor,
-  };
-
   return (
-    <Box mx="auto">
-      {[...Array(3).fill("card")].map((item, index) => (
+    <Stack spacing={4} width="100%">
+      {[...Array(3)].map((_, index) => (
         <Box
-          key={`${item}-${index}`}
-          className="uptime-card-skeleton"
-          p="20px"
-          borderBlockEnd="1px solid var(--chakra-colors-gray-200)"
+          key={`skeleton-${index}`}
+          {...styles.card}
+          bg="white"
+          borderRadius="xl"
+          p={6}
+          boxShadow="md"
+          border="1px solid"
+          borderColor="gray.100"
+          width="100%"
         >
-          <Grid maxW={{ lg: "90%" }} mx="auto" gap="60px" gridTemplateColumns="1fr 1fr">
-            <GridItem>
-              <Grid gap={{ base: "15px", md: "30px" }} alignItems="center" gridTemplateColumns="auto 1fr">
-                <GridItem>
-                  <Box as="span" {...stylesBigTag}></Box>
-                </GridItem>
-                <GridItem textAlign="left" display="grid" gap="10px">
-                  <Box as="span" className="uptime-card-title" display="flex" w="100%" h="25px" {...bgColor} />
-                  <Box as="span" className="uptime-card-subtitle" display="flex" w="60%" h="15px" {...bgColor} />
-                </GridItem>
-              </Grid>
-            </GridItem>
-            <GridItem>
-              <Grid gap={{ base: "15px", md: "30px" }} gridTemplateColumns="repeat(3,1fr)" alignItems="center">
-                <GridItem className="uptime-card-uptime" display="grid" gap="10px">
-                  <Box as="span" display="flex" w="100%" h="20px" {...bgColor} />
-                  <Box as="span" display="flex" w="60%" h="15px" {...bgColor} />
-                </GridItem>
-                <GridItem className="uptime-card-uptime" display="grid" gap="10px">
-                  <Box as="span" display="flex" w="100%" h="20px" {...bgColor} />
-                  <Box as="span" display="flex" w="60%" h="15px" {...bgColor} />
-                </GridItem>
-                <GridItem gap="10px" display="grid" gridTemplateColumns="1fr auto" alignItems="center">
-                  <Box as="span" w="100%" h="16px" {...bgColor} />
-                  <Flex as="span" w="25px" h="15px" {...bgColor} />
-                </GridItem>
-              </Grid>
-            </GridItem>
-          </Grid>
+          <Flex direction={{ base: "column", md: "row" }} justifyContent="space-between" alignItems="stretch" gap={6}>
+            <Stack spacing={4} flex={1}>
+              <Flex alignItems="center" gap={2}>
+                <Skeleton height={getFluidFontSize(20, 24)} width="200px" />
+                <Skeleton height="20px" width="60px" borderRadius="full" />
+              </Flex>
+              <Skeleton height={getFluidFontSize(14, 16)} width="180px" />
+              <HStack spacing={2}>
+                <Skeleton height="32px" width="80px" borderRadius="md" />
+                <Skeleton height="32px" width="80px" borderRadius="md" />
+              </HStack>
+            </Stack>
+            <HStack spacing={4} justifyContent="flex-end" flexWrap="wrap">
+              {[...Array(2)].map((_, i) => (
+                <Stack key={i} {...styles.statItem}>
+                  <Skeleton height="24px" width="24px" borderRadius="full" />
+                  <Skeleton height={getFluidFontSize(22, 26)} width="60px" />
+                  <Skeleton height={getFluidFontSize(14, 16)} width="40px" />
+                </Stack>
+              ))}
+            </HStack>
+          </Flex>
         </Box>
       ))}
-    </Box>
+    </Stack>
   );
 }
