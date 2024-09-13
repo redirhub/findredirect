@@ -11,16 +11,16 @@ export default function SiteStats({ uptime, timings, token }) {
   const { icon, color } = getResponseIcon(responseTime);
 
   return (
-    <HStack spacing={4} justifyContent="flex-end" flexWrap="wrap">
+    <HStack spacing={{ base: 2, md: 4 }} justifyContent={{ base: "space-between", md: "flex-end" }} flexWrap="wrap" width="100%">
       <StatItem 
         label="Uptime" 
         value={`${uptime}%`} 
-        icon={<Icon as={FiCheck} color="green.500" boxSize={8} />} 
+        icon={<Icon as={FiCheck} color="green.500" boxSize={{ base: 6, md: 8 }} />} 
       />
       <StatItem 
         label="Response" 
         value={`${responseTime}ms`} 
-        icon={<Icon as={icon} color={color} boxSize={8} />}
+        icon={<Icon as={icon} color={color} boxSize={{ base: 6, md: 8 }} />}
       />
     </HStack>
   );
@@ -40,12 +40,12 @@ const getResponseIcon = (responseTime) => {
 
 const StatItem = ({ label, value, icon }) => (
   <Tooltip label={label} placement="top">
-    <Stack {...styles.statItem}>
-      {React.cloneElement(icon, { size: 32 })} {/* Increased icon size */}
-      <Text fontWeight="bold" fontSize={getFluidFontSize(22, 26)}> {/* Increased font size */}
+    <Stack {...styles.statItem} minWidth={{ base: "auto", md: "180px" }} p={{ base: 2, md: 4 }}>
+      {React.cloneElement(icon, { size: { base: 24, md: 32 } })}
+      <Text fontWeight="bold" fontSize={{ base: "lg", md: getFluidFontSize(22, 26) }}>
         {value}
       </Text>
-      <Text color="gray.500" fontSize={getFluidFontSize(14, 16)}> {/* Slightly increased label font size */}
+      <Text color="gray.500" fontSize={{ base: "xs", md: getFluidFontSize(14, 16) }}>
         {label}
       </Text>
     </Stack>

@@ -3,8 +3,8 @@ import { Box, Container, VStack, Heading, Text, Button, useColorModeValue, Cente
 import { Link } from "@chakra-ui/next-js";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
-import CardList from "@/components/home/CardList";
-import DataSources from "@/components/home/DataSources";
+import CardList from "@/components/uptime/CardList";
+import DataSources from "@/components/uptime/DataSources";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRocket } from "react-icons/fa";

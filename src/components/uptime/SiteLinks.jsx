@@ -11,12 +11,12 @@ export default function SiteLinks({ url, token, official }) {
           as={Link}
           href={`https://updown.io/${token}`}
           target="_blank"
-          size="sm"
+          size={{ base: "xs", sm: "sm" }}
           colorScheme="blue"
           leftIcon={<FaInfoCircle />}
           variant="ghost"
           fontWeight="normal"
-          fontSize={getFluidFontSize(14, 16)}
+          fontSize={{ base: "xs", sm: getFluidFontSize(14, 16) }}
         >
           Details
         </Button>
@@ -26,12 +26,12 @@ export default function SiteLinks({ url, token, official }) {
           as={Link}
           href={official}
           target="_blank"
-          size="sm"
+          size={{ base: "xs", sm: "sm" }}
           colorScheme="green"
           leftIcon={<FaExternalLinkAlt />}
           variant="ghost"
           fontWeight="normal"
-          fontSize={getFluidFontSize(14, 16)}
+          fontSize={{ base: "xs", sm: getFluidFontSize(14, 16) }}
         >
           Website
         </Button>
