@@ -75,7 +75,7 @@ export default function RedirectResultList({ results }) {
               {!result.error ?
               <Tooltip label={result?.finalUrl} placement="top">
                 <Text fontSize={getFluidFontSize(16, 17)} fontWeight="500" isTruncated maxWidth="100%">
-                  {truncateUrl(result?.finalUrl, 40)}
+                  {truncateUrl(result?.finalUrl, 50)}
                 </Text>
                 </Tooltip>
                 :
