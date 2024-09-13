@@ -124,7 +124,7 @@ export default function RedirectResultList({ results }) {
                         <Tr key={index}>
                           <Td>{index + 1}</Td>
                           <Td>
-                            <Text fontSize="sm" fontWeight="medium" isTruncated maxWidth="200px">
+                            <Text fontSize="sm" fontWeight="medium">
                               {redirect.url}
                             </Text>
                           </Td>
