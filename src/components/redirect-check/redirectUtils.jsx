@@ -15,30 +15,31 @@ export async function checkRedirects(urlList, setProgress, toast) {
       }
 
       const data = await response.json();
-      if (data[0].succeed) {
+      const lastItem = data[data.length - 1];
+      
       results.push({
         url: urlList[i],
         chainNumber: data.filter(item => /^30\d/.test(item.http_code)).length,
-        statusCode: data[0].http_code,
-        finalUrl: data[data.length - 1].url,
-        totalTime: data.slice(0, data.length > 1 ? data.length - 1 : 1).reduce((sum, item) => sum + (item.alltime || 0), 0),
-          chain: data,
-        });
-      } else {
-        results.push({
-          url: urlList[i],
-          chainNumber: 0,
-          statusCode: data[0]?.error_no,
-          totalTime: 0,
-          error_no: data[0]?.error_no,
-          error_msg: data[0]?.error_msg,
-          chain: data,
-        });
-      }
+        statusCode: lastItem.http_code || lastItem.error_no,
+        finalUrl: lastItem.url || urlList[i],
+        totalTime: data.reduce((sum, item) => sum + (item.alltime || 0), 0),
+        chain: data,
+        error_msg: lastItem.error_msg,
+      });
     } catch (error) {
+      results.push({
+        url: urlList[i],
+        chainNumber: 0,
+        statusCode: 0,
+        finalUrl: urlList[i],
+        totalTime: 0,
+        chain: [],
+        error_msg: error.message,
+      });
+
       toast({
         title: "Error",
-        description: error.message,
+        description: `Failed to check ${urlList[i]}: ${error.message}`,
         status: "error",
         duration: 5000,
         isClosable: true,
