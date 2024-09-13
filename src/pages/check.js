@@ -1,7 +1,8 @@
 import Head from "next/head";
-import { Box, Container } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
+import RedirectChecker from "@/components/redirect-check/RedirectChecker";
 
 export default function RedirectCheck() {
     return (
@@ -15,7 +16,7 @@ export default function RedirectCheck() {
             </Head>
             <AppContainer>
                 <Box my={12}>
-                    {/* Add redirect check component here */}
+                    <RedirectChecker />
                 </Box>
             </AppContainer>
         </MainLayout>
