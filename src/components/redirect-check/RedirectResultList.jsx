@@ -108,89 +108,91 @@ export default function RedirectResultList({ results }) {
                 <AccordionIcon />
               </AccordionButton>
               <AccordionPanel pb={4} px={0}>
-                <Table variant="simple" size="sm">
-                  <Thead>
-                    <Tr>
-                      <Th>Step</Th>
-                      <Th>URL</Th>
-                      <Th>Status</Th>
-                      <Th>Time</Th>
-                      <Th>Details</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {result.chain.map((redirect, index) => (
-                      <Tr key={index}>
-                        <Td>{index + 1}</Td>
-                        <Td>
-                          <Text fontSize="sm" fontWeight="medium">
-                            {redirect.url}
-                          </Text>
-                        </Td>
-                        <Td>
-                          <Badge
-                            colorScheme={redirect.succeed ? "green" : "red"}
-                            borderRadius="full"
-                            px={2}
-                            py={1}
-                          >
-                            {redirect.http_code}
-                          </Badge>
-                        </Td>
-                        <Td>{redirect.alltime.toFixed(2)}s</Td>
-                        <Td>
-                          <Accordion allowToggle>
-                            <AccordionItem border="none">
-                              <AccordionButton p={0} _hover={{ bg: "transparent" }}>
-                                <Text color="blue.500" fontSize="sm">
-                                  View Details
-                                </Text>
-                              </AccordionButton>
-                              <AccordionPanel pb={4}>
-                                <VStack align="stretch" spacing={2}>
-                                  <Flex>
-                                    <Icon as={FaServer} mr={2} />
-                                    <Text fontWeight="bold">IP:</Text>
-                                    <Text ml={2}>{redirect.ip}</Text>
-                                  </Flex>
-                                  <Flex>
-                                    <Icon as={FaLink} mr={2} />
-                                    <Text fontWeight="bold">Scheme:</Text>
-                                    <Text ml={2}>{redirect.scheme}</Text>
-                                  </Flex>
-                                  {redirect.scheme.toLowerCase() === 'https' && (
-                                    <Flex>
-                                      <Icon as={FaClock} mr={2} />
-                                      <Text fontWeight="bold">SSL Verify Result:</Text>
-                                      <Text ml={2}>
-                                        {redirect.ssl_verify_result ? "Success" : "Failed"}
-                                      </Text>
-                                    </Flex>
-                                  )}
-                                  <Box>
-                                    <Text fontWeight="bold" mb={1}>
-                                      Headers:
-                                    </Text>
-                                    <Box
-                                      as="pre"
-                                      fontSize="xs"
-                                      p={2}
-                                      bg="gray.50"
-                                      borderRadius="md"
-                                      overflowX="auto"
-                                    >
-                                      {JSON.stringify(redirect.header, null, 2)}
-                                    </Box>
-                                  </Box>
-                                </VStack>
-                              </AccordionPanel>
-                            </AccordionItem>
-                          </Accordion>
-                        </Td>
+                <Box overflowX="auto">
+                  <Table variant="simple" size="sm" style={{ minWidth: '800px' }}>
+                    <Thead>
+                      <Tr>
+                        <Th>Step</Th>
+                        <Th>URL</Th>
+                        <Th>Status</Th>
+                        <Th>Time</Th>
+                        <Th>Details</Th>
                       </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
+                    </Thead>
+                    <Tbody>
+                      {result.chain.map((redirect, index) => (
+                        <Tr key={index}>
+                          <Td>{index + 1}</Td>
+                          <Td>
+                            <Text fontSize="sm" fontWeight="medium" isTruncated maxWidth="200px">
+                              {redirect.url}
+                            </Text>
+                          </Td>
+                          <Td>
+                            <Badge
+                              colorScheme={redirect.succeed ? "green" : "red"}
+                              borderRadius="full"
+                              px={2}
+                              py={1}
+                            >
+                              {redirect.http_code}
+                            </Badge>
+                          </Td>
+                          <Td>{redirect.alltime.toFixed(2)}s</Td>
+                          <Td>
+                            <Accordion allowToggle>
+                              <AccordionItem border="none">
+                                <AccordionButton p={0} _hover={{ bg: "transparent" }}>
+                                  <Text color="blue.500" fontSize="sm">
+                                    View Details
+                                  </Text>
+                                </AccordionButton>
+                                <AccordionPanel pb={4}>
+                                  <VStack align="stretch" spacing={2}>
+                                    <Flex>
+                                      <Icon as={FaServer} mr={2} />
+                                      <Text fontWeight="bold">IP:</Text>
+                                      <Text ml={2}>{redirect.ip}</Text>
+                                    </Flex>
+                                    <Flex>
+                                      <Icon as={FaLink} mr={2} />
+                                      <Text fontWeight="bold">Scheme:</Text>
+                                      <Text ml={2}>{redirect.scheme}</Text>
+                                    </Flex>
+                                    {redirect.scheme.toLowerCase() === 'https' && (
+                                      <Flex>
+                                        <Icon as={FaClock} mr={2} />
+                                        <Text fontWeight="bold">SSL Verify Result:</Text>
+                                        <Text ml={2}>
+                                          {redirect.ssl_verify_result ? "Success" : "Failed"}
+                                        </Text>
+                                      </Flex>
+                                    )}
+                                    <Box>
+                                      <Text fontWeight="bold" mb={1}>
+                                        Headers:
+                                      </Text>
+                                      <Box
+                                        as="pre"
+                                        fontSize="xs"
+                                        p={2}
+                                        bg="gray.50"
+                                        borderRadius="md"
+                                        overflowX="auto"
+                                      >
+                                        {JSON.stringify(redirect.header, null, 2)}
+                                      </Box>
+                                    </Box>
+                                  </VStack>
+                                </AccordionPanel>
+                              </AccordionItem>
+                            </Accordion>
+                          </Td>
+                        </Tr>
+                      ))}
+                    </Tbody>
+                  </Table>
+                </Box>
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
