@@ -49,6 +49,7 @@ export default function Header() {
                     </Button>
                     <IconButton
                         display={{ base: "flex", md: "none" }}
+                        px={2}
                         onClick={onOpen}
                         icon={<FaBars />}
                         variant="ghost"

@@ -51,8 +51,8 @@ export default function RedirectChecker() {
   }, [urls, toast]);
 
   return (
-    <Container maxW="container.xl" py={20}>
-      <VStack spacing={16} align="stretch">
+    <Container maxW="container.xl" py={{base: 4, md: 20}}>
+      <VStack spacing={{base: 10, md: 16}} align="stretch">
         <Flex direction="column" align="center" textAlign="center">
           <Box
             bg="blue.500"
