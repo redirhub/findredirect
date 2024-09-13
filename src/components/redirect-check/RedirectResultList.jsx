@@ -21,13 +21,26 @@ import {
   useColorModeValue,
   HStack,
   Tooltip,
+  Divider,
 } from "@chakra-ui/react";
-import { FaLink, FaClock, FaServer, FaChevronRight, FaBolt } from "react-icons/fa";
+import { FaLink, FaClock, FaServer, FaChevronRight, FaBolt, FaCheckCircle, FaSmile, FaSadTear, FaArrowDown } from "react-icons/fa";
 import { getFluidFontSize } from "@/utils";
+import { FiZap } from "react-icons/fi";
+import { GiTurtle } from "react-icons/gi";
+import { FaBicycle, FaCar, FaCode } from "react-icons/fa";
+import { styles } from "@/configs/checker";
 
 export default function RedirectResultList({ results }) {
   const bgColor = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.600");
+  const arrowColor = useColorModeValue("gray.300", "gray.600");
+
+  // Find the fastest result
+  const fastestResult = results.reduce((fastest, current) => {
+    const currentTime = current.totalTime;
+    const fastestTime = fastest ? fastest.totalTime : Infinity;
+    return currentTime < fastestTime ? current : fastest;
+  }, null);
 
   return (
     <VStack spacing={6} align="stretch">
@@ -36,6 +49,7 @@ export default function RedirectResultList({ results }) {
       </Heading>
       {results.map((result) => (
         <Box
+          {...styles.card}
           key={result.url}
           bg={bgColor}
           borderRadius="xl"
@@ -47,30 +61,45 @@ export default function RedirectResultList({ results }) {
           <Flex direction={{ base: "column", md: "row" }} justifyContent="space-between" alignItems="stretch" gap={6}>
             <VStack align="flex-start" spacing={4} flex={1}>
               <Flex alignItems="center" gap={2} flexWrap="wrap">
-                <Heading as="h4" fontSize={getFluidFontSize(20, 24)} fontWeight="600">
-                  {result.url}
-                </Heading>
-                <Badge colorScheme={result.chain[result.chain.length - 1].succeed ? "green" : "red"} fontSize="md" borderRadius="full" px={3} py={1}>
+                <Tooltip label={result.url} placement="top">
+                  <Heading as="h4" fontSize={getFluidFontSize(20, 24)} fontWeight="600" isTruncated maxWidth="100%">
+                    {truncateUrl(result.url, 30)}
+                  </Heading>
+                </Tooltip>
+                <Badge colorScheme={result.chain[result.chain.length - 1].succeed ? "green" : "red"} {...styles.statusBadge}>
                   {result.statusCode}
                 </Badge>
+                {getProviderBadge(result.chain[0].header)}
+                {result === fastestResult && results.length > 1 && (
+                  <Badge {...styles.fastestBadge}>
+                    <FaBolt /> Fastest
+                  </Badge>
+                )}
               </Flex>
-              <Text fontSize="sm" color="gray.500">
-                {result.chainNumber} redirect{result.chainNumber !== 1 ? "s" : ""}
-              </Text>
-              <Text fontSize="sm">
-                Final URL: {result.chain[result.chain.length - 1].url}
-              </Text>
+              <Flex alignItems="center" width="100%">
+                <Icon as={FaArrowDown} color={arrowColor} boxSize={4} mx={4} />
+              </Flex>
+              <Tooltip label={result.chain[result.chain.length - 1].url} placement="top">
+                <Text fontSize={getFluidFontSize(16, 17)} fontWeight="500" isTruncated maxWidth="100%">
+                  {truncateUrl(result.chain[result.chain.length - 1].url, 40)}
+                </Text>
+              </Tooltip>
             </VStack>
             <HStack spacing={4} justifyContent="flex-end" flexWrap="wrap">
               <StatItem
-                label="Total Time"
-                value={`${result.chain.reduce((sum, r) => sum + r.alltime, 0).toFixed(2)}s`}
-                icon={<Icon as={FaClock} color="blue.500" boxSize={8} />}
-              />
-              <StatItem
                 label="Redirects"
                 value={result.chainNumber}
-                icon={<Icon as={FaBolt} color="orange.500" boxSize={8} />}
+                icon={getRedirectIcon(result.chainNumber)}
+              />
+              <StatItem
+                label="Status"
+                value={result.statusCode}
+                icon={<Icon as={FaCode} color="purple.500" boxSize={8} />}
+              />
+              <StatItem
+                label="Response"
+                value={`${result.totalTime.toFixed(2)}s`}
+                icon={getResponseIcon(result.totalTime * 1000)}
               />
             </HStack>
           </Flex>
@@ -133,13 +162,15 @@ export default function RedirectResultList({ results }) {
                                     <Text fontWeight="bold">Scheme:</Text>
                                     <Text ml={2}>{redirect.scheme}</Text>
                                   </Flex>
-                                  <Flex>
-                                    <Icon as={FaClock} mr={2} />
-                                    <Text fontWeight="bold">SSL Verify Result:</Text>
-                                    <Text ml={2}>
-                                      {redirect.ssl_verify_result ? "Success" : "Failed"}
-                                    </Text>
-                                  </Flex>
+                                  {redirect.scheme.toLowerCase() === 'https' && (
+                                    <Flex>
+                                      <Icon as={FaClock} mr={2} />
+                                      <Text fontWeight="bold">SSL Verify Result:</Text>
+                                      <Text ml={2}>
+                                        {redirect.ssl_verify_result ? "Success" : "Failed"}
+                                      </Text>
+                                    </Flex>
+                                  )}
                                   <Box>
                                     <Text fontWeight="bold" mb={1}>
                                       Headers:
@@ -173,9 +204,31 @@ export default function RedirectResultList({ results }) {
   );
 }
 
+const getResponseIcon = (responseTime) => {
+  if (responseTime <= 150) {
+    return <Icon as={FiZap} color="green.500" boxSize={8} />;
+  } else if (responseTime <= 300) {
+    return <Icon as={FaCar} color="blue.500" boxSize={8} />;
+  } else if (responseTime <= 500) {
+    return <Icon as={FaBicycle} color="orange.500" boxSize={8} />;
+  } else {
+    return <Icon as={GiTurtle} color="red.500" boxSize={8} />;
+  }
+};
+
+const getRedirectIcon = (chainNumber) => {
+  if (chainNumber === 0) {
+    return <Icon as={FaCheckCircle} color="green.500" boxSize={8} />;
+  } else if (chainNumber <= 2) {
+    return <Icon as={FaSmile} color="yellow.500" boxSize={8} />;
+  } else {
+    return <Icon as={FaSadTear} color="red.500" boxSize={8} />;
+  }
+};
+
 const StatItem = ({ label, value, icon }) => (
   <Tooltip label={label} placement="top">
-    <VStack spacing={1} align="center">
+    <VStack spacing={1} align="center" {...styles.statItem}>
       {React.cloneElement(icon, { size: 32 })}
       <Text fontWeight="bold" fontSize={getFluidFontSize(22, 26)}>
         {value}
@@ -186,3 +239,24 @@ const StatItem = ({ label, value, icon }) => (
     </VStack>
   </Tooltip>
 );
+
+// Helper function to truncate URLs
+function truncateUrl(url, maxLength) {
+  if (url.length <= maxLength) return url;
+  const start = url.substring(0, maxLength / 2 - 2);
+  const end = url.substring(url.length - maxLength / 2 + 2);
+  return `${start}...${end}`;
+}
+
+// New function to get the provider badge
+const getProviderBadge = (headers) => {
+  const poweredBy = headers['x-powered-by'] || headers['X-Powered-By'];
+  if (poweredBy) {
+    return (
+      <Badge colorScheme="blue" {...styles.providerBadge}>
+        {poweredBy}
+      </Badge>
+    );
+  }
+  return null;
+};

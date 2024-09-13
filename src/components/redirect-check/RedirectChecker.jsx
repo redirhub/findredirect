@@ -46,10 +46,10 @@ export default function RedirectChecker() {
         const data = await response.json();
         setResults((prevResults) => [...prevResults, {
           url: urlList[i],
-          chainNumber: data.length,
+          chainNumber: data.filter(item => /^30\d/.test(item.http_code)).length,
           statusCode: data[0].http_code,
           finalUrl: data[data.length - 1].url,
-          totalTime: data.reduce((sum, item) => sum + (item.alltime || 0), 0),
+          totalTime: data.slice(0, data.length > 1 ? data.length - 1 : 1).reduce((sum, item) => sum + (item.alltime || 0), 0),
           chain: data,
         }]);
       } catch (error) {
