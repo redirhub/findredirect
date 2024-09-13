@@ -32,7 +32,7 @@ async function handler(req, res) {
                 url: currentUrl,
                 timeout: 5000, // 30 seconds timeout
                 headers: {
-                    'User-Agent': 'RedirHub_Redirect_Checker/1.0',
+                    'User-Agent': 'FindRedirect_Checker/1.0',
                 },
                 maxRedirects: 0,
                 validateStatus: null, // Resolve only if the status code is less than 500
