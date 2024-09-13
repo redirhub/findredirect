@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import {
   Box,
@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { FaSearch, FaLink } from "react-icons/fa";
 import RedirectResultList from "./RedirectResultList";
+import { checkRedirects } from "./redirectUtils.jsx";
 
 export default function RedirectChecker() {
   const [urls, setUrls] = useState('http://redirhub.com');
@@ -26,63 +27,29 @@ export default function RedirectChecker() {
   const toast = useToast();
   const router = useRouter();
 
-  const bgColor = useColorModeValue("white", "gray.800");
-  const borderColor = useColorModeValue("gray.200", "gray.700");
-  const headingColor = useColorModeValue("gray.800", "white");
-  const subheadingColor = useColorModeValue("gray.600", "gray.400");
+  const { bgColor, borderColor, headingColor, subheadingColor } = useColorModeValue(
+    { bgColor: "white", borderColor: "gray.200", headingColor: "gray.800", subheadingColor: "gray.600" },
+    { bgColor: "gray.800", borderColor: "gray.700", headingColor: "white", subheadingColor: "gray.400" }
+  );
 
-  useEffect(() => {
-    if (router.isReady) {
-      const { url } = router.query;
-      if (url) {
-        setUrls(decodeURIComponent(url));
-      }
-    }
-  }, [router.isReady, router.query]);
-
-  const handleCheck = async () => {
+  const handleCheck = useCallback(async () => {
     setIsLoading(true);
     setProgress(0);
     setResults([]);
     const urlList = urls.split("\n").filter((url) => url.trim() !== "");
-    const totalUrls = urlList.length;
 
-    for (let i = 0; i < totalUrls; i++) {
-      try {
-        const response = await fetch("/api/redirects", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url: urlList[i] }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch redirect data for ${urlList[i]}`);
-        }
-
-        const data = await response.json();
-        setResults((prevResults) => [...prevResults, {
-          url: urlList[i],
-          chainNumber: data.filter(item => /^30\d/.test(item.http_code)).length,
-          statusCode: data[0].http_code,
-          finalUrl: data[data.length - 1].url,
-          totalTime: data.slice(0, data.length > 1 ? data.length - 1 : 1).reduce((sum, item) => sum + (item.alltime || 0), 0),
-          chain: data,
-        }]);
-      } catch (error) {
-        toast({
-          title: "Error",
-          description: error.message,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
-      } finally {
-        setProgress(((i + 1) / totalUrls) * 100);
-      }
-    }
-
+    const newResults = await checkRedirects(urlList, setProgress, toast);
+    setResults(newResults);
     setIsLoading(false);
-  };
+    scrollToResults();
+  }, [urls, toast]);
+
+  useEffect(() => {
+    if (router.isReady && router.query.url) {
+      setUrls(decodeURIComponent(router.query.url));
+      handleCheck();
+    }
+  }, [router.isReady, router.query, handleCheck]);
 
   return (
     <Container maxW="container.xl" py={20}>
@@ -157,8 +124,21 @@ export default function RedirectChecker() {
             hasStripe
           />
         )}
-        {results.length > 0 && <RedirectResultList results={results} />}
+        {results.length > 0 && (
+          <Box id="redirect-results">
+            <RedirectResultList results={results} />
+          </Box>
+        )}
       </VStack>
     </Container>
   );
+}
+
+function scrollToResults() {
+  setTimeout(() => {
+    const resultsElement = document.getElementById('redirect-results');
+    if (resultsElement) {
+      resultsElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 100);
 }
