@@ -207,7 +207,7 @@ const SiteStats = ({ uptime, timings, token }) => {
       <StatItem 
         label="Uptime" 
         value={`${uptime}%`} 
-        icon={<Icon as={FiZap} color="green.500" boxSize={8} />} 
+        icon={<Icon as={FiCheck} color="green.500" boxSize={8} />} 
       />
       <StatItem 
         label="Response" 
