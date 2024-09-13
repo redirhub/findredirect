@@ -1,35 +1,39 @@
-import { Box, Flex, HStack, Skeleton, Stack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Skeleton, Stack, useColorModeValue } from "@chakra-ui/react";
 import { getFluidFontSize } from "@/utils";
 
-const styles = {
-  card: {
-    transition: "all 0.3s ease",
-  },
-  statItem: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    bg: "gray.50",
-    borderRadius: "md",
-    p: 4,
-    minWidth: "120px",
-  },
-};
+const CardListSkeleton = () => {
+  const bgColor = useColorModeValue("white", "gray.800");
+  const borderColor = useColorModeValue("gray.100", "gray.700");
+  const statItemBgColor = useColorModeValue("gray.50", "gray.700");
 
-export default function CardListSkeleton() {
+  const styles = {
+    card: {
+      transition: "all 0.3s ease",
+    },
+    statItem: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      bg: statItemBgColor,
+      borderRadius: "md",
+      p: 4,
+      minWidth: "120px",
+    },
+  };
+
   return (
     <Stack spacing={4} width="100%">
       {[...Array(3)].map((_, index) => (
         <Box
           key={`skeleton-${index}`}
           {...styles.card}
-          bg="white"
+          bg={bgColor}
           borderRadius="xl"
           p={6}
           boxShadow="md"
           border="1px solid"
-          borderColor="gray.100"
+          borderColor={borderColor}
           width="100%"
         >
           <Flex direction={{ base: "column", md: "row" }} justifyContent="space-between" alignItems="stretch" gap={6}>
@@ -58,4 +62,6 @@ export default function CardListSkeleton() {
       ))}
     </Stack>
   );
-}
+};
+
+export default CardListSkeleton;
