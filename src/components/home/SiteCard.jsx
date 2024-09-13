@@ -1,27 +1,27 @@
-import { Box, Flex, Stack, useColorModeValue } from "@chakra-ui/react";
-import SiteTitle from "./SiteTitle";
-import SiteLastCheck from "./SiteLastCheck";
+import { Badge, Box, Flex, Heading, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import SiteLinks from "./SiteLinks";
 import SiteStats from "./SiteStats";
 import { SITESMAPPING } from "./sites";
+import { FaBolt } from "react-icons/fa";
+import { styles } from "@/configs/uptime";
+import { getFluidFontSize, getFormattedTimeDiff } from "@/utils";
+import { FaClock } from "react-icons/fa";
+
 
 export default function SiteCard({ site, isFastest }) {
   const { token, url, alias, last_check_at, uptime } = site[0];
   const { timings } = site[1];
-  const siteInfo = SITESMAPPING.find(s => s.id === token);
-
-  const bgColor = useColorModeValue("white", "gray.800");
-  const borderColor = useColorModeValue("gray.100", "gray.700");
+  const siteInfo = SITESMAPPING.find(site => site.id === token);
 
   return (
     <Box
-      bg={bgColor}
+      {...styles.card}
+      bg="white"
       borderRadius="xl"
       p={6}
       boxShadow="md"
       border="1px solid"
-      borderColor={borderColor}
-      transition="all 0.3s ease"
+      borderColor="gray.100"
     >
       <Flex direction={{ base: "column", md: "row" }} justifyContent="space-between" alignItems="stretch" gap={6}>
         <Stack spacing={4} flex={1}>
@@ -29,10 +29,48 @@ export default function SiteCard({ site, isFastest }) {
           <SiteLastCheck lastCheckAt={last_check_at} token={token} />
           <SiteLinks url={url} token={token} official={siteInfo?.official} />
         </Stack>
-        <Flex justifyContent={{ base: "center", md: "flex-end" }} width={{ base: "100%", md: "auto" }}>
-          <SiteStats uptime={uptime} timings={timings} token={token} />
-        </Flex>
+        <SiteStats uptime={uptime} timings={timings} token={token} />
       </Flex>
     </Box>
   );
-}
+};
+
+// Updated SiteTitle component
+const SiteTitle = ({ alias, name, url, isFastest }) => (
+  <Flex alignItems="center" gap={2} flexWrap="wrap">
+    <Heading
+      as="h4"
+      fontSize={getFluidFontSize(20, 24)}
+      fontWeight="600"
+    >
+      {name || alias || url}
+    </Heading>
+    {name && (alias || url) && (
+      <Text color="gray.600" fontSize={getFluidFontSize(14, 16)}>
+        ({alias || url})
+      </Text>
+    )}
+    {isFastest && (
+      <Badge {...styles.fastestBadge}>
+        <FaBolt /> Fastest
+      </Badge>
+    )}
+  </Flex>
+);
+
+
+
+const SiteLastCheck = ({ lastCheckAt, token }) => (
+    <Text
+      href={`https://updown.io/${token}`}
+      target="_blank"
+      color="gray.600"
+      fontSize={getFluidFontSize(14, 16)}
+      display="flex"
+      alignItems="center"
+      gap={2}
+    >
+      <FaClock />
+      Last check: {getFormattedTimeDiff(lastCheckAt)}
+    </Text>
+);
