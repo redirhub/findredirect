@@ -14,8 +14,10 @@ import {
   Icon,
   Flex,
   Divider,
+  Tooltip,
 } from "@chakra-ui/react";
-import { FaSearch, FaLink } from "react-icons/fa";
+import { FaSearch, FaLink, FaLightbulb } from "react-icons/fa";
+import { SiApple } from "react-icons/si"; // Import the Apple icon for Cmd
 import RedirectResultList from "./RedirectResultList";
 import { checkRedirects } from "./redirectUtils.jsx";
 import { useDevice } from "@/hooks/useDevice";
@@ -40,7 +42,7 @@ export default function RedirectChecker() {
     setUrls(e.target.value);
   };
 
-  const handleUrlsBlur = () => {
+  const handleUrlsCorrect = () => {
     const lines = urls.split('\n');
     const processedLines = lines.map(line => {
       const trimmedLine = line.trim();
@@ -59,16 +61,38 @@ export default function RedirectChecker() {
   }, [router.isReady, router.query.url]);
 
   const handleCheck = useCallback(async () => {
+    handleUrlsCorrect();
     setIsLoading(true);
     setProgress(0);
-    setResults([]);
     const urlList = urls.split("\n").filter((url) => url.trim() !== "");
 
     const newResults = await checkRedirects(urlList, setProgress, toast);
     setResults(newResults);
     setIsLoading(false);
     scrollToResults();
-  }, [urls, toast]);
+  }, [urls, toast, handleUrlsCorrect]);
+
+  const handleShowExamples = () => {
+    const exampleUrls = [
+      "http://redirhub.com",
+      "http://google.com",
+      "http://twitter.com",
+    ].join("\n");
+    setUrls(exampleUrls);
+  };
+
+  const handleKeyDown = (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      handleCheck();
+    }
+  };
+
+  const tooltipLabel = (
+    <span>
+      Press Ctrl (⌘) + Enter to submit
+    </span>
+  );
 
   return (
     <Container maxW="container.xl" py={{base: 6, md: 20}}>
@@ -99,21 +123,42 @@ export default function RedirectChecker() {
           borderWidth={1}
         >
           <VStack spacing={6}>
-            <Textarea
-              ref={textareaRef}
-              value={urls}
-              onChange={handleUrlsChange}
-              onBlur={handleUrlsBlur}
-              placeholder="Enter URLs (one per line)&#10;e.g., example.com"
-              rows={isMobile ? 2 : 5}
-              resize="vertical"
-              bg={useColorModeValue("gray.50", "gray.700")}
-              borderColor={borderColor}
-              borderRadius="lg"
-              _hover={{ borderColor: "blue.400" }}
-              _focus={{ borderColor: "blue.400", boxShadow: "0 0 0 1px var(--chakra-colors-blue-400)" }}
-              fontSize={{base: "sm", md: "md"}}
-            />
+            <Box position="relative" width="100%">
+              <Tooltip label={tooltipLabel} hasArrow placement="bottom-start">
+                <Textarea
+                  ref={textareaRef}
+                  value={urls}
+                  onChange={handleUrlsChange}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Enter URLs (one per line)&#10;e.g., example.com"
+                  rows={isMobile ? 2 : 5}
+                  resize="vertical"
+                  bg={useColorModeValue("gray.50", "gray.700")}
+                  borderColor={borderColor}
+                  borderRadius="lg"
+                  _hover={{ borderColor: "blue.400" }}
+                  _focus={{ borderColor: "blue.400", boxShadow: "0 0 0 1px var(--chakra-colors-blue-400)" }}
+                  fontSize={{base: "sm", md: "md"}}
+                  pr="100px" // Add right padding to accommodate the button
+                />
+              </Tooltip>
+              <Button
+                position="absolute"
+                top="2"
+                right="2"
+                size="sm"
+                variant="ghost"
+                colorScheme="blue"
+                onClick={handleShowExamples}
+                leftIcon={<FaLightbulb />}
+                fontWeight="normal"
+                _hover={{ bg: "blue.50" }}
+                _active={{ bg: "blue.100" }}
+                transition="all 0.2s"
+              >
+                Examples
+              </Button>
+            </Box>
             <Button
               leftIcon={<FaSearch />}
               colorScheme="blue"

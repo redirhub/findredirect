@@ -307,14 +307,16 @@ function truncateUrl(url, maxLength) {
   return `${start}...${end}`;
 }
 
-// New function to get the provider badge
+// Updated function to get the provider badge with tooltip
 const getProviderBadge = (headers) => {
   const poweredBy = headers?.['x-powered-by'] || headers?.['X-Powered-By'];
   if (poweredBy) {
     return (
-      <Badge colorScheme="blue" {...styles.providerBadge}>
-        {poweredBy}
-      </Badge>
+      <Tooltip label={`Server powered by ${poweredBy}`} placement="top">
+        <Badge colorScheme="blue" {...styles.providerBadge}>
+          {poweredBy}
+        </Badge>
+      </Tooltip>
     );
   }
   return null;

@@ -36,6 +36,7 @@ export const styles = {
             bg: "blue.700",
             color: "blue.100",
         },
+        textTransform: "none", // Add this line to prevent uppercase transformation
     },
     fastestBadge: {
         display: "flex",
