@@ -95,7 +95,7 @@ export default function RedirectResultList({ results }) {
               <Flex alignItems="center" gap={2} flexWrap="wrap">
                 <Tooltip label={result.url} placement="top">
                   <Heading as="h4" fontSize={isMobile ? getFluidFontSize(18, 20) : getFluidFontSize(20, 24)} fontWeight="600" isTruncated maxWidth="100%">
-                    {truncateUrl(result.url, isMobile ? 25 : 30)}
+                    {truncateUrl(result.url, isMobile ? 36 : 45)}
                   </Heading>
                 </Tooltip>
                 {getProviderBadge(result?.chain?.[0]?.header)}

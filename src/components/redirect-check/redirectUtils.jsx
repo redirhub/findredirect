@@ -16,15 +16,16 @@ export async function checkRedirects(urlList, setProgress, toast) {
 
       const data = await response.json();
       const lastItem = data[data.length - 1];
+      const firstItem = data[0];
       
       results.push({
         url: urlList[i],
         chainNumber: data.filter(item => /^30\d/.test(item.http_code)).length,
-        statusCode: lastItem.http_code || lastItem.error_no,
+        statusCode: firstItem.http_code || firstItem.error_no,
         finalUrl: lastItem.url || urlList[i],
         totalTime: data.filter(item => /^30\d/.test(item.http_code)).map(item => item.alltime).reduce((sum, item) => sum + (item || 0), 0),
         chain: data,
-        error_msg: lastItem.error_msg,
+        error_msg: firstItem.error_msg,
       });
     } catch (error) {
       results.push({
