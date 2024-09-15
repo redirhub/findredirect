@@ -30,6 +30,7 @@ export default function RedirectChecker({children, icon, buttonText, examples}) 
   const router = useRouter();
   const [urls, setUrls] = useState('');
   const { isMobile } = useDevice();
+  const placeholder = "Enter URLs (one per line) e.g., " + examples[0];
 
   const { bgColor, borderColor } = useColorModeValue(
     { bgColor: "white", borderColor: "gray.200"  },
@@ -104,7 +105,7 @@ export default function RedirectChecker({children, icon, buttonText, examples}) 
                   value={urls}
                   onChange={handleUrlsChange}
                   onKeyDown={handleKeyDown}
-                  placeholder="Enter URLs (one per line)&#10;e.g., example.com"
+                  placeholder={placeholder}
                   rows={isMobile ? 2 : 5}
                   resize="vertical"
                   bg={useColorModeValue("gray.50", "gray.700")}
