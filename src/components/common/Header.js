@@ -21,7 +21,7 @@ export default function Header() {
     const links = [
         { id: 'home', icon: <FaHome />, label: "Home" },
         { id: 'uptime', icon: <FaRocket />, label: "Uptime" },
-        { id: 'check', icon: <FaCheckCircle />, label: "Redirect Check" },
+        { id: 'redirect', icon: <FaCheckCircle />, label: "Redirect Check" },
         { id: 'blog', icon: <FaBlog />, label: "Blog" },
     ];
 
