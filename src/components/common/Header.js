@@ -1,7 +1,7 @@
 import { Box, Flex, Button, useColorModeValue, Stack, useColorMode, Image, IconButton, useDisclosure } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
 import { APP_LOGO, APP_NAME, HIDE_NAV, INDEX_PAGE } from "@/configs/constant";
-import { FaSun, FaMoon, FaHome, FaCheckCircle, FaBlog, FaBars, FaRocket } from "react-icons/fa";
+import { FaSun, FaMoon, FaHome, FaCheckCircle, FaBlog, FaBars, FaRocket, FaExpand } from "react-icons/fa";
 import NavLink from "./NavLink";
 import MobileDrawer from "./MobileDrawer";
 
@@ -22,6 +22,7 @@ export default function Header() {
         { id: 'home', icon: <FaHome />, label: "Home" },
         { id: 'uptime', icon: <FaRocket />, label: "Uptime" },
         { id: 'redirect', icon: <FaCheckCircle />, label: "Redirect Check" },
+        { id: 'expander', icon: <FaExpand />, label: "URL Expander" },
         { id: 'blog', icon: <FaBlog />, label: "Blog" },
     ];
 

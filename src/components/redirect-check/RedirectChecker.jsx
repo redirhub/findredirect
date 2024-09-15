@@ -22,7 +22,7 @@ import RedirectResultList from "./RedirectResultList";
 import { checkRedirects } from "./redirectUtils.jsx";
 import { useDevice } from "@/hooks/useDevice";
 
-export default function RedirectChecker({children}) {
+export default function RedirectChecker({children, icon, buttonText, examples}) {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -67,11 +67,7 @@ export default function RedirectChecker({children}) {
   }, [urls, toast]);
 
   const handleShowExamples = () => {
-    const exampleUrls = [
-      "http://redirhub.com",
-      "http://google.com",
-      "http://twitter.com",
-    ].join("\n");
+    const exampleUrls = examples.join("\n");
     setUrls(exampleUrls);
   };
 
@@ -153,7 +149,7 @@ export default function RedirectChecker({children}) {
               _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
               transition="all 0.2s"
             >
-              Check Redirects
+              {buttonText}
             </Button>
           </VStack>
         </Box>

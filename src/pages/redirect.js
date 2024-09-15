@@ -80,7 +80,7 @@ export default function RedirectCheckPage() {
             </Head>
             <AppContainer>
                 <Box my={12}>
-                    <RedirectChecker>
+                    <RedirectChecker icon={FaLink} buttonText="Check Redirects" examples={[ "http://redirhub.com", "http://google.com", "http://twitter.com" ]}>
                         <Flex direction="column" align="center" textAlign="center">
                             <Box {...styles.checkPage.heroBox}>
                                 <Icon as={FaLink} {...styles.checkPage.heroIcon} />
