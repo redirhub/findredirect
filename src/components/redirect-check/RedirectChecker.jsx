@@ -85,6 +85,15 @@ export default function RedirectChecker({children, icon, buttonText, examples}) 
     </span>
   );
 
+  useEffect(() => {
+    if (router.isReady) {
+      const { url } = router.query;
+      if (url) {
+        setUrls(decodeURIComponent(url));
+      }
+    }
+  }, [router.isReady, router.query]);
+
   return (
     <Container maxW="container.xl" py={{base: 6, md: 20}}>
       <VStack spacing={{base: 8, md: 16}} align="stretch">
