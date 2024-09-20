@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Box, Flex, Heading, Icon, Text, Grid, GridItem, VStack, Input, InputGroup, InputLeftElement, Button, useColorModeValue } from "@chakra-ui/react";
 import { FaQuestionCircle, FaChevronDown, FaChevronUp, FaSearch } from "react-icons/fa";
+import Link from "next/link";
 
 // Styles object
 const styles = {
@@ -134,9 +135,11 @@ export default function FAQSection({ data }) {
                     </Text>
                 )}
                 <Box textAlign="center">
-                    <Button {...styles.contactButton}>
-                        Still have questions? Contact Support
-                    </Button>
+                    <Link href={'https://findredirect.featurebase.app'} target="_blank">
+                        <Button {...styles.contactButton}>
+                            Still have questions? 
+                        </Button>
+                    </Link>
                 </Box>
             </VStack>
         </Box>
