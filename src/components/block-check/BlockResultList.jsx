@@ -49,7 +49,7 @@ export default function BlockResultList({ results }) {
           </Thead>
           <Tbody>
             {results.map((result, index) => (
-              <Tr key={index} 
+              <Tr key={`${result.url}-${index}`} 
                   _hover={{ bg: bgColor, boxShadow: "lg" }} // Added hover effect
                   transition="background 0.3s ease, transform 0.3s ease" // Smooth transition
               >
@@ -63,7 +63,6 @@ export default function BlockResultList({ results }) {
                         ml={2}
                         boxSize={4}
                         color={color}
-                        _hover={{ color: hoverColor }}
                         onClick={() => window.open('http://' + result.url, '_blank')}
                       />
                     </Tooltip>

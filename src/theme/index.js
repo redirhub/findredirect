@@ -5,9 +5,9 @@ import { themeButton } from "@/theme/components/button";
 import { Inter, Manrope } from "next/font/google";
 
 const inter = Inter({
-  subsets: ["latin"],
+  subsets: [ "latin" ],
   variable: "--font-inter",
-  fallback: ["system-ui", "sans-serif"],
+  fallback: [ "system-ui", "sans-serif" ],
 });
 
 const fonts = {
@@ -49,7 +49,38 @@ export default extendTheme({
       body: {
         WebkitFontSmoothing: "antialiased",
         MozOsxFontSmoothing: "grayscale",
-        fontWeight: 300
+        fontWeight: 300,
+        bg: "gray.50", // Light mode background
+        color: "gray.800", // Light mode text color
+        _dark: {
+          bg: "gray.800", // Dark mode background
+          color: "gray.200", // Dark mode text color
+        },
+      },
+      a: {
+        color: "teal.500", // Link color
+        _hover: {
+          textDecoration: "underline", // Link hover effect
+        },
+        _dark: {
+          color: "teal.300", // Dark mode link color
+        },
+      },
+      input: {
+        bg: "white", // Input background
+        borderColor: "gray.300", // Input border color
+        _dark: {
+          bg: "gray.700", // Dark mode input background
+          borderColor: "gray.600", // Dark mode input border color
+        },
+      },
+      textarea: {
+        bg: "white", // Textarea background
+        borderColor: "gray.300", // Textarea border color
+        _dark: {
+          bg: "gray.700", // Dark mode textarea background
+          borderColor: "gray.600", // Dark mode textarea border color
+        },
       },
     }),
   },
@@ -59,5 +90,6 @@ export default extendTheme({
     Heading: themeHeading,
     Text: themeText,
     Button: themeButton,
+    // Add more components here if needed
   },
 });

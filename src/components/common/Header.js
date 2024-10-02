@@ -7,6 +7,7 @@ import MobileDrawer from "./MobileDrawer";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { LanguageMenu } from "./LanguageMenu";
 
 function navUrl(page) {
     if (INDEX_PAGE === page || page === 'home') {
@@ -81,6 +82,7 @@ const DesktopNav = ({ navItems }) => (
                 {item.label}
             </NavLink>
         ))}
+        <LanguageMenu />
     </Stack>
 );
 
