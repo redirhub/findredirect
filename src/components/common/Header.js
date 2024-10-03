@@ -29,7 +29,6 @@ export default function Header() {
         { id: 'home', icon: <FaHome />, label: "Home" },
         { id: 'uptime', icon: <FaRocket />, label: "Uptime" },
         { id: 'redirect', icon: <FaCheckCircle />, label: "Redirect Check" },
-        { id: 'block', icon: <FaCheckCircle />, label: "Block Check" },
         { id: 'expander', icon: <FaExpand />, label: "URL Expander" },
         { id: 'blog', icon: <FaBlog />, label: "Blog" },
     ];
