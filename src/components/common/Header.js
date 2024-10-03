@@ -1,12 +1,12 @@
 import { Box, Flex, Button, useColorModeValue, Stack, useColorMode, Image, IconButton, useDisclosure } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
-import { APP_LOGO, APP_LOGO_DARK, APP_NAME, HIDE_NAV, INDEX_PAGE } from "@/configs/constant";
+import { APP_LOGO, APP_LOGO_DARK, APP_NAME, HIDE_NAV, INDEX_PAGE, NAVS } from "@/configs/constant";
 import { FaSun, FaMoon, FaHome, FaCheckCircle, FaBlog, FaBars, FaRocket, FaExpand } from "react-icons/fa";
 import NavLink from "./NavLink";
 import MobileDrawer from "./MobileDrawer";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { LanguageMenu } from "./LanguageMenu";
 
 function navUrl(page) {
@@ -25,16 +25,24 @@ export default function Header() {
     const bgColor = useColorModeValue("white", "gray.800");
     const borderColor = useColorModeValue("gray.200", "gray.700");
 
-    const links = [
-        { id: 'home', icon: <FaHome />, label: "Home" },
-        { id: 'uptime', icon: <FaRocket />, label: "Uptime" },
-        { id: 'redirect', icon: <FaCheckCircle />, label: "Redirect Check" },
-        { id: 'expander', icon: <FaExpand />, label: "URL Expander" },
-        { id: 'blog', icon: <FaBlog />, label: "Blog" },
-    ];
+
+    const navsInUse = useMemo(() => {
+        const links = [
+            { id: 'home', icon: <FaHome />, label: "Home" },
+            { id: 'uptime', icon: <FaRocket />, label: "Uptime" },
+            { id: 'redirect', icon: <FaCheckCircle />, label: "Redirect Check" },
+            { id: 'expander', icon: <FaExpand />, label: "URL Expander" },
+            { id: 'blog', icon: <FaBlog />, label: "Blog" },
+        ];
+        if (!NAVS) {
+            return links;
+        }
+        const navs = JSON.parse(NAVS);
+        return links.filter((link) => navs.includes(link.id));
+    }, []);
 
     // put the item id = INDEX_PAGE to the first item
-    const navItems = links.filter((link) => link.id !== INDEX_PAGE).map((link) => ({
+    const navItems = navsInUse.filter((link) => link.id !== INDEX_PAGE).map((link) => ({
         id: link.id,
         href: navUrl(link.id),
         icon: link.icon,
