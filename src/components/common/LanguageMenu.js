@@ -10,15 +10,12 @@ import {
     useBreakpointValue,
 } from '@chakra-ui/react';
 import { FaArrowDown, FaCircle, FaLanguage } from 'react-icons/fa';
-import { LANGUAGES } from '@/configs/languages';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
-import { ALL_LOCALES } from '@/configs/constant';
+import { getSupportedLocales } from '@/configs/utils';
 
 export function LanguageMenu() {
     const router = useRouter();
     const { locale } = router;
-    const supportedLocales = useMemo(() => LANGUAGES.filter(lang => ALL_LOCALES.includes(lang.value)), []);
 
     const buttonStyles = {
         colorScheme: "white",
@@ -45,7 +42,7 @@ export function LanguageMenu() {
                 </Flex>
             </MenuButton>
             <MenuList p={2} minW={'fit-content'} zIndex={999}>
-                {supportedLocales?.map((lang) => (
+                {getSupportedLocales()?.map((lang) => (
                     <MenuItem
                         key={lang.value}
                         onClick={() => router.push(router.pathname, router.asPath, { locale: lang.value })}
