@@ -5,10 +5,11 @@ const ChainedBackend = require('i18next-chained-backend').default
 const path = require('path');
 const isBrowser = typeof window !== 'undefined'
 const isDev = process.env.NODE_ENV === 'development'
+const allLanguages = [ "en", "de", "es", "fr", "it", "pt", "ja", "zh", "ko" ];
 
 module.exports = {
     i18n: {
-        locales: [ 'en', 'zh', 'pt' ],
+        locales: allLanguages,
         defaultLocale: process.env.NEXT_PUBLIC_LOCALE || 'en',
         localeDetection: false,
         defaultNS: 'common',
@@ -21,8 +22,6 @@ module.exports = {
                 allowedAddOrUpdateHosts: () => '/api/translation/missing',
                 projectId: 'c129fb28-4614-4731-b76e-c6ca068a4f60',
                 apiKey: 'ad0d830f-0c5a-4d85-9e67-14a8f69e51fc',
-                // reloadInterval: false,
-                // version: 'staging',
                 referenceLng: 'en',
             }
         ],
