@@ -5,7 +5,7 @@ import { styles } from "@/configs/uptime";
 import React from "react";
 import { FaBicycle, FaCar } from "react-icons/fa";
 import { GiTurtle } from "react-icons/gi";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function SiteStats({ uptime, timings, token }) {
   const { t } = useTranslation();

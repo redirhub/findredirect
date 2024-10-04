@@ -4,7 +4,7 @@ import DataSources from "@/components/uptime/DataSources";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { styles } from "@/configs/uptime";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function Uptime() {
     const { t } = useTranslation();

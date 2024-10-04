@@ -1,6 +1,6 @@
 import { Box, Flex, Grid, GridItem, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { getFluidFontSize } from "@/utils";
-import { Trans, useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 
 export default function DataSources({ sitesData = {} }) {
   const { t } = useTranslation();

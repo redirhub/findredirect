@@ -7,7 +7,7 @@ import { styles } from "@/configs/uptime";
 import { getFluidFontSize, getFormattedTimeDiff } from "@/utils";
 import { FaClock } from "react-icons/fa";
 import { useDevice } from "@/hooks/useDevice";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function SiteCard({ site, isFastest }) {
   const { t } = useTranslation();
