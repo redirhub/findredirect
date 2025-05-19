@@ -6,6 +6,7 @@ import { getFluidFontSize } from "@/utils";
 import Uptime from "@/components/uptime/Uptime";
 import { APP_NAME } from "@/configs/constant";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function UptimePage() {
 
@@ -50,3 +51,9 @@ export default function UptimePage() {
         </MainLayout>
     );
 }
+
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ['common'])),
+    },
+});

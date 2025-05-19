@@ -1,4 +1,3 @@
-import { useState, useMemo } from "react";
 import Head from "next/head";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
@@ -9,6 +8,7 @@ import { FaLink, FaShieldVirus } from "react-icons/fa";
 import { styles } from "@/configs/checker";
 import FAQSection from "@/components/common/FAQSection";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function DomainBlockPage() {
 
@@ -70,3 +70,9 @@ export default function DomainBlockPage() {
         </MainLayout>
     );
 }
+
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ['common'])),
+    },
+});
