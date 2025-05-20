@@ -10,7 +10,6 @@ const Home = () => {
     case 'uptime':
       return <UptimePage />;
     case 'check':
-      return <RedirectCheckPage />;
     case 'redirect':
       return <RedirectCheckPage />;
     case 'block':

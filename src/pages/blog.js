@@ -2,7 +2,6 @@ import Head from "next/head";
 import { Box, Container, VStack, Heading, Text, useColorModeValue, Icon } from "@chakra-ui/react";
 import { FaTools } from "react-icons/fa";
 import MainLayout from "@/layouts/MainLayout";
-import { AppContainer } from "@/components/common/AppContainer";
 import { getFluidFontSize } from "@/utils";
 import { APP_NAME } from "@/configs/constant";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'

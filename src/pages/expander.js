@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Head from "next/head";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
