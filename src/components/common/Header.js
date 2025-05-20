@@ -5,26 +5,24 @@ import { FaSun, FaMoon, FaHome, FaCheckCircle, FaBlog, FaBars, FaRocket, FaExpan
 import NavLink from "./NavLink";
 import MobileDrawer from "./MobileDrawer";
 import { useRouter } from "next/router";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { LanguageMenu } from "./LanguageMenu";
 import { useTranslation } from "next-i18next";
 
-function navUrl(page) {
+function navUrl(page, locale) {
     if (INDEX_PAGE === page || page === 'home') {
-        return '/';
+        return locale !== 'en' ? `/${locale}` : '/';
     }
-    return `/${page}`;
+    return locale !== 'en' ? `/${locale}/${page}` : `/${page}`;
 }
 
 export default function Header() {
-
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const { locale } = useRouter();
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const bgColor = useColorModeValue("white", "gray.800");
     const borderColor = useColorModeValue("gray.200", "gray.700");
-
 
     const navsInUse = useMemo(() => {
         const links = [
@@ -44,19 +42,15 @@ export default function Header() {
     // put the item id = INDEX_PAGE to the first item
     const navItems = navsInUse.filter((link) => link.id !== INDEX_PAGE).map((link) => ({
         id: link.id,
-        href: navUrl(link.id),
+        href: navUrl(link.id, locale),
         icon: link.icon,
         label: t(`tool.${link.id}`, link.label),
     }));
 
-    useEffect(() => {
-        // i18n.changeLanguage(locale);
-    }, [ locale, i18n ]);
-
     return (
         <Box bg={bgColor} px={4} boxShadow="sm" position="sticky" top={0} zIndex="sticky" borderBottom={1} borderStyle={'solid'} borderColor={borderColor}>
             <Flex h={16} alignItems={"center"} justifyContent={"space-between"} maxW="container.xl" mx="auto">
-                <Logo />
+                <Logo locale={locale} />
                 <Flex alignItems={"center"}>
                     {!HIDE_NAV && <DesktopNav navItems={navItems} />}
                     <ColorModeToggle colorMode={colorMode} toggleColorMode={toggleColorMode} />
@@ -68,9 +62,9 @@ export default function Header() {
     );
 }
 
-const Logo = () => (
+const Logo = ({ locale }) => (
     <Flex alignItems="center">
-        <Link href="/">
+        <Link href={`/${locale !== 'en' ? locale : ''}`}>
             <Image
                 src={useColorModeValue(APP_LOGO, APP_LOGO_DARK)}
                 alt={APP_NAME}

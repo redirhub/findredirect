@@ -107,3 +107,31 @@ export function getFormattedTimeDiff(inputDatetime) {
   // If less than a minute, return "just now"
   return "just now";
 }
+
+export async function fetchTranslationsFromApi(locale, baseUrl = '') {
+  const url = `${baseUrl}/api/translation/${locale}`;
+  const res = await fetch(url);
+  const common = await res.json()
+  return { common }
+}
+
+export function mergeI18nProps(baseTranslations, resources, locale, namespace) {
+  const mergedNamespace = {
+    ...baseTranslations._nextI18Next.initialI18nStore[locale][namespace],
+    ...resources[namespace],
+  };
+
+  return {
+    ...baseTranslations,
+    _nextI18Next: {
+      ...baseTranslations._nextI18Next,
+      initialI18nStore: {
+        ...baseTranslations._nextI18Next.initialI18nStore,
+        [locale]: {
+          ...baseTranslations._nextI18Next.initialI18nStore[locale],
+          [namespace]: mergedNamespace,
+        },
+      },
+    },
+  };
+}

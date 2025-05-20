@@ -10,37 +10,16 @@ const allLanguages = [ "en", "de", "es", "fr", "it", "pt", "ja", "zh", "ko" ];
 module.exports = {
     i18n: {
         locales: allLanguages,
-        defaultLocale: process.env.NEXT_PUBLIC_LOCALE || 'en',
-        // localeDetection: false,
+        defaultLocale: 'en',
+        localeDetection: true,
     },
-    backend: {
-        backendOptions: [
-            {
-                loadPath: '/api/translation/{{lng}}',
-                addPath: '/api/translation/missing',
-                allowedAddOrUpdateHosts: () => '/api/translation/missing',
-                projectId: 'c129fb28-4614-4731-b76e-c6ca068a4f60',
-                apiKey: 'ad0d830f-0c5a-4d85-9e67-14a8f69e51fc',
-                referenceLng: 'en',
-            }
-        ],
-        backends: isBrowser ? [ HttpBackend ] : [],
-    },
-    partialBundledLanguages: isBrowser && true,
-    use: isBrowser ? [ ChainedBackend ] : [],
-    debug: isDev,
-    reloadOnPrerender: isDev,
-    localePath:
-        isBrowser
-            ? path.resolve('./public/locales')
-            : 'public/locales',
-    saveMissing: true,
+    localePath: path.resolve('./public/locales'), // server + build-time only
+    reloadOnPrerender: false,
+    saveMissing: false,
     interpolation: {
-        escapeValue: false
+        escapeValue: false,
     },
-    react: { // used only for the lazy reload
-        bindI18n: 'languageChanged loaded',
-        useSuspense: false
+    react: {
+        useSuspense: false,
     },
-    serializeConfig: false,
 }

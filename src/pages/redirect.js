@@ -9,6 +9,8 @@ import { FaLink } from "react-icons/fa";
 import { styles } from "@/configs/checker";
 import FAQSection from "@/components/common/FAQSection";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { fetchTranslationsFromApi, mergeI18nProps } from "@/utils";
 
 export default function RedirectCheckPage() {
     const { t } = useTranslation();
@@ -99,4 +101,16 @@ export default function RedirectCheckPage() {
             </AppContainer>
         </MainLayout>
     );
+}
+
+export async function getStaticProps({ locale }) {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const resources = await fetchTranslationsFromApi(locale, baseUrl);
+    const baseTranslations = await serverSideTranslations(locale, ['common']);
+    
+    const data = mergeI18nProps(baseTranslations, resources, locale, 'common')
+    
+    return {
+      props: data
+    }
 }
