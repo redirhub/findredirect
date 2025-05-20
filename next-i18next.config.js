@@ -6,7 +6,7 @@ const allLanguages = [ "en", "de", "es", "fr", "it", "pt", "ja", "zh", "ko" ];
 module.exports = {
     i18n: {
         locales: allLanguages,
-        defaultLocale: 'en',
+        defaultLocale: process.env.NEXT_PUBLIC_LOCALE || 'en',
         localeDetection: true,
     },
     localePath: path.resolve('./public/locales'), // server + build-time only
