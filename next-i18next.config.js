@@ -17,7 +17,7 @@ class NoLoadHttpBackend extends HttpBackend {
 module.exports = {
     i18n: {
         locales: allLanguages,
-        defaultLocale: 'en',
+        defaultLocale: process.env.NEXT_PUBLIC_LOCALE || 'en',
         // localeDetection: true,
     },
     backend: {
