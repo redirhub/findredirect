@@ -14,10 +14,12 @@ export default function BlogPage() {
 
     const headingColor = useColorModeValue("gray.800", "white");
 
+    const title = `Blog Under Construction | ${APP_NAME}`;
+
     return (
         <MainLayout>
             <Head>
-                <title>Blog Under Construction | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content="Our blog is currently under construction. Stay tuned for exciting content coming soon!"

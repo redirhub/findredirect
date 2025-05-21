@@ -40,10 +40,12 @@ export default function DomainBlockPage() {
         }
     ];
 
+    const title = `${t('tool.block-title', 'Domain Block Checker: Verify Accessibility in China')} | ${APP_NAME}`;
+
     return (
         <MainLayout>
             <Head>
-                <title>{t('tool.block-title', 'Domain Block Checker: Verify Accessibility in China')} | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content={t('tool.block-description', "Check if your domain is blocked by the Great Firewall of China. Ensure your content is accessible to users in China with our reliable tool.")}

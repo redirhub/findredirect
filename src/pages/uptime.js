@@ -19,10 +19,12 @@ export default function UptimePage() {
 
     const headingColor = useColorModeValue("gray.800", "white");
 
+    const title = `${t('tool.uptime-title')} | ${APP_NAME}`;
+
     return (
         <MainLayout>
             <Head>
-                <title>{t('tool.uptime-title', 'Compare Redirect Service Speeds | Uptime & Response Times Comparison')} | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content={t('tool.uptime-description', 'Find the fastest redirect services from RedirHub, Redirect.pizza, and EasyRedir with our comprehensive speed comparison tool. Check uptime, response times, and performance details in real-time.')}

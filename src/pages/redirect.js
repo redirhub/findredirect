@@ -56,10 +56,12 @@ export default function RedirectCheckPage() {
         }
     ];
 
+    const title = `${t('tool.redirect-title', 'Bulk Redirect Checker: Analyze URL Chains & Speed Compare')} | ${APP_NAME}`
+
     return (
         <MainLayout>
             <Head>
-                <title>{t('tool.redirect-title', 'Bulk Redirect Checker: Analyze URL Chains & Speed Compare')} | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content={t('tool.redirect-description', "Instantly check and analyze your URL redirects with our powerful tool. Uncover redirect chains, measure speed, and optimize your website's performance. Try our free redirect checker now!")}

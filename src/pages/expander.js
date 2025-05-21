@@ -55,10 +55,12 @@ export default function ShortURLExpanderPage() {
         }
     ];
 
+    const title = `${t('tool.expander-title', 'Bulk Short URL Expander: Reveal Full Links Instantly')} | ${APP_NAME}`;
+
     return (
         <MainLayout>
             <Head>
-                <title>{t('tool.expander-title', 'Bulk Short URL Expander: Reveal Full Links Instantly')} | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content={t('tool.expander-description', "Instantly expand shortened URLs to reveal their full destination. Enhance your online safety and transparency with our free Short URL Expander tool. Try it now!")}
