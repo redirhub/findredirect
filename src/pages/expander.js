@@ -1,5 +1,5 @@
-import { useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
@@ -9,9 +9,13 @@ import { styles } from "@/configs/checker";
 import FAQSection from "@/components/common/FAQSection";
 import RedirectChecker from "@/components/redirect-check/RedirectChecker";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { generateHrefLangsAndCanonicalTag } from "@/utils";
 
 export default function ShortURLExpanderPage() {
     const { t } = useTranslation();
+    const router = useRouter();
+    const { locale, asPath } = router;
     const faqData = [
         {
             "question": t('tool.expander-faq-1-question', "What is a short URL expander?"),
@@ -54,15 +58,18 @@ export default function ShortURLExpanderPage() {
             "answer": t('tool.expander-faq-10-answer', "Expanding short URLs is purely informational and does not impact your SEO. However, if you're managing a website or campaign, analyzing expanded URLs can help you ensure that redirects are working properly, which can indirectly influence SEO.")
         }
     ];
+    const title = `${t('tool.expander-title', 'Bulk Short URL Expander: Reveal Full Links Instantly')} | ${APP_NAME}`;
 
     return (
         <MainLayout>
             <Head>
-                <title>{t('tool.expander-title', 'Bulk Short URL Expander: Reveal Full Links Instantly')} | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content={t('tool.expander-description', "Instantly expand shortened URLs to reveal their full destination. Enhance your online safety and transparency with our free Short URL Expander tool. Try it now!")}
                 />
+                {/* hreflangs and canonical tag */}
+                {generateHrefLangsAndCanonicalTag(locale, asPath)}
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",
@@ -100,3 +107,10 @@ export default function ShortURLExpanderPage() {
     );
 }
 
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
+}

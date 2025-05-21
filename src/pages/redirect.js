@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
@@ -9,10 +9,13 @@ import { FaLink } from "react-icons/fa";
 import { styles } from "@/configs/checker";
 import FAQSection from "@/components/common/FAQSection";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { generateHrefLangsAndCanonicalTag } from "@/utils";
 
 export default function RedirectCheckPage() {
     const { t } = useTranslation();
-
+    const router = useRouter();
+    const { locale, asPath } = router;
     const faqData = [
         {
             "question": t('tool.redirect-faq-1', "What is a URL redirect and why is it important?"),
@@ -55,15 +58,18 @@ export default function RedirectCheckPage() {
             "answer": t('tool.redirect-faq-10-answer', "Yes, our Bulk Redirect Checker can track both HTTP and HTTPS redirects, helping you identify whether your URLs are correctly transitioning to secure protocols. Ensuring proper HTTPS redirects is vital for security, SEO, and user trust, as modern browsers and search engines prioritize HTTPS over HTTP.")
         }
     ];
+    const title = `${t('tool.redirect-title', 'Bulk Redirect Checker: Analyze URL Chains & Speed Compare')} | ${APP_NAME}`;
 
     return (
         <MainLayout>
             <Head>
-                <title>{t('tool.redirect-title', 'Bulk Redirect Checker: Analyze URL Chains & Speed Compare')} | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content={t('tool.redirect-description', "Instantly check and analyze your URL redirects with our powerful tool. Uncover redirect chains, measure speed, and optimize your website's performance. Try our free redirect checker now!")}
                 />
+                {/* hreflangs and canonical tag */}
+                {generateHrefLangsAndCanonicalTag(locale, asPath)}
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",
@@ -99,4 +105,12 @@ export default function RedirectCheckPage() {
             </AppContainer>
         </MainLayout>
     );
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
 }

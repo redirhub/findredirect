@@ -1,27 +1,29 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Box, Container, VStack, Heading, Text, useColorModeValue } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
-import { getFluidFontSize } from "@/utils";
+import { getFluidFontSize, generateHrefLangsAndCanonicalTag } from "@/utils";
 import Uptime from "@/components/uptime/Uptime";
 import { APP_NAME } from "@/configs/constant";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export default function UptimePage() {
-
     const { t } = useTranslation();
-
+    const router = useRouter();
+    const { locale, asPath } = router;
     const bgGradient = useColorModeValue(
         "linear(to-r, blue.100, green.100)",
         "linear(to-r, blue.800, green.800)"
     );
-
     const headingColor = useColorModeValue("gray.800", "white");
+    const title = `${t('tool.uptime-title')} | ${APP_NAME}`;
 
     return (
         <MainLayout>
             <Head>
-                <title>{t('tool.uptime-title', 'Compare Redirect Service Speeds | Uptime & Response Times Comparison')} | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content={t('tool.uptime-description', 'Find the fastest redirect services from RedirHub, Redirect.pizza, and EasyRedir with our comprehensive speed comparison tool. Check uptime, response times, and performance details in real-time.')}
@@ -31,6 +33,8 @@ export default function UptimePage() {
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
                 <meta property="og:image:alt" content={t('tool.uptime-image-alt', 'Redirect Services Performance Comparison')} />
+                {/* hreflangs and canonical tag */}
+                {generateHrefLangsAndCanonicalTag(locale, asPath)}
             </Head>
             <Box bgGradient={bgGradient} py={20}>
                 <Container maxW="container.xl">
@@ -49,4 +53,12 @@ export default function UptimePage() {
             </AppContainer>
         </MainLayout>
     );
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
 }

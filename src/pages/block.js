@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
@@ -9,10 +9,13 @@ import { FaLink, FaShieldVirus } from "react-icons/fa";
 import { styles } from "@/configs/checker";
 import FAQSection from "@/components/common/FAQSection";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { generateHrefLangsAndCanonicalTag } from "@/utils";
 
 export default function DomainBlockPage() {
-
     const { t } = useTranslation();
+    const router = useRouter();
+    const { locale, asPath } = router;
     const faqData = [
         {
             "question": t('tool.block-faq-1-question', "What is the Domain Block by GFW China tool?"),
@@ -39,15 +42,18 @@ export default function DomainBlockPage() {
             "answer": t('tool.block-faq-6-answer', "Yes, our tool allows you to check multiple domains simultaneously, providing a comprehensive overview of their accessibility.")
         }
     ];
+    const title = `${t('tool.block-title', 'Domain Block Checker: Verify Accessibility in China')} | ${APP_NAME}`;
 
     return (
         <MainLayout>
             <Head>
-                <title>{t('tool.block-title', 'Domain Block Checker: Verify Accessibility in China')} | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content={t('tool.block-description', "Check if your domain is blocked by the Great Firewall of China. Ensure your content is accessible to users in China with our reliable tool.")}
                 />
+                {/* hreflangs and canonical tag */}
+                {generateHrefLangsAndCanonicalTag(locale, asPath)}
             </Head>
             <AppContainer>
                 <Box my={12}>
@@ -69,4 +75,12 @@ export default function DomainBlockPage() {
             </AppContainer>
         </MainLayout>
     );
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
 }

@@ -1,28 +1,33 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Box, Container, VStack, Heading, Text, useColorModeValue, Icon } from "@chakra-ui/react";
 import { FaTools } from "react-icons/fa";
 import MainLayout from "@/layouts/MainLayout";
-import { AppContainer } from "@/components/common/AppContainer";
-import { getFluidFontSize } from "@/utils";
+import { generateHrefLangsAndCanonicalTag, getFluidFontSize } from "@/utils";
 import { APP_NAME } from "@/configs/constant";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export default function BlogPage() {
+    const router = useRouter();
+    const { locale, asPath } = router;
     const bgGradient = useColorModeValue(
         "linear(to-r, purple.100, pink.100)",
         "linear(to-r, purple.800, pink.800)"
     );
-
     const headingColor = useColorModeValue("gray.800", "white");
+    const title = `Blog Under Construction | ${APP_NAME}`;
 
     return (
         <MainLayout>
             <Head>
-                <title>Blog Under Construction | {APP_NAME}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content="Our blog is currently under construction. Stay tuned for exciting content coming soon!"
                 />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
+                {/* hreflangs and canonical tag */}
+                {generateHrefLangsAndCanonicalTag(locale, asPath)}
             </Head>
             <Box bgGradient={bgGradient} py={20} minHeight="calc(100vh - 100px)" display="flex" alignItems="center">
                 <Container maxW="container.xl">
@@ -40,4 +45,12 @@ export default function BlogPage() {
             </Box>
         </MainLayout>
     );
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
 }

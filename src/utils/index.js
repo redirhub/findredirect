@@ -1,3 +1,5 @@
+import { ALL_LOCALES, APP_BASE_URL } from "@/configs/constant";
+
 /**
  * Generates a UUID in the version 4 format.
  * @returns {string} A UUID string.
@@ -106,4 +108,31 @@ export function getFormattedTimeDiff(inputDatetime) {
 
   // If less than a minute, return "just now"
   return "just now";
+}
+
+export function getHrefForLocale(loc, asPath) {
+  return loc === 'en' 
+    ? `${APP_BASE_URL}${asPath}` 
+    : `${APP_BASE_URL}/${loc}${asPath}`;
+};
+
+export function generateHrefLangsAndCanonicalTag(locale, asPath) {
+  const hrefLangTags = ALL_LOCALES.map((loc) => (
+    <link
+      key={loc}
+      rel="alternate"
+      hrefLang={loc}
+      href={getHrefForLocale(loc, asPath)}
+    />
+  ));
+
+  const canonicalTag = (
+    <link
+      key="canonical"
+      rel="canonical"
+      href={getHrefForLocale(locale ?? 'en', asPath)}
+    />
+  );
+
+  return [...hrefLangTags, canonicalTag];
 }
