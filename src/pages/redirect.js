@@ -1,9 +1,15 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
 import RedirectChecker from "@/components/redirect-check/RedirectChecker";
-import { APP_NAME, EXAMPLE_REDIRECT_URL } from "@/configs/constant";
+import { 
+    APP_NAME, 
+    EXAMPLE_REDIRECT_URL, 
+    ALL_LOCALES, 
+    APP_BASE_URL 
+} from "@/configs/constant";
 import { FaLink } from "react-icons/fa";
 import { styles } from "@/configs/checker";
 import FAQSection from "@/components/common/FAQSection";
@@ -12,7 +18,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export default function RedirectCheckPage() {
     const { t } = useTranslation();
-
+    const router = useRouter();
+    const { locale, asPath } = router;
     const faqData = [
         {
             "question": t('tool.redirect-faq-1', "What is a URL redirect and why is it important?"),
@@ -55,8 +62,12 @@ export default function RedirectCheckPage() {
             "answer": t('tool.redirect-faq-10-answer', "Yes, our Bulk Redirect Checker can track both HTTP and HTTPS redirects, helping you identify whether your URLs are correctly transitioning to secure protocols. Ensuring proper HTTPS redirects is vital for security, SEO, and user trust, as modern browsers and search engines prioritize HTTPS over HTTP.")
         }
     ];
-
-    const title = `${t('tool.redirect-title', 'Bulk Redirect Checker: Analyze URL Chains & Speed Compare')} | ${APP_NAME}`
+    const title = `${t('tool.redirect-title', 'Bulk Redirect Checker: Analyze URL Chains & Speed Compare')} | ${APP_NAME}`;
+    const getHrefForLocale = (loc) => {
+        return loc === 'en' 
+            ? `${APP_BASE_URL}${asPath}` 
+            : `${APP_BASE_URL}/${loc}${asPath}`;
+    };
 
     return (
         <MainLayout>
@@ -65,6 +76,20 @@ export default function RedirectCheckPage() {
                 <meta
                     name="description"
                     content={t('tool.redirect-description', "Instantly check and analyze your URL redirects with our powerful tool. Uncover redirect chains, measure speed, and optimize your website's performance. Try our free redirect checker now!")}
+                />
+                {/* hreflang tags */}
+                {ALL_LOCALES.map((loc) => (
+                    <link
+                        key={loc}
+                        rel="alternate"
+                        hrefLang={loc}
+                        href={getHrefForLocale(loc)}
+                    />
+                ))}
+                {/* canonical tag */}
+                <link
+                    rel="canonical"
+                    href={getHrefForLocale(locale || 'en')}
                 />
                 <script type="application/ld+json">
                     {JSON.stringify({

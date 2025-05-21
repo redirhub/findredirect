@@ -1,8 +1,14 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
-import { APP_NAME, EXAMPLE_EXPANDER_URL } from "@/configs/constant";
+import { 
+    APP_NAME, 
+    EXAMPLE_EXPANDER_URL, 
+    ALL_LOCALES, 
+    APP_BASE_URL 
+} from "@/configs/constant";
 import { FaLink } from "react-icons/fa";
 import { styles } from "@/configs/checker";
 import FAQSection from "@/components/common/FAQSection";
@@ -12,6 +18,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export default function ShortURLExpanderPage() {
     const { t } = useTranslation();
+    const router = useRouter();
+    const { locale, asPath } = router;
     const faqData = [
         {
             "question": t('tool.expander-faq-1-question', "What is a short URL expander?"),
@@ -54,8 +62,12 @@ export default function ShortURLExpanderPage() {
             "answer": t('tool.expander-faq-10-answer', "Expanding short URLs is purely informational and does not impact your SEO. However, if you're managing a website or campaign, analyzing expanded URLs can help you ensure that redirects are working properly, which can indirectly influence SEO.")
         }
     ];
-
     const title = `${t('tool.expander-title', 'Bulk Short URL Expander: Reveal Full Links Instantly')} | ${APP_NAME}`;
+    const getHrefForLocale = (loc) => {
+        return loc === 'en' 
+            ? `${APP_BASE_URL}${asPath}` 
+            : `${APP_BASE_URL}/${loc}${asPath}`;
+    };
 
     return (
         <MainLayout>
@@ -64,6 +76,20 @@ export default function ShortURLExpanderPage() {
                 <meta
                     name="description"
                     content={t('tool.expander-description', "Instantly expand shortened URLs to reveal their full destination. Enhance your online safety and transparency with our free Short URL Expander tool. Try it now!")}
+                />
+                {/* hreflang tags */}
+                {ALL_LOCALES.map((loc) => (
+                    <link
+                        key={loc}
+                        rel="alternate"
+                        hrefLang={loc}
+                        href={getHrefForLocale(loc)}
+                    />
+                ))}
+                {/* canonical tag */}
+                <link
+                    rel="canonical"
+                    href={getHrefForLocale(locale || 'en')}
                 />
                 <script type="application/ld+json">
                     {JSON.stringify({

@@ -1,25 +1,29 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Box, Container, VStack, Heading, Text, useColorModeValue } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { AppContainer } from "@/components/common/AppContainer";
 import { getFluidFontSize } from "@/utils";
 import Uptime from "@/components/uptime/Uptime";
-import { APP_NAME } from "@/configs/constant";
+import { APP_NAME, ALL_LOCALES, APP_BASE_URL } from "@/configs/constant";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export default function UptimePage() {
-
     const { t } = useTranslation();
-
+    const router = useRouter();
+    const { locale, asPath } = router;
     const bgGradient = useColorModeValue(
         "linear(to-r, blue.100, green.100)",
         "linear(to-r, blue.800, green.800)"
     );
-
     const headingColor = useColorModeValue("gray.800", "white");
-
     const title = `${t('tool.uptime-title')} | ${APP_NAME}`;
+    const getHrefForLocale = (loc) => {
+        return loc === 'en' 
+            ? `${APP_BASE_URL}${asPath}` 
+            : `${APP_BASE_URL}/${loc}${asPath}`;
+    };
 
     return (
         <MainLayout>
@@ -34,6 +38,20 @@ export default function UptimePage() {
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
                 <meta property="og:image:alt" content={t('tool.uptime-image-alt', 'Redirect Services Performance Comparison')} />
+                {/* hreflang tags */}
+                {ALL_LOCALES.map((loc) => (
+                    <link
+                        key={loc}
+                        rel="alternate"
+                        hrefLang={loc}
+                        href={getHrefForLocale(loc)}
+                    />
+                ))}
+                {/* canonical tag */}
+                <link
+                    rel="canonical"
+                    href={getHrefForLocale(locale || 'en')}
+                />
             </Head>
             <Box bgGradient={bgGradient} py={20}>
                 <Container maxW="container.xl">
