@@ -1,6 +1,6 @@
 import { Box, Flex, Button, useColorModeValue, Stack, useColorMode, Image, IconButton, useDisclosure } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
-import { APP_LOGO, APP_LOGO_DARK, APP_NAME, HIDE_NAV, INDEX_PAGE, NAVS } from "@/configs/constant";
+import { APP_LOGO, APP_LOGO_DARK, APP_NAME, HIDE_NAV, INDEX_PAGE, LOCALE, NAVS } from "@/configs/constant";
 import { FaSun, FaMoon, FaHome, FaCheckCircle, FaBlog, FaBars, FaRocket, FaExpand } from "react-icons/fa";
 import NavLink from "./NavLink";
 import MobileDrawer from "./MobileDrawer";
@@ -11,9 +11,9 @@ import { useTranslation } from "next-i18next";
 
 function navUrl(page, locale) {
     if (INDEX_PAGE === page || page === 'home') {
-        return locale !== 'en' ? `/${locale}` : '/';
+        return locale !== LOCALE ? `/${locale}` : '/';
     }
-    return locale !== 'en' ? `/${locale}/${page}` : `/${page}`;
+    return locale !== LOCALE ? `/${locale}/${page}` : `/${page}`;
 }
 
 export default function Header() {
