@@ -21,4 +21,5 @@ export const NAVS = process.env.NEXT_PUBLIC_NAVS;
 export const EXAMPLE_REDIRECT_URL = process.env.NEXT_PUBLIC_EXAMPLE_REDIRECT_URL;
 export const EXAMPLE_EXPANDER_URL = process.env.NEXT_PUBLIC_EXAMPLE_EXPANDER_URL;
 export const ALL_LOCALES = process.env.NEXT_PUBLIC_LOCALES?.split(',') || [ "en", "de", "es", "fr", "it", "pt", "ja", "zh", "ko" ];
+export const LOCALE = process.env.NEXT_PUBLIC_LOCALE || 'en';
 export const APP_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;

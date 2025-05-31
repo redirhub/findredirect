@@ -1,4 +1,4 @@
-import { ALL_LOCALES, APP_BASE_URL } from "@/configs/constant";
+import { ALL_LOCALES, APP_BASE_URL, LOCALE } from "@/configs/constant";
 
 /**
  * Generates a UUID in the version 4 format.
@@ -15,10 +15,10 @@ export function getRandomUUID() {
   for (let i = 0; i < 36; i++) {
     // If the index is 8, 13, 18, or 23, insert a hyphen
     if (i === 8 || i === 13 || i === 18 || i === 23) {
-      chars[i] = "-";
+      chars[ i ] = "-";
     } else {
       // Otherwise, insert a random hexadecimal digit
-      chars[i] = hexDigits[Math.floor(Math.random() * 16)];
+      chars[ i ] = hexDigits[ Math.floor(Math.random() * 16) ];
     }
   }
 
@@ -84,16 +84,16 @@ export function getFormattedTimeDiff(inputDatetime) {
 
   // Define units and their corresponding thresholds
   const units = [
-    ["years", 31536000],
-    ["months", 2592000],
-    ["weeks", 604800],
-    ["days", 86400],
-    ["hours", 3600],
-    ["minutes", 60],
+    [ "years", 31536000 ],
+    [ "months", 2592000 ],
+    [ "weeks", 604800 ],
+    [ "days", 86400 ],
+    [ "hours", 3600 ],
+    [ "minutes", 60 ],
   ];
 
   // Iterate through units to find the best fit
-  for (const [unit, threshold] of units) {
+  for (const [ unit, threshold ] of units) {
     if (seconds >= threshold) {
       const value = Math.floor(seconds / threshold);
       if (unit === "months") {
@@ -111,8 +111,8 @@ export function getFormattedTimeDiff(inputDatetime) {
 }
 
 export function getHrefForLocale(loc, asPath) {
-  return loc === 'en' 
-    ? `${APP_BASE_URL}${asPath}` 
+  return loc === LOCALE
+    ? `${APP_BASE_URL}${asPath}`
     : `${APP_BASE_URL}/${loc}${asPath}`;
 };
 
@@ -130,9 +130,9 @@ export function generateHrefLangsAndCanonicalTag(locale, asPath) {
     <link
       key="canonical"
       rel="canonical"
-      href={getHrefForLocale(locale ?? 'en', asPath)}
+      href={getHrefForLocale(locale ?? LOCALE, asPath)}
     />
   );
 
-  return [...hrefLangTags, canonicalTag];
+  return [ ...hrefLangTags, canonicalTag ];
 }
