@@ -54,7 +54,7 @@ export default function RedirectCheckPage() {
             "answer": t('tool.redirect-faq-9-answer', "Each redirect adds a small delay in loading the final page. If you have multiple redirects (redirect chains), it can significantly slow down the page load time, leading to poor user experience. Slow-loading pages often lead to higher bounce rates and lower SEO rankings. Regularly checking and optimizing redirects is essential for maintaining fast page speeds.")
         },
         {
-            "question": t('tool.redirect-faq-10', "Can I use FindRedirect.com to track both HTTP and HTTPS redirects?"),
+            "question": t('tool.redirect-faq-10', "Can I track both HTTP and HTTPS redirects?"),
             "answer": t('tool.redirect-faq-10-answer', "Yes, our Bulk Redirect Checker can track both HTTP and HTTPS redirects, helping you identify whether your URLs are correctly transitioning to secure protocols. Ensuring proper HTTPS redirects is vital for security, SEO, and user trust, as modern browsers and search engines prioritize HTTPS over HTTP.")
         }
     ];
