@@ -7,16 +7,8 @@ const httpsAgent = new https.Agent({
   rejectUnauthorized: false
 });
 
-async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
-
-    let { url } = req.body;
-
-    if (!url) {
-        return res.status(400).json({ error: 'URL parameter is required' });
-    }
+// Function to check a single URL
+async function checkSingleUrl(url) {
     url = url.trim();
 
     // fix url if it doesn't have a scheme
@@ -80,7 +72,41 @@ async function handler(req, res) {
             error_msg: error.message,
         });
     }
-    return res.status(200).json(results);
+    return results;
+}
+
+async function handler(req, res) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
+    }
+
+    const { url, urls } = req.body;
+
+    // Support batch processing (urls array) or single URL
+    if (urls && Array.isArray(urls)) {
+        // Batch mode: process up to 10 URLs in parallel
+        const urlsToCheck = urls.slice(0, 10); // Limit to 10 URLs per request
+
+        if (urlsToCheck.length === 0) {
+            return res.status(400).json({ error: 'URLs array is empty' });
+        }
+
+        try {
+            // Process all URLs in parallel
+            const results = await Promise.all(
+                urlsToCheck.map(singleUrl => checkSingleUrl(singleUrl))
+            );
+            return res.status(200).json(results);
+        } catch (error) {
+            return res.status(500).json({ error: 'Batch processing failed', message: error.message });
+        }
+    } else if (url) {
+        // Single URL mode (backward compatibility)
+        const results = await checkSingleUrl(url);
+        return res.status(200).json(results);
+    } else {
+        return res.status(400).json({ error: 'URL or URLs parameter is required' });
+    }
 }
 
 export default corsMiddleware(handler);
