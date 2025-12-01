@@ -15,10 +15,10 @@ export function getRandomUUID() {
   for (let i = 0; i < 36; i++) {
     // If the index is 8, 13, 18, or 23, insert a hyphen
     if (i === 8 || i === 13 || i === 18 || i === 23) {
-      chars[ i ] = "-";
+      chars[i] = "-";
     } else {
       // Otherwise, insert a random hexadecimal digit
-      chars[ i ] = hexDigits[ Math.floor(Math.random() * 16) ];
+      chars[i] = hexDigits[Math.floor(Math.random() * 16)];
     }
   }
 
@@ -33,7 +33,12 @@ export function getRandomUUID() {
  * @param {string} [maxViewport='1400px'] - The maximum viewport width in pixels.
  * @returns {string} A clamp expression that can be used in CSS.
  */
-export function getFluidFontSize(minFontSize, maxFontSize, minViewport = "768px", maxViewport = "1400px") {
+export function getFluidFontSize(
+  minFontSize,
+  maxFontSize,
+  minViewport = "768px",
+  maxViewport = "1400px"
+) {
   // Convert the parameters to numbers
   minFontSize = parseFloat(minFontSize);
   maxFontSize = parseFloat(maxFontSize);
@@ -84,16 +89,16 @@ export function getFormattedTimeDiff(inputDatetime) {
 
   // Define units and their corresponding thresholds
   const units = [
-    [ "years", 31536000 ],
-    [ "months", 2592000 ],
-    [ "weeks", 604800 ],
-    [ "days", 86400 ],
-    [ "hours", 3600 ],
-    [ "minutes", 60 ],
+    ["years", 31536000],
+    ["months", 2592000],
+    ["weeks", 604800],
+    ["days", 86400],
+    ["hours", 3600],
+    ["minutes", 60],
   ];
 
   // Iterate through units to find the best fit
-  for (const [ unit, threshold ] of units) {
+  for (const [unit, threshold] of units) {
     if (seconds >= threshold) {
       const value = Math.floor(seconds / threshold);
       if (unit === "months") {
@@ -114,7 +119,7 @@ export function getHrefForLocale(loc, asPath) {
   return loc === LOCALE
     ? `${APP_BASE_URL}${asPath}`
     : `${APP_BASE_URL}/${loc}${asPath}`;
-};
+}
 
 export function generateHrefLangsAndCanonicalTag(locale, asPath) {
   const hrefLangTags = ALL_LOCALES.map((loc) => (
@@ -134,5 +139,57 @@ export function generateHrefLangsAndCanonicalTag(locale, asPath) {
     />
   );
 
-  return [ ...hrefLangTags, canonicalTag ];
+  return [...hrefLangTags, canonicalTag];
 }
+export const articles = [
+  {
+    date: "Nov 19, 2025",
+    title: "Mastercard Business Outcomes — Making the Invisible...",
+    description:
+      "When Mastercard set out to create the Business Outcomes platform, the goal was not to build another corporate website. The mission was to reimagine...",
+    mainImage: "/images/Mastercard.jpg",
+    link: "#",
+  },
+  {
+    date: "Nov 21, 2025",
+    title: "Pantheon",
+    description:
+      "Stories that move you Pantheon Media Group unites leading production companies creating standout content.",
+    mainImage: "/images/Ponpon Mania.jpg",
+    link: "#",
+  },
+  {
+    date: "Oct 22, 2025",
+    title: "CASE STUDY: JAM AREA",
+    description:
+      "From Story to Experience: The New Jamarea — “Show us as you see us — and as you would see us.” This was Jamarea’s main request...",
+    mainImage: "/images/Case Study.jpg",
+    link: "#",
+  },
+];
+export const otherArticles = [
+  {
+    date: "Oct 22, 2025",
+    title: "CASE STUDY: JAM AREA",
+    description:
+      "From Story to Experience: The New Jamarea “Show us as you see us — and as you would see us.” This was Jamarea’s main request, and certainly...",
+    mainImage: "/images/Jam Area.jpg",
+    link: "#",
+  },
+  {
+    date: "Oct 1, 2025",
+    title: "Building a product landing page with Readymag",
+    description:
+      "Setting the Scene To celebrate its 10th anniversary, French cosmetics brand La Rosée opened a temporary pop-up store in",
+    mainImage: "/images/Landing.jpg",
+    link: "#",
+  },
+  {
+    date: "Oct 22, 2025",
+    title: "CASE STUDY: JAM AREA",
+    description:
+      "Introduction Palmer Dinnerware creates ceramic pieces that bring life to dining tables around the world. Our challenge",
+    mainImage: "/images/Case Stusy Jam Area.jpg",
+    link: "#",
+  },
+];
