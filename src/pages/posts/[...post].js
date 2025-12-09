@@ -1,8 +1,6 @@
-"use client";
 import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import {
@@ -15,8 +13,6 @@ import {
   Tag,
   Wrap,
   WrapItem,
-  Skeleton,
-  Stack,
   Divider,
   VStack,
   HStack,
@@ -25,84 +21,13 @@ import MainLayout from "@/layouts/MainLayout";
 import { urlFor } from "@/sanity/lib/image";
 import { generateHrefLangsAndCanonicalTag } from "@/utils";
 import { APP_NAME } from "@/configs/constant";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const POST_QUERY = `*[
-  _type == "post" && slug.current == $slug
-][0] {
-  _id,
-  title,
-  slug,
-  excerpt,
-  tags,
-  content,
-  image,
-  publishedAt,
-  author->{
-    name,
-    image
-  },
-  faqs
-}`;
-
-const options = { next: { revalidate: 60 } };
-
-export default function PostPage() {
+export default function PostPage({ postData }) {
   const router = useRouter();
-  const { query: { post }, locale, asPath } = router;
-  console.log("router",router);
-  const [postData, setPostData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { locale, asPath } = router;
 
-  // Extract slug from the catch-all route
-  const slug = post ? post[0] : null;
-console.log("slug",post);
-
-  useEffect(() => {
-    // Wait for router to be ready
-    if (!router.isReady) return;
-
-    if (!slug) {
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
-    client
-      .fetch(POST_QUERY, { slug: slug }, options)
-      .then((data) => {
-        setPostData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching post:", error);
-        setLoading(false);
-      });
-  }, [slug, router.isReady]);
-console.log("postData",postData);
-  const title = postData?.title
-    ? `${postData.title} | ${APP_NAME}`
-    : `Loading... | ${APP_NAME}`;
-
-  if (loading) {
-    return (
-      <MainLayout>
-        <Head>
-          <title>{title}</title>
-        </Head>
-        <Container maxW="container.xl" py={10}>
-          <Stack spacing={6}>
-            <Skeleton height="40px" width="70%" />
-            <Skeleton height="20px" width="50%" />
-            <Skeleton height="400px" />
-            <Skeleton height="20px" />
-            <Skeleton height="20px" />
-            <Skeleton height="20px" width="90%" />
-          </Stack>
-        </Container>
-      </MainLayout>
-    );
-  }
-
+  // Handle 404
   if (!postData) {
     return (
       <MainLayout>
@@ -120,6 +45,8 @@ console.log("postData",postData);
       </MainLayout>
     );
   }
+
+  const title = `${postData.title} | ${APP_NAME}`;
 
   const formattedDate = postData.publishedAt
     ? new Date(postData.publishedAt).toLocaleDateString("en-US", {
@@ -342,5 +269,56 @@ console.log("postData",postData);
       </Box>
     </MainLayout>
   );
+}
+
+export async function getServerSideProps({ params, locale }) {
+  const POST_QUERY = `*[
+    _type == "post" && slug.current == $slug
+  ][0] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    tags,
+    content,
+    image,
+    publishedAt,
+    author->{
+      name,
+      image
+    },
+    faqs
+  }`;
+
+  // Extract slug from catch-all route
+  const slug = params.post ? params.post[0] : null;
+
+  if (!slug) {
+    return {
+      notFound: true,
+    };
+  }
+
+  try {
+    const postData = await client.fetch(POST_QUERY, { slug });
+
+    if (!postData) {
+      return {
+        notFound: true,
+      };
+    }
+
+    return {
+      props: {
+        postData,
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    return {
+      notFound: true,
+    };
+  }
 }
 
