@@ -6,6 +6,34 @@ export const postType = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'locale',
+      type: 'string',
+      title: 'Language',
+      description: 'Language of this document',
+      options: {
+        list: [
+          {title: 'English', value: 'en'},
+          {title: 'Spanish', value: 'es'},
+          {title: 'French', value: 'fr'},
+          {title: 'German', value: 'de'},
+          {title: 'Italian', value: 'it'},
+          {title: 'Chinese', value: 'zh'},
+          {title: 'Arabic', value: 'ar'},
+          {title: 'Japanese', value: 'ja'},
+        ],
+        layout: 'dropdown',
+      },
+      initialValue: 'en',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'baseSlug',
+      type: 'string',
+      title: 'Base Slug',
+      description: 'Common slug shared across all language versions',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'title',
       type: 'string',
       title: 'Title',
@@ -80,4 +108,29 @@ export const postType = defineType({
       validation: (rule) => rule.max(5),
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      locale: 'locale',
+      baseSlug: 'baseSlug',
+      media: 'image',
+    },
+    prepare({title, locale, baseSlug, media}) {
+      const localeLabels = {
+        en: '🇬🇧 EN',
+        es: '🇪🇸 ES',
+        fr: '🇫🇷 FR',
+        de: '🇩🇪 DE',
+        it: '🇮🇹 IT',
+        zh: '🇨🇳 ZH',
+        ar: '🇸🇦 AR',
+        ja: '🇯🇵 JA',
+      }
+      return {
+        title: title,
+        subtitle: `${localeLabels[locale] || locale} • ${baseSlug}`,
+        media,
+      }
+    },
+  },
 })

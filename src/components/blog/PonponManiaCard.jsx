@@ -1,17 +1,26 @@
 import { Box, Heading, Text, Link, Image, Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
+import NextLink from "next/link";
+import { urlFor } from "@/sanity/lib/image";
 
 const MotionBox = motion(Box);
 
-export default function PonponManiaCard({
-  reverse = false,
-  title = "Ponpon Mania: A comic that breathes Through web interaction",
-  date = "Nov 26, 2025",
-  description = `"What if we do a comic that could be animated for the web ?" Ponpon Mania began with that question...`,
-  articleLink = "#",
-  image = "/images/Ponpon Mania.jpg",
-}) {
+export default function PonponManiaCard({ post, reverse = false }) {
+  const { title, excerpt, slug, publishedAt, image } = post;
+
+  const formattedDate = publishedAt
+    ? new Date(publishedAt).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+    : "";
+
+  const imageUrl = image
+    ? urlFor(image).width(800).height(600).url()
+    : "/images/Ponpon Mania.jpg";
+
   return (
     <Box
       bg="#f5f5f5"
@@ -36,7 +45,7 @@ export default function PonponManiaCard({
         >
           <Box flex="1">
             <Text fontSize="sm" color="gray.600" mb={4} fontWeight="500">
-              {date}
+              {formattedDate}
             </Text>
 
             <Heading
@@ -51,31 +60,34 @@ export default function PonponManiaCard({
               {title}
             </Heading>
 
-            <Text
-              fontSize={{ base: "16px", lg: "20px" }}
-              color="gray.700"
-              mb={8}
-              lineHeight="1.6"
-            >
-              {description}
-            </Text>
+            {excerpt && (
+              <Text
+                fontSize={{ base: "16px", lg: "20px" }}
+                color="gray.700"
+                mb={8}
+                lineHeight="1.6"
+              >
+                {excerpt}
+              </Text>
+            )}
 
             <MotionBox whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-              <Link
-                href={articleLink}
-                display="inline-flex"
-                alignItems="center"
-                gap={2}
-                fontSize="md"
-                fontWeight="600"
-                color="gray.900"
-                textDecoration="underline"
-                textUnderlineOffset="4px"
-                _hover={{ color: "#7D65DB" }}
-              >
-                <FiArrowRight />
-                Read Article
-              </Link>
+              <NextLink href={`/blog/${slug.current}`} passHref legacyBehavior>
+                <Link
+                  display="inline-flex"
+                  alignItems="center"
+                  gap={2}
+                  fontSize="md"
+                  fontWeight="600"
+                  color="gray.900"
+                  textDecoration="underline"
+                  textUnderlineOffset="4px"
+                  _hover={{ color: "#7D65DB" }}
+                >
+                  <FiArrowRight />
+                  Read Article
+                </Link>
+              </NextLink>
             </MotionBox>
           </Box>
 
@@ -85,23 +97,27 @@ export default function PonponManiaCard({
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
-            <Box
-              position="relative"
-              borderRadius="16px"
-              overflow="hidden"
-              boxShadow="0 20px 60px rgba(0, 0, 0, 0.15)"
-              cursor="pointer"
-            >
-              <Image
-                src={image}
-                alt={title}
-                w="100%"
-                h="auto"
-                minH={'380px'}
-                maxH={'380px'}
-                objectFit="cover"
-              />
-            </Box>
+            <NextLink href={`/blog/${slug.current}`} passHref legacyBehavior>
+              <Link>
+                <Box
+                  position="relative"
+                  borderRadius="16px"
+                  overflow="hidden"
+                  boxShadow="0 20px 60px rgba(0, 0, 0, 0.15)"
+                  cursor="pointer"
+                >
+                  <Image
+                    src={imageUrl}
+                    alt={title}
+                    w="100%"
+                    h="auto"
+                    minH={'380px'}
+                    maxH={'380px'}
+                    objectFit="cover"
+                  />
+                </Box>
+              </Link>
+            </NextLink>
           </MotionBox>
         </Flex>
       </MotionBox>

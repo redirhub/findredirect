@@ -23,13 +23,13 @@ import {
 } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { urlFor } from "@/sanity/lib/image";
-import { generateHrefLangsAndCanonicalTag } from "@/utils";
 import { APP_NAME } from "@/configs/constant";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import LanguageSwitcher from "@/components/blog/LanguageSwitcher";
 
 export default function PostPage({ postData }) {
   const router = useRouter();
-  const { locale, asPath } = router;
+  const { asPath } = router;
 
   if (!postData) {
     return (
@@ -169,7 +169,26 @@ export default function PostPage({ postData }) {
           />
         )}
 
-        {generateHrefLangsAndCanonicalTag(locale, asPath)}
+        {postData.availableTranslations &&
+          postData.availableTranslations.map((translation) => (
+            <link
+              key={translation.locale}
+              rel="alternate"
+              hrefLang={translation.locale}
+              href={`${process.env.NEXT_PUBLIC_SITE_URL}/${translation.locale === "en" ? "" : `${translation.locale}/`
+                }blog/${translation.slug}`}
+            />
+          ))}
+
+        {postData.availableTranslations && (
+          <link
+            rel="alternate"
+            hrefLang="x-default"
+            href={`${process.env.NEXT_PUBLIC_SITE_URL}/blog/${postData.availableTranslations.find((t) => t.locale === "en")
+              ?.slug || postData.slug.current
+              }`}
+          />
+        )}
       </Head>
 
       <Box
@@ -180,6 +199,16 @@ export default function PostPage({ postData }) {
       >
         <article>
           <Box as="header" mb={10}>
+            {postData.availableTranslations &&
+              postData.availableTranslations.length > 1 && (
+                <Box mb={6}>
+                  <LanguageSwitcher
+                    availableTranslations={postData.availableTranslations}
+                    currentSlug={postData.slug.current}
+                  />
+                </Box>
+              )}
+
             <Heading
               as="h1"
               fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }}
@@ -408,17 +437,17 @@ export async function getStaticPaths() {
   const SLUGS_QUERY = `*[
     _type == "post" && defined(slug.current)
   ][0...50] {
-    "slug": slug.current
+    "slug": slug.current,
+    locale
   }`;
 
-  const allLanguages = ["en", "de", "es", "fr", "it", "pt", "ja", "zh", "ko"];
 
   try {
     const posts = await client.fetch(SLUGS_QUERY);
 
     const paths = posts.map((post) => ({
       params: { blog: [post.slug] },
-      locale: "en",
+      locale: post.locale || "en",
     }));
 
     return {
@@ -435,23 +464,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params, locale }) {
-  const POST_QUERY = `*[
-    _type == "post" && slug.current == $slug
-  ][0] {
-    _id,
-    title,
-    slug,
-    excerpt,
-    tags,
-    content,
-    image,
-    publishedAt,
-    author->{
-      name,
-      image
-    },
-    faqs
-  }`;
   const slug = params.blog ? params.blog[0] : null;
 
   if (!slug) {
@@ -461,7 +473,33 @@ export async function getStaticProps({ params, locale }) {
   }
 
   try {
-    const postData = await client.fetch(POST_QUERY, { slug });
+    const POST_QUERY = `*[
+      _type == "post" && 
+      slug.current == $slug && 
+      locale == $locale
+    ][0] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      tags,
+      content,
+      image,
+      publishedAt,
+      locale,
+      baseSlug,
+      author->{
+        name,
+        image
+      },
+      faqs
+    }`;
+
+    let postData = await client.fetch(POST_QUERY, { slug, locale: locale || 'en' });
+
+    if (!postData && locale !== 'en') {
+      postData = await client.fetch(POST_QUERY, { slug, locale: 'en' });
+    }
 
     if (!postData) {
       return {
@@ -469,9 +507,24 @@ export async function getStaticProps({ params, locale }) {
       };
     }
 
+    const TRANSLATIONS_QUERY = `*[
+      _type == "post" && 
+      baseSlug == $baseSlug
+    ] {
+      locale,
+      "slug": slug.current
+    }`;
+
+    const availableTranslations = await client.fetch(TRANSLATIONS_QUERY, {
+      baseSlug: postData.baseSlug,
+    });
+
     return {
       props: {
-        postData,
+        postData: {
+          ...postData,
+          availableTranslations: availableTranslations || [],
+        },
         ...(await serverSideTranslations(locale, ["common"])),
       },
       revalidate: 60,

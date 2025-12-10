@@ -7,6 +7,7 @@ import { generateHrefLangsAndCanonicalTag } from "@/utils";
 import { APP_NAME } from "@/configs/constant";
 import PostCard from "@/components/blog/PostCard";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import PonponManiaCard from "@/components/blog/PonponManiaCard";
 
 export default function IndexPage({ posts }) {
   const router = useRouter();
@@ -57,22 +58,46 @@ export default function IndexPage({ posts }) {
         >
           BLOGS
         </Heading>
-
         {posts.length === 0 ? (
+          console.log(posts),
           <Box textAlign="center" py={20}>
             <Text fontSize="2xl" color="gray.600">
               No posts available yet. Check back soon!
             </Text>
           </Box>
         ) : (
-          <SimpleGrid
-            columns={{ base: 1, md: 2, xl: 3 }}
-            spacing={{ base: 4, "2xl": 8 }}
-          >
-            {posts.map((post) => (
-              <PostCard key={post._id} post={post} />
-            ))}
-          </SimpleGrid>
+          <Box>
+            {posts.map((post, index) => {
+              const position = index % 4;
+              if (position === 0) {
+                const groupIndex = Math.floor(index / 4);
+                const reverse = groupIndex % 2 !== 0;
+                return (
+                  <PonponManiaCard
+                    key={post._id}
+                    post={post}
+                    reverse={reverse}
+                  />
+                );
+              }
+              if (position === 1) {
+                const remainingPosts = posts.slice(index, index + 3);
+                return (
+                  <SimpleGrid
+                    key={`grid-${index}`}
+                    columns={{ base: 1, md: 2, xl: 3 }}
+                    spacing={{ base: 4, "2xl": 8 }}
+                    mb={8}
+                  >
+                    {remainingPosts.map((gridPost) => (
+                      <PostCard key={gridPost._id} post={gridPost} />
+                    ))}
+                  </SimpleGrid>
+                );
+              }
+              return null;
+            })}
+          </Box>
         )}
       </Box>
     </MainLayout>
@@ -81,7 +106,9 @@ export default function IndexPage({ posts }) {
 
 export async function getStaticProps({ locale }) {
   const POSTS_QUERY = `*[
-    _type == "post" && defined(slug.current)
+    _type == "post" && 
+    defined(slug.current) && 
+    locale == $locale
   ] | order(publishedAt desc)[0...12] {
     _id,
     title,
@@ -89,6 +116,8 @@ export async function getStaticProps({ locale }) {
     excerpt,
     image,
     publishedAt,
+    locale,
+    baseSlug,
     author->{
       name,
       image
@@ -96,14 +125,16 @@ export async function getStaticProps({ locale }) {
   }`;
 
   try {
-    const posts = await client.fetch(POSTS_QUERY);
+    const posts = await client.fetch(POSTS_QUERY, {
+      locale: locale || 'en'
+    });
 
     return {
       props: {
         posts: posts || [],
         ...(await serverSideTranslations(locale, ["common"])),
       },
-        revalidate: 60,
+      revalidate: 60,
     };
   } catch (error) {
     return {
