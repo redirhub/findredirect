@@ -38,7 +38,7 @@ export default function PostPage({ postData }) {
             Post not found
           </Heading>
           <Text fontSize="xl" color="gray.600">
-            The post you're looking for doesn't exist.
+            The post you&apos;re looking for doesn&apos;t exist.
           </Text>
         </Container>
       </MainLayout>
@@ -54,10 +54,10 @@ export default function PostPage({ postData }) {
 
   const formattedDate = postData.publishedAt
     ? new Date(postData.publishedAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : "";
 
   const publishedTime = postData.publishedAt
@@ -74,12 +74,12 @@ export default function PostPage({ postData }) {
     dateModified: publishedTime,
     author: postData.author
       ? {
-          "@type": "Person",
-          name: postData.author.name,
-          ...(postData.author.image && {
-            image: urlFor(postData.author.image).width(200).height(200).url(),
-          }),
-        }
+        "@type": "Person",
+        name: postData.author.name,
+        ...(postData.author.image && {
+          image: urlFor(postData.author.image).width(200).height(200).url(),
+        }),
+      }
       : undefined,
     publisher: {
       "@type": "Organization",
@@ -99,17 +99,17 @@ export default function PostPage({ postData }) {
   const faqSchema =
     postData.faqs && postData.faqs.length > 0
       ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: postData.faqs.map((faq) => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: postData.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      }
       : null;
 
   return (
@@ -187,16 +187,6 @@ export default function PostPage({ postData }) {
               {postData.title}
             </Heading>
 
-            {postData.excerpt && (
-              <Text
-                fontSize={{ base: "lg", md: "xl" }}
-                color="gray.600"
-                mb={6}
-                lineHeight="1.6"
-              >
-                {postData.excerpt}
-              </Text>
-            )}
 
             <Flex
               direction={{ base: "column", md: "row" }}
@@ -271,35 +261,36 @@ export default function PostPage({ postData }) {
 
           {postData.content && (
             <Box
-              mb={12}
+              mb={4}
               sx={{
                 "& p": {
                   fontSize: { base: "md", md: "lg" },
                   lineHeight: "1.8",
-                  mb: 6,
                   color: "gray.700",
+                },
+                "& h1": {
+                  fontSize: { base: "2xl", md: "3xl" },
+                  fontWeight: "bold",
+                  mt: 10,
+                  color: "gray.900",
                 },
                 "& h2": {
                   fontSize: { base: "2xl", md: "3xl" },
                   fontWeight: "bold",
                   mt: 10,
-                  mb: 4,
                   color: "gray.900",
                 },
                 "& h3": {
                   fontSize: { base: "xl", md: "2xl" },
                   fontWeight: "bold",
-                  mt: 8,
-                  mb: 3,
+                  mt: 4,
                   color: "gray.900",
                 },
                 "& ul, & ol": {
                   pl: 6,
-                  mb: 6,
                 },
                 "& li": {
                   fontSize: { base: "md", md: "lg" },
-                  mb: 2,
                   color: "gray.700",
                 },
                 "& a": {
@@ -311,16 +302,25 @@ export default function PostPage({ postData }) {
                 },
                 "& img": {
                   borderRadius: "12px",
-                  my: 8,
+                  my: 4,
                 },
               }}
             >
               <PortableText value={postData.content} />
             </Box>
           )}
-
+          {postData.excerpt && (
+            <Text
+              fontSize={{ base: "lg", md: "xl" }}
+              color="gray.600"
+              mb={2}
+              lineHeight="1.6"
+            >
+              {postData.excerpt}
+            </Text>
+          )}
           {postData.faqs && postData.faqs.length > 0 && (
-            <Box as="section" mt={16}>
+            <Box as="section" mt={10}>
               <Divider mb={8} />
               <Heading
                 as="h2"
@@ -381,13 +381,13 @@ export async function getStaticPaths() {
     const posts = await client.fetch(SLUGS_QUERY);
 
     const paths = posts.map((post) => ({
-      params: { post: [post.slug] },
+      params: { blog: [post.slug] },
       locale: "en",
     }));
 
     return {
       paths,
-        fallback: "blocking",
+      fallback: "blocking",
     };
   } catch (error) {
     console.error("Error fetching post slugs:", error);
@@ -416,8 +416,7 @@ export async function getStaticProps({ params, locale }) {
     },
     faqs
   }`;
-
-  const slug = params.post ? params.post[0] : null;
+  const slug = params.blog ? params.blog[0] : null;
 
   if (!slug) {
     return {

@@ -48,14 +48,14 @@ export default function IndexPage({ posts }) {
           fontSize={{
             base: "60px",
             sm: "100px",
-            md: "150px",
-            xl: "180px",
+            md: "140px",
+            xl: "165px",
           }}
           fontWeight={"bold"}
           color={"#222"}
           py={8}
         >
-          POSTS
+          BLOGS
         </Heading>
 
         {posts.length === 0 ? (

@@ -5,10 +5,9 @@ import NextLink from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 
 const MotionBox = motion(Box);
-const MotionImage = motion(Image);
 
 export default function PostCard({ post }) {
-  const { title, excerpt, slug, publishedAt, image, author } = post;
+  const { title, excerpt, slug, publishedAt, image } = post;
 
   const formattedDate = publishedAt
     ? new Date(publishedAt).toLocaleDateString("en-US", {
@@ -20,7 +19,7 @@ export default function PostCard({ post }) {
 
   const imageUrl = image
     ? urlFor(image).width(800).height(600).url()
-    : "/images/placeholder.jpg";
+    : "/images/Case Study.jpg";
 
   return (
     <Box
@@ -28,7 +27,7 @@ export default function PostCard({ post }) {
       alignItems="start"
       justifyContent="center"
       py={{ base: 4, md: 8 }}
-      my={4}
+      my={3}
     >
       <MotionBox
         initial={{ opacity: 0, y: 20 }}
@@ -38,7 +37,7 @@ export default function PostCard({ post }) {
       >
         <Flex
           direction={{ base: "column" }}
-          gap={{ base: 6, lg: 8 }}
+          gap={{ base: 4, lg: 6 }}
           align={"start"}
         >
           <Box flex="1">
@@ -52,7 +51,7 @@ export default function PostCard({ post }) {
                 fontSize={{ base: "22px", md: "26px", "2xl": "30px" }}
                 fontWeight="bold"
                 lineHeight="1.2"
-                mb={6}
+                mb={5}
                 color="gray.900"
                 minH={{ base: "0px", md: "60px", xl: "68px" }}
                 noOfLines={2}
@@ -68,7 +67,7 @@ export default function PostCard({ post }) {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <NextLink href={`/posts/${slug.current}`} passHref legacyBehavior>
+              <NextLink href={`/blog/${slug.current}`} passHref legacyBehavior>
                 <Link>
                   <Box
                     position="relative"
@@ -95,7 +94,7 @@ export default function PostCard({ post }) {
               <Text
                 fontSize={{ base: "md", md: "lg" }}
                 color="gray.700"
-                mb={8}
+                mb={3}
                 noOfLines={3}
                 lineHeight="1.6"
                 pt={5}
@@ -109,7 +108,7 @@ export default function PostCard({ post }) {
               transition={{ duration: 0.2 }}
               alignSelf="flex-end"
             >
-              <NextLink href={`/posts/${slug.current}`} passHref legacyBehavior>
+              <NextLink href={`/blog/${slug.current}`} passHref legacyBehavior>
                 <Link
                   display="inline-flex"
                   alignItems="center"
