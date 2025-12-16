@@ -109,7 +109,7 @@ export async function getStaticProps({ locale }) {
     _type == "post" &&
     defined(slug.current) &&
     locale == $locale
-  ] | order(publishedAt desc)[0...12] {
+  ] | order(publishedAt desc) {
     _id,
     title,
     slug,

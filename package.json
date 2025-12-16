@@ -11,7 +11,8 @@
     "prepare": "husky",
     "generate-locales": "node scripts/generate-locales.js",
     "postbuild": "next-sitemap",
-    "migrate:remove-baseSlug": "node scripts/remove-baseSlug.js"
+    "migrate:remove-baseSlug": "node scripts/remove-baseSlug.js",
+    "migrate:wp": "node scripts/migrate-wordpress-to-sanity.js"
   },
   "lint-staged": {
     "*.js": "eslint --fix"
