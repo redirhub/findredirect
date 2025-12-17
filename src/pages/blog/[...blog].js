@@ -10,11 +10,9 @@ import {
   Text,
   Flex,
   Avatar,
-  Tag,
-  Wrap,
-  WrapItem,
   Divider,
   HStack,
+  Image as ChakraImage,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -26,6 +24,28 @@ import { urlFor } from "@/sanity/lib/image";
 import { APP_NAME } from "@/configs/constant";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LanguageSwitcher from "@/components/blog/LanguageSwitcher";
+import { FaCalendar, FaRegClock } from "react-icons/fa";
+
+const WORDS_PER_MINUTE = 200;
+
+const getWordCountFromContent = (content) => {
+  if (!Array.isArray(content)) return 0;
+
+  return content.reduce((count, block) => {
+    if (block?._type === "block" && Array.isArray(block.children)) {
+      const text = block.children.map((child) => child?.text || "").join(" ");
+      const words = text.trim().split(/\s+/).filter(Boolean);
+      return count + words.length;
+    }
+    return count;
+  }, 0);
+};
+
+const calculateReadTimeMinutes = (content) => {
+  const wordCount = getWordCountFromContent(content);
+  if (!wordCount) return 0;
+  return Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
+};
 
 export default function PostPage({ postData }) {
   const router = useRouter();
@@ -93,6 +113,9 @@ export default function PostPage({ postData }) {
         url: `${process.env.NEXT_PUBLIC_SITE_URL || ""}/logo.png`,
       },
     },
+    timeRequired: postData.readTimeMinutes
+      ? `PT${postData.readTimeMinutes}M`
+      : undefined,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": canonicalUrl,
@@ -115,6 +138,38 @@ export default function PostPage({ postData }) {
         })),
       }
       : null;
+
+  const portableComponents = {
+    types: {
+      image: ({ value }) => {
+        const src = value?.asset
+          ? urlFor(value).width(1200).fit("max").url()
+          : value?.url;
+
+        if (!src) return null;
+
+        return (
+          <Box my={6} textAlign="center">
+            <ChakraImage
+              src={src}
+              alt={value?.alt || postData.title}
+              mx="auto"
+              maxH="640px"
+              maxWidth={'800px'}
+              w="100%"
+              objectFit="contain"
+              loading="lazy"
+            />
+            {value?.caption && (
+              <Text mt={2} fontSize="sm" color="gray.500">
+                {value.caption}
+              </Text>
+            )}
+          </Box>
+        );
+      },
+    },
+  };
 
   return (
     <MainLayout>
@@ -211,7 +266,7 @@ export default function PostPage({ postData }) {
 
             <Heading
               as="h1"
-              fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }}
+              fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }}
               fontWeight="bold"
               lineHeight="1.2"
               mb={6}
@@ -229,15 +284,28 @@ export default function PostPage({ postData }) {
               mb={6}
             >
               {postData.publishedAt && (
-                <Text
-                  as="time"
-                  dateTime={postData.publishedAt}
-                  fontSize="md"
-                  fontWeight="500"
-                >
-                  {formattedDate}
-                </Text>
+                <Box display={'flex'} alignItems={'center'} gap={1}>
+                  <FaCalendar size={18} color={'#6C6965'} />
+                  <Text
+                    as="time"
+                    dateTime={postData.publishedAt}
+                    fontSize="md"
+                    textColor={'#6C6965'}
+                    fontWeight="500"
+                  >
+                    {formattedDate}
+                  </Text>
+                </Box>
               )}
+
+              {postData.readTimeMinutes ? (
+                <Box display="flex" alignItems="center" gap={1}>
+                  <FaRegClock size={18} color="#6C6965" />
+                  <Text fontSize="md" textColor="#6C6965" fontWeight="500">
+                    {postData.readTimeMinutes} min read
+                  </Text>
+                </Box>
+              ) : null}
 
               {postData.author && (
                 <HStack spacing={3}>
@@ -251,28 +319,10 @@ export default function PostPage({ postData }) {
                         .url()}
                     />
                   )}
-                  <Text fontSize="md">by {postData.author.name}</Text>
+                  <Text fontSize="md" textColor={'#6C6965'} textTransform={'capitalize'}>by {postData.author.name}</Text>
                 </HStack>
               )}
             </Flex>
-
-            {postData.tags && postData.tags.length > 0 && (
-              <Wrap spacing={2} mb={8}>
-                {postData.tags.map((tag, index) => (
-                  <WrapItem key={index}>
-                    <Tag
-                      size="md"
-                      borderRadius="full"
-                      colorScheme="purple"
-                      px={4}
-                      py={2}
-                    >
-                      {tag}
-                    </Tag>
-                  </WrapItem>
-                ))}
-              </Wrap>
-            )}
           </Box>
 
           {postData.image && (
@@ -283,11 +333,11 @@ export default function PostPage({ postData }) {
               boxShadow="0 20px 60px rgba(0, 0, 0, 0.15)"
             >
               <Image
-                src={urlFor(postData.image).width(1200).height(630).url()}
+                src={urlFor(postData.image).width(1200).height(550).url()}
                 alt={postData.title}
                 style={{ objectFit: "cover" }}
                 width={1200}
-                height={630}
+                height={550}
               />
             </Box>
           )}
@@ -340,23 +390,15 @@ export default function PostPage({ postData }) {
                   },
                 },
                 "& img": {
-                  borderRadius: "12px",
                   my: 4,
                 },
               }}
             >
-              <PortableText value={postData.content} />
+              <PortableText
+                value={postData.content}
+                components={portableComponents}
+              />
             </Box>
-          )}
-          {postData.excerpt && (
-            <Text
-              fontSize={{ base: "lg", md: "xl" }}
-              color="gray.600"
-              mb={2}
-              lineHeight="1.6"
-            >
-              {postData.excerpt}
-            </Text>
           )}
           {postData.faqs && postData.faqs.length > 0 && (
             <Box as="section" mt={10}>
@@ -530,11 +572,14 @@ export async function getStaticProps({ params, locale }) {
       baseSlug,
     });
 
+    const readTimeMinutes = calculateReadTimeMinutes(postData.content);
+
     return {
       props: {
         postData: {
           ...postData,
           availableTranslations: availableTranslations || [],
+          readTimeMinutes,
         },
         ...(await serverSideTranslations(locale, ["common"])),
       },

@@ -3,6 +3,8 @@
 
 const axios = require('axios');
 const { createClient } = require('@sanity/client');
+const { parse } = require('node-html-parser');
+const { decode } = require('html-entities');
 require('dotenv').config({ path: '.env.development' });
 require('dotenv').config();
 
@@ -25,7 +27,7 @@ if (missing.length) {
 const WP_API_BASE =
   process.env.WORDPRESS_API_BASE;
 const DEFAULT_LOCALE = process.env.WORDPRESS_DEFAULT_LOCALE || 'en';
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 100;
 
 const sanity = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -44,20 +46,202 @@ const slugify = (value = '') =>
     .replace(/^-+|-+$/g, '')
     .slice(0, 96) || 'post';
 
-const stripHtml = (html) =>
-  html ? html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim() : '';
+const decodeEntities = (value = '') => decode(value);
 
-const toPortableText = (html) => {
-  const text = stripHtml(html);
-  if (!text) return [];
-  return [
-    {
-      _type: 'block',
-      style: 'normal',
-      markDefs: [],
-      children: [{ _type: 'span', text, marks: [] }],
+const stripHtml = (html) => {
+  const text = html ? html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim() : '';
+  return decodeEntities(text);
+};
+
+const htmlToPortableText = async (html = '') => {
+  const root = parse(html, {
+    blockTextElements: {
+      script: true,
+      style: true,
+      pre: true,
     },
-  ];
+  });
+
+  const blocks = [];
+  const linkKeyCache = new Map();
+
+  const ensureLinkKey = (href, markDefs) => {
+    if (!href) return null;
+    if (linkKeyCache.has(href)) return linkKeyCache.get(href);
+    const key = `link-${linkKeyCache.size + 1}`;
+    linkKeyCache.set(href, key);
+    markDefs.push({ _key: key, _type: 'link', href });
+    return key;
+  };
+
+  const buildSpans = (node, activeMarks, markDefs) => {
+    if (!node) return [];
+
+    if (node.nodeType === 3) {
+      const text = decodeEntities(node.rawText || '');
+      if (!text || !text.trim()) return [];
+      return [
+        {
+          _type: 'span',
+          text,
+          marks: activeMarks,
+        },
+      ];
+    }
+
+    if (node.nodeType !== 1) return [];
+
+    let marks = [...activeMarks];
+    const tag = (node.tagName || '').toLowerCase();
+
+    if (tag === 'br') {
+      return [
+        {
+          _type: 'span',
+          text: '\n',
+          marks,
+        },
+      ];
+    }
+
+    if (tag === 'strong' || tag === 'b') marks = [...marks, 'strong'];
+    if (tag === 'em' || tag === 'i') marks = [...marks, 'em'];
+    if (tag === 'code') marks = [...marks, 'code'];
+    if (tag === 'a') {
+      const href = node.getAttribute('href');
+      const linkKey = ensureLinkKey(href, markDefs);
+      if (linkKey) marks = [...marks, linkKey];
+    }
+
+    return node.childNodes.flatMap((child) =>
+      buildSpans(child, marks, markDefs),
+    );
+  };
+
+  const findImageInfo = (node) => {
+    const tag = (node.tagName || '').toLowerCase();
+    const imgNode =
+      tag === 'img' ? node : node.querySelector && node.querySelector('img');
+    if (!imgNode) return null;
+
+    const src = imgNode.getAttribute('src');
+    const srcsetRaw = imgNode.getAttribute('srcset') || '';
+    const sourcesFromSrcset = srcsetRaw
+      .split(',')
+      .map((entry) => entry.trim().split(' ')[0])
+      .filter(Boolean);
+    const sources = Array.from(
+      new Set([src, ...sourcesFromSrcset].filter(Boolean)),
+    );
+    if (!sources.length) return null;
+
+    const alt = decodeEntities(imgNode.getAttribute('alt') || '');
+    const captionNode =
+      node.querySelector && node.querySelector('figcaption')
+        ? node.querySelector('figcaption')
+        : null;
+    const caption = captionNode
+      ? decodeEntities(captionNode.text || captionNode.innerText || '')
+      : decodeEntities(imgNode.getAttribute('title') || '');
+
+    return { sources, alt, caption };
+  };
+
+  const uploadImageWithFallback = async (sources) => {
+    for (const source of sources) {
+      const uploaded = await uploadImageFromUrl(
+        source,
+        filenameFromUrl(source),
+      );
+      if (uploaded) return uploaded;
+    }
+    return undefined;
+  };
+
+  const nodeToBlock = async (node) => {
+    if (node.nodeType === 3) {
+      const text = node.rawText?.trim();
+      if (!text) return null;
+      return {
+        _type: 'block',
+        style: 'normal',
+        markDefs: [],
+        children: [
+          {
+            _type: 'span',
+            text,
+            marks: [],
+          },
+        ],
+      };
+    }
+
+    if (node.nodeType !== 1) return null;
+
+    const imageInfo = findImageInfo(node);
+    if (imageInfo) {
+      const uploaded = await uploadImageWithFallback(imageInfo.sources);
+      if (!uploaded) return null;
+      return {
+        ...uploaded,
+        alt: imageInfo.alt || imageInfo.caption || '',
+        caption: imageInfo.caption || '',
+      };
+    }
+
+    const tag = (node.tagName || '').toLowerCase();
+    const markDefs = [];
+    const styleMap = {
+      h1: 'h1',
+      h2: 'h2',
+      h3: 'h3',
+      h4: 'h4',
+      blockquote: 'blockquote',
+    };
+
+    if (tag === 'ul' || tag === 'ol') {
+      const listItemStyle = tag === 'ul' ? 'bullet' : 'number';
+      const items = node.childNodes.filter(
+        (child) => child.tagName?.toLowerCase() === 'li',
+      );
+
+      const listBlocks = [];
+      for (const item of items) {
+        const children = buildSpans(item, [], markDefs);
+        if (!children.length) continue;
+        listBlocks.push({
+          _type: 'block',
+          style: 'normal',
+          listItem: listItemStyle,
+          markDefs,
+          children,
+        });
+      }
+      return listBlocks;
+    }
+
+    const style = styleMap[tag] || 'normal';
+    const children = buildSpans(node, [], markDefs);
+    if (!children.length) return null;
+
+    return {
+      _type: 'block',
+      style,
+      markDefs,
+      children,
+    };
+  };
+
+  for (const node of root.childNodes) {
+    const blockOrBlocks = await nodeToBlock(node);
+    if (Array.isArray(blockOrBlocks)) {
+      blocks.push(...blockOrBlocks);
+    } else if (blockOrBlocks) {
+      blocks.push(blockOrBlocks);
+    }
+  }
+
+  return blocks;
 };
 
 const filenameFromUrl = (url, fallback = 'wp-image.jpg') => {
@@ -134,7 +318,7 @@ const fetchAllPosts = async () => {
 
   while (true) {
     const response = await axios.get(`${WP_API_BASE}/posts`, {
-      params: { per_page: PAGE_SIZE, page, _embed: true, order: 'asc' },
+      params: { page, per_page: PAGE_SIZE, _embed: true, order: 'asc' },
       responseType: 'json',
     });
 
@@ -172,7 +356,7 @@ const mapPostToSanity = async (post) => {
     title: stripHtml(post.title?.rendered),
     excerpt: stripHtml(post.excerpt?.rendered),
     tags: extractTags(post),
-    content: toPortableText(post.content?.rendered),
+    content: await htmlToPortableText(post.content?.rendered),
     image,
     publishedAt: new Date(post.date_gmt || post.date || Date.now()).toISOString(),
     author: authorRef,

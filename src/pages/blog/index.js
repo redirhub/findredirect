@@ -1,7 +1,17 @@
 import { client } from "@/sanity/lib/client";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { useCallback, useMemo } from "react";
+import {
+  Box,
+  Heading,
+  SimpleGrid,
+  Text,
+  Button,
+  HStack,
+  Flex,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { generateHrefLangsAndCanonicalTag } from "@/utils";
 import { APP_NAME } from "@/configs/constant";
@@ -9,9 +19,68 @@ import PostCard from "@/components/blog/PostCard";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PonponManiaCard from "@/components/blog/PonponManiaCard";
 
+const PER_PAGE = 20;
 export default function IndexPage({ posts }) {
   const router = useRouter();
   const { locale, asPath } = router;
+
+  const { currentPage, totalPages, chunkedPosts } = useMemo(() => {
+    const rawPage =
+      typeof router.query.page === "string"
+        ? router.query.page
+        : Array.isArray(router.query.page)
+          ? router.query.page[0]
+          : "1";
+    const parsedPage = Number.parseInt(rawPage, 10);
+    const total = Math.max(1, Math.ceil(posts.length / PER_PAGE));
+    const current = Math.min(
+      Math.max(Number.isNaN(parsedPage) ? 1 : parsedPage, 1),
+      total
+    );
+    const startIndex = (current - 1) * PER_PAGE;
+    const paginatedPosts = posts.slice(startIndex, startIndex + PER_PAGE);
+
+    const grouped = [];
+    for (let i = 0; i < paginatedPosts.length; i += 4) {
+      grouped.push(paginatedPosts.slice(i, i + 4));
+    }
+    return { currentPage: current, totalPages: total, chunkedPosts: grouped };
+  }, [posts, router.query.page]);
+
+  const maxPageButtons = useBreakpointValue({
+    base: 3,
+    sm: 5,
+    md: 7,
+    lg: 9,
+  }) || 5;
+  const visiblePages = useMemo(() => {
+    if (!maxPageButtons) return [];
+    if (totalPages <= maxPageButtons) {
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
+    }
+    const halfWindow = Math.floor((maxPageButtons - 1) / 2);
+    let start = Math.max(1, currentPage - halfWindow);
+    let end = start + maxPageButtons - 1;
+    if (end > totalPages) {
+      end = totalPages;
+      start = end - maxPageButtons + 1;
+    }
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  }, [currentPage, maxPageButtons, totalPages]);
+  const handlePageChange = useCallback((page) => {
+    const safePage = Math.min(Math.max(page, 1), totalPages);
+    const nextQuery = { ...router.query };
+    if (safePage === 1) {
+      delete nextQuery.page;
+    } else {
+      nextQuery.page = String(safePage);
+    }
+    router.push(
+      { pathname: router.pathname, query: nextQuery },
+      undefined,
+      { shallow: true }
+    );
+  }, [router, totalPages]);
 
   const title = `Blog Posts | ${APP_NAME}`;
   const description =
@@ -59,7 +128,6 @@ export default function IndexPage({ posts }) {
           BLOGS
         </Heading>
         {posts.length === 0 ? (
-          console.log(posts),
           <Box textAlign="center" py={20}>
             <Text fontSize="2xl" color="gray.600">
               No posts available yet. Check back soon!
@@ -67,36 +135,75 @@ export default function IndexPage({ posts }) {
           </Box>
         ) : (
           <Box>
-            {posts.map((post, index) => {
-              const position = index % 4;
-              if (position === 0) {
-                const groupIndex = Math.floor(index / 4);
-                const reverse = groupIndex % 2 !== 0;
-                return (
-                  <PonponManiaCard
-                    key={post._id}
-                    post={post}
-                    reverse={reverse}
-                  />
-                );
-              }
-              if (position === 1) {
-                const remainingPosts = posts.slice(index, index + 3);
-                return (
-                  <SimpleGrid
-                    key={`grid-${index}`}
-                    columns={{ base: 1, md: 2, xl: 3 }}
-                    spacing={{ base: 4, "2xl": 8 }}
-                    mb={8}
-                  >
-                    {remainingPosts.map((gridPost) => (
-                      <PostCard key={gridPost._id} post={gridPost} />
-                    ))}
-                  </SimpleGrid>
-                );
-              }
-              return null;
+            {chunkedPosts.map((group, groupIndex) => {
+              const [firstPost, ...gridPosts] = group;
+              const reverse = groupIndex % 2 !== 0;
+              return (
+                <Box key={firstPost?._id || `group-${groupIndex}`} mb={8}>
+                  {firstPost && (
+                    <PonponManiaCard
+                      post={firstPost}
+                      reverse={reverse}
+                    />
+                  )}
+
+                  {gridPosts.length > 0 && (
+                    <SimpleGrid
+                      columns={{ base: 1, md: 2, xl: 3 }}
+                      spacing={{ base: 4, "2xl": 8 }}
+                      mt={6}
+                    >
+                      {gridPosts.map((gridPost) => (
+                        <PostCard key={gridPost._id} post={gridPost} />
+                      ))}
+                    </SimpleGrid>
+                  )}
+                </Box>
+              );
             })}
+
+            {totalPages > 1 && (
+              <Flex justify="center" mt={10} mb={12}>
+                <HStack spacing={3}>
+                  <Button
+                    size="sm"
+                    rounded={'lg'}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    isDisabled={currentPage === 1}
+                    variant="outline"
+                    _hover={currentPage === 1 ? {} : { bg: '#d2e1f0', color: '#1d6db6' }}
+                  >
+                    Previous
+                  </Button>
+                  {visiblePages.map((page) => {
+                    const isActive = page === currentPage;
+                    return (
+                      <Button
+                        key={`page-${page}`}
+                        size="sm"
+                        rounded={'lg'}
+                        bg={isActive ? "#d2e1f0" : "transparent"}
+                        _hover={isActive ? { bg: "#d2e1f0" } : { bg: "gray.100" }}
+                        boxShadow={isActive ? "0 2px 8px rgba(210, 225, 240, 0.3)" : "none"}
+                        textColor={"#1d6db6"}
+                        variant={isActive ? "solid" : "solid"}
+                        onClick={() => handlePageChange(page)}
+                      >{page}</Button>
+                    );
+                  })}
+                  <Button
+                    size="sm"
+                    rounded={'lg'}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    isDisabled={currentPage === totalPages}
+                    variant="outline"
+                    _hover={currentPage === totalPages ? {} : { bg: '#d2e1f0', color: '#1d6db6' }}
+                  >
+                    Next
+                  </Button>
+                </HStack>
+              </Flex>
+            )}
           </Box>
         )}
       </Box>
