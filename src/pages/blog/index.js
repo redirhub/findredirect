@@ -20,32 +20,22 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PonponManiaCard from "@/components/blog/PonponManiaCard";
 
 const PER_PAGE = 20;
-export default function IndexPage({ posts }) {
+export default function IndexPage({ posts, pagination }) {
   const router = useRouter();
   const { locale, asPath } = router;
 
-  const { currentPage, totalPages, chunkedPosts } = useMemo(() => {
-    const rawPage =
-      typeof router.query.page === "string"
-        ? router.query.page
-        : Array.isArray(router.query.page)
-          ? router.query.page[0]
-          : "1";
-    const parsedPage = Number.parseInt(rawPage, 10);
-    const total = Math.max(1, Math.ceil(posts.length / PER_PAGE));
-    const current = Math.min(
-      Math.max(Number.isNaN(parsedPage) ? 1 : parsedPage, 1),
-      total
-    );
-    const startIndex = (current - 1) * PER_PAGE;
-    const paginatedPosts = posts.slice(startIndex, startIndex + PER_PAGE);
+  const { currentPage, totalPages } = pagination || {
+    currentPage: 1,
+    totalPages: 1,
+  };
 
+  const chunkedPosts = useMemo(() => {
     const grouped = [];
-    for (let i = 0; i < paginatedPosts.length; i += 4) {
-      grouped.push(paginatedPosts.slice(i, i + 4));
+    for (let i = 0; i < posts.length; i += 4) {
+      grouped.push(posts.slice(i, i + 4));
     }
-    return { currentPage: current, totalPages: total, chunkedPosts: grouped };
-  }, [posts, router.query.page]);
+    return grouped;
+  }, [posts]);
 
   const maxPageButtons = useBreakpointValue({
     base: 3,
@@ -67,20 +57,19 @@ export default function IndexPage({ posts }) {
     }
     return Array.from({ length: end - start + 1 }, (_, index) => start + index);
   }, [currentPage, maxPageButtons, totalPages]);
-  const handlePageChange = useCallback((page) => {
-    const safePage = Math.min(Math.max(page, 1), totalPages);
-    const nextQuery = { ...router.query };
-    if (safePage === 1) {
-      delete nextQuery.page;
-    } else {
-      nextQuery.page = String(safePage);
-    }
-    router.push(
-      { pathname: router.pathname, query: nextQuery },
-      undefined,
-      { shallow: true }
-    );
-  }, [router, totalPages]);
+  const handlePageChange = useCallback(
+    (page) => {
+      const safePage = Math.min(Math.max(page, 1), totalPages);
+      const nextQuery = { ...router.query };
+      if (safePage === 1) {
+        delete nextQuery.page;
+      } else {
+        nextQuery.page = String(safePage);
+      }
+      router.push({ pathname: router.pathname, query: nextQuery });
+    },
+    [router, totalPages]
+  );
 
   const title = `Blog Posts | ${APP_NAME}`;
   const description =
@@ -211,12 +200,36 @@ export default function IndexPage({ posts }) {
   );
 }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale, query }) {
+  const rawPage =
+    typeof query.page === "string"
+      ? query.page
+      : Array.isArray(query.page)
+        ? query.page[0]
+        : "1";
+  const requestedPage = Number.parseInt(rawPage, 10);
+  const currentPage = Math.max(Number.isNaN(requestedPage) ? 1 : requestedPage, 1);
+
+  const totalCountQuery = `count(*[
+    _type == "post" &&
+    defined(slug.current) &&
+    locale == $locale
+  ])`;
+
+  const totalCount = await client.fetch(totalCountQuery, {
+    locale: locale || "en",
+  });
+
+  const totalPages = Math.max(1, Math.ceil(totalCount / PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
+  const start = (safePage - 1) * PER_PAGE;
+  const end = start + PER_PAGE;
+
   const POSTS_QUERY = `*[
     _type == "post" &&
     defined(slug.current) &&
     locale == $locale
-  ] | order(publishedAt desc) {
+  ] | order(publishedAt desc) [$start...$end] {
     _id,
     title,
     slug,
@@ -232,23 +245,31 @@ export async function getStaticProps({ locale }) {
 
   try {
     const posts = await client.fetch(POSTS_QUERY, {
-      locale: locale || 'en'
+      locale: locale || "en",
+      start,
+      end,
     });
 
     return {
       props: {
         posts: posts || [],
+        pagination: {
+          currentPage: safePage,
+          totalPages,
+        },
         ...(await serverSideTranslations(locale, ["common"])),
       },
-      revalidate: 60,
     };
   } catch (error) {
     return {
       props: {
         posts: [],
+        pagination: {
+          currentPage: 1,
+          totalPages: 1,
+        },
         ...(await serverSideTranslations(locale, ["common"])),
       },
-      revalidate: 60,
     };
   }
 }
