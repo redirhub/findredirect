@@ -2,6 +2,7 @@
 // node scripts/migrate-wordpress-to-sanity.js
 
 const axios = require('axios');
+const { randomUUID } = require('crypto');
 const { createClient } = require('@sanity/client');
 const { parse } = require('node-html-parser');
 const { decode } = require('html-entities');
@@ -53,6 +54,8 @@ const stripHtml = (html) => {
   return decodeEntities(text);
 };
 
+const genKey = () => (typeof randomUUID === 'function' ? randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`);
+
 const htmlToPortableText = async (html = '') => {
   const root = parse(html, {
     blockTextElements: {
@@ -82,6 +85,7 @@ const htmlToPortableText = async (html = '') => {
       if (!text || !text.trim()) return [];
       return [
         {
+          _key: genKey(),
           _type: 'span',
           text,
           marks: activeMarks,
@@ -97,6 +101,7 @@ const htmlToPortableText = async (html = '') => {
     if (tag === 'br') {
       return [
         {
+          _key: genKey(),
           _type: 'span',
           text: '\n',
           marks,
@@ -163,11 +168,13 @@ const htmlToPortableText = async (html = '') => {
       const text = node.rawText?.trim();
       if (!text) return null;
       return {
+        _key: genKey(),
         _type: 'block',
         style: 'normal',
         markDefs: [],
         children: [
           {
+            _key: genKey(),
             _type: 'span',
             text,
             marks: [],
@@ -183,6 +190,7 @@ const htmlToPortableText = async (html = '') => {
       const uploaded = await uploadImageWithFallback(imageInfo.sources);
       if (!uploaded) return null;
       return {
+        _key: genKey(),
         ...uploaded,
         alt: imageInfo.alt || imageInfo.caption || '',
         caption: imageInfo.caption || '',
@@ -210,6 +218,7 @@ const htmlToPortableText = async (html = '') => {
         const children = buildSpans(item, [], markDefs);
         if (!children.length) continue;
         listBlocks.push({
+          _key: genKey(),
           _type: 'block',
           style: 'normal',
           listItem: listItemStyle,
@@ -225,6 +234,7 @@ const htmlToPortableText = async (html = '') => {
     if (!children.length) return null;
 
     return {
+      _key: genKey(),
       _type: 'block',
       style,
       markDefs,

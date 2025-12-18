@@ -16,6 +16,27 @@ const openai = new OpenAI({
 
 const SUPPORTED_LOCALES = allLanguages.filter(locale => locale !== 'en');
 
+const normalizeError = (error) => {
+  const code =
+    error?.code ||
+    error?.type ||
+    error?.response?.status ||
+    error?.response?.data?.error?.code ||
+    'translation_error';
+
+  let message =
+    error?.response?.data?.error?.message ||
+    error?.error?.message ||
+    error?.message ||
+    'Unknown translation error';
+
+  if (code === 'invalid_api_key') {
+    message = 'Incorrect API key provided. Please provide a valid API key.';
+  }
+
+  return { code, message };
+};
+
 const LOCALE_NAMES = LANGUAGES.reduce((acc, lang) => {
   acc[lang.id] = lang.nativeName || lang.title;
   return acc;
@@ -221,23 +242,36 @@ export default async function handler(req, res) {
           documentId: translatedDoc._id,
         });
       } catch (error) {
+        // Capture per-locale error so UI can surface what's wrong without failing the whole batch
         console.error(`Error translating to ${locale}:`, error);
-        return res.status(error.status || 500).json({
-          error: `Failed to translate to ${locale}`,
-          details: error.message || 'Unknown translation error',
+        const { code, message } = normalizeError(error);
+
+        results.push({
+          locale,
+          status: 'error',
+          code,
+          message,
+          details: message,
+          error: message,
         });
       }
     }
 
-    return res.status(200).json({
-      message: 'Translation completed',
+    // If any locale failed, return 207 Multi-Status-ish response with details; otherwise 200
+    const hasError = results.some((r) => r.status === 'error');
+    return res.status(hasError ? 207 : 200).json({
+      message: hasError
+        ? 'Translation completed with errors'
+        : 'Translation completed',
       results,
     });
   } catch (error) {
     console.error('Translation error:', error);
+    const { code, message } = normalizeError(error);
     return res.status(500).json({
       error: 'Translation failed',
-      details: error.message,
+      code,
+      details: message,
     });
   }
 }

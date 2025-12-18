@@ -71,7 +71,8 @@ function LanguageSwitcherComponent({ document, schemaType }) {
 
       const result = await response.json();
       if (!response.ok) {
-        alert(`Translation failed: ${result?.error || 'Unknown error'}`);
+        const msg = result?.details || result?.error || 'Unknown error';
+        alert(`Translation failed: ${msg}`);
         return;
       }
 
@@ -80,10 +81,10 @@ function LanguageSwitcherComponent({ document, schemaType }) {
       );
 
       if (failures.length > 0) {
-        const details = failures
-          .map((f) => `${LOCALE_NAMES[f.locale] || f.locale}: ${f.error}`)
-          .join('; ');
-        alert(`Some translations failed: ${details}`);
+        const first = failures[0];
+        const msg =
+          first.message || first.details || first.error || 'Unknown error';
+        alert(`Translation failed: ${msg}`);
         return;
       }
 
@@ -93,7 +94,10 @@ function LanguageSwitcherComponent({ document, schemaType }) {
       }
     } catch (error) {
       console.error('Translation error:', error);
-      alert('Translation failed. Check console for details.');
+      const msg =
+        error?.message ||
+        'Network connection failed. Please check your internet connection.';
+      alert(`Translation failed: ${msg}`);
     } finally {
       setTranslating(false);
     }
