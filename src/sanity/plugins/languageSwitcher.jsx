@@ -70,26 +70,31 @@ function LanguageSwitcherComponent({ document, schemaType }) {
       });
 
       const result = await response.json();
+
       if (!response.ok) {
         alert(`Translation failed: ${result?.error || 'Unknown error'}`);
         return;
       }
 
-      const failures = (result?.results || []).filter(
-        (entry) => entry.status === 'error'
-      );
-
-      if (failures.length > 0) {
-        const details = failures
-          .map((f) => `${LOCALE_NAMES[f.locale] || f.locale}: ${f.error}`)
-          .join('; ');
-        alert(`Some translations failed: ${details}`);
-        return;
-      }
-
-      alert('Translation completed! Refresh to see the new translations.');
-      if (document.slug?.current) {
-        fetchTranslations(document.slug.current);
+      // 202 Accepted means the job is queued
+      if (response.status === 202) {
+        alert(
+          'Translation job started! 🎉\n\n' +
+          'Translations are being created in the background. ' +
+          'This may take a few minutes. Refresh in a moment to see the new translations.'
+        );
+        // Optionally refresh after a delay
+        setTimeout(() => {
+          if (document.slug?.current) {
+            fetchTranslations(document.slug.current);
+          }
+        }, 5000);
+      } else {
+        // Fallback for immediate completion (shouldn't happen with queue)
+        alert('Translation completed! Refresh to see the new translations.');
+        if (document.slug?.current) {
+          fetchTranslations(document.slug.current);
+        }
       }
     } catch (error) {
       console.error('Translation error:', error);

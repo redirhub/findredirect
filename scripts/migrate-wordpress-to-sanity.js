@@ -352,7 +352,6 @@ const mapPostToSanity = async (post) => {
     _type: 'post',
     locale: DEFAULT_LOCALE,
     slug: { current: slug },
-    sourceSlug: post.slug,
     title: stripHtml(post.title?.rendered),
     excerpt: stripHtml(post.excerpt?.rendered),
     tags: extractTags(post),
