@@ -51,60 +51,56 @@ async function translateText(text, targetLocale) {
 async function translatePortableText(content, targetLocale) {
   if (!content || !Array.isArray(content)) return content;
 
-  const translated = [];
+  // Translate all text blocks in parallel for speed
+  const translatedBlocks = await Promise.all(
+    content.map(async (block) => {
+      if (block._type === 'block' && block.children) {
+        const textToTranslate = block.children
+          .filter((child) => child._type === 'span' && child.text)
+          .map((child) => child.text)
+          .join(' ');
 
-  for (const block of content) {
-    if (block._type === 'block' && block.children) {
-      const textToTranslate = block.children
-        .filter((child) => child._type === 'span' && child.text)
-        .map((child) => child.text)
-        .join(' ');
+        if (textToTranslate.trim()) {
+          const translatedText = await translateText(textToTranslate, targetLocale);
 
-      if (textToTranslate.trim()) {
-        const translatedText = await translateText(textToTranslate, targetLocale);
-
-        const translatedBlock = {
-          ...block,
-          children: [
-            {
-              _type: 'span',
-              text: translatedText,
-              marks: [],
-            },
-          ],
-        };
-        translated.push(translatedBlock);
-      } else {
-        translated.push(block);
+          return {
+            ...block,
+            children: [
+              {
+                _type: 'span',
+                text: translatedText,
+                marks: [],
+              },
+            ],
+          };
+        }
       }
-    } else {
-      translated.push(block);
-    }
-  }
+      return block;
+    })
+  );
 
-  return translated;
+  return translatedBlocks;
 }
 
 async function createTranslatedDocument(sourceDoc, targetLocale) {
-  const translatedTitle = await translateText(sourceDoc.title, targetLocale);
-  const translatedExcerpt = sourceDoc.excerpt
-    ? await translateText(sourceDoc.excerpt, targetLocale)
-    : null;
-  const translatedContent = await translatePortableText(
-    sourceDoc.content,
-    targetLocale
-  );
-
-  let translatedFaqs = [];
-  if (Array.isArray(sourceDoc.faqs) && sourceDoc.faqs.length > 0) {
-    translatedFaqs = await Promise.all(
-      sourceDoc.faqs.map(async (faq) => ({
-        question: await translateText(faq.question, targetLocale),
-        answer: await translateText(faq.answer, targetLocale),
-        _key: faq._key,
-      }))
-    );
-  }
+  // Translate all parts in parallel for maximum speed
+  const [translatedTitle, translatedExcerpt, translatedContent, translatedFaqs] = await Promise.all([
+    translateText(sourceDoc.title, targetLocale),
+    sourceDoc.excerpt ? translateText(sourceDoc.excerpt, targetLocale) : Promise.resolve(null),
+    translatePortableText(sourceDoc.content, targetLocale),
+    Array.isArray(sourceDoc.faqs) && sourceDoc.faqs.length > 0
+      ? Promise.all(
+          sourceDoc.faqs.map(async (faq) => {
+            // Translate question and answer in parallel
+            const [question, answer] = await Promise.all([
+              translateText(faq.question, targetLocale),
+              translateText(faq.answer, targetLocale),
+            ]);
+            return { question, answer, _key: faq._key };
+          })
+        )
+      : Promise.resolve([]),
+  ]);
 
   const baseSlug = sourceDoc.slug?.current;
 
@@ -174,29 +170,31 @@ export async function processTranslationJob(documentId, targetLocales) {
 
   const slug = sourceDoc.slug?.current || 'unknown';
   const locales = targetLocales || SUPPORTED_LOCALES;
-  const results = [];
 
-  console.log(`[Translate Post] Starting translation for slug: ${slug}`);
+  console.log(`[Translate Post] Starting parallel translation for slug: ${slug} to ${locales.length} languages`);
 
-  for (const locale of locales) {
-    try {
-      console.log(`[Translate Post] [${slug}] Translating to ${locale}...`);
-      const translatedDoc = await createTranslatedDocument(sourceDoc, locale);
-      results.push({
-        locale,
-        status: 'success',
-        documentId: translatedDoc._id,
-      });
-      console.log(`[Translate Post] [${slug}] ✓ Translated to ${locale}`);
-    } catch (error) {
-      console.error(`[Translate Post] [${slug}] Error translating to ${locale}:`, error);
-      results.push({
-        locale,
-        status: 'error',
-        error: error.message,
-      });
-    }
-  }
+  // Translate all languages in parallel for maximum speed
+  const results = await Promise.all(
+    locales.map(async (locale) => {
+      try {
+        console.log(`[Translate Post] [${slug}] Translating to ${locale}...`);
+        const translatedDoc = await createTranslatedDocument(sourceDoc, locale);
+        console.log(`[Translate Post] [${slug}] ✓ Translated to ${locale}`);
+        return {
+          locale,
+          status: 'success',
+          documentId: translatedDoc._id,
+        };
+      } catch (error) {
+        console.error(`[Translate Post] [${slug}] Error translating to ${locale}:`, error);
+        return {
+          locale,
+          status: 'error',
+          error: error.message,
+        };
+      }
+    })
+  );
 
   // Mark the source document as no longer needing translation
   await sanityClient
