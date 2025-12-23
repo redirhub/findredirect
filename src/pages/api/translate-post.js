@@ -172,21 +172,24 @@ export async function processTranslationJob(documentId, targetLocales) {
     throw new Error(message);
   }
 
+  const slug = sourceDoc.slug?.current || 'unknown';
   const locales = targetLocales || SUPPORTED_LOCALES;
   const results = [];
 
+  console.log(`[Translate Post] Starting translation for slug: ${slug}`);
+
   for (const locale of locales) {
     try {
-      console.log(`[Translate Post] Translating to ${locale}...`);
+      console.log(`[Translate Post] [${slug}] Translating to ${locale}...`);
       const translatedDoc = await createTranslatedDocument(sourceDoc, locale);
       results.push({
         locale,
         status: 'success',
         documentId: translatedDoc._id,
       });
-      console.log(`[Translate Post] ✓ Translated to ${locale}`);
+      console.log(`[Translate Post] [${slug}] ✓ Translated to ${locale}`);
     } catch (error) {
-      console.error(`[Translate Post] Error translating to ${locale}:`, error);
+      console.error(`[Translate Post] [${slug}] Error translating to ${locale}:`, error);
       results.push({
         locale,
         status: 'error',
@@ -201,7 +204,7 @@ export async function processTranslationJob(documentId, targetLocales) {
     .set({ needsTranslation: false })
     .commit();
 
-  console.log(`[Translate Post] Translation complete for document: ${documentId}`);
+  console.log(`[Translate Post] [${slug}] Translation complete for document: ${documentId}`);
   return { success: true, results };
 }
 
