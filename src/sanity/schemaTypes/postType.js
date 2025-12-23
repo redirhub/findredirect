@@ -26,7 +26,27 @@ export const postType = defineType({
       type: 'slug',
       title: 'Slug',
       description: 'URL slug - identical across all language versions of this article',
-      options: {source: 'title'},
+      options: {
+        source: 'title',
+        isUnique: (slug, context) => {
+          const { document, getClient } = context;
+          const locale = document?.locale || 'en';
+          const docId = document?._id || '';
+          const draftId = docId.startsWith('drafts.') ? docId : `drafts.${docId}`;
+          const client = getClient({ apiVersion: '2024-01-01' });
+
+          const query = `
+            !defined(*[
+              _type == "post" &&
+              slug.current == $slug &&
+              locale == $locale &&
+              !(_id in [$docId, $draftId])
+            ][0]._id)
+          `;
+
+          return client.fetch(query, { slug, locale, docId, draftId });
+        },
+      },
       validation: (rule) => rule.required(),
     }),
     defineField({
