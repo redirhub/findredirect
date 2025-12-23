@@ -19,7 +19,7 @@ import PostCard from "@/components/blog/PostCard";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PonponManiaCard from "@/components/blog/PonponManiaCard";
 
-const PER_PAGE = 20;
+const PER_PAGE = 12;
 export default function IndexPage({ posts, pagination }) {
   const router = useRouter();
   const { locale, asPath } = router;
@@ -28,14 +28,7 @@ export default function IndexPage({ posts, pagination }) {
     currentPage: 1,
     totalPages: 1,
   };
-
-  const chunkedPosts = useMemo(() => {
-    const grouped = [];
-    for (let i = 0; i < posts.length; i += 4) {
-      grouped.push(posts.slice(i, i + 4));
-    }
-    return grouped;
-  }, [posts]);
+  const isFirstPage = currentPage === 1;
 
   const maxPageButtons = useBreakpointValue({
     base: 3,
@@ -56,7 +49,7 @@ export default function IndexPage({ posts, pagination }) {
       start = end - maxPageButtons + 1;
     }
     return Array.from({ length: end - start + 1 }, (_, index) => start + index);
-  }, [currentPage, maxPageButtons, totalPages]);
+  }, [ currentPage, maxPageButtons, totalPages ]);
   const handlePageChange = useCallback(
     (page) => {
       const safePage = Math.min(Math.max(page, 1), totalPages);
@@ -68,7 +61,7 @@ export default function IndexPage({ posts, pagination }) {
       }
       router.push({ pathname: router.pathname, query: nextQuery });
     },
-    [router, totalPages]
+    [ router, totalPages ]
   );
 
   const title = `Blog Posts | ${APP_NAME}`;
@@ -114,7 +107,7 @@ export default function IndexPage({ posts, pagination }) {
           color={"#222"}
           py={8}
         >
-          BLOGS
+          BLOG
         </Heading>
         {posts.length === 0 ? (
           <Box textAlign="center" py={20}>
@@ -124,32 +117,24 @@ export default function IndexPage({ posts, pagination }) {
           </Box>
         ) : (
           <Box>
-            {chunkedPosts.map((group, groupIndex) => {
-              const [firstPost, ...gridPosts] = group;
-              const reverse = groupIndex % 2 !== 0;
-              return (
-                <Box key={firstPost?._id || `group-${groupIndex}`} mb={8}>
-                  {firstPost && (
-                    <PonponManiaCard
-                      post={firstPost}
-                      reverse={reverse}
-                    />
-                  )}
+            {/* First post as hero (only on first page) */}
+            {isFirstPage && posts[ 0 ] && (
+              <Box mb={{ base: 8, md: 12 }}>
+                <PonponManiaCard post={posts[ 0 ]} />
+              </Box>
+            )}
 
-                  {gridPosts.length > 0 && (
-                    <SimpleGrid
-                      columns={{ base: 1, md: 2, xl: 3 }}
-                      spacing={{ base: 4, "2xl": 8 }}
-                      mt={6}
-                    >
-                      {gridPosts.map((gridPost) => (
-                        <PostCard key={gridPost._id} post={gridPost} />
-                      ))}
-                    </SimpleGrid>
-                  )}
-                </Box>
-              );
-            })}
+            {/* Remaining posts in grid */}
+            {posts.length > 0 && (
+              <SimpleGrid
+                columns={{ base: 1, md: 2, xl: 3 }}
+                spacing={{ base: 4, "2xl": 8 }}
+              >
+                {(isFirstPage ? posts.slice(1) : posts).map((post) => (
+                  <PostCard key={post._id} post={post} />
+                ))}
+              </SimpleGrid>
+            )}
 
             {totalPages > 1 && (
               <Flex justify="center" mt={10} mb={12}>
@@ -205,7 +190,7 @@ export async function getServerSideProps({ locale, query }) {
     typeof query.page === "string"
       ? query.page
       : Array.isArray(query.page)
-        ? query.page[0]
+        ? query.page[ 0 ]
         : "1";
   const requestedPage = Number.parseInt(rawPage, 10);
   const currentPage = Math.max(Number.isNaN(requestedPage) ? 1 : requestedPage, 1);
@@ -223,7 +208,7 @@ export async function getServerSideProps({ locale, query }) {
   const totalPages = Math.max(1, Math.ceil(totalCount / PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
   const start = (safePage - 1) * PER_PAGE;
-  const end = start + PER_PAGE;
+  const end = start > 0 ? start + PER_PAGE : start + PER_PAGE + 1;
 
   const POSTS_QUERY = `*[
     _type == "post" &&
@@ -257,7 +242,7 @@ export async function getServerSideProps({ locale, query }) {
           currentPage: safePage,
           totalPages,
         },
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };
   } catch (error) {
@@ -268,7 +253,7 @@ export async function getServerSideProps({ locale, query }) {
           currentPage: 1,
           totalPages: 1,
         },
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };
   }
