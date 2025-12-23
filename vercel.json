@@ -6,7 +6,7 @@
     }
   ],
   "functions": {
-    "api/queue/translate.js": {
+    "api/queue/translate": {
       "maxDuration": 300
     }
   }
