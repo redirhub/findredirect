@@ -208,7 +208,7 @@ export async function getServerSideProps({ locale, query }) {
   const totalPages = Math.max(1, Math.ceil(totalCount / PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
   const start = (safePage - 1) * PER_PAGE;
-  const end = start > 0 ? start + PER_PAGE : start + PER_PAGE + 1;
+  const end = safePage > 1 ? start + PER_PAGE : start + PER_PAGE + 1;
 
   const POSTS_QUERY = `*[
     _type == "post" &&
