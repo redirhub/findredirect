@@ -17,6 +17,7 @@ function LanguageSwitcherComponent({ document, schemaType }) {
   const [translations, setTranslations] = useState([]);
   const [loading, setLoading] = useState(false);
   const [translating, setTranslating] = useState(false);
+  const [cooldownUntil, setCooldownUntil] = useState(null);
   const lastFetchedSlug = useRef(null);
 
   const fetchTranslations = async (slug, signal) => {
@@ -64,6 +65,9 @@ function LanguageSwitcherComponent({ document, schemaType }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [document?._id, document?.slug?.current]);
 
+  const isOnCooldown = () =>
+    typeof cooldownUntil === 'number' && Date.now() < cooldownUntil;
+
   const handleTranslate = async () => {
     if (!document._id) {
       alert('Please save the document first before translating.');
@@ -102,6 +106,8 @@ function LanguageSwitcherComponent({ document, schemaType }) {
           'Translations are being created in the background. ' +
           'This may take a few minutes. Refresh in a moment to see the new translations.'
         );
+        // Enforce a cooldown to avoid rapid re-submission; UI stays responsive
+        setCooldownUntil(Date.now() + 2 * 60 * 1000);
         // Optionally refresh after a delay
         setTimeout(() => {
           if (document.slug?.current) {
@@ -122,6 +128,7 @@ function LanguageSwitcherComponent({ document, schemaType }) {
         'Network connection failed. Please check your internet connection.';
       alert(`Translation failed: ${msg}`);
     } finally {
+      // Stop the spinner; cooldown keeps the button disabled for 2 minutes
       setTranslating(false);
     }
   };
@@ -148,7 +155,7 @@ function LanguageSwitcherComponent({ document, schemaType }) {
               fontSize={1}
               padding={2}
               onClick={handleTranslate}
-              disabled={translating || !document._id}
+              disabled={translating || isOnCooldown() || !document._id}
               loading={translating}
             />
           )}
