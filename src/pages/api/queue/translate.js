@@ -1,4 +1,3 @@
-import { queue } from '@vercel/functions';
 import { createClient } from '@sanity/client';
 import OpenAI from 'openai';
 import { allLanguages } from '../../../config/i18n';
@@ -141,79 +140,81 @@ async function createTranslatedDocument(sourceDoc, targetLocale) {
   }
 }
 
-// Queue consumer function
-export default queue(
-  'translate-article',
-  {
-    rateLimit: {
-      refillRate: 10,
-      interval: '1m',
-      capacity: 10,
-    },
-  },
-  async ({ body }) => {
-    const { documentId, targetLocales } = body;
+// Plain API route to process translation immediately (no Vercel Queue SDK)
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
+  const { documentId, targetLocales } = req.body || {};
+
+  if (!documentId) {
+    return res.status(400).json({ error: 'Document ID is required' });
+  }
+
+  try {
     console.log(`[Queue] Processing translation for document: ${documentId}`);
 
-    try {
-      // Fetch source document
-      const sourceDoc = await sanityClient.fetch(
-        `*[_id == $id][0]{
-          _id,
-          title,
-          slug,
-          excerpt,
-          content,
-          tags,
-          image,
-          publishedAt,
-          author,
-          faqs,
-          locale
-        }`,
-        { id: documentId }
-      );
+    const sourceDoc = await sanityClient.fetch(
+      `*[_id == $id][0]{
+        _id,
+        title,
+        slug,
+        excerpt,
+        content,
+        tags,
+        image,
+        publishedAt,
+        author,
+        faqs,
+        locale
+      }`,
+      { id: documentId }
+    );
 
-      if (!sourceDoc) {
-        console.error(`[Queue] Document not found: ${documentId}`);
-        return { success: false, error: 'Document not found' };
-      }
-
-      if (sourceDoc.locale !== 'en') {
-        console.error(`[Queue] Only English documents can be translated`);
-        return { success: false, error: 'Only English documents can be translated' };
-      }
-
-      const locales = targetLocales || SUPPORTED_LOCALES;
-      const results = [];
-
-      // Translate to each target locale
-      for (const locale of locales) {
-        try {
-          console.log(`[Queue] Translating to ${locale}...`);
-          const translatedDoc = await createTranslatedDocument(sourceDoc, locale);
-          results.push({
-            locale,
-            status: 'success',
-            documentId: translatedDoc._id,
-          });
-          console.log(`[Queue] ✓ Translated to ${locale}`);
-        } catch (error) {
-          console.error(`[Queue] Error translating to ${locale}:`, error);
-          results.push({
-            locale,
-            status: 'error',
-            error: error.message,
-          });
-        }
-      }
-
-      console.log(`[Queue] Translation complete for document: ${documentId}`);
-      return { success: true, results };
-    } catch (error) {
-      console.error('[Queue] Translation job failed:', error);
-      return { success: false, error: error.message };
+    if (!sourceDoc) {
+      console.error(`[Queue] Document not found: ${documentId}`);
+      return res.status(404).json({ success: false, error: 'Document not found' });
     }
+
+    if (sourceDoc.locale !== 'en') {
+      console.error(`[Queue] Only English documents can be translated`);
+      return res.status(400).json({
+        success: false,
+        error: 'Only English documents can be translated',
+      });
+    }
+
+    const locales = targetLocales || SUPPORTED_LOCALES;
+    const results = [];
+
+    for (const locale of locales) {
+      try {
+        console.log(`[Queue] Translating to ${locale}...`);
+        const translatedDoc = await createTranslatedDocument(sourceDoc, locale);
+        results.push({
+          locale,
+          status: 'success',
+          documentId: translatedDoc._id,
+        });
+        console.log(`[Queue] ✓ Translated to ${locale}`);
+      } catch (error) {
+        console.error(`[Queue] Error translating to ${locale}:`, error);
+        results.push({
+          locale,
+          status: 'error',
+          error: error.message,
+        });
+      }
+    }
+
+    console.log(`[Queue] Translation complete for document: ${documentId}`);
+    return res.status(200).json({ success: true, results });
+  } catch (error) {
+    console.error('[Queue] Translation job failed:', error);
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
-);
+}

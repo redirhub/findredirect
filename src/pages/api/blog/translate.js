@@ -1,4 +1,3 @@
-import { queue } from '@vercel/functions';
 import { createClient } from '@sanity/client';
 import { allLanguages } from '../../../config/i18n';
 
@@ -40,23 +39,29 @@ export default async function handler(req, res) {
       });
     }
 
-    // Enqueue translation job with deduplication
-    const translateQueue = queue('translate-article');
-    await translateQueue.enqueue(
-      {
-        documentId,
-        targetLocales: targetLocales || null, // null = all supported locales
+    // Get base URL
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000';
+
+    // Trigger queue by calling the queue endpoint
+    const response = await fetch(`${baseUrl}/api/queue/translate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        // Deduplication: Only one job per document ID
-        // If same documentId is queued within 5 minutes, it's deduplicated
-        deduplicationId: `translate-${documentId}`,
-      }
-    );
+      body: JSON.stringify({
+        documentId,
+        targetLocales: targetLocales || SUPPORTED_LOCALES,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to enqueue translation');
+    }
 
     console.log(`[API] Translation job enqueued for document: ${documentId}`);
 
-    // Return immediately - translation will happen in background
     return res.status(202).json({
       message: 'Translation job started. Translations will be created in the background.',
       documentId,
