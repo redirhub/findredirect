@@ -21,6 +21,19 @@ function verifySignature(req) {
   return signature === webhookSecret;
 }
 
+// Kick off the cron job immediately so new posts get processed right away
+async function triggerCronRun() {
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
+
+  const response = await fetch(`${baseUrl}/api/cron`);
+
+  if (!response.ok) {
+    throw new Error(`Cron trigger failed (${response.status})`);
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -71,6 +84,14 @@ export default async function handler(req, res) {
     );
 
     console.log(`[Webhook] ✓ Translation job enqueued for: ${payload._id}`);
+
+    // Also trigger the cron run so translations start immediately
+    try {
+      await triggerCronRun();
+      console.log('[Webhook] ✓ Cron run triggered');
+    } catch (error) {
+      console.error('[Webhook] Failed to trigger cron:', error);
+    }
 
     return res.status(200).json({
       message: 'Translation job enqueued',
