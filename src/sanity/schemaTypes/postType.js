@@ -32,7 +32,11 @@ export const postType = defineType({
           const { document, getClient } = context;
           const locale = document?.locale || 'en';
           const docId = document?._id || '';
-          const draftId = docId.startsWith('drafts.') ? docId : `drafts.${docId}`;
+
+          // Handle both draft and published IDs
+          const publishedId = docId.replace(/^drafts\./, '');
+          const draftId = `drafts.${publishedId}`;
+
           const client = getClient({ apiVersion: '2024-01-01' });
 
           const query = `
@@ -40,11 +44,11 @@ export const postType = defineType({
               _type == "post" &&
               slug.current == $slug &&
               locale == $locale &&
-              !(_id in [$docId, $draftId])
+              !(_id in [$publishedId, $draftId])
             ][0]._id)
           `;
 
-          return client.fetch(query, { slug, locale, docId, draftId });
+          return client.fetch(query, { slug, locale, publishedId, draftId });
         },
       },
       validation: (rule) => rule.required(),
@@ -116,14 +120,6 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'needsTranslation',
-      type: 'boolean',
-      title: 'Needs Translation',
-      description: 'Check this box to queue this post for automatic translation to all supported languages',
-      initialValue: false,
-      hidden: ({document}) => document?.locale !== 'en',
-    }),
-    defineField({
       name: 'author',
       type: 'reference',
       title: 'Author',
@@ -150,6 +146,14 @@ export const postType = defineType({
         },
       ],
       validation: (rule) => rule.max(5),
+    }),
+    defineField({
+      name: 'needsTranslation',
+      type: 'boolean',
+      title: 'Needs Translation',
+      description: 'Check this box to queue this post for automatic translation to all supported languages',
+      initialValue: false,
+      hidden: ({document}) => document?.locale !== 'en',
     }),
   ],
   preview: {
