@@ -1,8 +1,8 @@
-import { definePlugin } from 'sanity';
-import { Button, Card, Flex, Stack, Text, Badge } from '@sanity/ui';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'sanity/router';
-import { LANGUAGES } from '../../config/i18n';
+import { definePlugin } from "sanity";
+import { Button, Card, Flex, Stack, Text, Badge } from "@sanity/ui";
+import { useState, useEffect } from "react";
+import { useRouter } from "sanity/router";
+import { LANGUAGES } from "../../config/i18n";
 
 function LanguageSwitcherComponent({ document, documentId }) {
   const router = useRouter();
@@ -10,6 +10,7 @@ function LanguageSwitcherComponent({ document, documentId }) {
   const [loading, setLoading] = useState(false);
   const [jobLoading, setJobLoading] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const slug = document?.slug?.current;
     if (!slug) {
@@ -33,19 +34,19 @@ function LanguageSwitcherComponent({ document, documentId }) {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching translations:', error);
+        console.error("Error fetching translations:", error);
         setLoading(false);
       });
-  }, [document?.slug?.current]);
+  }, [document?.slug]);
 
   const handleNavigate = (translationId) => {
-    router.navigateIntent('edit', {
+    router.navigateIntent("edit", {
       id: translationId,
-      type: 'post',
+      type: "post",
     });
   };
 
-  const currentLocale = document?.locale || 'en';
+  const currentLocale = document?.locale || "en";
   const currentLang = LANGUAGES.find((l) => l.id === currentLocale);
 
   return (
@@ -61,19 +62,23 @@ function LanguageSwitcherComponent({ document, documentId }) {
         </Flex>
 
         {loading ? (
-          <Text size={1} muted>Loading translations...</Text>
+          <Text size={1} muted>
+            Loading translations...
+          </Text>
         ) : (
           <Flex wrap="wrap" gap={2}>
             {LANGUAGES.map((lang) => {
-              const translation = translations.find((t) => t.locale === lang.id);
+              const translation = translations.find(
+                (t) => t.locale === lang.id
+              );
               const isCurrent = lang.id === currentLocale;
               const exists = Boolean(translation);
 
               return (
                 <Button
                   key={lang.id}
-                  mode={isCurrent ? 'default' : 'ghost'}
-                  tone={exists ? 'primary' : 'default'}
+                  mode={isCurrent ? "default" : "ghost"}
+                  tone={exists ? "primary" : "default"}
                   fontSize={1}
                   padding={2}
                   disabled={isCurrent || !exists}
@@ -82,8 +87,16 @@ function LanguageSwitcherComponent({ document, documentId }) {
                     <Flex align="center" gap={2}>
                       <span>{lang.flag}</span>
                       <span>{lang.nativeName}</span>
-                      {!exists && <Badge mode="outline" tone="caution" fontSize={0}>Missing</Badge>}
-                      {isCurrent && <Badge tone="primary" fontSize={0}>Current</Badge>}
+                      {!exists && (
+                        <Badge mode="outline" tone="caution" fontSize={0}>
+                          Missing
+                        </Badge>
+                      )}
+                      {isCurrent && (
+                        <Badge tone="primary" fontSize={0}>
+                          Current
+                        </Badge>
+                      )}
                     </Flex>
                   }
                 />
@@ -135,11 +148,11 @@ function LanguageSwitcherComponent({ document, documentId }) {
 }
 
 export const languageSwitcherPlugin = definePlugin({
-  name: 'language-switcher',
+  name: "language-switcher",
   form: {
     components: {
       input: (props) => {
-        if (props.schemaType.name === 'post') {
+        if (props.schemaType.name === "post") {
           return (
             <>
               {props.renderDefault(props)}
