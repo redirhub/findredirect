@@ -125,13 +125,23 @@ export function AIAssistantAction(props) {
     if (generatedPost.content) patchData.content = generatedPost.content
     if (generatedPost.faqs?.length > 0) patchData.faqs = generatedPost.faqs
 
+    // Auto-complete publishedAt if not set
+    if (!currentDoc?.publishedAt) {
+      patchData.publishedAt = new Date().toISOString()
+    }
+
+    // Auto-complete locale if not set
+    if (!currentDoc?.locale) {
+      patchData.locale = 'en'
+    }
+
     patch.execute([{ set: patchData }])
 
     onComplete()
     setIsOpen(false)
     setPrompt('')
     setGeneratedPost(null)
-  }, [generatedPost, patch, onComplete])
+  }, [generatedPost, currentDoc, patch, onComplete])
 
   // Apply individual field suggestion
   const handleApplyField = useCallback((fieldName, value) => {
