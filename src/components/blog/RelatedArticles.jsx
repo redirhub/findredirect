@@ -41,16 +41,9 @@ export default function RelatedArticles({ posts }) {
         </Link>
       </Flex>
 
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
         {posts.slice(0, 3).map((post) => (
-          <Box
-            key={post._id}
-            transform="scale(0.95)"
-            transition="all 0.3s"
-            _hover={{ transform: "scale(1)" }}
-          >
-            <PostCard post={post} />
-          </Box>
+          <PostCard key={post._id} post={post} />
         ))}
       </SimpleGrid>
     </Box>

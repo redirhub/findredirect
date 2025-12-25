@@ -26,8 +26,8 @@ export default function BlogPostGrid({ posts, showHero = false }) {
 
       {gridPosts.length > 0 && (
         <SimpleGrid
-          columns={{ base: 1, md: 2, xl: 3 }}
-          spacing={{ base: 6, md: 8, xl: 10 }}
+          columns={{ base: 1, md: 2, lg: 3 }}
+          spacing={{ base: 6, md: 6, lg: 8 }}
         >
           {gridPosts.map((post) => (
             <PostCard key={post._id} post={post} />
