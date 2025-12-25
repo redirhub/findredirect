@@ -107,8 +107,15 @@ IMPORTANT: Return ONLY valid JSON, no markdown code blocks or explanations.`;
       return block;
     });
 
-    // Ensure FAQs don't exceed 5
-    const faqs = generatedPost.faqs ? generatedPost.faqs.slice(0, 5) : [];
+    // Ensure FAQs don't exceed 5 and format with required Sanity fields
+    const faqs = generatedPost.faqs
+      ? generatedPost.faqs.slice(0, 5).map(faq => ({
+          _type: 'object',
+          _key: generateKey(),
+          question: faq.question || '',
+          answer: faq.answer || ''
+        }))
+      : [];
 
     return res.status(200).json({
       title: generatedPost.title,
