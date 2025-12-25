@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import BlogListLayout from "@/components/blog/BlogListLayout";
 import BlogPostGrid from "@/components/blog/BlogPostGrid";
 import BlogPagination from "@/components/blog/BlogPagination";
@@ -7,6 +8,7 @@ import BlogPagination from "@/components/blog/BlogPagination";
 const PER_PAGE = 12;
 
 export default function IndexPage({ posts, pagination }) {
+  const { t } = useTranslation();
   const { currentPage, totalPages } = pagination || {
     currentPage: 1,
     totalPages: 1,
@@ -15,8 +17,8 @@ export default function IndexPage({ posts, pagination }) {
 
   return (
     <BlogListLayout
-      title="BLOG"
-      description="Explore our latest blog posts and articles about web development, design, and more."
+      title={t('blog.title', 'BLOG')}
+      description={t('blog.description', 'Explore our latest blog posts and articles about web development, design, and more.')}
     >
       <BlogPostGrid posts={posts} showHero={isFirstPage} />
       <BlogPagination currentPage={currentPage} totalPages={totalPages} />

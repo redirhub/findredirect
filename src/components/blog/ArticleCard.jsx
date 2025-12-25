@@ -1,6 +1,7 @@
 import { Box, Heading, Text, Link, Image, Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
 
 const MotionBox = motion(Box);
 const MotionImage = motion(Image);
@@ -14,9 +15,12 @@ export default function ArticleCard({
   mainImage,
   link = "#",
   hasOverlay = false,
-  overlayText = "read now",
+  overlayText,
   showBadge = false,
 }) {
+  const { t } = useTranslation();
+  const defaultOverlayText = t('blog.read-now', 'read now');
+
   return (
     <Box
       display="flex"
@@ -100,7 +104,7 @@ export default function ArticleCard({
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.2 }}
                   >
-                    {overlayText}
+                    {overlayText || defaultOverlayText}
                   </MotionBox>
                 )}
 
@@ -168,7 +172,7 @@ export default function ArticleCard({
                 }}
               >
                 <FiArrowRight />
-                Read Article
+                {t('blog.read-article', 'Read Article')}
               </Link>
             </MotionBox>
           </Box>

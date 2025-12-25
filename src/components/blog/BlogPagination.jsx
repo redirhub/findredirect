@@ -1,7 +1,9 @@
 import { Flex, HStack, Button } from "@chakra-ui/react";
 import { useBlogPagination } from "@/hooks/useBlogPagination";
+import { useTranslation } from "next-i18next";
 
 export default function BlogPagination({ currentPage, totalPages }) {
+  const { t } = useTranslation();
   const { visiblePages, handlePageChange } = useBlogPagination(currentPage, totalPages);
 
   if (totalPages <= 1) return null;
@@ -17,7 +19,7 @@ export default function BlogPagination({ currentPage, totalPages }) {
           variant="outline"
           _hover={currentPage === 1 ? {} : { bg: "#d2e1f0", color: "#1d6db6" }}
         >
-          Previous
+          {t('blog.previous', 'Previous')}
         </Button>
 
         {visiblePages.map((page) => {
@@ -47,7 +49,7 @@ export default function BlogPagination({ currentPage, totalPages }) {
           variant="outline"
           _hover={currentPage === totalPages ? {} : { bg: "#d2e1f0", color: "#1d6db6" }}
         >
-          Next
+          {t('blog.next', 'Next')}
         </Button>
       </HStack>
     </Flex>

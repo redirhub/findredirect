@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import { Box, Heading, Text, Avatar, VStack } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
 import BlogListLayout from "@/components/blog/BlogListLayout";
 import BlogPostGrid from "@/components/blog/BlogPostGrid";
 import BlogPagination from "@/components/blog/BlogPagination";
@@ -9,12 +10,13 @@ import { urlFor } from "@/sanity/lib/image";
 const PER_PAGE = 12;
 
 export default function AuthorPage({ author, posts, pagination, totalCount }) {
+  const { t } = useTranslation();
   const { currentPage, totalPages } = pagination;
 
   return (
     <BlogListLayout
-      title={`${author.name}'s Posts`}
-      description={`Blog posts by ${author.name}`}
+      title={t('blog.author-posts-title', "{{name}}'s Posts", { name: author.name })}
+      description={t('blog.author-posts-description', 'Blog posts by {{name}}', { name: author.name })}
       showTitle={false}
     >
       {/* Author Hero Section */}
@@ -23,6 +25,7 @@ export default function AuthorPage({ author, posts, pagination, totalCount }) {
         borderRadius="2xl"
         p={{ base: 8, md: 12 }}
         mb={12}
+        mt={4}
         textAlign="center"
       >
         <VStack spacing={4}>
@@ -52,7 +55,7 @@ export default function AuthorPage({ author, posts, pagination, totalCount }) {
             </Text>
           )}
           <Text fontSize="sm" color="gray.600" fontWeight="600">
-            {totalCount} {totalCount === 1 ? 'post' : 'posts'}
+            {totalCount} {t('blog.posts', totalCount === 1 ? 'post' : 'posts')}
           </Text>
         </VStack>
       </Box>
@@ -142,7 +145,7 @@ export async function getServerSideProps({ locale, params, query }) {
         posts: posts || [],
         pagination: { currentPage: safePage, totalPages },
         totalCount,
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };
   } catch (error) {
@@ -153,7 +156,7 @@ export async function getServerSideProps({ locale, params, query }) {
         posts: [],
         pagination: { currentPage: 1, totalPages: 1 },
         totalCount: 0,
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };
   }

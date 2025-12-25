@@ -1,9 +1,13 @@
 import { Box, Flex, HStack, Text, Avatar, Wrap, WrapItem } from "@chakra-ui/react";
 import { FaCalendar, FaRegClock } from "react-icons/fa";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import { motion } from "framer-motion";
 import { formatPostDate } from "@/utils/blogHelpers";
 import { urlFor } from "@/sanity/lib/image";
 import TagBadge from "./TagBadge";
+
+const MotionFlex = motion(Flex);
 
 export default function PostMetadata({
   publishedAt,
@@ -16,6 +20,7 @@ export default function PostMetadata({
   disableAuthorLink = false,
 }) {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <Box>
@@ -41,14 +46,14 @@ export default function PostMetadata({
           <>
             <Flex align="center" gap={1.5}>
               <FaRegClock size={compact ? 14 : 16} color="#6C6965" />
-              <Text>{readTimeMinutes} min read</Text>
+              <Text>{t('blog.min-read', '{{minutes}} min read', { minutes: readTimeMinutes })}</Text>
             </Flex>
             {author && <Text>•</Text>}
           </>
         )}
 
         {author && (
-          <Flex
+          <MotionFlex
             align="center"
             gap={2}
             cursor={!disableAuthorLink && author.slug ? "pointer" : "default"}
@@ -59,7 +64,9 @@ export default function PostMetadata({
               }
             }}
             _hover={!disableAuthorLink && author.slug ? { color: "#7D65DB" } : {}}
-            transition="color 0.2s"
+            transition="all 0.2s"
+            whileHover={!disableAuthorLink && author.slug ? { scale: 1.05, y: -2 } : {}}
+            whileTap={!disableAuthorLink && author.slug ? { scale: 0.98 } : {}}
           >
             {author.image && (
               <Avatar
@@ -68,14 +75,12 @@ export default function PostMetadata({
                 src={urlFor(author.image).width(40).height(40).url()}
                 border="2px solid"
                 borderColor="purple.200"
-                _hover={!disableAuthorLink ? { borderColor: "purple.500" } : {}}
-                transition="border-color 0.2s"
               />
             )}
             <Text textTransform="capitalize">
               {author.name}
             </Text>
-          </Flex>
+          </MotionFlex>
         )}
       </Flex>
 
@@ -88,7 +93,9 @@ export default function PostMetadata({
           ))}
           {tags.length > 5 && (
             <WrapItem>
-              <Text fontSize="sm" color="gray.500">+{tags.length - 5} more</Text>
+              <Text fontSize="sm" color="gray.500">
+                {t('blog.more-tags', '+{{count}} more', { count: tags.length - 5 })}
+              </Text>
             </WrapItem>
           )}
         </Wrap>

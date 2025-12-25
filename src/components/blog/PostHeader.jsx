@@ -1,5 +1,8 @@
-import { Box, Flex, Heading, Container } from "@chakra-ui/react";
+import { Box, Flex, Heading, Container, Link as ChakraLink } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
+import { FiArrowLeft } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
 import PostMetadata from "./PostMetadata";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -11,6 +14,7 @@ export default function PostHeader({
   tags,
   image
 }) {
+  const { t } = useTranslation();
   const imageUrl = image
     ? urlFor(image).width(1600).height(900).url()
     : null;
@@ -25,6 +29,26 @@ export default function PostHeader({
         >
           {/* Left Column */}
           <Box flex="1.5">
+            <Link href="/blog" passHref legacyBehavior>
+              <ChakraLink
+                display="inline-flex"
+                alignItems="center"
+                gap={2}
+                mb={4}
+                fontSize="sm"
+                fontWeight="600"
+                color="gray.600"
+                _hover={{
+                  color: "#7D65DB",
+                  textDecoration: "none",
+                }}
+                transition="color 0.2s"
+              >
+                <FiArrowLeft size={16} />
+                {t('blog.back-to-blog', 'Blog')}
+              </ChakraLink>
+            </Link>
+
             <Heading
               as="h1"
               fontSize={{ base: "24px", md: "32px", lg: "36px" }}

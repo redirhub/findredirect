@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import { Box, Heading } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
 import BlogListLayout from "@/components/blog/BlogListLayout";
 import BlogPostGrid from "@/components/blog/BlogPostGrid";
 import BlogPagination from "@/components/blog/BlogPagination";
@@ -9,13 +10,14 @@ import { denormalizeTag } from "@/utils/blogHelpers";
 const PER_PAGE = 12;
 
 export default function TagPage({ tag, posts, pagination }) {
+  const { t } = useTranslation();
   const { currentPage, totalPages } = pagination;
   const displayTag = tag.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
   return (
     <BlogListLayout
-      title={`Tag: ${displayTag}`}
-      description={`Blog posts tagged with "${displayTag}"`}
+      title={t('blog.tag-title', 'Tag: {{tag}}', { tag: displayTag })}
+      description={t('blog.tag-description', 'Blog posts tagged with "{{tag}}"', { tag: displayTag })}
       showTitle={false}
     >
       <Heading
@@ -25,8 +27,9 @@ export default function TagPage({ tag, posts, pagination }) {
         fontWeight="800"
         color="#222"
         py={6}
+        mt={6}
       >
-        Posts tagged with <Box as="span" color="#7D65DB">#{displayTag}</Box>
+        {t('blog.posts-tagged-with', 'Posts tagged with')} <Box as="span" color="#7D65DB">#{displayTag}</Box>
       </Heading>
 
       <BlogPostGrid posts={posts} showHero={false} />
@@ -61,7 +64,7 @@ export async function getServerSideProps({ locale, params, query }) {
         tag,
         posts: [],
         pagination: { currentPage: 1, totalPages: 1 },
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };
   }
@@ -107,7 +110,7 @@ export async function getServerSideProps({ locale, params, query }) {
         tag,
         posts: posts || [],
         pagination: { currentPage: safePage, totalPages },
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };
   } catch (error) {
@@ -117,7 +120,7 @@ export async function getServerSideProps({ locale, params, query }) {
         tag,
         posts: [],
         pagination: { currentPage: 1, totalPages: 1 },
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };
   }
