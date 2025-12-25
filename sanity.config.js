@@ -9,8 +9,7 @@ import { schema } from './src/sanity/schemaTypes'
 import { structure } from './src/sanity/structure'
 import { languageSwitcherPlugin } from './src/sanity/plugins/languageSwitcher'
 import { languageFilterPlugin } from './src/sanity/plugins/languageFilter'
-import { aiPostGeneratorPlugin } from './src/sanity/plugins/aiPostGenerator'
-import { aiFieldSuggestionsPlugin } from './src/sanity/plugins/aiFieldSuggestions'
+import { aiAssistantPlugin } from './src/sanity/plugins/aiAssistant'
 
 export default defineConfig({
   basePath: '/studio',
@@ -22,7 +21,6 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion }),
     languageSwitcherPlugin(),
     languageFilterPlugin(),
-    aiPostGeneratorPlugin(),
-    aiFieldSuggestionsPlugin(),
+    aiAssistantPlugin(),
   ],
 })
