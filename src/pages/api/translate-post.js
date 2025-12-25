@@ -48,6 +48,51 @@ async function translateText(text, targetLocale) {
   return response.choices[0].message.content.trim();
 }
 
+async function translateMetadata(sourceDoc, targetLocale) {
+  const targetLanguage = LOCALE_NAMES[targetLocale];
+
+  // Prepare structured metadata for translation
+  const metadata = {
+    title: sourceDoc.title,
+    excerpt: sourceDoc.excerpt || '',
+    tags: sourceDoc.tags || [],
+    faqs: sourceDoc.faqs || [],
+  };
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content: `You are a professional translator. Translate the following blog post metadata to ${targetLanguage}. Maintain the tone, style, and context. Return ONLY a valid JSON object with the same structure, containing the translations. Do not add any explanations or markdown formatting.`,
+      },
+      {
+        role: 'user',
+        content: JSON.stringify(metadata, null, 2),
+      },
+    ],
+    temperature: 0.3,
+    response_format: { type: "json_object" },
+  });
+
+  const translatedMetadata = JSON.parse(response.choices[0].message.content);
+
+  // Preserve _key fields from original FAQs
+  const translatedFaqs = Array.isArray(translatedMetadata.faqs)
+    ? translatedMetadata.faqs.map((faq, index) => ({
+        ...faq,
+        _key: sourceDoc.faqs?.[index]?._key || faq._key,
+      }))
+    : sourceDoc.faqs || [];
+
+  return {
+    title: translatedMetadata.title || sourceDoc.title,
+    excerpt: translatedMetadata.excerpt || sourceDoc.excerpt,
+    tags: Array.isArray(translatedMetadata.tags) ? translatedMetadata.tags : sourceDoc.tags || [],
+    faqs: translatedFaqs,
+  };
+}
+
 async function translatePortableText(content, targetLocale) {
   if (!content || !Array.isArray(content)) return content;
 
@@ -83,23 +128,10 @@ async function translatePortableText(content, targetLocale) {
 }
 
 async function createTranslatedDocument(sourceDoc, targetLocale) {
-  // Translate all parts in parallel for maximum speed
-  const [translatedTitle, translatedExcerpt, translatedContent, translatedFaqs] = await Promise.all([
-    translateText(sourceDoc.title, targetLocale),
-    sourceDoc.excerpt ? translateText(sourceDoc.excerpt, targetLocale) : Promise.resolve(null),
+  // Translate metadata (title, excerpt, tags, FAQs) and content in parallel for maximum speed
+  const [translatedMetadata, translatedContent] = await Promise.all([
+    translateMetadata(sourceDoc, targetLocale),
     translatePortableText(sourceDoc.content, targetLocale),
-    Array.isArray(sourceDoc.faqs) && sourceDoc.faqs.length > 0
-      ? Promise.all(
-          sourceDoc.faqs.map(async (faq) => {
-            // Translate question and answer in parallel
-            const [question, answer] = await Promise.all([
-              translateText(faq.question, targetLocale),
-              translateText(faq.answer, targetLocale),
-            ]);
-            return { question, answer, _key: faq._key };
-          })
-        )
-      : Promise.resolve([]),
   ]);
 
   const baseSlug = sourceDoc.slug?.current;
@@ -115,15 +147,15 @@ async function createTranslatedDocument(sourceDoc, targetLocale) {
   const translatedDoc = {
     _type: 'post',
     locale: targetLocale,
-    title: translatedTitle,
+    title: translatedMetadata.title,
     slug: sourceDoc.slug,
-    excerpt: translatedExcerpt,
+    excerpt: translatedMetadata.excerpt,
     content: Array.isArray(translatedContent) ? translatedContent : [],
-    tags: Array.isArray(sourceDoc.tags) ? sourceDoc.tags : [],
+    tags: translatedMetadata.tags,
     image: sourceDoc.image,
     publishedAt: sourceDoc.publishedAt,
     author: sourceDoc.author,
-    faqs: translatedFaqs,
+    faqs: translatedMetadata.faqs,
   };
 
   if (existingTranslation) {

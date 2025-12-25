@@ -2,16 +2,12 @@ import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Image from "next/image";
 import {
   Box,
   Container,
   Heading,
   Text,
-  Flex,
-  Avatar,
   Divider,
-  HStack,
   Image as ChakraImage,
   Accordion,
   AccordionItem,
@@ -23,8 +19,7 @@ import MainLayout from "@/layouts/MainLayout";
 import { urlFor } from "@/sanity/lib/image";
 import { APP_NAME } from "@/configs/constant";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import LanguageSwitcher from "@/components/blog/LanguageSwitcher";
-import { FaCalendar, FaRegClock } from "react-icons/fa";
+import PostHeader from "@/components/blog/PostHeader";
 
 const WORDS_PER_MINUTE = 200;
 
@@ -266,94 +261,14 @@ export default function PostPage({ postData }) {
         py={10}
       >
         <article>
-          <Box as="header" mb={10}>
-            {postData.availableTranslations &&
-              postData.availableTranslations.length > 1 && (
-                <Box mb={6}>
-                  <LanguageSwitcher
-                    availableTranslations={postData.availableTranslations}
-                    currentSlug={postData.slug.current}
-                  />
-                </Box>
-              )}
-
-            <Heading
-              as="h1"
-              fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }}
-              fontWeight="bold"
-              lineHeight="1.2"
-              mb={6}
-              color="gray.900"
-            >
-              {postData.title}
-            </Heading>
-
-
-            <Flex
-              direction={{ base: "column", md: "row" }}
-              align={{ base: "start", md: "center" }}
-              gap={4}
-              color="gray.600"
-              mb={6}
-            >
-              {postData.publishedAt && (
-                <Box display={'flex'} alignItems={'center'} gap={1}>
-                  <FaCalendar size={18} color={'#6C6965'} />
-                  <Text
-                    as="time"
-                    dateTime={postData.publishedAt}
-                    fontSize="md"
-                    textColor={'#6C6965'}
-                    fontWeight="500"
-                  >
-                    {formattedDate}
-                  </Text>
-                </Box>
-              )}
-
-              {postData.readTimeMinutes ? (
-                <Box display="flex" alignItems="center" gap={1}>
-                  <FaRegClock size={18} color="#6C6965" />
-                  <Text fontSize="md" textColor="#6C6965" fontWeight="500">
-                    {postData.readTimeMinutes} min read
-                  </Text>
-                </Box>
-              ) : null}
-
-              {postData.author && (
-                <HStack spacing={3}>
-                  {postData.author.image && (
-                    <Avatar
-                      size="sm"
-                      name={postData.author.name}
-                      src={urlFor(postData.author.image)
-                        .width(40)
-                        .height(40)
-                        .url()}
-                    />
-                  )}
-                  <Text fontSize="md" textColor={'#6C6965'} textTransform={'capitalize'}>by {postData.author.name}</Text>
-                </HStack>
-              )}
-            </Flex>
-          </Box>
-
-          {heroImage && (
-            <Box
-              mb={12}
-              borderRadius="16px"
-              overflow="hidden"
-              boxShadow="0 20px 60px rgba(0, 0, 0, 0.15)"
-            >
-              <Image
-                src={heroImage.src}
-                alt={heroImage.alt}
-                style={{ objectFit: "cover" }}
-                width={1200}
-                height={630}
-              />
-            </Box>
-          )}
+          <PostHeader
+            title={postData.title}
+            author={postData.author}
+            publishedAt={postData.publishedAt}
+            readTimeMinutes={postData.readTimeMinutes}
+            tags={postData.tags}
+            image={postData.image}
+          />
 
           {postData.content && (
             <Box

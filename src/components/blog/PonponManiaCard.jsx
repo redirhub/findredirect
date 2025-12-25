@@ -1,22 +1,14 @@
-import { Box, Heading, Text, Link, Image, Flex } from "@chakra-ui/react";
+import { Box, Heading, Text, Image, Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FiArrowRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { urlFor } from "@/sanity/lib/image";
+import PostMetadata from "./PostMetadata";
 
 const MotionBox = motion(Box);
 
 export default function PonponManiaCard({ post, reverse = false }) {
   const router = useRouter();
-  const { title, excerpt, slug, publishedAt, image } = post;
-
-  const formattedDate = publishedAt
-    ? new Date(publishedAt).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-    : "";
+  const { title, excerpt, slug, publishedAt, image, author, tags } = post;
 
   const imageUrl = image
     ? urlFor(image).width(800).height(600).url()
@@ -24,13 +16,18 @@ export default function PonponManiaCard({ post, reverse = false }) {
 
   return (
     <Box
-      bg="#f5f5f5"
+      bg="linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)"
       display="flex"
       alignItems="center"
       justifyContent="center"
       paddingX={6}
       py={{ base: 12, lg: 20 }}
       my={4}
+      borderRadius="16px"
+      cursor="pointer"
+      onClick={() => router.push(`/blog/${slug.current}`)}
+      _hover={{ transform: "translateY(-2px)" }}
+      transition="all 0.3s ease"
     >
       <MotionBox
         initial={{ opacity: 0, y: 20 }}
@@ -45,18 +42,13 @@ export default function PonponManiaCard({ post, reverse = false }) {
           justify="space-evenly"
         >
           <Box flex="1">
-            <Text fontSize="sm" color="gray.600" mb={4} fontWeight="500">
-              {formattedDate}
-            </Text>
-
             <Heading
               as="h1"
-              fontSize={{ base: "2xl", md: "3xl", lg: "39px" }}
-              fontWeight="bold"
-              lineHeight="1.2"
-              mb={6}
+              fontSize={{ base: "24px", md: "28px", lg: "32px" }}
+              fontWeight="700"
+              lineHeight="1.3"
+              mb={5}
               color="gray.900"
-              noOfLines={2}
             >
               {title}
             </Heading>
@@ -65,58 +57,47 @@ export default function PonponManiaCard({ post, reverse = false }) {
               <Text
                 fontSize={{ base: "16px", lg: "20px" }}
                 color="gray.700"
-                mb={8}
+                mb={6}
                 lineHeight="1.6"
               >
                 {excerpt}
               </Text>
             )}
 
-            <MotionBox whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-              <Link
-                display="inline-flex"
-                alignItems="center"
-                gap={2}
-                fontSize="md"
-                fontWeight="600"
-                color="gray.900"
-                textDecoration="underline"
-                textUnderlineOffset="4px"
-                cursor="pointer"
-                onClick={() => router.push(`/blog/${slug.current}`)}
-                _hover={{ color: "#7D65DB" }}
-              >
-                <FiArrowRight />
-                Read Article
-              </Link>
-            </MotionBox>
+            <Box mb={6} position="relative" zIndex={10}>
+              <PostMetadata
+                publishedAt={publishedAt}
+                author={author}
+                tags={tags}
+                compact={false}
+                layout="horizontal"
+              />
+            </Box>
           </Box>
 
-          <MotionBox
+          <Box
             flex="1"
             position="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
           >
             <Box
               position="relative"
               borderRadius="16px"
               overflow="hidden"
-              boxShadow="0 20px 60px rgba(0, 0, 0, 0.15)"
-              cursor="pointer"
-              onClick={() => router.push(`/blog/${slug.current}`)}
+              boxShadow="0 30px 80px rgba(0, 0, 0, 0.2)"
+              paddingBottom="56.25%"
             >
               <Image
                 src={imageUrl}
                 alt={title}
+                position="absolute"
+                top="0"
+                left="0"
                 w="100%"
-                h="auto"
-                minH={'380px'}
-                maxH={'380px'}
+                h="100%"
                 objectFit="cover"
               />
             </Box>
-          </MotionBox>
+          </Box>
         </Flex>
       </MotionBox>
     </Box>

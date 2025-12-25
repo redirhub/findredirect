@@ -7,18 +7,9 @@ export const postType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'locale',
+      name: 'title',
       type: 'string',
-      title: 'Language',
-      description: 'Language of this document',
-      options: {
-        list: LANGUAGES.map(lang => ({
-          title: lang.nativeName || lang.title,
-          value: lang.id,
-        })),
-        layout: 'dropdown',
-      },
-      initialValue: defaultLocale,
+      title: 'Title',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -60,12 +51,6 @@ export const postType = defineType({
       description: 'DEPRECATED: No longer used. All translations now share the same slug.',
       readOnly: true,
       hidden: true,
-    }),
-    defineField({
-      name: 'title',
-      type: 'string',
-      title: 'Title',
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'excerpt',
@@ -146,6 +131,21 @@ export const postType = defineType({
         },
       ],
       validation: (rule) => rule.max(5),
+    }),
+    defineField({
+      name: 'locale',
+      type: 'string',
+      title: 'Language',
+      description: 'Language of this document',
+      options: {
+        list: LANGUAGES.map(lang => ({
+          title: lang.nativeName || lang.title,
+          value: lang.id,
+        })),
+        layout: 'dropdown',
+      },
+      initialValue: defaultLocale,
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'needsTranslation',

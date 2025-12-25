@@ -1,22 +1,14 @@
-import { Box, Heading, Text, Link, Image, Flex } from "@chakra-ui/react";
+import { Box, Heading, Text, Image, Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FiArrowRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { urlFor } from "@/sanity/lib/image";
+import PostMetadata from "./PostMetadata";
 
 const MotionBox = motion(Box);
 
 export default function PostCard({ post }) {
   const router = useRouter();
-  const { title, excerpt, slug, publishedAt, image } = post;
-
-  const formattedDate = publishedAt
-    ? new Date(publishedAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
-    : "";
+  const { title, excerpt, slug, publishedAt, image, author, tags } = post;
 
   const imageUrl = image
     ? urlFor(image).width(800).height(600).url()
@@ -35,6 +27,18 @@ export default function PostCard({ post }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         w="100%"
+        border="1px solid"
+        borderColor="transparent"
+        borderRadius="12px"
+        p={{ base: 4, md: 6 }}
+        cursor="pointer"
+        onClick={() => router.push(`/blog/${slug.current}`)}
+        _hover={{
+          borderColor: "purple.200",
+          transform: "translateY(-4px)",
+          boxShadow: "xl",
+        }}
+        sx={{ transition: "all 0.3s ease" }}
       >
         <Flex
           direction={{ base: "column" }}
@@ -42,57 +46,49 @@ export default function PostCard({ post }) {
           align={"start"}
         >
           <Box flex="1">
-            <Box alignSelf="flex-start">
-              <Text fontSize="sm" color="gray.600" mb={4} fontWeight="500">
-                {formattedDate}
-              </Text>
-
+            <Box alignSelf="flex-start" mb={4}>
               <Heading
                 as="h2"
-                fontSize={{ base: "22px", md: "26px", "2xl": "30px" }}
-                fontWeight="bold"
-                lineHeight="1.2"
-                mb={5}
+                fontSize={{ base: "18px", md: "20px", "2xl": "22px" }}
+                fontWeight="700"
+                lineHeight="1.3"
+                mb={4}
                 color="gray.900"
-                minH={{ base: "0px", md: "60px", xl: "68px" }}
-                noOfLines={2}
               >
                 {title}
               </Heading>
             </Box>
 
-            <MotionBox
+            <Box
               flex="1"
               position="relative"
               w="100%"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
             >
               <Box
                 position="relative"
                 borderRadius="12px"
                 overflow="hidden"
                 boxShadow="0 20px 60px rgba(0, 0, 0, 0.15)"
-                cursor="pointer"
-                onClick={() => router.push(`/blog/${slug.current}`)}
+                paddingBottom="56.25%"
               >
                 <Image
                   src={imageUrl}
                   alt={title}
+                  position="absolute"
+                  top="0"
+                  left="0"
                   w="100%"
-                  h="auto"
-                  minH={"290px"}
-                  maxH={"290px"}
+                  h="100%"
                   objectFit="cover"
                 />
               </Box>
-            </MotionBox>
+            </Box>
 
             {excerpt && (
               <Text
                 fontSize={{ base: "md", md: "lg" }}
                 color="gray.700"
-                mb={3}
+                mb={4}
                 noOfLines={3}
                 lineHeight="1.6"
                 pt={5}
@@ -101,30 +97,14 @@ export default function PostCard({ post }) {
               </Text>
             )}
 
-            <MotionBox
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2 }}
-              alignSelf="flex-end"
-            >
-              <Link
-                display="inline-flex"
-                alignItems="center"
-                gap={2}
-                fontSize="md"
-                fontWeight="600"
-                color="gray.900"
-                textDecoration="underline"
-                textUnderlineOffset="4px"
-                cursor="pointer"
-                onClick={() => router.push(`/blog/${slug.current}`)}
-                _hover={{
-                  color: "#7D65DB",
-                }}
-              >
-                <FiArrowRight />
-                Read Article
-              </Link>
-            </MotionBox>
+            <Box mb={4} position="relative" zIndex={10}>
+              <PostMetadata
+                publishedAt={publishedAt}
+                author={author}
+                tags={tags}
+                compact={true}
+              />
+            </Box>
           </Box>
         </Flex>
       </MotionBox>
