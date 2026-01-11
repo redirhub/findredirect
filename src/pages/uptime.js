@@ -8,8 +8,9 @@ import Uptime from "@/components/uptime/Uptime";
 import { APP_NAME } from "@/configs/constant";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { fetchToolPagesForFooter } from "@/services/toolPageService";
 
-export default function UptimePage() {
+export default function UptimePage({ toolPages = [] }) {
     const { t } = useTranslation();
     const router = useRouter();
     const { locale, asPath } = router;
@@ -21,7 +22,7 @@ export default function UptimePage() {
     const title = `${t('tool.uptime-title')} | ${APP_NAME}`;
 
     return (
-        <MainLayout>
+        <MainLayout toolPages={toolPages}>
             <Head>
                 <title>{title}</title>
                 <meta
@@ -56,9 +57,13 @@ export default function UptimePage() {
 }
 
 export async function getStaticProps({ locale }) {
+    const toolPages = await fetchToolPagesForFooter(locale);
+
     return {
         props: {
+            toolPages,
             ...(await serverSideTranslations(locale, ['common'])),
         },
+        revalidate: 3600, // Revalidate every hour to pick up new tool pages
     };
 }
