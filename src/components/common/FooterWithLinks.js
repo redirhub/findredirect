@@ -103,12 +103,6 @@ export default function FooterWithLinks({ toolPages = [], companyPages = [] }) {
                         <FooterLink href="/redirect">
                             {t('footer.redirect-checker', 'Redirect Checker')}
                         </FooterLink>
-                        <FooterLink href="/block">
-                            {t('footer.block-checker', 'Block Checker')}
-                        </FooterLink>
-                        <FooterLink href="/uptime">
-                            {t('footer.uptime-monitor', 'Uptime Monitor')}
-                        </FooterLink>
                         <FooterLink href="/expander">
                             {t('footer.url-expander', 'URL Expander')}
                         </FooterLink>
