@@ -25,6 +25,7 @@ export const pageType = defineType({
           const locale = document?.locale || 'en';
           const docId = document?._id || '';
 
+          // Handle both draft and published IDs
           const publishedId = docId.replace(/^drafts\./, '');
           const draftId = `drafts.${publishedId}`;
 
@@ -32,7 +33,7 @@ export const pageType = defineType({
 
           const query = `
             !defined(*[
-              _type == "toolPage" &&
+              _type == "page" &&
               slug.current == $slug &&
               locale == $locale &&
               !(_id in [$publishedId, $draftId])

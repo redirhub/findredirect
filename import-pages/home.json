@@ -1,0 +1,77 @@
+{
+  "_type": "page",
+  "title": "Free Redirect Checker & URL Tools",
+  "slug": {
+    "_type": "slug",
+    "current": "home"
+  },
+  "metaTitle": "Free Redirect Checker & URL Tools | RedirHub",
+  "metaDescription": "Professional redirect checker, URL expander, and domain monitoring tools. Check redirects, expand short URLs, and monitor uptime - all free and instant.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "Redirect Checker & URL Tools",
+  "heroDescription": "Check URL redirects, expand short links, and monitor domain accessibility - all in one place.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "http://google.com,http://twitter.com,https://github.com"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Professional URL Analysis Tools"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Our suite of free tools helps web developers, SEO professionals, and digital marketers analyze URLs, check redirects, and ensure website accessibility. All tools are instant, free, and require no registration."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "What tools are available?",
+      "answer": "We offer a redirect checker to analyze URL redirect chains, a short URL expander to reveal destinations behind shortened links, a domain block checker to verify China accessibility, and uptime monitoring for domain availability."
+    },
+    {
+      "_type": "object",
+      "question": "Are these tools really free?",
+      "answer": "Yes, all our tools are completely free to use with no registration required. You can check unlimited URLs and access all features at no cost."
+    },
+    {
+      "_type": "object",
+      "question": "Do I need to create an account?",
+      "answer": "No account or registration is needed. Simply enter your URL and get instant results. All tools work directly in your browser."
+    },
+    {
+      "_type": "object",
+      "question": "How do I check if my redirects are working correctly?",
+      "answer": "Use our redirect checker tool to analyze your URLs. It will show you the complete redirect chain, response times, status codes, and identify any issues like redirect loops or chains."
+    },
+    {
+      "_type": "object",
+      "question": "Can I check multiple URLs at once?",
+      "answer": "Yes, our bulk redirect checker allows you to analyze multiple URLs simultaneously, making it easy to audit entire websites or batches of links."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

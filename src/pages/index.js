@@ -2,9 +2,16 @@ import { INDEX_PAGE } from "@/configs/constant";
 import RedirectCheckPage from "./redirect";
 import UptimePage from "./uptime";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { fetchAllPagesForFooter } from "@/services/pageService";
+import { fetchAllPagesForFooter, fetchPageBySlug } from "@/services/pageService";
+import ToolPage from "./[tool]";
 
-const Home = ({ pages = [] }) => {
+const Home = ({ homeData, pages = [] }) => {
+  // If homepage exists in CMS with slug "home", use it
+  if (homeData) {
+    return <ToolPage toolData={homeData} pages={pages} />;
+  }
+
+  // Otherwise, fall back to INDEX_PAGE config
   switch (INDEX_PAGE) {
     case 'uptime':
       return <UptimePage pages={pages} />;
@@ -21,9 +28,11 @@ const Home = ({ pages = [] }) => {
 
 export async function getStaticProps({ locale }) {
   const pages = await fetchAllPagesForFooter(locale);
+  const homeData = await fetchPageBySlug('home', locale);
 
   return {
     props: {
+        homeData,
         pages,
         ...(await serverSideTranslations(locale, ['common'])),
     },

@@ -253,8 +253,8 @@ export async function getStaticPaths() {
   const tools = await fetchAllPageSlugs();
 
   // Get unique slugs (since we'll generate paths for all locales)
-  // Exclude 'redirect' since it has its own dedicated page file
-  const uniqueSlugs = [...new Set(tools.map(t => t.slug))].filter(slug => slug !== 'redirect');
+  // Exclude 'redirect' and 'home' since they have their own dedicated page files
+  const uniqueSlugs = [...new Set(tools.map(t => t.slug))].filter(slug => slug !== 'redirect' && slug !== 'home');
 
   // Generate paths for each slug in all locales
   const paths = uniqueSlugs.flatMap((slug) =>
