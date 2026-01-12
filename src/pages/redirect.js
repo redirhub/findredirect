@@ -21,6 +21,21 @@ const ICON_MAP = {
   FaExternalLinkAlt,
 };
 
+// Helper function to convert widgetConfig array to object
+function parseWidgetConfig(config) {
+  if (!config) return {};
+  if (Array.isArray(config)) {
+    return config.reduce((acc, item) => {
+      if (item.key && item.value !== undefined) {
+        acc[item.key] = item.value;
+      }
+      return acc;
+    }, {});
+  }
+  // Support old format (plain object)
+  return config;
+}
+
 export default function RedirectCheckPage({ toolData, pages = [] }) {
     const router = useRouter();
     const { locale, asPath } = router;
@@ -50,6 +65,9 @@ export default function RedirectCheckPage({ toolData, pages = [] }) {
     const pageTitle = toolData.metaTitle || `${toolData.title} | ${APP_NAME}`;
     const pageDescription = toolData.metaDescription || toolData.heroDescription;
     const faqData = toolData.faqs || [];
+
+    // Parse widgetConfig from array to object
+    const config = parseWidgetConfig(toolData.widgetConfig);
 
     return (
         <MainLayout pages={pages}>
@@ -104,8 +122,12 @@ export default function RedirectCheckPage({ toolData, pages = [] }) {
                     {/* Widget Section */}
                     <RedirectChecker
                         icon={IconComponent}
-                        buttonText={toolData.buttonText}
-                        examples={toolData.exampleUrls || []}
+                        buttonText={config.buttonText || toolData.buttonText}
+                        examples={
+                          typeof config.examples === 'string'
+                            ? config.examples.split(',').map(s => s.trim()).filter(Boolean)
+                            : config.examples || toolData.exampleUrls || []
+                        }
                     >
                         <Flex direction="column" align="center" textAlign="center">
                             <Box {...styles.checkPage.heroBox}>

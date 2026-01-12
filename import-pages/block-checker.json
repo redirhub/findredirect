@@ -53,5 +53,15 @@
     }
   ],
   "locale": "en",
-  "publishedAt": "2026-01-11T00:00:00.000Z"
+  "publishedAt": "2026-01-11T00:00:00.000Z",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check Domain"
+    },
+    {
+      "key": "examples",
+      "value": "example.com,test.com,sample.com"
+    }
+  ]
 }

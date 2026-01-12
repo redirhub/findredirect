@@ -425,5 +425,15 @@
   ],
   "locale": "en",
   "publishedAt": "2026-01-11T00:00:00.000Z",
-  "customStructuredData": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"SoftwareApplication\",\n  \"name\": \"301 Redirect Checker\",\n  \"applicationCategory\": \"DeveloperApplication\",\n  \"offers\": {\n    \"@type\": \"Offer\",\n    \"price\": \"0\",\n    \"priceCurrency\": \"USD\"\n  },\n  \"description\": \"Free online tool to check 301 permanent redirects, analyze redirect chains, and verify proper SEO implementation for website migrations.\",\n  \"operatingSystem\": \"Any\",\n  \"permissions\": \"No installation required\",\n  \"author\": {\n    \"@type\": \"Organization\",\n    \"name\": \"RedirHub\"\n  }\n}"
+  "customStructuredData": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"SoftwareApplication\",\n  \"name\": \"301 Redirect Checker\",\n  \"applicationCategory\": \"DeveloperApplication\",\n  \"offers\": {\n    \"@type\": \"Offer\",\n    \"price\": \"0\",\n    \"priceCurrency\": \"USD\"\n  },\n  \"description\": \"Free online tool to check 301 permanent redirects, analyze redirect chains, and verify proper SEO implementation for website migrations.\",\n  \"operatingSystem\": \"Any\",\n  \"permissions\": \"No installation required\",\n  \"author\": {\n    \"@type\": \"Organization\",\n    \"name\": \"RedirHub\"\n  }\n}",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check 301 Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://www.google.com,https://github.com,https://stackoverflow.com"
+    }
+  ]
 }

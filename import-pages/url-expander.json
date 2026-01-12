@@ -73,5 +73,15 @@
     }
   ],
   "locale": "en",
-  "publishedAt": "2026-01-11T00:00:00.000Z"
+  "publishedAt": "2026-01-11T00:00:00.000Z",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Expand Short URLs"
+    },
+    {
+      "key": "examples",
+      "value": "http://bit.ly/try,https://rbnd.ly/booked,https://t.co/example"
+    }
+  ]
 }

@@ -73,5 +73,15 @@
     }
   ],
   "locale": "en",
-  "publishedAt": "2026-01-11T00:00:00.000Z"
+  "publishedAt": "2026-01-11T00:00:00.000Z",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "http://google.com,http://twitter.com,https://github.com"
+    }
+  ]
 }

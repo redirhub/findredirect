@@ -112,21 +112,42 @@ export const pageType = defineType({
       hidden: ({ document }) => document?.widget === 'none',
     }),
     defineField({
-      name: 'buttonText',
-      type: 'string',
-      title: 'Button Text',
-      description: 'Text for the main action button - Only for tool pages',
-      initialValue: 'Check Now',
-      hidden: ({ document }) => document?.widget === 'none',
-    }),
-    defineField({
-      name: 'exampleUrls',
+      name: 'widgetConfig',
       type: 'array',
-      title: 'Example URLs',
-      description: 'Example URLs to show in the widget (2-3 recommended) - Only for tool pages',
-      of: [{ type: 'string' }],
-      validation: (rule) => rule.max(3),
+      title: 'Widget Configuration',
+      description: 'Key-value configuration for the widget (e.g., key: "buttonText", value: "Check Now" or key: "examples", value: "url1,url2,url3")',
       hidden: ({ document }) => document?.widget === 'none',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'key',
+              type: 'string',
+              title: 'Key',
+              description: 'Configuration key (e.g., buttonText, examples, placeholder)',
+              validation: (rule) => rule.required(),
+            },
+            {
+              name: 'value',
+              type: 'text',
+              title: 'Value',
+              description: 'Configuration value (use comma-separated for lists)',
+              rows: 2,
+              validation: (rule) => rule.required(),
+            },
+          ],
+          preview: {
+            select: { key: 'key', value: 'value' },
+            prepare({ key, value }) {
+              return {
+                title: key,
+                subtitle: value?.length > 60 ? value.substring(0, 60) + '...' : value
+              }
+            },
+          },
+        },
+      ],
     }),
     defineField({
       name: 'contentBeforeWidget',

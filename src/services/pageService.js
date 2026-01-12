@@ -54,6 +54,7 @@ export async function fetchPageBySlug(slug, locale = 'en') {
       heroIcon,
       heroHeading,
       heroDescription,
+      widgetConfig,
       buttonText,
       exampleUrls,
       contentBeforeWidget,
@@ -64,11 +65,11 @@ export async function fetchPageBySlug(slug, locale = 'en') {
       customStructuredData
     }`;
 
-    let toolPage = await client.fetch(query, { slug, locale });
+    let page = await client.fetch(query, { slug, locale });
 
     // Fallback to English if not found in current locale
     if (!page && locale !== 'en') {
-      toolPage = await client.fetch(query, { slug, locale: 'en' });
+      page = await client.fetch(query, { slug, locale: 'en' });
     }
 
     return page;
