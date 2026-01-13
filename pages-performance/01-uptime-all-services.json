@@ -1,0 +1,254 @@
+{
+  "_type": "page",
+  "title": "Link Shortener Uptime Comparison",
+  "slug": {
+    "current": "shortener-uptime"
+  },
+  "metaTitle": "Link Shortener Uptime Comparison: 5 Services Tested 24/7 | 2026",
+  "metaDescription": "Real-time uptime and performance monitoring for RedirHub, Bitly, Rebrandly, EasyRedir, and Redirect Pizza. Compare response times, reliability, and service quality across top redirect services.",
+  "category": "tools",
+  "widget": "uptime",
+  "locale": "en",
+  "heroIcon": "FaCheckCircle",
+  "heroHeading": "Link Shortener Uptime & Performance Monitoring",
+  "heroDescription": "Compare real-time uptime statistics and response times across 5 leading redirect services",
+  "widgetConfig": [
+    {
+      "key": "showDataSources",
+      "value": "true"
+    },
+    {
+      "key": "ctaUrl",
+      "value": "https://www.redirhub.com"
+    },
+    {
+      "key": "ctaText",
+      "value": "Try RedirHub - 99.9% Uptime Guarantee"
+    },
+    {
+      "key": "services",
+      "value": "yy6y,ps0k,peet,1z19,nwxh"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why Uptime Matters for Link Shorteners",
+          "marks": ["strong"]
+        }
+      ],
+      "style": "h2"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "When choosing a redirect service for your business, uptime and performance are critical factors. A single minute of downtime can mean:"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Lost traffic and potential customers"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Broken marketing campaigns and social media links"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Damaged brand reputation and customer trust"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "SEO penalties from search engines"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "How We Monitor Service Performance",
+          "marks": ["strong"]
+        }
+      ],
+      "style": "h2"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Our uptime monitoring system checks these services every 5 minutes from multiple global locations. We measure:"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Response Time: How quickly the service redirects users"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Uptime Percentage: Service availability over the last 24 hours"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Last Check: Most recent status verification"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Compare Individual Services",
+          "marks": ["strong"]
+        }
+      ],
+      "style": "h2"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Want to dive deeper into specific services? Check out our detailed performance analysis for "
+        },
+        {
+          "_type": "span",
+          "text": "RedirHub",
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/redirhub-performance"
+            }
+          ]
+        },
+        {
+          "_type": "span",
+          "text": ", "
+        },
+        {
+          "_type": "span",
+          "text": "Bitly",
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/bitly-performance"
+            }
+          ]
+        },
+        {
+          "_type": "span",
+          "text": ", or compare services head-to-head with our "
+        },
+        {
+          "_type": "span",
+          "text": "Bitly vs Rebrandly comparison",
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/bitly-vs-rebrandly"
+            }
+          ]
+        },
+        {
+          "_type": "span",
+          "text": ". You can also see our "
+        },
+        {
+          "_type": "span",
+          "text": "top 3 link shorteners ranking",
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/top-link-shorteners"
+            }
+          ]
+        },
+        {
+          "_type": "span",
+          "text": "."
+        }
+      ],
+      "style": "normal"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How often is this uptime data updated?",
+      "answer": "Our monitoring system checks each service every 5 minutes and the dashboard updates hourly with the latest statistics."
+    },
+    {
+      "question": "What does the 'Fastest' badge mean?",
+      "answer": "The fastest badge indicates which service had the lowest average response time in the last 24 hours."
+    },
+    {
+      "question": "Why is uptime important for redirect services?",
+      "answer": "High uptime ensures your shortened links always work. Even brief downtime can break marketing campaigns, social media links, and hurt your brand reputation."
+    },
+    {
+      "question": "How do these services compare in terms of reliability?",
+      "answer": "All services monitored maintain high uptime percentages above 99%. Check the live data above for current performance metrics."
+    },
+    {
+      "question": "What happens if a redirect service goes down?",
+      "answer": "If your redirect service is down, all shortened links will fail to redirect, resulting in broken links for your users. This is why choosing a reliable service with high uptime is crucial."
+    }
+  ]
+}

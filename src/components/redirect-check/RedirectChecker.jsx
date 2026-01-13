@@ -23,7 +23,7 @@ import { checkRedirects } from "./redirectUtils.jsx";
 import { useDevice } from "@/hooks/useDevice";
 import { useTranslation } from "next-i18next";
 
-export default function RedirectChecker({children, icon, buttonText, examples}) {
+export default function RedirectChecker({children, icon, ...config}) {
   const {t} = useTranslation();
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,15 @@ export default function RedirectChecker({children, icon, buttonText, examples}) 
   const router = useRouter();
   const [urls, setUrls] = useState('');
   const { isMobile } = useDevice();
-  const placeholder = t('tool.redirect-placeholder', "Enter URLs (one per line) e.g., ")  + examples[0];
+
+  const { examples, buttonText } = config;
+
+  // Process examples: handle string format from widgetConfig or use array
+  const processedExamples = typeof examples === 'string'
+    ? examples.split(',').map(s => s.trim()).filter(Boolean)
+    : examples || [];
+
+  const placeholder = t('tool.redirect-placeholder', "Enter URLs (one per line) e.g., ")  + (processedExamples[0] || '');
 
   const { bgColor, borderColor } = useColorModeValue(
     { bgColor: "white", borderColor: "gray.200"  },

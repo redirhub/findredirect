@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { useRef } from "react";
 import {
   Box,
   Container,
@@ -20,6 +21,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import AuthorBox from "@/components/blog/AuthorBox";
 import RelatedArticles from "@/components/blog/RelatedArticles";
 import FAQSection from "@/components/common/FAQSection";
+import { createPortableTextComponents } from "@/components/common/PortableTextComponents";
 import { fetchAllPagesForFooter } from "@/services/pageService";
 
 const WORDS_PER_MINUTE = 200;
@@ -46,6 +48,7 @@ const calculateReadTimeMinutes = (content) => {
 export default function PostPage({ postData, pages = [] }) {
   const router = useRouter();
   const { asPath } = router;
+  const currentHeadingIndexRef = useRef(-1);
 
   if (!postData) {
     return (
@@ -148,75 +151,12 @@ export default function PostPage({ postData, pages = [] }) {
       }
       : null;
 
-  let currentHeadingIndex = -1;
-
-  const portableComponents = {
-    types: {
-      image: ({ value }) => {
-        const src = value?.asset
-          ? urlFor(value).width(1200).fit("max").url()
-          : value?.url;
-
-        if (!src) return null;
-
-        return (
-          <Box my={6} textAlign="center">
-            <ChakraImage
-              src={src}
-              alt={value?.alt || postData.title}
-              mx="auto"
-              maxH="640px"
-              maxWidth={'800px'}
-              w="100%"
-              objectFit="contain"
-              loading="lazy"
-            />
-            {value?.caption && (
-              <Text mt={2} fontSize="sm" color="gray.500">
-                {value.caption}
-              </Text>
-            )}
-          </Box>
-        );
-      },
-    },
-    block: {
-      h2: ({ children }) => {
-        currentHeadingIndex++;
-        return (
-          <Heading
-            as="h2"
-            id={`heading-${currentHeadingIndex}`}
-            fontSize={{ base: "2xl", md: "3xl" }}
-            fontWeight="bold"
-            mt={10}
-            mb={4}
-            color="gray.900"
-            scrollMarginTop="100px"
-          >
-            {children}
-          </Heading>
-        );
-      },
-      h3: ({ children }) => {
-        currentHeadingIndex++;
-        return (
-          <Heading
-            as="h3"
-            id={`heading-${currentHeadingIndex}`}
-            fontSize={{ base: "xl", md: "2xl" }}
-            fontWeight="bold"
-            mt={6}
-            mb={3}
-            color="gray.900"
-            scrollMarginTop="100px"
-          >
-            {children}
-          </Heading>
-        );
-      },
-    },
-  };
+  // Create PortableText components with heading IDs for table of contents
+  const portableComponents = createPortableTextComponents({
+    postData,
+    enableHeadings: true,
+    currentHeadingIndexRef,
+  });
 
   return (
     <MainLayout pages={pages}>

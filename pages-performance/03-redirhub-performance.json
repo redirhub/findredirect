@@ -1,0 +1,218 @@
+{
+  "_type": "page",
+  "title": "RedirHub Uptime & Performance Monitoring",
+  "slug": {
+    "current": "redirhub-performance"
+  },
+  "metaTitle": "RedirHub Uptime Monitor: Live Performance Stats 2026",
+  "metaDescription": "Track RedirHub's real-time uptime, response times, and reliability. Live performance monitoring updated every 5 minutes with 24-hour statistics and global data.",
+  "category": "tools",
+  "widget": "uptime",
+  "locale": "en",
+  "heroIcon": "FaRocket",
+  "heroHeading": "RedirHub Performance Monitor",
+  "heroDescription": "Real-time uptime and performance statistics for RedirHub redirect service",
+  "widgetConfig": [
+    {
+      "key": "showDataSources",
+      "value": "true"
+    },
+    {
+      "key": "ctaUrl",
+      "value": "https://www.redirhub.com/"
+    },
+    {
+      "key": "ctaText",
+      "value": "Start Free Trial - 99.9% Uptime SLA"
+    },
+    {
+      "key": "services",
+      "value": "yy6y"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why Choose RedirHub?",
+          "marks": ["strong"]
+        }
+      ],
+      "style": "h2"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "RedirHub is built for reliability and speed. Our infrastructure is designed to handle millions of redirects with consistently low latency and high uptime."
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Key Features",
+          "marks": ["strong"]
+        }
+      ],
+      "style": "h3"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "99.9% uptime SLA guarantee"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Global CDN for fast redirects worldwide"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Real-time analytics and monitoring"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Custom branded domains included"
+        }
+      ],
+      "listItem": "bullet",
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Performance at Scale",
+          "marks": ["strong"]
+        }
+      ],
+      "style": "h2"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "RedirHub is engineered to maintain consistent performance even under high traffic loads. Our global infrastructure ensures fast redirects for users worldwide, with response times typically under 50ms."
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Compare RedirHub Performance",
+          "marks": ["strong"]
+        }
+      ],
+      "style": "h2"
+    },
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "See how RedirHub stacks up against the competition. Check our "
+        },
+        {
+          "_type": "span",
+          "text": "complete uptime comparison",
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/uptime"
+            }
+          ]
+        },
+        {
+          "_type": "span",
+          "text": " of all services, or compare against "
+        },
+        {
+          "_type": "span",
+          "text": "Bitly",
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/bitly-performance"
+            }
+          ]
+        },
+        {
+          "_type": "span",
+          "text": " specifically. You can also view our "
+        },
+        {
+          "_type": "span",
+          "text": "top link shorteners ranking",
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/top-link-shorteners"
+            }
+          ]
+        },
+        {
+          "_type": "span",
+          "text": " to see how we compare."
+        }
+      ],
+      "style": "normal"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is RedirHub's uptime guarantee?",
+      "answer": "RedirHub offers a 99.9% uptime SLA, backed by our Service Level Agreement. This means less than 8.76 hours of downtime per year."
+    },
+    {
+      "question": "How fast are RedirHub's redirects?",
+      "answer": "RedirHub typically achieves response times under 50ms globally thanks to our distributed CDN infrastructure. Check the live monitoring data above for current performance."
+    },
+    {
+      "question": "Where is RedirHub hosted?",
+      "answer": "RedirHub uses a global CDN with servers in multiple regions worldwide, ensuring fast performance regardless of user location."
+    },
+    {
+      "question": "Does RedirHub support custom domains?",
+      "answer": "Yes, RedirHub includes custom branded domain support in all plans, allowing you to use your own domain for shortened links."
+    },
+    {
+      "question": "How can I monitor my RedirHub performance?",
+      "answer": "In addition to this public monitoring page, RedirHub customers get access to a private dashboard with detailed analytics and uptime statistics."
+    }
+  ]
+}

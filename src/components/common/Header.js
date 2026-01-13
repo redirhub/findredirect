@@ -1,16 +1,15 @@
 import { Box, Flex, Button, useColorModeValue, Stack, useColorMode, Image, IconButton, useDisclosure } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
-import { APP_LOGO, APP_LOGO_DARK, APP_NAME, HIDE_NAV, INDEX_PAGE, LOCALE, NAVS } from "@/configs/constant";
+import { APP_LOGO, APP_LOGO_DARK, APP_NAME, LOCALE } from "@/configs/constant";
 import { FaSun, FaMoon, FaHome, FaCheckCircle, FaBlog, FaBars, FaRocket, FaExpand } from "react-icons/fa";
 import NavLink from "./NavLink";
 import MobileDrawer from "./MobileDrawer";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
-import { LanguageMenu } from "./LanguageMenu";
 import { useTranslation } from "next-i18next";
 
 function navUrl(page, locale) {
-    if (INDEX_PAGE === page || page === 'home') {
+    if (page === 'home') {
         return locale !== LOCALE ? `/${locale}` : '/';
     }
     return locale !== LOCALE ? `/${locale}/${page}` : `/${page}`;
@@ -28,19 +27,13 @@ export default function Header() {
         const links = [
             { id: 'home', icon: <FaHome />, label: "Home" },
             { id: 'uptime', icon: <FaRocket />, label: "Uptime" },
-            { id: 'redirect', icon: <FaCheckCircle />, label: "Redirect Check" },
             { id: 'expander', icon: <FaExpand />, label: "URL Expander" },
             { id: 'blog', icon: <FaBlog />, label: "Blog" },
         ];
-        if (!NAVS) {
-            return links;
-        }
-        const navs = JSON.parse(NAVS);
-        return links.filter((link) => navs.includes(link.id));
+        return links;
     }, []);
 
-    // put the item id = INDEX_PAGE to the first item
-    const navItems = navsInUse.filter((link) => link.id !== INDEX_PAGE).map((link) => ({
+    const navItems = navsInUse.map((link) => ({
         id: link.id,
         href: navUrl(link.id, locale),
         icon: link.icon,
@@ -52,9 +45,9 @@ export default function Header() {
             <Flex h={16} alignItems={"center"} justifyContent={"space-between"} maxW="container.xl" mx="auto">
                 <Logo locale={locale} />
                 <Flex alignItems={"center"}>
-                    {!HIDE_NAV && <DesktopNav navItems={navItems} />}
+                    <DesktopNav navItems={navItems} />
                     <ColorModeToggle colorMode={colorMode} toggleColorMode={toggleColorMode} />
-                    {!HIDE_NAV && <MobileMenuButton onOpen={onOpen} />}
+                    <MobileMenuButton onOpen={onOpen} />
                 </Flex>
             </Flex>
             <MobileDrawer isOpen={isOpen} onClose={onClose} navItems={navItems} />
@@ -82,7 +75,6 @@ const DesktopNav = ({ navItems }) => (
                 {item.label}
             </NavLink>
         ))}
-        <LanguageMenu />
     </Stack>
 );
 

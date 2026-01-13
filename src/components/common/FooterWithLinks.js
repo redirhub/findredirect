@@ -12,6 +12,7 @@ import {
 import { FaTwitter, FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa";
 import NextLink from "next/link";
 import { useTranslation } from "next-i18next";
+import { LanguageMenu } from "./LanguageMenu";
 
 const SocialButton = ({ children, label, href }) => {
     return (
@@ -220,6 +221,7 @@ export default function FooterWithLinks({ pages = [] }) {
                     <Text fontSize="sm" textAlign={{ base: "center", md: "left" }}>
                         © {new Date().getFullYear()} {APP_NAME}. {t('footer.rights', 'All rights reserved')}
                     </Text>
+                    <LanguageMenu />
                     <Stack direction={"row"} spacing={{ base: 4, md: 6 }}>
                         {X_URL && (
                             <SocialButton label={"Twitter"} href={X_URL}>

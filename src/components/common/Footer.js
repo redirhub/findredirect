@@ -1,6 +1,7 @@
 import { APP_NAME, GITHUB_URL, LINKEDIN_URL, TELEGRAM_URL, X_URL } from "@/configs/constant";
 import { Box, Container, Stack, Text, Link, useColorModeValue } from "@chakra-ui/react";
 import { FaTwitter, FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa";
+import { LanguageMenu } from "./LanguageMenu";
 
 const SocialButton = ({ children, label, href }) => {
     return (
@@ -36,16 +37,17 @@ export default function Footer() {
             <Container
                 as={Stack}
                 maxW={"6xl"}
-                mt={8} // Reduced top margin
-                py={6} // Increased vertical padding
+                mt={8}
+                py={6}
                 direction={{ base: "column", md: "row" }}
-                spacing={{ base: 6, md: 4 }} // Increased spacing for mobile
+                spacing={{ base: 6, md: 4 }}
                 justify={{ base: "center", md: "space-between" }}
                 align={{ base: "center", md: "center" }}
             >
                 <Text textAlign={{ base: "center", md: "left" }}>
                     © {new Date().getFullYear()} {APP_NAME}. All rights reserved
                 </Text>
+                <LanguageMenu />
                 <Stack direction={"row"} spacing={{ base: 4, md: 6 }}>
                     {X_URL && (
                         <SocialButton label={"Twitter"} href={X_URL}>

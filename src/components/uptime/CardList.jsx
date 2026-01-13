@@ -11,21 +11,21 @@ const findFastestSite = (sitesData) => {
   }, null);
 };
 
-export default function CardList({ sitesData = [] }) {
+export default function CardList({ sitesData = [], isLoading = false }) {
   const fastestSite = findFastestSite(sitesData);
 
   return (
     <Stack spacing={4} mx="auto">
-      {sitesData?.length > 0 ? (
+      {isLoading || sitesData?.length === 0 ? (
+        <CardListSkeleton />
+      ) : (
         sitesData.map((site) => (
           <SiteCard
-            key={`${site[0].token}-${site[0].url}`} 
-            site={site} 
+            key={`${site[0].token}-${site[0].url}`}
+            site={site}
             isFastest={site[0].token === fastestSite?.[0].token}
           />
         ))
-      ) : (
-        <CardListSkeleton />
       )}
     </Stack>
   );

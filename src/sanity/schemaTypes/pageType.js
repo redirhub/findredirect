@@ -84,6 +84,7 @@ export const pageType = defineType({
         list: [
           { title: 'Redirect Checker', value: 'redirect' },
           { title: 'Block Checker', value: 'block' },
+          { title: 'Uptime Comparison', value: 'uptime' },
           { title: 'None (Content Page)', value: 'none' },
         ],
         layout: 'radio',
@@ -116,7 +117,9 @@ export const pageType = defineType({
       name: 'widgetConfig',
       type: 'array',
       title: 'Widget Configuration',
-      description: 'Key-value configuration for the widget (e.g., key: "buttonText", value: "Check Now" or key: "examples", value: "url1,url2,url3")',
+      description: 'Key-value configuration for the widget. Examples:\n' +
+        '• Redirect/Block: key="buttonText", value="Check Now" | key="examples", value="url1,url2,url3"\n' +
+        '• Uptime: key="services", value="yy6y,ps0k,peet" (empty=all) | key="showDataSources", value="true" | key="ctaUrl", value="https://..." | key="ctaText", value="Get Started"',
       hidden: ({ document }) => document?.widget === 'none',
       of: [
         {
