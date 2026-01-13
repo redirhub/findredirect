@@ -1,0 +1,198 @@
+{
+  "_type": "page",
+  "title": "Privacy Policy",
+  "slug": {
+    "_type": "slug",
+    "current": "privacy"
+  },
+  "metaTitle": "Privacy Policy | FindRedirect",
+  "metaDescription": "Learn how FindRedirect collects, uses, and protects your personal information.",
+  "category": "company",
+  "widget": "none",
+  "contentBeforeWidget": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Last updated: January 11, 2026"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "This Privacy Policy describes how FindRedirect collects, uses, and shares your personal information when you use our website and services."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Information We Collect"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "We collect information that you provide directly to us, including:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "URLs you submit for redirect checking"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Usage data and analytics"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Device and browser information"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "How We Use Your Information"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "We use the information we collect to:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Provide and improve our redirect checking services"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Analyze usage patterns and optimize performance"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Prevent abuse and ensure security"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Data Security"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Your Rights"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "You have the right to access, correct, or delete your personal information. To exercise these rights, please contact us at privacy@findredirect.com."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Changes to This Policy"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last updated\" date."
+        }
+      ]
+    }
+  ],
+  "contentAfterWidget": [],
+  "faqs": [],
+  "locale": "en",
+  "publishedAt": "2026-01-11T00:00:00.000Z"
+}

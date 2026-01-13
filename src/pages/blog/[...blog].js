@@ -10,11 +10,6 @@ import {
   Divider,
   Flex,
   Image as ChakraImage,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
 } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { urlFor } from "@/sanity/lib/image";
@@ -24,6 +19,8 @@ import PostHeader from "@/components/blog/PostHeader";
 import TableOfContents from "@/components/blog/TableOfContents";
 import AuthorBox from "@/components/blog/AuthorBox";
 import RelatedArticles from "@/components/blog/RelatedArticles";
+import FAQSection from "@/components/common/FAQSection";
+import { fetchAllPagesForFooter } from "@/services/pageService";
 
 const WORDS_PER_MINUTE = 200;
 
@@ -46,13 +43,13 @@ const calculateReadTimeMinutes = (content) => {
   return Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
 };
 
-export default function PostPage({ postData }) {
+export default function PostPage({ postData, pages = [] }) {
   const router = useRouter();
   const { asPath } = router;
 
   if (!postData) {
     return (
-      <MainLayout>
+      <MainLayout pages={pages}>
         <Head>
           <title>{`Post Not Found | ${APP_NAME}`}</title>
         </Head>
@@ -222,7 +219,7 @@ export default function PostPage({ postData }) {
   };
 
   return (
-    <MainLayout>
+    <MainLayout pages={pages}>
       <Head>
         <title>{title}</title>
         <meta name="title" content={title} />
@@ -372,76 +369,12 @@ export default function PostPage({ postData }) {
                   {postData.faqs && postData.faqs.length > 0 && (
                     <Box as="section" mt={10}>
                       <Divider mb={6} />
-                      <Heading
-                        as="h2"
-                        fontSize={{ base: "2xl", md: "3xl" }}
-                        fontWeight="bold"
-                        my={8}
-                        color="gray.900"
-                      >
-                        Frequently Asked Questions
-                      </Heading>
-                      <Accordion allowMultiple allowToggle>
-                        {postData.faqs.map((faq, index) => (
-                          <AccordionItem
-                            key={index}
-                            border="1px solid"
-                            borderColor="gray.200"
-                            borderRadius="2xl"
-                            mb={4}
-                            overflow="hidden"
-                            transition="all 0.3s ease"
-                            _hover={{
-                              boxShadow: "md",
-                              borderColor: "#7D65DB",
-                            }}
-                          >
-                            <AccordionButton
-                              py={4}
-                              px={6}
-                              _hover={{
-                                bg: "purple.50",
-                              }}
-                              borderTopRadius="2xl"
-                              borderTop={"2px solid #7D65DB"}
-                              _expanded={{
-                                bg: "#7D65DB",
-                                color: "white",
-                              }}
-                              transition="all 0.2s"
-                            >
-                              <Box
-                                flex="1"
-                                textAlign="left"
-                                fontSize={{ base: "lg", md: "xl" }}
-                                fontWeight="semibold"
-                              >
-                                {faq.question}
-                              </Box>
-                              <AccordionIcon
-                                fontSize="24px"
-                                transition="transform 0.2s ease"
-                              />
-                            </AccordionButton>
-                            <AccordionPanel
-                              pb={6}
-                              pt={4}
-                              px={6}
-                              bg="gray.50"
-                              borderTop="1px solid"
-                              borderColor="gray.200"
-                            >
-                              <Text
-                                fontSize={{ base: "md", md: "lg" }}
-                                color="gray.700"
-                                lineHeight="1.7"
-                              >
-                                {faq.answer}
-                              </Text>
-                            </AccordionPanel>
-                          </AccordionItem>
-                        ))}
-                      </Accordion>
+                      <FAQSection
+                        data={postData.faqs}
+                        title="Frequently Asked Questions"
+                        showContactButton={false}
+                        accentColor="#7D65DB"
+                      />
                     </Box>
                   )}
 
@@ -589,6 +522,8 @@ export async function getStaticProps({ params, locale }) {
         })
       : [];
 
+    const pages = await fetchAllPagesForFooter(locale || 'en');
+
     return {
       props: {
         postData: {
@@ -597,6 +532,7 @@ export async function getStaticProps({ params, locale }) {
           readTimeMinutes,
           relatedPosts: relatedPosts || [],
         },
+        pages,
         ...(await serverSideTranslations(locale, ["common"])),
       },
       revalidate: 60,

@@ -1,0 +1,670 @@
+{
+  "_type": "page",
+  "title": "Bulk Short URL Expander",
+  "slug": {
+    "_type": "slug",
+    "current": "expander"
+  },
+  "metaTitle": "Free Bulk Short URL Expander | Reveal Full Links Safely",
+  "metaDescription": "Expand shortened URLs in bulk to reveal destinations before clicking. Check bit.ly, TinyURL, and all URL shorteners. Protect against phishing and malware with our free URL expander.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaExternalLinkAlt",
+  "heroHeading": "Bulk Short URL Expander",
+  "heroDescription": "Expand shortened URLs in bulk to safely reveal their full destinations before clicking. Check bit.ly, TinyURL, t.co, and all shorteners.",
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What is a Short URL Expander?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "A short URL expander reveals the full destination URL hidden behind shortened links from services like bit.ly, TinyURL, ow.ly, and t.co. Before clicking a shortened link, expand it to see where it really leads, protecting yourself from phishing scams, malware, and malicious websites."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why Expand Shortened URLs?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Security & Safety"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shortened URLs hide the destination, making them perfect for phishing attacks and malware distribution. Attackers use legitimate shorteners like bit.ly to mask malicious links. Our expander reveals the true destination, helping you:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Avoid phishing scams disguised as legitimate links"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Identify malware and ransomware distribution links"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Verify links before clicking in emails or messages"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Protect your privacy from tracking and data collection"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Transparency & Trust"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Know where you're going before clicking. Short URLs in emails, social media, or SMS messages could lead anywhere. Expanding shows:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Actual domain and website destination"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Affiliate tracking parameters and referral codes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Complete redirect chain through multiple shorteners"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "UTM parameters and tracking codes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Supported URL Shorteners"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Our tool expands URLs from all major shortening services:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "bit.ly / Bitly - Most popular URL shortener"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "TinyURL - Classic URL shortener"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "t.co - Twitter/X URL shortener"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "ow.ly - Hootsuite URL shortener"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "goo.gl - Google URL shortener (legacy)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "rebrand.ly - Custom branded short links"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "is.gd, buff.ly, snip.ly - Other popular services"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Custom short domains - Any URL shortener"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Bulk URL Expansion"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Expand multiple shortened URLs simultaneously. Perfect for:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Email Campaigns: Verify all links before sending"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Social Media: Check competitor shortened links"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Security Audits: Scan suspicious messages for phishing"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Link Management: Audit your own shortened URLs"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Common Phishing Tactics"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Attackers commonly use URL shorteners to hide malicious destinations:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Fake Banking Sites: bit.ly/yourbank → phishing-site.com"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Package Delivery Scams: Short link → fake tracking page"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Prize/Survey Scams: \"Click to claim\" → malware site"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Login Credential Theft: Fake social media or email logins"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "How URL Expansion Works"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Our tool sends a HEAD request to the shortened URL, following all "
+        },
+        {
+          "_type": "span",
+          "text": "redirects",
+          "marks": ["link"],
+          "url": "/redirect"
+        },
+        {
+          "_type": "span",
+          "text": " without downloading page content. This reveals:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Full destination URL"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "All intermediate redirects in the chain"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "HTTP status codes ("
+        },
+        {
+          "_type": "span",
+          "text": "301",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ", "
+        },
+        {
+          "_type": "span",
+          "text": "302",
+          "marks": ["link"],
+          "url": "/302-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ", etc.)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Response times and performance"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use Cases"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Email Security"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Before clicking links in emails from unknown senders, expand them to verify the destination. Common email scams use shortened URLs to bypass spam filters and hide malicious domains."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Social Media Safety"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Twitter, Facebook, and Instagram posts often contain shortened URLs. Expand them to see if they lead to legitimate content or spam/scam sites."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Marketing Analysis"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Analyze competitor campaigns by expanding their short links to reveal landing pages, tracking parameters, and affiliate codes."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Related Security Tools"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Checker",
+          "marks": ["link"],
+          "url": "/redirect"
+        },
+        {
+          "_type": "span",
+          "text": ": Analyze redirect chains for any URL"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Domain Block Checker",
+          "marks": ["link"],
+          "url": "/block"
+        },
+        {
+          "_type": "span",
+          "text": ": Verify if domains are accessible or blocked"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Link Monitoring",
+          "marks": ["link"],
+          "url": "/link-monitoring-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Continuous monitoring of URL redirects"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "How do I expand a shortened URL without clicking it?",
+      "answer": "Paste the shortened URL into our expander tool and click the expand button. Our tool sends a HEAD request to follow the redirects without actually loading the page content, revealing the full destination URL safely. This allows you to see where the link leads without visiting potentially malicious websites."
+    },
+    {
+      "_type": "object",
+      "question": "Can shortened URLs contain viruses or malware?",
+      "answer": "The shortened URL itself doesn't contain malware, but it can hide a link to a malicious website that distributes viruses, ransomware, or malware. Attackers use legitimate shorteners like bit.ly to mask dangerous destinations. Always expand shortened URLs before clicking, especially from unknown sources."
+    },
+    {
+      "_type": "object",
+      "question": "Why do scammers use URL shorteners?",
+      "answer": "URL shorteners hide the true destination, making it easier to trick victims into clicking malicious links. A shortened link looks innocent (bit.ly/abc123) while hiding a phishing or malware site. Shorteners also bypass some email spam filters and make links appear more legitimate in messages."
+    },
+    {
+      "_type": "object",
+      "question": "What URL shorteners does this tool support?",
+      "answer": "Our tool supports all major URL shorteners including bit.ly/Bitly, TinyURL, t.co (Twitter/X), ow.ly (Hootsuite), goo.gl (Google legacy), rebrand.ly, is.gd, buff.ly, snip.ly, and any custom short domain. It works with any service that uses HTTP redirects to forward users."
+    },
+    {
+      "_type": "object",
+      "question": "Can I expand multiple short URLs at once?",
+      "answer": "Yes, our bulk expander lets you paste multiple shortened URLs (one per line) and expand them all simultaneously. This is useful for checking multiple links in emails, social media posts, or marketing campaigns. Bulk expansion saves time and helps identify patterns in suspicious links."
+    },
+    {
+      "_type": "object",
+      "question": "Does expanding a short URL visit the website?",
+      "answer": "No, our tool only sends HTTP HEAD requests which retrieve redirect information without downloading the actual page content. This means you can safely see where a link leads without triggering malware downloads, tracking pixels, or page view counters on the destination site."
+    },
+    {
+      "_type": "object",
+      "question": "How can I tell if an expanded URL is safe?",
+      "answer": "After expanding, check if the domain looks legitimate. Be wary of: misspelled brand names (g00gle.com instead of google.com), unfamiliar domains, excessively long URLs with random characters, URLs with suspicious keywords (login, verify, urgent), or domains that don't match the link's claimed purpose."
+    },
+    {
+      "_type": "object",
+      "question": "Can URL shorteners be used for legitimate purposes?",
+      "answer": "Yes, many legitimate uses exist: social media character limits (Twitter), marketing campaign tracking, making long URLs shareable, branded short links for companies, QR codes, and link management. However, the same features that make them useful also make them attractive to scammers, which is why verification is important."
+    },
+    {
+      "_type": "object",
+      "question": "What is a redirect chain in shortened URLs?",
+      "answer": "Some shortened URLs redirect through multiple services or tracking systems before reaching the final destination. For example: bit.ly → tracking.site → affiliate.link → final-site.com. Our expander reveals the entire chain, showing each hop so you can see all intermediate destinations and tracking mechanisms."
+    },
+    {
+      "_type": "object",
+      "question": "Should I expand URL shorteners in work emails?",
+      "answer": "Yes, especially if the email is unexpected or from unknown senders. Corporate phishing attacks often use URL shorteners to bypass email security systems. Even if an email appears to come from a colleague, verify shortened links before clicking, as compromised accounts often send malicious links to contacts."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-11T00:00:00.000Z",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Expand Short URLs"
+    },
+    {
+      "key": "examples",
+      "value": "https://bit.ly/try,https://rbnd.ly/booked,https://redirhub.com/try-redirect"
+    }
+  ]
+}

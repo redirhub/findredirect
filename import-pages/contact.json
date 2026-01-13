@@ -1,0 +1,88 @@
+{
+  "_type": "page",
+  "title": "Contact Us",
+  "slug": {
+    "_type": "slug",
+    "current": "contact"
+  },
+  "metaTitle": "Contact Us | FindRedirect",
+  "metaDescription": "Get in touch with the FindRedirect team. We're here to help with your redirect management needs.",
+  "category": "company",
+  "widget": "none",
+  "contentBeforeWidget": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Have questions about our redirect checking tools? Need help with your website's redirects? We're here to assist you."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Get in Touch"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "For general inquiries, support questions, or partnership opportunities, please reach out to us through the following channels:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Email"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "support@findredirect.com"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Business Hours"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monday - Friday: 9:00 AM - 5:00 PM (PST)"
+        }
+      ]
+    }
+  ],
+  "contentAfterWidget": [],
+  "faqs": [],
+  "locale": "en",
+  "publishedAt": "2026-01-11T00:00:00.000Z"
+}

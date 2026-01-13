@@ -1,0 +1,788 @@
+{
+  "_type": "page",
+  "title": "Shopify Redirect Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "shopify-redirect-checker"
+  },
+  "metaTitle": "Shopify Redirect Checker | Test Store URL Redirects",
+  "metaDescription": "Check Shopify store redirects, verify product URL changes, and test collection redirects. Ensure proper 301 implementation for Shopify SEO.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "Shopify Redirect Checker",
+  "heroDescription": "Test and verify redirects on Shopify stores. Check product URLs, collection changes, and ensure proper redirect configuration.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check Shopify Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://yourstore.myshopify.com,https://yourstore.com/products/example,https://yourstore.com/collections/all"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify Redirect Management"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Built-in URL Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify provides a built-in redirect manager accessible at: Online Store > Navigation > URL Redirects. This interface allows you to:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Create manual "
+        },
+        {
+          "_type": "span",
+          "text": "301 permanent redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Import bulk redirects via CSV"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "View and manage existing redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify automatically creates redirects when you change product or collection handles"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify Redirect Apps"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "For advanced redirect features, Shopify apps provide:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Bulk redirect management and import"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "404 page monitoring and auto-redirect suggestions"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wildcard and regex pattern redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Temporary "
+        },
+        {
+          "_type": "span",
+          "text": "302 redirects",
+          "marks": ["link"],
+          "url": "/302-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for campaigns"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Common Shopify Redirect Scenarios"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Product Handle Changes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "When you change a product handle, Shopify automatically creates a redirect from the old URL to the new one. However, if you delete and recreate a product, you must manually create redirects. Always test product URL changes with our redirect checker."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Collection URL Changes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Reorganizing collections requires redirects from old collection URLs to new ones. Map old collection structure to new to preserve category rankings."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Custom Domain Migration"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Moving from yourstore.myshopify.com to custom domain requires domain-level redirects. Shopify handles this automatically, but verify with our "
+        },
+        {
+          "_type": "span",
+          "text": "domain change checker",
+          "marks": ["link"],
+          "url": "/domain-change-checker"
+        },
+        {
+          "_type": "span",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Platform Migration to Shopify"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Migrating from WooCommerce, Magento, or other platforms to Shopify requires comprehensive URL mapping. Create CSV file of old→new URLs and bulk import to Shopify. See our "
+        },
+        {
+          "_type": "span",
+          "text": "website migration guide",
+          "marks": ["link"],
+          "url": "/website-migration-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for details."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify Redirect Limitations"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect limit varies by plan (check current Shopify limits)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "No native support for regex or wildcard patterns (need app)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Can only create 301 redirects (no 302, 307, 308 support)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Cannot redirect to external domains directly"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "How to Create Shopify Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Single Redirect"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Go to Online Store > Navigation > URL Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Click 'Create URL redirect'"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Enter old path (e.g., /products/old-product)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Enter new path or search for product/collection"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Click 'Save redirect'"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Bulk Import"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Create CSV with columns: Redirect from, Redirect to"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Go to URL Redirects page"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Click 'Import' and upload CSV"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Verify import completed successfully"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Test redirects with our bulk checker"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify SEO and Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify's automatic redirect creation helps preserve SEO when making changes, but:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Always verify redirects are created (Shopify occasionally misses them)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitor for redirect chains after multiple handle changes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check Google Search Console for crawl errors weekly"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use "
+        },
+        {
+          "_type": "span",
+          "text": "link monitoring",
+          "marks": ["link"],
+          "url": "/link-monitoring-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for high-value product pages"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Troubleshooting Shopify Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Not Working"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Clear browser cache and test in incognito mode"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Verify redirect path doesn't include domain (use /path not full URL)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check if Shopify app is overriding built-in redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Ensure redirect is saved and active in admin"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Limit Reached"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "If you hit Shopify's redirect limit:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Audit and remove unnecessary redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use redirect app with unlimited redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Consolidate redirect chains into direct redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Consider upgrading Shopify plan"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Chain Issues"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Multiple handle changes create redirect chains (A→B→C). Use our redirect checker to identify chains, then update redirects to point directly to final destination (A→C)."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Best Practices for Shopify Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Plan Handle Changes: Minimize unnecessary product handle changes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Test Before Deleting Products: Verify no important backlinks before deletion"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Export Redirect List: Regularly backup your redirect configuration"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitor 404 Pages: Install app to track broken links"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Verify After Theme Changes: Theme updates can affect URL structure"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "Does Shopify automatically create redirects?",
+      "answer": "Yes, Shopify automatically creates 301 redirects when you change product or collection handles. However, if you delete and recreate a product with a different handle, or make certain bulk changes, you must manually create redirects. Always verify automatic redirects were created using our checker tool."
+    },
+    {
+      "_type": "object",
+      "question": "How many redirects can I have on Shopify?",
+      "answer": "Shopify's redirect limit varies by plan. Basic plans typically allow fewer redirects than Advanced or Plus plans. Check your current limit in the Shopify admin. If you need more redirects, consider using a third-party redirect app or upgrading your plan."
+    },
+    {
+      "_type": "object",
+      "question": "Can I create 302 temporary redirects on Shopify?",
+      "answer": "No, Shopify's built-in redirect system only supports 301 permanent redirects. If you need temporary redirects for campaigns or A/B testing, you'll need to use a third-party Shopify app that supports 302 redirects."
+    },
+    {
+      "_type": "object",
+      "question": "How do I redirect my old domain to Shopify?",
+      "answer": "When migrating to Shopify from another platform, set up your custom domain in Shopify settings, then redirect your old domain using your domain registrar's redirect settings. Create individual page redirects in Shopify's URL redirect manager to map old product/collection URLs to new Shopify URLs."
+    },
+    {
+      "_type": "object",
+      "question": "Will changing product URLs hurt my SEO on Shopify?",
+      "answer": "If properly redirected using 301 redirects, changing product URLs preserves 90-99% of SEO value. Shopify's automatic redirect creation helps, but always verify redirects are working and monitor rankings for a few weeks after changes. Avoid frequent URL changes when possible."
+    },
+    {
+      "_type": "object",
+      "question": "How do I bulk import redirects to Shopify?",
+      "answer": "Create a CSV file with two columns: 'Redirect from' and 'Redirect to'. Include only the path portion (e.g., /products/old-item), not the full URL. Go to Online Store > Navigation > URL Redirects, click Import, and upload your CSV. Shopify will process and create the redirects."
+    },
+    {
+      "_type": "object",
+      "question": "Can I redirect Shopify URLs to external websites?",
+      "answer": "Shopify's built-in redirect system doesn't support redirecting to external domains. You'll need to use a third-party redirect app or Shopify Scripts (Shopify Plus only) to redirect to external sites. For most cases, it's better to keep redirects within your store."
+    },
+    {
+      "_type": "object",
+      "question": "What happens to Shopify redirects if I change themes?",
+      "answer": "Redirects are stored in Shopify's database, not in themes, so they persist across theme changes. However, theme changes might alter URL structure for blogs or pages, requiring new redirects. Always test your site after theme changes and create any necessary new redirects."
+    },
+    {
+      "_type": "object",
+      "question": "How do I fix redirect chains on Shopify?",
+      "answer": "Redirect chains occur when you change a product handle multiple times (A→B→C). To fix, update the original redirect to point directly to the final destination (A→C). Use our redirect checker to identify chains, then manually update redirects in Shopify's URL redirect manager."
+    },
+    {
+      "_type": "object",
+      "question": "Should I use a Shopify redirect app?",
+      "answer": "Use a redirect app if you need: unlimited redirects (beyond Shopify's plan limit), 302 temporary redirects, wildcard/regex patterns, 404 monitoring, or detailed redirect analytics. For basic redirect needs, Shopify's built-in redirect manager is sufficient and free."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

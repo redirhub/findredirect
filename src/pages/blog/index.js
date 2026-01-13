@@ -4,10 +4,11 @@ import { useTranslation } from "next-i18next";
 import BlogListLayout from "@/components/blog/BlogListLayout";
 import BlogPostGrid from "@/components/blog/BlogPostGrid";
 import BlogPagination from "@/components/blog/BlogPagination";
+import { fetchAllPagesForFooter } from "@/services/pageService";
 
 const PER_PAGE = 12;
 
-export default function IndexPage({ posts, pagination }) {
+export default function IndexPage({ posts, pagination, pages = [] }) {
   const { t } = useTranslation();
   const { currentPage, totalPages } = pagination || {
     currentPage: 1,
@@ -19,6 +20,7 @@ export default function IndexPage({ posts, pagination }) {
     <BlogListLayout
       title={t('blog.title', 'BLOG')}
       description={t('blog.description', 'Explore our latest blog posts and articles about web development, design, and more.')}
+      pages={pages}
     >
       <BlogPostGrid posts={posts} showHero={isFirstPage} />
       <BlogPagination currentPage={currentPage} totalPages={totalPages} />
@@ -79,6 +81,8 @@ export async function getServerSideProps({ locale, query }) {
       end,
     });
 
+    const pages = await fetchAllPagesForFooter(locale || "en");
+
     return {
       props: {
         posts: posts || [],
@@ -86,10 +90,13 @@ export async function getServerSideProps({ locale, query }) {
           currentPage: safePage,
           totalPages,
         },
+        pages,
         ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };
   } catch (error) {
+    const pages = await fetchAllPagesForFooter(locale || "en");
+
     return {
       props: {
         posts: [],
@@ -97,6 +104,7 @@ export async function getServerSideProps({ locale, query }) {
           currentPage: 1,
           totalPages: 1,
         },
+        pages,
         ...(await serverSideTranslations(locale, [ "common" ])),
       },
     };

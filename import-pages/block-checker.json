@@ -1,0 +1,67 @@
+{
+  "_type": "page",
+  "title": "Domain Block Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "block"
+  },
+  "metaTitle": "Domain Block Checker: Verify Accessibility in China",
+  "metaDescription": "Check if your domain is blocked by the Great Firewall of China. Ensure your content is accessible to users in China with our reliable tool.",
+  "category": "tools",
+  "widget": "block",
+  "heroIcon": "FaShieldVirus",
+  "heroHeading": "Domain Block Checker",
+  "heroDescription": "Verify if your domain is accessible from China and avoid potential traffic loss.",
+  "buttonText": "Check Domain",
+  "exampleUrls": [
+    "example.com",
+    "test.com",
+    "sample.com"
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "What is the Domain Block by GFW China tool?",
+      "answer": "The Domain Block by GFW China tool helps users check if a specific domain is blocked by the Great Firewall of China. It provides insights into accessibility issues for users in China."
+    },
+    {
+      "_type": "object",
+      "question": "How does the Great Firewall of China work?",
+      "answer": "The Great Firewall of China is a system of internet censorship that blocks access to certain foreign websites and slows down cross-border internet traffic. It is used to control the information available to Chinese citizens."
+    },
+    {
+      "_type": "object",
+      "question": "Why is it important to check if a domain is blocked?",
+      "answer": "Checking if a domain is blocked is crucial for businesses and individuals who want to ensure their content is accessible to users in China. Blocked domains can lead to loss of traffic and engagement."
+    },
+    {
+      "_type": "object",
+      "question": "How can I use the Domain Block tool?",
+      "answer": "Simply enter the domain you wish to check in the provided input field and click the 'Check Domain' button. The tool will analyze the domain's accessibility from within China."
+    },
+    {
+      "_type": "object",
+      "question": "What should I do if my domain is blocked?",
+      "answer": "If your domain is blocked, consider using alternative domains, VPN services, or other methods to ensure your content reaches users in China."
+    },
+    {
+      "_type": "object",
+      "question": "Can I check multiple domains at once?",
+      "answer": "Yes, our tool allows you to check multiple domains simultaneously, providing a comprehensive overview of their accessibility."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-11T00:00:00.000Z",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check Domain"
+    },
+    {
+      "key": "examples",
+      "value": "example.com,test.com,sample.com"
+    }
+  ]
+}

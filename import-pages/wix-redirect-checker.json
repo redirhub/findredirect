@@ -1,0 +1,860 @@
+{
+  "_type": "page",
+  "title": "Wix Redirect Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "wix-redirect-checker"
+  },
+  "metaTitle": "Wix Redirect Checker | Test Wix Site URL Redirects",
+  "metaDescription": "Check Wix website redirects, verify URL redirect manager configuration, and ensure proper 301 implementation for Wix SEO.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "Wix Redirect Checker",
+  "heroDescription": "Test and verify redirects on Wix websites. Check URL redirect manager settings and ensure proper redirect configuration.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check Wix Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://yoursite.wixsite.com,https://yoursite.com,https://yoursite.com/page"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix URL Redirect Manager"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix provides a built-in URL Redirect Manager for handling redirects. Access it through: Settings > SEO Tools > URL Redirect Manager. The tool offers:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Easy interface for creating "
+        },
+        {
+          "_type": "span",
+          "text": "301 permanent redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Automatic redirect creation for deleted or renamed pages"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Bulk redirect import via CSV (Premium plans)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect history and management"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Common Wix Redirect Scenarios"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Page Deletions and Renames"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "When you delete or rename a page in Wix, the platform prompts you to create a redirect. Always accept this prompt to preserve SEO value. If you accidentally skip it, manually create redirects in the URL Redirect Manager."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Custom Domain Connection"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Moving from username.wixsite.com to your custom domain requires redirects. Wix handles this automatically when you connect a custom domain, but verify with our "
+        },
+        {
+          "_type": "span",
+          "text": "domain change checker",
+          "marks": ["link"],
+          "url": "/domain-change-checker"
+        },
+        {
+          "_type": "span",
+          "text": " to ensure it's working correctly."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Site Structure Reorganization"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Reorganizing your Wix site's navigation or folder structure may change page URLs. Create redirects from old URLs to new ones to maintain search rankings and user bookmarks."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Migration from Another Platform"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Migrating from WordPress, Shopify, or other platforms to Wix requires comprehensive redirect mapping. Export your old URL list and create corresponding redirects in Wix. See our "
+        },
+        {
+          "_type": "span",
+          "text": "website migration guide",
+          "marks": ["link"],
+          "url": "/website-migration-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for details."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "How to Create Wix Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Manual Redirect Creation"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Go to Settings in your Wix Dashboard"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Click SEO Tools > URL Redirect Manager"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Click '+ New Redirect'"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Enter old URL path (e.g., /old-page)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Select redirect type (301 permanent recommended)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Enter new URL or select from site pages"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Click 'Save' and test with our redirect checker"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Bulk Import (Premium Plans)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Create CSV with columns: Old URL, New URL, Redirect Type"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "In URL Redirect Manager, click 'Import'"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Upload CSV file"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Review and confirm import"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Test sample redirects to verify"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix Redirect Types"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "301 Permanent Redirect"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use "
+        },
+        {
+          "_type": "span",
+          "text": "301 redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for permanently moved content. This passes SEO value and updates search engine indexes. Best for page deletions, URL structure changes, and migrations."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "302 Temporary Redirect"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix supports "
+        },
+        {
+          "_type": "span",
+          "text": "302 temporary redirects",
+          "marks": ["link"],
+          "url": "/302-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for short-term changes like seasonal campaigns or A/B testing. These don't pass link equity and should only be used temporarily."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix Redirect Limitations"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect limits vary by plan (Free plans have restrictions)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "No native regex or wildcard support"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Cannot redirect to external domains (only internal pages)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Bulk import requires Premium plan"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix SEO and Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Proper redirect implementation is crucial for Wix SEO:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Always create redirects when deleting pages"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitor redirect chains after multiple page renames"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use Wix SEO Wiz to identify broken links"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Connect Google Search Console to monitor crawl errors"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use "
+        },
+        {
+          "_type": "span",
+          "text": "link monitoring",
+          "marks": ["link"],
+          "url": "/link-monitoring-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for important pages"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Troubleshooting Wix Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Not Working"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Clear browser cache and test in incognito mode"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Verify redirect is saved and active in URL Redirect Manager"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check if URL path matches exactly (case-sensitive)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Ensure you're testing on published site, not editor preview"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Too Many Redirects Error"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check for redirect loops (Page A → Page B → Page A)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Review recently added redirects for conflicts"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use our redirect checker to identify the loop source"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Chains"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Multiple page renames create chains (A→B→C). Find chains using our tool, then update redirects to point directly to final destination (A→C) to improve performance."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix vs Other Platforms"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Compare Wix redirect capabilities with other platforms:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress",
+          "marks": ["link"],
+          "url": "/wordpress-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": More flexible with plugins and .htaccess access"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify",
+          "marks": ["link"],
+          "url": "/shopify-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Automatic redirects for product changes, similar to Wix"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix provides a good balance of ease-of-use and functionality for most websites."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Best Practices for Wix Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Accept Automatic Redirect Prompts: When Wix offers to create redirects, always accept"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Plan URL Structure: Choose permanent page names to minimize future redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Test Before Publishing: Verify redirects work in published site, not just preview"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Regular Audits: Monthly check of redirect list to remove unnecessary ones"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitor Performance: Use our "
+        },
+        {
+          "_type": "span",
+          "text": "redirect checker",
+          "marks": ["link"],
+          "url": "/redirect"
+        },
+        {
+          "_type": "span",
+          "text": " to verify response times"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "Does Wix automatically create redirects?",
+      "answer": "Yes, Wix automatically prompts you to create redirects when you delete or rename pages. Always accept these prompts to preserve SEO value. If you skip the prompt, you can manually create redirects later in the URL Redirect Manager."
+    },
+    {
+      "_type": "object",
+      "question": "How many redirects can I have on Wix?",
+      "answer": "Redirect limits vary by Wix plan. Free plans have significant restrictions, while Premium and Business plans offer more redirects. Check your current limit in Settings > URL Redirect Manager. Consider upgrading if you need more redirects."
+    },
+    {
+      "_type": "object",
+      "question": "Can I use 302 temporary redirects on Wix?",
+      "answer": "Yes, Wix supports both 301 permanent and 302 temporary redirects. When creating a redirect, you can choose the type. Use 301 for permanent changes and 302 only for truly temporary situations like seasonal campaigns or testing."
+    },
+    {
+      "_type": "object",
+      "question": "How do I redirect my Wix site to a custom domain?",
+      "answer": "Connect your custom domain in Wix Settings > Domains. Wix automatically handles redirecting yoursite.wixsite.com to your custom domain. Verify the redirect is working using our domain change checker after connecting."
+    },
+    {
+      "_type": "object",
+      "question": "Will changing page URLs hurt my Wix SEO?",
+      "answer": "If properly redirected using 301 redirects, changing page URLs preserves 90-99% of SEO value. Wix prompts you to create redirects when renaming pages. Always create these redirects and test them to ensure they work correctly."
+    },
+    {
+      "_type": "object",
+      "question": "Can I bulk import redirects to Wix?",
+      "answer": "Yes, but bulk import is only available on Premium and Business plans. Create a CSV with old URLs, new URLs, and redirect types, then import through URL Redirect Manager. Free plans require manual redirect creation one at a time."
+    },
+    {
+      "_type": "object",
+      "question": "Can I redirect Wix pages to external websites?",
+      "answer": "Wix's URL Redirect Manager only supports internal redirects (within your site). To redirect to external sites, you'll need to create a page with a redirect link or use Wix Velo (code) to implement custom redirects."
+    },
+    {
+      "_type": "object",
+      "question": "What happens to Wix redirects when I change templates?",
+      "answer": "Redirects are stored separately from templates, so they persist when you change templates. However, changing templates might alter page URLs or structure, requiring new redirects. Always test your site after template changes."
+    },
+    {
+      "_type": "object",
+      "question": "How do I fix redirect chains on Wix?",
+      "answer": "Redirect chains occur when you rename pages multiple times (A→B→C). Use our redirect checker to identify chains, then update the original redirect to point directly to the final page (A→C). Edit redirects in URL Redirect Manager to consolidate chains."
+    },
+    {
+      "_type": "object",
+      "question": "Why isn't my Wix redirect working?",
+      "answer": "Common causes include: browser cache (clear it and test in incognito), redirect not saved/active in manager, URL path mismatch (case-sensitive), testing in editor preview instead of published site, or redirect limit reached. Verify configuration and test with our tool."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

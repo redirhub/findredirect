@@ -1,0 +1,340 @@
+{
+  "_type": "page",
+  "title": "307 Redirect Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "307-redirect-checker"
+  },
+  "metaTitle": "Free 307 Redirect Checker | Test Temporary HTTP Redirects",
+  "metaDescription": "Check 307 temporary redirects and verify HTTP method preservation. Analyze redirect chains and ensure proper implementation for modern web applications.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "307 Redirect Checker",
+  "heroDescription": "Verify 307 temporary redirects that preserve HTTP methods. Essential for modern web applications and API redirects.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check 307 Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://api.example.com,https://app.example.com,https://example.com"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What is a 307 Redirect?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "A 307 redirect is a temporary redirect introduced in HTTP/1.1 that strictly preserves the HTTP request method and body. Unlike older "
+        },
+        {
+          "_type": "span",
+          "text": "302 redirects",
+          "marks": ["link"],
+          "url": "/302-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ", a 307 ensures that POST requests remain POST requests after redirection, making it crucial for modern web applications and APIs."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "307 vs 302: Key Differences"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "The main difference between 307 and 302:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "307: Guarantees HTTP method preservation (POST stays POST, DELETE stays DELETE)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "302: May change POST to GET on redirect (legacy behavior)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "For permanent redirects with method preservation, use "
+        },
+        {
+          "_type": "span",
+          "text": "308 redirects",
+          "marks": ["link"],
+          "url": "/308-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " instead. For general redirect checking, try our "
+        },
+        {
+          "_type": "span",
+          "text": "bulk redirect checker",
+          "marks": ["link"],
+          "url": "/redirect"
+        },
+        {
+          "_type": "span",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "When to Use 307 Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "API Endpoints: Temporary API endpoint changes that must preserve POST/PUT/DELETE methods"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Form Submissions: Redirecting form POST requests while maintaining the submission data"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Load Balancing: Temporary server redirects that must preserve request methods"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Maintenance Mode: Redirecting RESTful API calls during temporary maintenance"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Common Use Cases by Platform"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Different platforms may handle 307 redirects differently:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress APIs",
+          "marks": ["link"],
+          "url": "/wordpress-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": REST API endpoint redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify Webhooks",
+          "marks": ["link"],
+          "url": "/shopify-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Preserving webhook POST requests"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Domain Changes",
+          "marks": ["link"],
+          "url": "/domain-change-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Temporary domain migrations with API preservation"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "SEO Impact of 307 Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Like "
+        },
+        {
+          "_type": "span",
+          "text": "302 redirects",
+          "marks": ["link"],
+          "url": "/302-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ", 307 redirects don't pass link equity and keep the original URL in search indexes. For permanent changes that need link equity transfer, use "
+        },
+        {
+          "_type": "span",
+          "text": "301 redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " or 308 redirects instead."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "What is the difference between 307 and 302 redirects?",
+      "answer": "307 redirects strictly preserve the HTTP request method (POST, PUT, DELETE, etc.), while 302 redirects may change POST to GET. For modern web applications and APIs where method preservation is critical, always use 307 for temporary redirects instead of 302."
+    },
+    {
+      "_type": "object",
+      "question": "When should I use 307 instead of 308?",
+      "answer": "Use 307 for temporary redirects and 308 for permanent redirects. Both preserve HTTP methods, but 307 signals the change is temporary (search engines keep original URL) while 308 signals permanent (search engines index new URL and pass link equity)."
+    },
+    {
+      "_type": "object",
+      "question": "Do 307 redirects affect SEO?",
+      "answer": "307 redirects don't pass link equity to the new URL and search engines keep indexing the original URL. This is correct behavior for temporary redirects. If the redirect is permanent, switch to a 308 or 301 redirect to pass SEO value to the new location."
+    },
+    {
+      "_type": "object",
+      "question": "Why do APIs use 307 redirects?",
+      "answer": "APIs use 307 redirects because they preserve the HTTP method and request body. When an API endpoint temporarily moves, a 307 ensures POST requests don't become GET requests, DELETE requests stay DELETE, and all request data is forwarded correctly to the new endpoint."
+    },
+    {
+      "_type": "object",
+      "question": "Can browsers handle 307 redirects?",
+      "answer": "Yes, all modern browsers properly handle 307 redirects and will preserve the HTTP method. However, very old browsers might not support 307 correctly. For maximum compatibility with legacy systems, test your redirects thoroughly or consider using 302 for simple page redirects."
+    },
+    {
+      "_type": "object",
+      "question": "How do I implement a 307 redirect?",
+      "answer": "Implementation depends on your platform. In Apache .htaccess use 'Redirect 307', in Nginx use 'return 307', in Node.js use res.redirect(307, url). Always test your redirects with our checker to verify the 307 status code is being returned correctly."
+    },
+    {
+      "_type": "object",
+      "question": "Will 307 redirects break form submissions?",
+      "answer": "No, 307 redirects are specifically designed to preserve form submissions. Unlike 302 redirects which might convert POST to GET, 307 maintains the POST method and form data, ensuring form submissions work correctly after redirection."
+    },
+    {
+      "_type": "object",
+      "question": "Should I use 307 for HTTPS redirects?",
+      "answer": "For permanent HTTP to HTTPS redirects, use 301 or 308 status codes instead. 307 is for temporary redirects only. Since HTTPS migration is permanent, you want to pass link equity and update search engine indexes, which requires 301/308."
+    },
+    {
+      "_type": "object",
+      "question": "How long can I keep a 307 redirect?",
+      "answer": "While technically indefinite, 307 redirects should only be used for genuinely temporary situations. If a redirect needs to stay longer than a few weeks or months, consider changing to a 308 permanent redirect to pass link equity and properly signal the permanent nature to search engines."
+    },
+    {
+      "_type": "object",
+      "question": "Do 307 redirects work with RESTful APIs?",
+      "answer": "Yes, 307 redirects are ideal for RESTful APIs because they preserve all HTTP methods (GET, POST, PUT, DELETE, PATCH). This ensures API clients can follow redirects without losing request methods or data, making 307 the preferred choice for temporary API endpoint changes."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

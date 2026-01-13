@@ -1,0 +1,712 @@
+{
+  "_type": "page",
+  "title": "WordPress Redirect Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "wordpress-redirect-checker"
+  },
+  "metaTitle": "WordPress Redirect Checker | Test WP Redirects & Plugins",
+  "metaDescription": "Check WordPress redirects, verify Redirection plugin configuration, and ensure proper 301 implementation. Free WordPress redirect testing tool.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "WordPress Redirect Checker",
+  "heroDescription": "Test and verify redirects on WordPress sites. Check Redirection plugin, .htaccess rules, and permalink changes.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check WordPress Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://yoursite.com,https://yoursite.com/blog,https://yoursite.com/page"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress Redirect Methods"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "1. Redirection Plugin"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "The Redirection plugin is the most popular WordPress redirect solution. It provides:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "User-friendly interface for managing redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Automatic "
+        },
+        {
+          "_type": "span",
+          "text": "301 redirect",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " creation when changing permalinks"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "404 error logging and redirect suggestions"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Support for regex patterns and wildcard redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Import/export functionality for bulk redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "2. .htaccess File"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "For Apache servers, .htaccess redirects are server-level and faster than plugin redirects. Common patterns:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Single page redirect:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect 301 /old-page /new-page"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Domain-wide redirect:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "RewriteEngine On\nRewriteCond %{HTTP_HOST} ^olddomain\\.com$ [NC]\nRewriteRule ^(.*)$ https://newdomain.com/$1 [R=301,L]"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "3. WordPress Functions"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Programmatic redirects in functions.php using wp_redirect() for custom redirect logic."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Common WordPress Redirect Scenarios"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Permalink Structure Changes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Changing permalink structure (e.g., from /%postname%/ to /blog/%postname%/) requires redirects for all posts. Use Redirection plugin's automatic redirect feature or bulk import."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress Site Migration"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Moving WordPress to a new domain requires site-wide "
+        },
+        {
+          "_type": "span",
+          "text": "301 redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ". See our "
+        },
+        {
+          "_type": "span",
+          "text": "website migration checker",
+          "marks": ["link"],
+          "url": "/website-migration-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for comprehensive guidance."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "HTTP to HTTPS"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "After installing SSL, add this to .htaccess:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "RewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WooCommerce Product URLs"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "When changing WooCommerce product slugs or shop page structure, use Redirection plugin to map old product URLs to new ones to preserve product rankings."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress Redirect Best Practices"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use Server-Level Redirects When Possible: .htaccess is faster than PHP/plugin redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitor 404 Errors: Enable 404 logging in Redirection plugin to catch missing redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Test After Plugin Updates: Plugin updates can reset redirect configurations"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Backup Redirect Rules: Export Redirection plugin settings regularly"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Avoid Redirect Chains: Use our "
+        },
+        {
+          "_type": "span",
+          "text": "redirect checker",
+          "marks": ["link"],
+          "url": "/redirect"
+        },
+        {
+          "_type": "span",
+          "text": " to detect chains"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Troubleshooting WordPress Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Not Working"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Clear WordPress cache (if using caching plugin)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Clear CDN cache (Cloudflare, etc.)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Clear browser cache and test in incognito mode"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check redirect order in Redirection plugin (first match wins)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Too Many Redirects Error"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check for redirect loops (A→B→A)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Verify HTTPS redirect isn't conflicting with plugin redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check for conflicts between .htaccess and plugin rules"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wrong Redirect Type"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Ensure Redirection plugin is set to 301 for permanent redirects. Use our "
+        },
+        {
+          "_type": "span",
+          "text": "302 checker",
+          "marks": ["link"],
+          "url": "/302-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " vs "
+        },
+        {
+          "_type": "span",
+          "text": "301 checker",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " to verify the correct type is being used."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress Multisite Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress Multisite networks require special consideration. Redirects can be:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Network-wide (in network .htaccess or wp-config.php)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Per-site (using Redirection plugin on each subsite)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Test redirects on each subsite individually to ensure they work correctly across the network."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitoring WordPress Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Regular "
+        },
+        {
+          "_type": "span",
+          "text": "link monitoring",
+          "marks": ["link"],
+          "url": "/link-monitoring-checker"
+        },
+        {
+          "_type": "span",
+          "text": " is essential for WordPress sites because:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Plugin updates can reset configurations"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Theme changes may affect redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress core updates occasionally affect URL handling"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": ".htaccess can be overwritten by plugins"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use our bulk redirect checker to test all critical WordPress URLs after any major update or change."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "What's the best WordPress redirect plugin?",
+      "answer": "Redirection is the most popular and reliable WordPress redirect plugin with over 5 million active installations. It offers a user-friendly interface, automatic redirect creation, 404 monitoring, and supports all redirect types. Other options include Rank Math (SEO plugin with redirect features) and Simple 301 Redirects."
+    },
+    {
+      "_type": "object",
+      "question": "Should I use a plugin or .htaccess for WordPress redirects?",
+      "answer": "For technical users, .htaccess is faster and more efficient as it handles redirects at the server level before WordPress loads. However, plugins like Redirection are safer for non-technical users, provide a user interface, and work on all server types (Apache, Nginx). Use .htaccess for site-wide rules and plugins for individual page redirects."
+    },
+    {
+      "_type": "object",
+      "question": "Do WordPress redirects slow down my site?",
+      "answer": "Plugin-based redirects add minimal overhead since they must load WordPress and PHP. .htaccess redirects are faster as they bypass WordPress entirely. For high-traffic sites, use server-level redirects when possible. Either way, the redirect itself adds 100-200ms latency, which is usually acceptable."
+    },
+    {
+      "_type": "object",
+      "question": "How do I redirect WordPress from HTTP to HTTPS?",
+      "answer": "After installing SSL, add redirect code to .htaccess, update WordPress URL settings (Settings > General), and update internal links using a plugin like Better Search Replace. Some plugins like Really Simple SSL automate this process. Always backup before making changes."
+    },
+    {
+      "_type": "object",
+      "question": "What happens to WordPress redirects when I change themes?",
+      "answer": "Plugin-based redirects (like Redirection) survive theme changes since they're stored in the database. However, some theme-specific redirects in functions.php will be lost. Always use the Redirection plugin for important redirects rather than theme files to ensure they persist across theme changes."
+    },
+    {
+      "_type": "object",
+      "question": "How do I bulk import redirects to WordPress?",
+      "answer": "Use the Redirection plugin's Import feature. Create a CSV file with old URLs and new URLs, then import through the plugin interface. You can also use WP-CLI commands for large-scale imports. Always test a few redirects before importing thousands."
+    },
+    {
+      "_type": "object",
+      "question": "Can I redirect WordPress categories and tags?",
+      "answer": "Yes, use the Redirection plugin to redirect old category/tag URLs to new ones. This is common when reorganizing taxonomy structure. Ensure you redirect to relevant content to preserve SEO value and provide good user experience."
+    },
+    {
+      "_type": "object",
+      "question": "Why is my WordPress redirect creating a loop?",
+      "answer": "Redirect loops occur when URL A redirects to URL B, which redirects back to URL A. Common causes include conflicting rules between .htaccess and plugins, HTTPS redirects conflicting with WWW redirects, or incorrect regex patterns. Use our tool to identify the loop source."
+    },
+    {
+      "_type": "object",
+      "question": "Do I need redirects when changing WordPress permalinks?",
+      "answer": "Yes! Changing permalink structure without redirects breaks all existing URLs, causing 404 errors and SEO damage. Enable automatic redirect creation in the Redirection plugin before changing permalinks, or manually create redirects for all affected URLs."
+    },
+    {
+      "_type": "object",
+      "question": "How do I test WordPress redirects before going live?",
+      "answer": "Use a staging site to test redirect configuration, then verify with our redirect checker tool. Test in multiple browsers, clear caches between tests, and check both individual pages and bulk URL lists. Monitor Google Search Console for crawl errors after implementing redirects."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

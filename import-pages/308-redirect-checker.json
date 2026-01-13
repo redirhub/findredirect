@@ -1,0 +1,390 @@
+{
+  "_type": "page",
+  "title": "308 Redirect Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "308-redirect-checker"
+  },
+  "metaTitle": "Free 308 Redirect Checker | Test Permanent Method-Preserving Redirects",
+  "metaDescription": "Check 308 permanent redirects that preserve HTTP methods. Verify redirect chains and ensure proper implementation for APIs and modern web applications.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "308 Redirect Checker",
+  "heroDescription": "Verify 308 permanent redirects with HTTP method preservation. Perfect for permanent API endpoint changes and modern web applications.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check 308 Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://api.example.com,https://example.com,https://app.example.com"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What is a 308 Redirect?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "A 308 redirect is a permanent redirect that preserves the HTTP request method and body. It combines the permanence of "
+        },
+        {
+          "_type": "span",
+          "text": "301 redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " with the method preservation of "
+        },
+        {
+          "_type": "span",
+          "text": "307 redirects",
+          "marks": ["link"],
+          "url": "/307-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ". This makes it ideal for permanent API endpoint changes and modern web applications that require strict HTTP method preservation."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "308 vs 301: Which Should You Use?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use 308 When:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "You have RESTful APIs with POST, PUT, DELETE methods"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Form submissions must preserve POST method"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Modern web applications requiring strict method preservation"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Permanent "
+        },
+        {
+          "_type": "span",
+          "text": "domain changes",
+          "marks": ["link"],
+          "url": "/domain-change-checker"
+        },
+        {
+          "_type": "span",
+          "text": " with API endpoints"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use 301 When:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirecting regular web pages (no APIs)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Maximum browser compatibility is needed"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Simple "
+        },
+        {
+          "_type": "span",
+          "text": "website migration",
+          "marks": ["link"],
+          "url": "/website-migration-checker"
+        },
+        {
+          "_type": "span",
+          "text": " without complex forms or APIs"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "SEO Benefits of 308 Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Like 301 redirects, 308 redirects:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Pass 90-99% of link equity to the new URL"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Signal permanent change to search engines"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Update search engine indexes to new URL"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Preserve backlink value"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "The added benefit is strict HTTP method preservation for modern web applications. Use our "
+        },
+        {
+          "_type": "span",
+          "text": "redirect checker",
+          "marks": ["link"],
+          "url": "/redirect"
+        },
+        {
+          "_type": "span",
+          "text": " to verify all redirect types."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Platform Implementation"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check platform-specific redirect implementation:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress",
+          "marks": ["link"],
+          "url": "/wordpress-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": REST API and WooCommerce endpoints"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify",
+          "marks": ["link"],
+          "url": "/shopify-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Storefront and admin API redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Link Monitoring",
+          "marks": ["link"],
+          "url": "/link-monitoring-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Continuous redirect monitoring"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "What is the difference between 308 and 301 redirects?",
+      "answer": "Both are permanent redirects that pass link equity, but 308 strictly preserves the HTTP method (POST stays POST, DELETE stays DELETE) while 301 may change POST to GET. Use 308 for APIs and modern applications where method preservation is critical, and 301 for regular page redirects."
+    },
+    {
+      "_type": "object",
+      "question": "When should I use 308 instead of 307?",
+      "answer": "Use 308 for permanent redirects and 307 for temporary redirects. If an API endpoint or resource has permanently moved and you need to preserve HTTP methods, use 308. If the move is temporary, use 307. Both preserve methods, but only 308 passes link equity."
+    },
+    {
+      "_type": "object",
+      "question": "Do all browsers support 308 redirects?",
+      "answer": "Most modern browsers support 308 redirects correctly. However, very old browsers or legacy systems may not recognize the 308 status code. For maximum compatibility with legacy systems, consider using 301 redirects. Test your implementation with our checker tool to verify browser behavior."
+    },
+    {
+      "_type": "object",
+      "question": "Will 308 redirects pass SEO value?",
+      "answer": "Yes, 308 redirects pass approximately 90-99% of link equity to the new URL, just like 301 redirects. Search engines treat 308 as a permanent redirect and will update their indexes to the new location while preserving most of the SEO value from backlinks."
+    },
+    {
+      "_type": "object",
+      "question": "Should I use 308 for website migration?",
+      "answer": "If your website includes APIs, RESTful endpoints, or complex form submissions that require method preservation, use 308 redirects. For simple content websites without APIs, 301 redirects offer better legacy browser compatibility. Modern sites with APIs benefit from 308's strict method preservation."
+    },
+    {
+      "_type": "object",
+      "question": "How do I implement a 308 redirect?",
+      "answer": "Implementation varies by platform. In Apache use 'Redirect 308', in Nginx use 'return 308 https://newdomain.com$request_uri', in Node.js Express use res.redirect(308, url). Always test with our 308 redirect checker to verify correct implementation."
+    },
+    {
+      "_type": "object",
+      "question": "Can 308 redirects cause problems with APIs?",
+      "answer": "No, 308 redirects are designed specifically for APIs. They preserve the HTTP method and request body, ensuring POST, PUT, DELETE, and other methods work correctly after redirection. This makes them ideal for permanent API endpoint changes without breaking client implementations."
+    },
+    {
+      "_type": "object",
+      "question": "Should RESTful APIs use 308 or 301?",
+      "answer": "RESTful APIs should use 308 for permanent redirects because it preserves HTTP methods. Using 301 might cause clients to convert POST requests to GET, breaking API functionality. For temporary API redirects, use 307 instead of 302."
+    },
+    {
+      "_type": "object",
+      "question": "Will 308 redirects work with webhooks?",
+      "answer": "Yes, 308 redirects are ideal for permanently moved webhook endpoints because they preserve the POST method and request payload. This ensures webhook systems can follow the redirect without losing data or failing due to method changes."
+    },
+    {
+      "_type": "object",
+      "question": "How do search engines handle 308 redirects?",
+      "answer": "Search engines treat 308 redirects similarly to 301 redirects - they recognize the permanent nature, update their indexes to the new URL, and pass link equity. Google, Bing, and other major search engines properly support 308 status codes for modern websites."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

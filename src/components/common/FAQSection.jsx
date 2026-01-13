@@ -1,6 +1,17 @@
-import { useState, useMemo } from "react";
-import { Box, Flex, Heading, Icon, Text, Grid, GridItem, VStack, Input, InputGroup, InputLeftElement, Button, useColorModeValue } from "@chakra-ui/react";
-import { FaQuestionCircle, FaChevronDown, FaChevronUp, FaSearch } from "react-icons/fa";
+import {
+  Box,
+  Text,
+  VStack,
+  Button,
+  useColorModeValue,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  Icon,
+} from "@chakra-ui/react";
+import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { FaQuestionCircle } from "react-icons/fa";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { QUESTION_URL } from "@/configs/constant";
@@ -8,143 +19,126 @@ import { QUESTION_URL } from "@/configs/constant";
 // Styles object
 const styles = {
   container: {
-    py: 12,
-    px: 4,
-    borderRadius: "xl",
+    py: 8,
+    px: 0,
   },
-  heading: {
-    as: "h2",
-    size: "xl",
-    textAlign: "center",
-  },
-  subText: {
-    textAlign: "center",
-    maxW: "800px",
-    mx: "auto",
-  },
-  searchInput: {
-    maxW: "600px",
-    mx: "auto",
-  },
-  faqGrid: {
-    templateColumns: { base: "1fr", lg: "repeat(2, 1fr)" },
-    gap: 8,
-  },
-  faqItem: {
-    borderWidth: "1px",
-    borderRadius: "lg",
-    p: 6,
-    boxShadow: "md",
-    transition: "all 0.3s",
-    _hover: { boxShadow: "lg" },
-  },
-  faqQuestion: {
-    as: "h3",
-    size: "md",
-    lineHeight: "1.2",
-    fontWeight: "semibold",
-  },
-  faqAnswer: {
-    lineHeight: "1.6",
-  },
-  noResults: {
-    textAlign: "center",
-    color: "gray.500",
-  },
-  contactButton: {
-    colorScheme: "blue",
-    leftIcon: <FaQuestionCircle />,
+  subtitle: {
+    textAlign: "left",
+    mb: 8,
   },
 };
 
-export default function FAQSection({ data }) {
+export default function FAQSection({
+  data,
+  title,
+  showContactButton = true,
+  accentColor = "blue.500",
+}) {
+  const { t } = useTranslation();
 
-    const {t} = useTranslation();
-    const [openIndices, setOpenIndices] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
+  // Color mode values
+  const bgColor = useColorModeValue("gray.50", "gray.900");
+  const cardBgColor = useColorModeValue("white", "gray.800");
+  const panelBgColor = useColorModeValue("gray.50", "gray.800");
+  const textColor = useColorModeValue("gray.700", "gray.300");
+  const borderColor = useColorModeValue("gray.200", "gray.700");
+  const hoverBgColor = useColorModeValue("gray.50", "gray.700");
 
-    const filteredFAQs = useMemo(() => {
-        return data.filter(faq => 
-            faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-    }, [searchTerm, data]);
+  // Default title with i18n support
+  const displayTitle =
+    title || t("tool.faq-title", "FAQ: Common Questions Answered");
 
-    const toggleFAQ = (index) => {
-        setOpenIndices(prevIndices => 
-            prevIndices.includes(index)
-                ? prevIndices.filter(i => i !== index)
-                : [...prevIndices, index]
-        );
-    };
+  return (
+    <Box {...styles.container}>
+      <VStack spacing={8} align="stretch">
+        {/* Section Title - NOT a heading tag for better SEO */}
+        <Text
+          fontSize={{ base: "2xl", md: "3xl" }}
+          fontWeight="bold"
+          textAlign="left"
+          mb={6}
+        >
+          {displayTitle}
+        </Text>
 
-    // Color mode values
-    const bgColor = useColorModeValue("gray.50", "gray.900");
-    const cardBgColor = useColorModeValue("white", "gray.800");
-    const textColor = useColorModeValue("gray.600", "gray.300");
-    const borderColor = useColorModeValue("gray.200", "gray.700");
+        {/* Single Column Accordion */}
+        <VStack spacing={4} align="stretch" w="full">
+          <Accordion allowMultiple allowToggle>
+            {data.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                border="1px solid"
+                borderColor={borderColor}
+                borderRadius="lg"
+                mb={4}
+                overflow="hidden"
+                bg={cardBgColor}
+                transition="all 0.3s ease"
+                _hover={{
+                  boxShadow: "md",
+                  borderColor: accentColor,
+                }}
+              >
+                {({ isExpanded }) => (
+                  <>
+                    <AccordionButton
+                      py={4}
+                      px={6}
+                      _hover={{ bg: hoverBgColor }}
+                    >
+                      {/* Question as Text, NOT Heading */}
+                      <Text
+                        flex="1"
+                        textAlign="left"
+                        fontSize={{ base: "md", md: "lg" }}
+                        fontWeight="semibold"
+                      >
+                        {faq.question}
+                      </Text>
 
-    return (
-        <Box bg={bgColor} {...styles.container}>
-            <VStack spacing={8} align="stretch">
-                <Heading {...styles.heading}>
-                    {t('tool.faq-title', 'Frequently Asked Questions')}
-                </Heading>
-                <Text {...styles.subText} color={textColor}>
-                    {t('tool.faq-subtext', "Find answers to common questions about this tool. Can't find what you're looking for? Contact our support team for more help.")}
-                </Text>
-                <InputGroup {...styles.searchInput}>
-                    <InputLeftElement pointerEvents="none">
-                        <Icon as={FaSearch} color="gray.300" />
-                    </InputLeftElement>
-                    <Input 
-                        placeholder={t('tool.faq-search-placeholder', 'Search FAQs...')} 
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        bg={cardBgColor}
-                    />
-                </InputGroup>
-                <Grid {...styles.faqGrid}>
-                    {filteredFAQs.map((faq, index) => (
-                        <GridItem key={index}>
-                            <Box 
-                                {...styles.faqItem}
-                                bg={cardBgColor}
-                                borderColor={borderColor}
-                            >
-                                <VStack align="stretch" spacing={4}>
-                                    <Flex justify="space-between" align="center" onClick={() => toggleFAQ(index)} cursor="pointer">
-                                        <Heading {...styles.faqQuestion}>
-                                            {faq.question}
-                                        </Heading>
-                                        <Icon 
-                                            as={openIndices.includes(index) ? FaChevronUp : FaChevronDown} 
-                                            color="blue.500"
-                                        />
-                                    </Flex>
-                                    {openIndices.includes(index) && (
-                                        <Text color={textColor} {...styles.faqAnswer}>
-                                            {faq.answer}
-                                        </Text>
-                                    )}
-                                </VStack>
-                            </Box>
-                        </GridItem>
-                    ))}
-                </Grid>
-                {filteredFAQs.length === 0 && (
-                    <Text {...styles.noResults}>
-                        {t('tool.faq-no-results', 'No matching questions found. Please try a different search term.')}
-                    </Text>
+                      {/* Plus/Minus Icons */}
+                      <Icon
+                        as={isExpanded ? MinusIcon : AddIcon}
+                        fontSize="16px"
+                        color={accentColor}
+                        transition="all 0.2s"
+                      />
+                    </AccordionButton>
+
+                    <AccordionPanel
+                      pb={6}
+                      pt={4}
+                      px={6}
+                      bg={panelBgColor}
+                      borderTop="1px solid"
+                      borderColor={borderColor}
+                    >
+                      <Text
+                        fontSize={{ base: "md", md: "lg" }}
+                        color={textColor}
+                        lineHeight="1.7"
+                      >
+                        {faq.answer}
+                      </Text>
+                    </AccordionPanel>
+                  </>
                 )}
-                <Box textAlign="center">
-                    <Link href={QUESTION_URL} target="_blank">
-                        <Button {...styles.contactButton}>
-                            {t('tool.faq-contact-button', 'Still have questions?')}
-                        </Button>
-                    </Link>
-                </Box>
-            </VStack>
-        </Box>
-    );
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </VStack>
+
+        {/* Optional Contact Button */}
+        {showContactButton && (
+          <Box mt={8}>
+            <Link href={QUESTION_URL} target="_blank">
+              <Button colorScheme="blue" leftIcon={<FaQuestionCircle />}>
+                {t("tool.faq-contact-button", "Still have questions?")}
+              </Button>
+            </Link>
+          </Box>
+        )}
+      </VStack>
+    </Box>
+  );
 }

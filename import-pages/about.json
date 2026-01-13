@@ -1,0 +1,118 @@
+{
+  "_type": "page",
+  "title": "About Us",
+  "slug": {
+    "_type": "slug",
+    "current": "about"
+  },
+  "metaTitle": "About Us | FindRedirect",
+  "metaDescription": "Learn about FindRedirect - your trusted platform for URL redirect checking, monitoring, and optimization tools.",
+  "category": "company",
+  "widget": "none",
+  "contentBeforeWidget": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "FindRedirect is a comprehensive platform designed to help web professionals, developers, and SEO specialists manage and optimize their URL redirects effectively."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Our Mission"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "We believe that every website deserves reliable redirect management tools that are both powerful and easy to use. Our mission is to provide the best redirect checking and monitoring solutions to help you maintain optimal website performance and SEO rankings."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What We Offer"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Bulk Redirect Checker - Analyze multiple URLs simultaneously"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Chain Detection - Identify and optimize redirect chains"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Performance Monitoring - Track redirect response times"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Domain Accessibility Check - Verify website accessibility worldwide"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why Choose Us"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Our tools are built by developers for developers. We understand the challenges of managing redirects at scale and have designed our platform to make this process as simple and efficient as possible."
+        }
+      ]
+    }
+  ],
+  "contentAfterWidget": [],
+  "faqs": [],
+  "locale": "en",
+  "publishedAt": "2026-01-11T00:00:00.000Z"
+}

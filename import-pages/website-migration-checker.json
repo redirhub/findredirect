@@ -1,0 +1,562 @@
+{
+  "_type": "page",
+  "title": "Website Migration Redirect Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "website-migration-checker"
+  },
+  "metaTitle": "Website Migration Redirect Checker | Verify SEO Redirects",
+  "metaDescription": "Ensure your website migration preserves SEO value. Check all redirects, verify 301 implementation, and prevent broken links during site migration.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "Website Migration Redirect Checker",
+  "heroDescription": "Verify redirects during website migration, ensure proper 301 implementation, and preserve your SEO rankings.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check Migration Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://old-domain.com,https://old-domain.com/page,https://old-domain.com/blog"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why Website Migration Redirects Matter"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Website migration is one of the riskiest SEO operations. Poor redirect implementation can cause:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Loss of search rankings"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Broken backlinks and lost link equity"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "404 errors for users and search engines"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Decreased organic traffic"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use "
+        },
+        {
+          "_type": "span",
+          "text": "301 permanent redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for all migrated content to preserve SEO value. Our redirect checker helps you verify every URL is properly redirected."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Website Migration Checklist"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Before Migration"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Audit all existing URLs and traffic sources"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Map old URLs to new URLs"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Plan redirect strategy (1-to-1 mapping preferred)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Set up "
+        },
+        {
+          "_type": "span",
+          "text": "link monitoring",
+          "marks": ["link"],
+          "url": "/link-monitoring-checker"
+        },
+        {
+          "_type": "span",
+          "text": " to track changes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "During Migration"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Implement 301 redirects for all moved content"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Avoid redirect chains - redirect directly to final destination"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Test redirects with our bulk redirect checker"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Update internal links to point to new URLs"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "After Migration"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitor for 404 errors in Google Search Console"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check for redirect chains and loops"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Verify redirect response times"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Keep redirects active for at least 1 year"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Platform-Specific Migration Guides"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Different platforms require different redirect approaches:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress Migration",
+          "marks": ["link"],
+          "url": "/wordpress-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Using Redirection plugin or .htaccess"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify Migration",
+          "marks": ["link"],
+          "url": "/shopify-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Built-in redirect manager and URL handles"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix Migration",
+          "marks": ["link"],
+          "url": "/wix-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Wix URL redirect manager"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Common Migration Scenarios"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Domain Name Change"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Changing domains requires careful redirect planning. See our "
+        },
+        {
+          "_type": "span",
+          "text": "domain change checker",
+          "marks": ["link"],
+          "url": "/domain-change-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for specific guidance on domain migrations."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "HTTP to HTTPS"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "All HTTP URLs should 301 redirect to HTTPS equivalents. This is a permanent change that passes full SEO value."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "URL Structure Change"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Changing permalink structure, removing dates from URLs, or reorganizing site architecture all require comprehensive redirect mapping."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Redirect Type Selection"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "For website migration, always use permanent redirects:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "301 redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " - For standard page migrations"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "308 redirects",
+          "marks": ["link"],
+          "url": "/308-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " - For API endpoints requiring method preservation"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Never use temporary redirects ("
+        },
+        {
+          "_type": "span",
+          "text": "302",
+          "marks": ["link"],
+          "url": "/302-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " or "
+        },
+        {
+          "_type": "span",
+          "text": "307",
+          "marks": ["link"],
+          "url": "/307-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ") for permanent migrations as they don't pass link equity."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "What type of redirect should I use for website migration?",
+      "answer": "Use 301 (permanent) redirects for website migration. 301 redirects pass 90-99% of link equity to the new URLs and signal to search engines that the content has permanently moved. Never use 302 or 307 temporary redirects for migration as they don't pass full SEO value."
+    },
+    {
+      "_type": "object",
+      "question": "How long should I keep redirects active after migration?",
+      "answer": "Keep redirects active for at least 1 year, preferably indefinitely. Search engines need time to discover and process redirects, and backlinks may point to old URLs for years. The performance cost of maintaining redirects is minimal compared to the SEO benefits."
+    },
+    {
+      "_type": "object",
+      "question": "Will website migration hurt my SEO?",
+      "answer": "Properly executed migrations with correct 301 redirects typically preserve 90-99% of SEO value. However, you may see temporary ranking fluctuations for 1-4 weeks as search engines process the changes. Poor redirect implementation or missing redirects can significantly damage SEO."
+    },
+    {
+      "_type": "object",
+      "question": "What are redirect chains and why are they bad for migration?",
+      "answer": "Redirect chains occur when URL A redirects to URL B, which redirects to URL C. Each hop adds latency and may cause search engines to stop following the chain. During migration, redirect old URLs directly to their final destination, not through intermediary redirects."
+    },
+    {
+      "_type": "object",
+      "question": "How do I test redirects before going live with migration?",
+      "answer": "Test in a staging environment using our redirect checker tool. Create a spreadsheet mapping old URLs to new URLs, implement redirects in staging, then verify each one. Check for redirect chains, verify 301 status codes, and ensure destination URLs are correct before launching."
+    },
+    {
+      "_type": "object",
+      "question": "Should I redirect 404 pages during migration?",
+      "answer": "Yes, redirect old URLs that returned 404s if they had backlinks or traffic. Map them to the most relevant new content. However, don't redirect every 404 - pages that never had value can remain as 404s or be removed from your sitemap."
+    },
+    {
+      "_type": "object",
+      "question": "What happens if I forget to set up redirects during migration?",
+      "answer": "Missing redirects cause 404 errors, lost traffic, broken backlinks, and significant SEO damage. Users and search engines can't find your content, resulting in lost rankings and revenue. Always implement comprehensive redirect mapping before migration and verify with our checker tool."
+    },
+    {
+      "_type": "object",
+      "question": "How do I handle images and assets during migration?",
+      "answer": "All resources including images, PDFs, CSS, JavaScript, and videos should be redirected if URLs change. Missing asset redirects can cause broken images and styling issues. Test asset redirects separately to ensure your site displays correctly after migration."
+    },
+    {
+      "_type": "object",
+      "question": "Can I migrate in phases or should it be all at once?",
+      "answer": "Both approaches work. Phased migrations allow testing and refinement but require managing multiple redirect sets. All-at-once migrations are riskier but simpler to manage. Regardless of approach, thoroughly test redirects for each phase before going live."
+    },
+    {
+      "_type": "object",
+      "question": "How do I update Google about my website migration?",
+      "answer": "Submit both old and new sitemaps to Google Search Console, use the Change of Address tool if changing domains, and monitor the Coverage report for crawl errors. Google will discover your redirects through crawling, but these steps accelerate the process."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

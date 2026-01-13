@@ -11,6 +11,7 @@ export default function BlogListLayout({
   children,
   showTitle = true,
   pageTitle,
+  pages = [],
 }) {
   const router = useRouter();
   const { locale, asPath } = router;
@@ -19,7 +20,7 @@ export default function BlogListLayout({
   const canonicalUrl = `${process.env.NEXT_PUBLIC_SITE_URL || ""}${asPath}`;
 
   return (
-    <MainLayout>
+    <MainLayout pages={pages}>
       <Head>
         <title>{fullTitle}</title>
         <meta name="description" content={description} />

@@ -1,0 +1,596 @@
+{
+  "_type": "page",
+  "title": "Domain Change Redirect Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "domain-change-checker"
+  },
+  "metaTitle": "Domain Change Redirect Checker | Verify Domain Migration SEO",
+  "metaDescription": "Changing domains? Verify all redirects are properly configured. Check 301 implementation, prevent SEO loss, and ensure smooth domain transition.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "Domain Change Redirect Checker",
+  "heroDescription": "Verify redirects when changing domains. Ensure proper 301 implementation and preserve your SEO value during domain migration.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check Domain Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://olddomain.com,https://olddomain.com/blog,https://olddomain.com/products"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why Domain Changes Are Risky"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Changing your domain name is one of the most significant SEO changes you can make. Without proper "
+        },
+        {
+          "_type": "span",
+          "text": "301 redirects",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ", you risk:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Losing all search engine rankings"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Breaking all existing backlinks"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Losing social media share counts"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Confusing returning visitors"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Massive traffic drops"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Our domain change checker helps you verify every URL is properly redirected from your old domain to your new one."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Domain Change Checklist"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Before Domain Change"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Export all URLs from old domain using sitemap"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Document all backlinks using Google Search Console"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Set up new domain and replicate site structure"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Create URL mapping spreadsheet (old domain → new domain)"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Set up "
+        },
+        {
+          "_type": "span",
+          "text": "link monitoring",
+          "marks": ["link"],
+          "url": "/link-monitoring-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for both domains"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "During Domain Change"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Implement site-wide 301 redirects from old to new domain"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use page-level redirects, not just homepage redirect"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Test all critical pages with our redirect checker"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Update Google Search Console with Change of Address tool"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Submit new sitemap to search engines"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "After Domain Change"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitor for 404 errors daily"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Check for redirect chains and fix them"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Update social media profiles with new domain"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Reach out to high-value backlink sources to update links"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Keep old domain and redirects active for at least 1 year"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Common Domain Change Scenarios"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Rebranding"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Company rebrands often require domain changes. Ensure comprehensive redirect mapping and maintain redirects indefinitely."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Acquiring Better Domain"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Moving to a premium or more brandable domain requires the same careful redirect planning as any domain change."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Merger or Acquisition"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Multiple domains merging into one require complex redirect mapping. Consider maintaining separate domains if they serve different audiences."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Platform-Specific Domain Change Guides"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress Domain Change",
+          "marks": ["link"],
+          "url": "/wordpress-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Update wp-config.php and use redirect plugins"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify Domain Change",
+          "marks": ["link"],
+          "url": "/shopify-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Use Shopify's domain settings and bulk redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix Domain Change",
+          "marks": ["link"],
+          "url": "/wix-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": ": Change primary domain in Wix settings"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "SEO Best Practices for Domain Changes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use 301 Permanent Redirects: Never use "
+        },
+        {
+          "_type": "span",
+          "text": "302",
+          "marks": ["link"],
+          "url": "/302-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " or "
+        },
+        {
+          "_type": "span",
+          "text": "307 temporary redirects",
+          "marks": ["link"],
+          "url": "/307-redirect-checker"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Preserve URL Structure: Keep same URL paths when possible"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "No Redirect Chains: Redirect directly to final destination"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Monitor Rankings: Track keyword positions during transition"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "number",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Keep Old Domain Active: Maintain for minimum 1 year"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "For comprehensive "
+        },
+        {
+          "_type": "span",
+          "text": "website migration",
+          "marks": ["link"],
+          "url": "/website-migration-checker"
+        },
+        {
+          "_type": "span",
+          "text": " guidance beyond just domain changes, see our full migration checker."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "How long does it take for search engines to recognize a domain change?",
+      "answer": "Google typically processes domain changes within 2-4 weeks if properly redirected using 301s and the Change of Address tool in Search Console. However, full recovery of rankings may take 1-3 months. Keep your old domain and redirects active for at least 1 year to ensure complete transition."
+    },
+    {
+      "_type": "object",
+      "question": "Will I lose my SEO rankings when changing domains?",
+      "answer": "With proper 301 redirects, you should preserve 90-99% of your SEO value. Expect temporary ranking fluctuations during the transition period (1-4 weeks). However, poor redirect implementation or using temporary redirects instead of 301s can cause significant ranking loss."
+    },
+    {
+      "_type": "object",
+      "question": "Should I redirect to the homepage or page-level URLs?",
+      "answer": "Always use page-level redirects, not blanket homepage redirects. Redirect each old URL to its equivalent page on the new domain. Redirecting everything to the homepage loses link equity and creates poor user experience. Map URLs individually for best results."
+    },
+    {
+      "_type": "object",
+      "question": "How do I update Google about my domain change?",
+      "answer": "Use Google Search Console's Change of Address tool. You must have verified ownership of both old and new domains. Submit sitemaps for both domains, and Google will process the change faster. The tool only works for full domain changes, not subdomain or protocol changes."
+    },
+    {
+      "_type": "object",
+      "question": "Can I delete my old domain after setting up redirects?",
+      "answer": "No, you must keep the old domain active with redirects for at least 1 year, preferably indefinitely. Backlinks, bookmarks, and search engine caches will point to the old domain for years. Deleting it breaks all those links and loses accumulated SEO value."
+    },
+    {
+      "_type": "object",
+      "question": "What happens to my backlinks when I change domains?",
+      "answer": "Backlinks pointing to your old domain will pass their link equity through your 301 redirects to the new domain. However, it's beneficial to reach out to high-value link sources (major publishers, industry sites) and ask them to update links directly to your new domain."
+    },
+    {
+      "_type": "object",
+      "question": "Should I change domains and redesign at the same time?",
+      "answer": "No, avoid changing too many things simultaneously. Separate domain changes from major redesigns or content changes. This makes it easier to identify the cause of any traffic drops and reduces overall risk. Complete the domain change first, stabilize, then proceed with other changes."
+    },
+    {
+      "_type": "object",
+      "question": "How do I handle subdomains when changing domains?",
+      "answer": "Redirect each subdomain individually. If you had blog.olddomain.com, redirect it to blog.newdomain.com (or wherever you're moving that content). Map subdomains carefully and test all subdomain redirects separately to ensure complete coverage."
+    },
+    {
+      "_type": "object",
+      "question": "Will social share counts transfer to the new domain?",
+      "answer": "Unfortunately, social share counts (Facebook likes, Twitter shares, etc.) typically don't transfer to the new domain even with proper redirects. Each social platform treats the new domain as a new URL. This is one unavoidable cost of domain changes."
+    },
+    {
+      "_type": "object",
+      "question": "What if I'm changing domains and moving to a new CMS?",
+      "answer": "Tackle one change at a time if possible. If you must do both, ensure redirects map old URLs to new URLs correctly regardless of the URL structure change. Test extensively in staging before going live, and have a rollback plan ready in case of issues."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

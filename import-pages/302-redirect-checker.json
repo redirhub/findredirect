@@ -1,0 +1,369 @@
+{
+  "_type": "page",
+  "title": "302 Redirect Checker",
+  "slug": {
+    "_type": "slug",
+    "current": "302-redirect-checker"
+  },
+  "metaTitle": "Free 302 Redirect Checker Tool | Test Temporary Redirects",
+  "metaDescription": "Check 302 temporary redirects instantly. Verify redirect chains, analyze response times, and ensure proper implementation. Free bulk 302 redirect checker tool.",
+  "category": "tools",
+  "widget": "redirect",
+  "heroIcon": "FaLink",
+  "heroHeading": "302 Redirect Checker",
+  "heroDescription": "Test and verify 302 temporary redirects, analyze redirect chains, and ensure your temporary URL changes are properly implemented.",
+  "widgetConfig": [
+    {
+      "key": "buttonText",
+      "value": "Check 302 Redirects"
+    },
+    {
+      "key": "examples",
+      "value": "https://example.com,https://test.com,https://sample.com"
+    }
+  ],
+  "contentBeforeWidget": [],
+  "contentAfterWidget": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What is a 302 Redirect?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "A 302 redirect is a temporary redirect that tells browsers and search engines that a page has temporarily moved to a new location. Unlike "
+        },
+        {
+          "_type": "span",
+          "text": "301 redirects",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "text": " which are permanent, 302 redirects preserve the original URL in search engine indexes and don't pass full link equity. Use our "
+        },
+        {
+          "_type": "span",
+          "text": "redirect checker",
+          "marks": ["link"],
+          "url": "/redirect"
+        },
+        {
+          "_type": "span",
+          "text": " to verify all redirect types."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "When to Use 302 Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "302 redirects are ideal for temporary situations:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "A/B testing different landing pages"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Temporary promotions or seasonal campaigns"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Maintenance mode redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Testing new page designs before permanent migration"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Regional or language-based redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "For permanent URL changes during "
+        },
+        {
+          "_type": "span",
+          "text": "website migration",
+          "marks": ["link"],
+          "url": "/website-migration-checker"
+        },
+        {
+          "_type": "span",
+          "text": ", use 301 redirects instead. Check our "
+        },
+        {
+          "_type": "span",
+          "text": "301 redirect checker",
+          "marks": ["link"],
+          "url": "/301-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " for permanent redirects."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "302 vs Other Redirect Types"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "302 vs 301 Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "302 (Temporary): Does not pass link equity, search engines keep indexing original URL"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "301 (Permanent): Passes 90-99% link equity, search engines index new URL"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "302 vs 307 Redirects"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Both are temporary redirects, but "
+        },
+        {
+          "_type": "span",
+          "text": "307 redirects",
+          "marks": ["link"],
+          "url": "/307-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " strictly preserve the HTTP method (POST, GET, etc.), while 302 may change POST to GET. For modern web applications, use 307 or "
+        },
+        {
+          "_type": "span",
+          "text": "308 redirects",
+          "marks": ["link"],
+          "url": "/308-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Platform-Specific Implementation"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Different platforms handle 302 redirects differently. Check our platform-specific guides:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "WordPress redirect checker",
+          "marks": ["link"],
+          "url": "/wordpress-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " - For WordPress sites and plugins"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Shopify redirect checker",
+          "marks": ["link"],
+          "url": "/shopify-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " - For e-commerce stores"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Wix redirect checker",
+          "marks": ["link"],
+          "url": "/wix-redirect-checker"
+        },
+        {
+          "_type": "span",
+          "text": " - For Wix website builders"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "object",
+      "question": "What is the difference between 301 and 302 redirects?",
+      "answer": "301 redirects are permanent and pass link equity to the new URL, making search engines index the new location. 302 redirects are temporary and don't pass full link equity, keeping the original URL in search indexes. Use 301 for permanent changes and 302 for temporary situations like A/B testing or maintenance."
+    },
+    {
+      "_type": "object",
+      "question": "Do 302 redirects hurt SEO?",
+      "answer": "302 redirects don't hurt SEO when used correctly for temporary situations. However, using 302 instead of 301 for permanent changes can prevent link equity transfer and cause search engines to index the wrong URL. Always use 301 for permanent redirects to maintain SEO value."
+    },
+    {
+      "_type": "object",
+      "question": "How long can I keep a 302 redirect active?",
+      "answer": "While there's no technical time limit, 302 redirects should only be used for genuinely temporary situations. If a redirect needs to stay in place for more than a few weeks or months, consider changing it to a 301 permanent redirect to pass link equity and update search engine indexes."
+    },
+    {
+      "_type": "object",
+      "question": "Will Google follow 302 redirects?",
+      "answer": "Yes, Google and other search engines follow 302 redirects and show users the redirected content. However, they typically keep the original URL in search results rather than the destination URL, and don't pass full PageRank. If the redirect remains long-term, Google may eventually treat it as a 301."
+    },
+    {
+      "_type": "object",
+      "question": "Can I use 302 redirects for mobile versions?",
+      "answer": "While 302 redirects can work for mobile redirects, it's not recommended. Modern best practice is responsive design or dynamic serving. If you must use separate mobile URLs, implement them correctly and consider that Google prefers responsive design for mobile-friendly sites."
+    },
+    {
+      "_type": "object",
+      "question": "How do I test if my 302 redirect is working?",
+      "answer": "Use our 302 redirect checker tool to test your redirects. Enter your URL and we'll show the HTTP status code (should be 302), destination URL, response time, and any redirect chains. You can also check redirects using browser developer tools or command-line tools like curl."
+    },
+    {
+      "_type": "object",
+      "question": "Should I use 302 or 307 redirects?",
+      "answer": "For modern web applications, use 307 redirects instead of 302. The 307 status code strictly preserves the HTTP method (POST remains POST), while 302 may change POST requests to GET. For simple page redirects where method preservation doesn't matter, 302 works fine."
+    },
+    {
+      "_type": "object",
+      "question": "Can 302 redirects cause redirect chains?",
+      "answer": "Yes, 302 redirects can create redirect chains just like any other redirect type. Chains occur when URL A redirects to URL B, which redirects to URL C. This slows down page load times and can confuse search engines. Use our tool to detect and eliminate redirect chains."
+    },
+    {
+      "_type": "object",
+      "question": "Do 302 redirects pass link juice?",
+      "answer": "302 redirects pass minimal to no link juice (link equity) because they signal a temporary move. Search engines keep the link value on the original URL. If you need to pass link equity, use a 301 permanent redirect instead."
+    },
+    {
+      "_type": "object",
+      "question": "How do I change a 302 redirect to 301?",
+      "answer": "To change from 302 to 301, update your server configuration, .htaccess file, or redirect plugin settings depending on your platform. Change the status code from 302 to 301. After changing, use our redirect checker to verify the new 301 status is working correctly."
+    }
+  ],
+  "locale": "en",
+  "publishedAt": "2026-01-12T00:00:00.000Z"
+}

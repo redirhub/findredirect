@@ -1,0 +1,218 @@
+{
+  "_type": "page",
+  "title": "Terms of Service",
+  "slug": {
+    "_type": "slug",
+    "current": "terms"
+  },
+  "metaTitle": "Terms of Service | FindRedirect",
+  "metaDescription": "Read our Terms of Service to understand the rules and regulations for using FindRedirect's redirect checking tools.",
+  "category": "company",
+  "widget": "none",
+  "contentBeforeWidget": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Last updated: January 11, 2026"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Please read these Terms of Service carefully before using FindRedirect's services."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Acceptance of Terms"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "By accessing and using FindRedirect's website and services, you accept and agree to be bound by the terms and provisions of this agreement."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use of Service"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "You agree to use our redirect checking services only for lawful purposes and in accordance with these Terms. You must not:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use the service in any way that violates any applicable law or regulation"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Attempt to gain unauthorized access to our systems"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use the service to transmit malware or harmful code"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Abuse the service through excessive requests or automated scripts without permission"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Service Availability"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "We strive to maintain high availability of our services, but we do not guarantee uninterrupted access. We reserve the right to modify, suspend, or discontinue any part of our service at any time."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Limitation of Liability"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "FindRedirect and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Intellectual Property"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "All content, features, and functionality of FindRedirect are owned by us and are protected by international copyright, trademark, and other intellectual property laws."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Changes to Terms"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "We reserve the right to modify these terms at any time. We will notify users of any material changes by updating the \"Last updated\" date at the top of this page."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Contact Us"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "If you have any questions about these Terms of Service, please contact us at legal@FindRedirect.com."
+        }
+      ]
+    }
+  ],
+  "contentAfterWidget": [],
+  "faqs": [],
+  "locale": "en",
+  "publishedAt": "2026-01-11T00:00:00.000Z"
+}
