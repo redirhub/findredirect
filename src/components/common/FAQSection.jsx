@@ -20,12 +20,10 @@ import { QUESTION_URL } from "@/configs/constant";
 const styles = {
   container: {
     py: 8,
-    px: 4,
+    px: 0,
   },
   subtitle: {
-    textAlign: "center",
-    maxW: "800px",
-    mx: "auto",
+    textAlign: "left",
     mb: 8,
   },
 };
@@ -51,27 +49,20 @@ export default function FAQSection({
     title || t("tool.faq-title", "FAQ: Common Questions Answered");
 
   return (
-    <Box bg={bgColor} {...styles.container}>
+    <Box {...styles.container}>
       <VStack spacing={8} align="stretch">
         {/* Section Title - NOT a heading tag for better SEO */}
         <Text
           fontSize={{ base: "2xl", md: "3xl" }}
           fontWeight="bold"
-          textAlign="center"
-          mb={2}
+          textAlign="left"
+          mb={6}
         >
           {displayTitle}
         </Text>
 
-        <Text {...styles.subtitle} color={textColor}>
-          {t(
-            "tool.faq-subtext",
-            "Find answers to common questions about this tool. Can't find what you're looking for? Contact our support team for more help."
-          )}
-        </Text>
-
         {/* Single Column Accordion */}
-        <VStack spacing={4} align="stretch" maxW="800px" mx="auto" w="full">
+        <VStack spacing={4} align="stretch" w="full">
           <Accordion allowMultiple allowToggle>
             {data.map((faq, index) => (
               <AccordionItem
@@ -139,7 +130,7 @@ export default function FAQSection({
 
         {/* Optional Contact Button */}
         {showContactButton && (
-          <Box textAlign="center" mt={8}>
+          <Box mt={8}>
             <Link href={QUESTION_URL} target="_blank">
               <Button colorScheme="blue" leftIcon={<FaQuestionCircle />}>
                 {t("tool.faq-contact-button", "Still have questions?")}
