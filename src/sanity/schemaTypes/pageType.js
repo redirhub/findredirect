@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import { LANGUAGES, defaultLocale, getLocaleLabel } from '../../config/i18n'
+import { LANGUAGES, defaultLocale, getLocaleLabel } from '@/sanity/config/i18n'
 
 export const pageType = defineType({
   name: 'page',

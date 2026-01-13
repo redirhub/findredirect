@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { FaArrowDown, FaCircle, FaLanguage } from 'react-icons/fa';
 import { useRouter } from 'next/router';
-import { getSupportedLocales } from '@/configs/utils';
+import { allLanguages } from '@/sanity/config/i18n';
 
 export function LanguageMenu() {
     const router = useRouter();
@@ -39,7 +39,7 @@ export function LanguageMenu() {
                 </Flex>
             </MenuButton>
             <MenuList p={2} minW={'fit-content'} zIndex={999}>
-                {getSupportedLocales()?.map((lang) => (
+                {allLanguages()?.map((lang) => (
                     <MenuItem
                         key={lang.value}
                         onClick={() => router.push(router.pathname, router.asPath, { locale: lang.value })}

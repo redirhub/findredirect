@@ -1,6 +1,6 @@
 import { createClient } from '@sanity/client';
 import OpenAI from 'openai';
-import { allLanguages } from '../../config/i18n';
+import { allLanguages } from '@/sanity/config/i18n';
 
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -28,7 +28,7 @@ const LOCALE_NAMES = {
 };
 
 async function translateText(text, targetLocale) {
-  const targetLanguage = LOCALE_NAMES[targetLocale];
+  const targetLanguage = LOCALE_NAMES[ targetLocale ];
 
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
@@ -45,11 +45,11 @@ async function translateText(text, targetLocale) {
     temperature: 0.3,
   });
 
-  return response.choices[0].message.content.trim();
+  return response.choices[ 0 ].message.content.trim();
 }
 
 async function translateMetadata(sourceDoc, targetLocale) {
-  const targetLanguage = LOCALE_NAMES[targetLocale];
+  const targetLanguage = LOCALE_NAMES[ targetLocale ];
 
   // Prepare structured metadata for translation
   const metadata = {
@@ -75,14 +75,14 @@ async function translateMetadata(sourceDoc, targetLocale) {
     response_format: { type: "json_object" },
   });
 
-  const translatedMetadata = JSON.parse(response.choices[0].message.content);
+  const translatedMetadata = JSON.parse(response.choices[ 0 ].message.content);
 
   // Preserve _key fields from original FAQs
   const translatedFaqs = Array.isArray(translatedMetadata.faqs)
     ? translatedMetadata.faqs.map((faq, index) => ({
-        ...faq,
-        _key: sourceDoc.faqs?.[index]?._key || faq._key,
-      }))
+      ...faq,
+      _key: sourceDoc.faqs?.[ index ]?._key || faq._key,
+    }))
     : sourceDoc.faqs || [];
 
   return {
@@ -129,7 +129,7 @@ async function translatePortableText(content, targetLocale) {
 
 async function createTranslatedDocument(sourceDoc, targetLocale) {
   // Translate metadata (title, excerpt, tags, FAQs) and content in parallel for maximum speed
-  const [translatedMetadata, translatedContent] = await Promise.all([
+  const [ translatedMetadata, translatedContent ] = await Promise.all([
     translateMetadata(sourceDoc, targetLocale),
     translatePortableText(sourceDoc.content, targetLocale),
   ]);

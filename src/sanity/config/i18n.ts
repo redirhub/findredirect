@@ -1,7 +1,12 @@
-// Centralized i18n configuration
-// Used by both Next.js and Sanity
+// Centralized i18n configuration shared by Sanity and Next.js
+export interface Language {
+  id: string
+  title: string
+  nativeName: string
+  flag: string
+}
 
-const LANGUAGES = [
+export const LANGUAGES: Language[] = [
   { id: 'en', title: 'English', nativeName: 'English', flag: '🇬🇧' },
   { id: 'de', title: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
   { id: 'es', title: 'Spanish', nativeName: 'español', flag: '🇪🇸' },
@@ -11,28 +16,16 @@ const LANGUAGES = [
   { id: 'ja', title: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
   { id: 'zh', title: 'Chinese', nativeName: '简体中文', flag: '🇨🇳' },
   { id: 'ko', title: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
-];
+]
 
-const allLanguages = LANGUAGES.map(lang => lang.id);
+export const allLanguages = LANGUAGES.map((lang) => lang.id)
+export const defaultLocale = 'en'
 
-const defaultLocale = 'en';
+export const getLocaleLabel = (locale: string): string => {
+  const lang = LANGUAGES.find((l) => l.id === locale)
+  return lang ? `${lang.flag} ${lang.nativeName}` : locale
+}
 
-const getLocaleLabel = (locale) => {
-  const lang = LANGUAGES.find(l => l.id === locale);
-  return lang ? `${lang.flag} ${lang.nativeName || lang.title}` : locale;
-};
-
-// CommonJS export
-module.exports = {
-  LANGUAGES,
-  allLanguages,
-  defaultLocale,
-  getLocaleLabel,
-};
-
-// ES module export
-module.exports.LANGUAGES = LANGUAGES;
-module.exports.allLanguages = allLanguages;
-module.exports.defaultLocale = defaultLocale;
-module.exports.getLocaleLabel = getLocaleLabel;
-
+export const getLanguageByLocale = (locale: string): Language | undefined => {
+  return LANGUAGES.find((l) => l.id === locale)
+}
