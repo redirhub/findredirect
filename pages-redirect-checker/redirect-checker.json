@@ -1,17 +1,17 @@
 {
   "_type": "page",
-  "title": "Bulk Redirect Checker",
+  "title": "Redirect Checker",
   "slug": {
     "_type": "slug",
     "current": "home"
   },
-  "metaTitle": "Free Bulk Redirect Checker | Analyze URL Chains & Performance",
-  "metaDescription": "Check multiple URL redirects instantly. Analyze redirect chains, measure response times, verify 301/302/307/308 status codes, and optimize website performance. Free bulk redirect testing tool.",
+  "metaTitle": "Free Redirect Checker | Analyze URL Chains & Performance",
+  "metaDescription": "Check URL redirects instantly. Analyze redirect chains, measure response times, verify 301/302/307/308 status codes, and optimize website performance. Free redirect testing tool.",
   "category": "tools",
   "widget": "redirect",
   "heroIcon": "FaLink",
-  "heroHeading": "Bulk Redirect Checker",
-  "heroDescription": "Check multiple URL redirects simultaneously. Analyze redirect chains, verify status codes, and measure performance.",
+  "heroHeading": "Redirect Checker",
+  "heroDescription": "Check URL redirects quickly. Analyze redirect chains, verify status codes, and measure performance.",
   "contentBeforeWidget": [],
   "contentAfterWidget": [
     {
@@ -20,7 +20,7 @@
       "children": [
         {
           "_type": "span",
-          "text": "What is a Bulk Redirect Checker?"
+          "text": "What is a Redirect Checker?"
         }
       ]
     },
@@ -30,7 +30,7 @@
       "children": [
         {
           "_type": "span",
-          "text": "Our bulk redirect checker allows you to test multiple URLs simultaneously, providing detailed analysis of redirect behavior, status codes, and performance metrics. Whether you're managing a "
+          "text": "Our redirect checker provides detailed analysis of redirect behavior, status codes, and performance metrics. Whether you're managing a "
         },
         {
           "_type": "span",
@@ -210,7 +210,7 @@
         },
         {
           "_type": "span",
-          "text": ", bulk testing ensures every page on your old domain properly redirects to the new domain, preserving SEO value and user bookmarks."
+          "text": ", testing ensures every page on your old domain properly redirects to the new domain, preserving SEO value and user bookmarks. For testing multiple URLs at once, use our Bulk Redirect Checker."
         }
       ]
     },
@@ -260,7 +260,7 @@
       "children": [
         {
           "_type": "span",
-          "text": "Different platforms handle redirects differently. Use our bulk checker with platform-specific guides:"
+          "text": "Different platforms handle redirects differently. Use our checker with these platform-specific guides:"
         }
       ]
     },
@@ -468,9 +468,33 @@
       "children": [
         {
           "_type": "span",
+          "text": "Bulk Redirect Checker",
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/bulk-redirect-checker"
+            }
+          ]
+        },
+        {
+          "_type": "span",
+          "text": ": Check multiple URL redirects at once"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "listItem": "bullet",
+      "children": [
+        {
+          "_type": "span",
           "text": "Short URL Expander",
-          "marks": ["link"],
-          "url": "/expander"
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/expander"
+            }
+          ]
         },
         {
           "_type": "span",
@@ -485,8 +509,12 @@
         {
           "_type": "span",
           "text": "Domain Block Checker",
-          "marks": ["link"],
-          "url": "/block"
+          "marks": [
+            {
+              "_type": "link",
+              "href": "/block"
+            }
+          ]
         },
         {
           "_type": "span",
@@ -498,13 +526,13 @@
   "faqs": [
     {
       "_type": "object",
-      "question": "What is a bulk redirect checker and why do I need one?",
-      "answer": "A bulk redirect checker allows you to test multiple URLs simultaneously rather than checking them one at a time. This is essential for website migrations, domain changes, or when managing large websites with hundreds of redirects. Testing in bulk saves time and ensures comprehensive coverage, helping you catch redirect errors before they impact users or SEO."
+      "question": "What is a redirect checker and why do I need one?",
+      "answer": "A redirect checker analyzes URL redirects to show you redirect chains, status codes, and final destinations. It's essential for troubleshooting redirect issues, verifying proper configuration, and ensuring optimal SEO performance. For testing multiple URLs at once, use our Bulk Redirect Checker tool."
     },
     {
       "_type": "object",
-      "question": "How do I check multiple redirects at once?",
-      "answer": "Enter multiple URLs (one per line) into our bulk redirect checker tool. Click the check button and our tool will test all URLs simultaneously, showing you the redirect type, status code, destination URL, response time, and any redirect chains for each URL. Results are displayed in an easy-to-read format for quick analysis."
+      "question": "How do I check a redirect?",
+      "answer": "Enter a URL into our redirect checker tool and click the check button. Our tool will follow the redirect chain and show you the redirect type, status code, destination URL, response time, and any intermediate hops. For checking multiple URLs simultaneously, use our Bulk Redirect Checker."
     },
     {
       "_type": "object",
@@ -514,7 +542,7 @@
     {
       "_type": "object",
       "question": "Can I use this tool to check redirects after a website migration?",
-      "answer": "Yes, this is one of the primary use cases. After migrating your website, export your old URLs from a sitemap, paste them into our bulk checker, and verify that all URLs properly redirect to their new locations. This helps catch missing redirects, broken redirect chains, or incorrect destination URLs before they damage your SEO."
+      "answer": "Yes, this is one of the primary use cases. After migrating your website, use our tool to verify that URLs properly redirect to their new locations. For testing multiple URLs from a sitemap, use our Bulk Redirect Checker which can test hundreds of URLs at once to catch missing redirects or incorrect destinations."
     },
     {
       "_type": "object",
@@ -538,8 +566,8 @@
     },
     {
       "_type": "object",
-      "question": "What's the difference between checking one URL versus bulk checking?",
-      "answer": "Single URL checking is great for quick tests or troubleshooting specific pages. Bulk checking lets you test hundreds of URLs simultaneously, essential for comprehensive site audits, migrations, or regular monitoring. Bulk testing is more efficient and ensures you don't miss any problematic redirects across your site."
+      "question": "When should I use the single vs bulk redirect checker?",
+      "answer": "Use our single redirect checker for quick tests or troubleshooting specific pages. It's perfect for debugging individual redirect issues or verifying a particular URL. Use our Bulk Redirect Checker when you need to test hundreds of URLs simultaneously for comprehensive site audits, migrations, or regular monitoring."
     },
     {
       "_type": "object",

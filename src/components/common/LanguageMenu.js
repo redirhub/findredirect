@@ -18,9 +18,6 @@ export function LanguageMenu() {
     const { locale } = router;
 
     const buttonStyles = {
-        colorScheme: "white",
-        px: 3,
-        py: 2,
         rounded: "full",
     };
 
