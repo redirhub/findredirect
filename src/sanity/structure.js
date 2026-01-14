@@ -9,11 +9,12 @@ export const structure = (S) => {
   }
 
   // Find the selected language info
-  const selectedLang = LANGUAGES.find(l => l.id === selectedLanguage) || LANGUAGES[ 0 ];
+  const selectedLang = LANGUAGES.find(l => l.id === selectedLanguage) || LANGUAGES[0];
 
   return S.list()
     .title('Content')
     .items([
+      // Posts
       S.listItem()
         .id('posts')
         .title('Posts')
@@ -23,11 +24,23 @@ export const structure = (S) => {
             .title(`Posts - ${selectedLang.flag} ${selectedLang.nativeName || selectedLang.title}`)
             .filter('_type == "post" && locale == $locale')
             .params({ locale: selectedLanguage })
-            .defaultOrdering([ { field: 'publishedAt', direction: 'desc' } ])
+            .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+        ),
+      // Pages
+      S.listItem()
+        .id('pages')
+        .title('Pages')
+        .icon(() => '📄')
+        .child(
+          S.documentTypeList('page')
+            .title(`Pages - ${selectedLang.flag} ${selectedLang.nativeName || selectedLang.title}`)
+            .filter('_type == "page" && locale == $locale')
+            .params({ locale: selectedLanguage })
+            .defaultOrdering([{ field: 'title', direction: 'asc' }])
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (listItem) => listItem.getId() !== 'post'
+        (listItem) => !['post', 'page'].includes(listItem.getId())
       ),
     ]);
 };
