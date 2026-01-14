@@ -33,6 +33,7 @@ yarn generate-locales
 ### Pages-Based Routing (Next.js Pages Router)
 
 The project uses Next.js Pages Router with the following main pages:
+
 - `/` - Index page (configurable via `NEXT_PUBLIC_INDEX` env var, defaults to uptime)
 - `/redirect` - Redirect checker tool
 - `/block` - Block checker tool
@@ -55,6 +56,7 @@ The i18n setup is complex and uses a custom backend chain:
 ### API Routes
 
 Key API endpoints:
+
 - `/api/redirects` - POST endpoint for checking URL redirects (max 5 hops)
 - `/api/uptime` - GET endpoint for uptime data (cached, from updown.io API)
 - `/api/block` - Block checking functionality
@@ -80,6 +82,7 @@ src/components/
 ### Configuration System
 
 All environment-based configuration is centralized in `src/configs/constant.js`. Key configs:
+
 - App name, logo, and branding
 - API keys and base URLs for uptime monitoring
 - Translation URLs
@@ -96,6 +99,7 @@ All environment-based configuration is centralized in `src/configs/constant.js`.
 ### Pre-commit Hooks
 
 The project uses Husky + lint-staged:
+
 - Runs ESLint with auto-fix on staged `.js` files
 - Runs `yarn lint:fix` on all files before commit
 
@@ -116,11 +120,12 @@ Rate limiting is configured for production only (skipped in development). Uses V
 
 ### Sitemap Generation
 
-`next-sitemap` runs post-build to generate sitemap.xml and robots.txt. Non-English locales are excluded from sitemap.
+`generate-sitemap` runs post-build to generate sitemap.xml and robots.txt. Non-English locales are excluded from sitemap.
 
 ## Environment Variables
 
 Required environment variables (see `.env` for examples):
+
 - `API_BASE` - Uptime monitoring API base URL (e.g., updown.io)
 - `API_KEY` - Uptime monitoring API key
 - `SITES` - JSON array of site tokens to monitor
