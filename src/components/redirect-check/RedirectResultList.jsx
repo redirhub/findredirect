@@ -71,11 +71,12 @@ export default function RedirectResultList({ results }) {
   const toast = useToast();
   const [showDetails, setShowDetails] = useState({});
 
-  // Find the fastest result
+  // Find the fastest result (only for 30x redirects)
   const fastestResult = results.reduce((fastest, current) => {
     const currentTime = current.totalTime;
     const fastestTime = fastest ? fastest.totalTime : Infinity;
-    return currentTime < fastestTime && !current.error_msg ? current : fastest;
+    const isValidRedirect = !current.error_msg && current.statusCode >= 300 && current.statusCode < 400;
+    return currentTime < fastestTime && isValidRedirect ? current : fastest;
   }, null);
 
   const handleOpenUrl = (url) => {
