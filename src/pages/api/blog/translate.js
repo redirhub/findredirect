@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client';
-import { allLanguages } from '../@/sanity/config/i18n';
+import { allLanguages } from '@/sanity/config/i18n';
 
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,

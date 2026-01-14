@@ -11,7 +11,7 @@
  * The AI translation button calls /api/sanity/process-translations which uses
  * the generalized translation service from src/lib/translation/translate-document.ts
  *
- * Supported document types: post, support, legal, faqSet
+ * Supported document types: post, page
  */
 
 import { definePlugin } from 'sanity'
@@ -34,7 +34,7 @@ interface LanguageSwitcherProps {
 }
 
 // Document types that support translation
-const TRANSLATABLE_TYPES = ['post', 'support', 'legal', 'faqSet']
+const TRANSLATABLE_TYPES = ['post', 'page']
 
 function LanguageSwitcherComponent({
   document,
@@ -47,10 +47,8 @@ function LanguageSwitcherComponent({
   const [jobLoading, setJobLoading] = useState(false)
 
   useEffect(() => {
-    // For faqSet, use pageSlug; for others use slug.current
-    const identifier = documentType === 'faqSet'
-      ? document?.pageSlug
-      : document?.slug?.current
+    // Both post and page use slug.current
+    const identifier = document?.slug?.current
 
     if (!identifier) {
       setTranslations([])
@@ -59,10 +57,8 @@ function LanguageSwitcherComponent({
 
     setLoading(true)
 
-    // Build query based on document type
-    const query = documentType === 'faqSet'
-      ? `*[_type == "${documentType}" && pageSlug == $slug]{ _id, locale, title, pageSlug }`
-      : `*[_type == "${documentType}" && slug.current == $slug]{ _id, locale, title }`
+    // Query for translations using slug.current
+    const query = `*[_type == "${documentType}" && slug.current == $slug]{ _id, locale, title }`
 
     fetch(
       `/api/sanity/query?query=${encodeURIComponent(query)}&slug=${identifier}&fresh=true`
@@ -176,15 +172,11 @@ function LanguageSwitcherComponent({
                 console.log('✅ Translation completed:', result)
 
                 // Reload translations with retry logic (Sanity has eventual consistency)
-                const identifier = documentType === 'faqSet'
-                  ? document?.pageSlug
-                  : document?.slug?.current
+                const identifier = document?.slug?.current
 
                 if (identifier) {
                   setLoading(true)
-                  const query = documentType === 'faqSet'
-                    ? `*[_type == "${documentType}" && pageSlug == $slug]{ _id, locale, title, pageSlug }`
-                    : `*[_type == "${documentType}" && slug.current == $slug]{ _id, locale, title }`
+                  const query = `*[_type == "${documentType}" && slug.current == $slug]{ _id, locale, title }`
 
                   // Use fresh=true to bypass Sanity CDN cache after translation
                   const queryResponse = await fetch(

@@ -263,6 +263,14 @@ export const pageType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'needsTranslation',
+      type: 'boolean',
+      title: 'Needs Translation',
+      description: 'Auto translate page in background',
+      initialValue: false,
+      hidden: ({ document }) => document?.locale !== 'en',
+    }),
+    defineField({
       name: 'customStructuredData',
       type: 'text',
       title: 'Custom Structured Data (JSON-LD)',
