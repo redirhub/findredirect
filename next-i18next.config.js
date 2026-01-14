@@ -1,7 +1,7 @@
 // next-i18next.config.js
 const HttpBackend = require('i18next-http-backend/cjs')
 const ChainedBackend = require('i18next-chained-backend').default
-const { allLanguages, defaultLocale } = require('./src/sanity/config/i18n')
+const { allLanguages, defaultLocale } = require('./src/sanity/config/i18n.js')
 
 const path = require('path');
 const isBrowser = typeof window !== 'undefined'
