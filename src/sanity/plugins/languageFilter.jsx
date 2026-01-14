@@ -1,7 +1,7 @@
 import { definePlugin } from 'sanity';
 import { Flex, Select, Text, Box } from '@sanity/ui';
 import { useRouter, useRouterState } from 'sanity/router';
-import { LANGUAGES, defaultLocale } from '../../config/i18n';
+import { LANGUAGES, defaultLocale } from '@/sanity/config/i18n';
 
 // Language Filter Component for Studio Navbar
 function LanguageFilterNavbar(props) {

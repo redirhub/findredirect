@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { FaGlobe } from 'react-icons/fa';
-import { LANGUAGES } from '../../config/i18n';
+import { LANGUAGES } from '@/sanity/config/i18n';
 
 // Transform centralized config to component format
 const LANGUAGE_CONFIG = LANGUAGES.reduce((acc, lang) => {

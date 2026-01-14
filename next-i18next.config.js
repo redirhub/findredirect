@@ -1,7 +1,7 @@
 // next-i18next.config.js
 const HttpBackend = require('i18next-http-backend/cjs')
 const ChainedBackend = require('i18next-chained-backend').default
-const { allLanguages, defaultLocale } = require('./src/config/i18n')
+const { allLanguages, defaultLocale } = require('./src/sanity/config/i18n')
 
 const path = require('path');
 const isBrowser = typeof window !== 'undefined'
@@ -17,7 +17,7 @@ class NoLoadHttpBackend extends HttpBackend {
 module.exports = {
     i18n: {
         locales: allLanguages,
-        defaultLocale: process.env.NEXT_PUBLIC_LOCALE || defaultLocale,
+        defaultLocale: defaultLocale,
         // localeDetection: true,
     },
     backend: {

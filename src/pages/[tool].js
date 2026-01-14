@@ -16,7 +16,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { generateHrefLangsAndCanonicalTag } from "@/utils";
 import { fetchAllPagesForFooter, fetchPageBySlug, fetchAllPageSlugs } from "@/services/pageService";
-import { allLanguages } from "@/config/i18n";
+import { allLanguages } from "@/sanity/config/i18n";
 
 // Map widget types to components
 const WIDGET_COMPONENTS = {

@@ -74,11 +74,10 @@ git push
 
 ## Files Modified
 
-- ✅ `src/pages/api/queue/translate.js` - NEW: Queue consumer
-- ✅ `src/pages/api/webhooks/sanity.js` - NEW: Webhook handler
-- ✅ `src/pages/api/blog/translate.js` - Updated: Now enqueues jobs
-- ✅ `src/sanity/plugins/languageSwitcher.jsx` - Updated: Shows background status
-- ✅ `package.json` - Added: @vercel/functions
+- ✅ `src/lib/translation/translate-document.ts` - NEW: Unified translation service
+- ✅ `src/app/api/sanity/process-translations/route.ts` - NEW: Translation API endpoint
+- ✅ `src/sanity/plugins/languageSwitcher.tsx` - Updated: Uses new API endpoint
+- ✅ `package.json` - Added: OpenAI dependency
 
 ## Troubleshooting
 

@@ -43,7 +43,7 @@ export function AIAssistantAction(props) {
     setGeneratedPost(null)
 
     try {
-      const response = await fetch('/api/generate-post', {
+      const response = await fetch('/api/sanity/generate-post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export function AIAssistantAction(props) {
       const results = {}
 
       for (const field of fields) {
-        const response = await fetch('/api/generate-field', {
+        const response = await fetch('/api/sanity/generate-field', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

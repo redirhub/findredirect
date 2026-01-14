@@ -60,7 +60,7 @@ Key API endpoints:
 - `/api/block` - Block checking functionality
 - `/api/translation/[slug]` - Translation fetching
 - `/api/translation/missing` - Missing translation tracking
-- `/api/weglot/[...path]` - Weglot integration proxy
+- `/api/sanity/*` - Sanity CMS integration endpoints (translation, content generation)
 
 ### Middleware
 
