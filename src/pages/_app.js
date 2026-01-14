@@ -7,6 +7,7 @@ import nextI18nConfig from '../../next-i18next.config'
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import NProgress from "nprogress";
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -43,6 +44,9 @@ const App = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
+      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      )}
     </ChakraProvider>
   );
 }
