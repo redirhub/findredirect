@@ -86,7 +86,7 @@ export default function RedirectChecker({children, icon, ...config}) {
   }, [urls, toast]);
 
   const handleShowExamples = () => {
-    const exampleUrls = examples.join("\n");
+    const exampleUrls = processedExamples.join("\n");
     setUrls(exampleUrls);
   };
 
