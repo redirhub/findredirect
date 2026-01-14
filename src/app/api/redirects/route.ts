@@ -107,24 +107,15 @@ export async function POST(req: NextRequest) {
       const timeout = getTimeout(urlsToCheck.length)
 
       // Process all URLs in parallel
-      const allResults = await Promise.all(
-        urlsToCheck.map((u: string) => checkSingleUrl(u, timeout))
+      const results = await Promise.all(
+        urlsToCheck.map(singleUrl => checkSingleUrl(singleUrl, timeout))
       )
 
-      // Flatten results: each URL may have multiple redirect hops
-      const flatResults = allResults.flat()
-
-      return NextResponse.json(
-        { results: flatResults },
-        { headers }
-      )
+      return NextResponse.json(results, { headers })
     } else if (url) {
-      // Single URL mode
-      const results = await checkSingleUrl(url, 5000)
-      return NextResponse.json(
-        { results },
-        { headers }
-      )
+      // Single URL mode (backward compatibility)
+      const results = await checkSingleUrl(url, getTimeout(1))
+      return NextResponse.json(results, { headers })
     } else {
       return NextResponse.json(
         { error: 'Missing url or urls parameter' },
