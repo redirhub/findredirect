@@ -66,6 +66,10 @@ async function importToolPage(jsonFilePath) {
     // Add _key properties to all array items
     pageData = addKeysToArrays(pageData);
 
+    if (typeof pageData.needsTranslation === 'undefined') {
+      pageData.needsTranslation = true;
+    }
+
     console.log(`📄 Importing page: ${pageData.title}`);
     console.log(`🔗 Slug: ${pageData.slug.current}`);
 
