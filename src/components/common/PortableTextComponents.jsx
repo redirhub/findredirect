@@ -50,20 +50,19 @@ export const createPortableTextComponents = (options = {}) => {
     marks: {
       // Internal links
       internalLink: ({ value, children }) => {
-        const href = value?.reference?.slug?.current
-          ? `/${value.reference.slug.current}`
-          : '#';
+        const slug = value?.reference?.slug?.current;
+        if (!slug) return <>{children}</>;
 
         return (
-          <Link href={href} passHref legacyBehavior>
-            <ChakraLink
-              color="blue.600"
-              textDecoration="underline"
-              _hover={{ color: "blue.700" }}
-            >
-              {children}
-            </ChakraLink>
-          </Link>
+          <ChakraLink
+            as={Link}
+            href={`/${slug}`}
+            color="blue.600"
+            textDecoration="underline"
+            _hover={{ color: "blue.700" }}
+          >
+            {children}
+          </ChakraLink>
         );
       },
       // External links
