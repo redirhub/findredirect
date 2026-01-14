@@ -1,16 +1,8 @@
 {
   "crons": [
     {
-      "path": "/api/process-translations",
+      "path": "/api/sanity/process-translations",
       "schedule": "0 1 * * *"
     }
-  ],
-  "functions": {
-    "src/pages/api/process-translations.js": {
-      "maxDuration": 300
-    },
-    "src/pages/api/translate-post.js": {
-      "maxDuration": 300
-    }
-  }
+  ]
 }
