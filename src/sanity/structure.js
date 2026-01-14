@@ -1,4 +1,4 @@
-import { LANGUAGES, defaultLocale } from '../config/i18n';
+import { LANGUAGES, defaultLocale } from '@/sanity/config/i18n';
 
 export const structure = (S) => {
   // Get language from sessionStorage (client-side), default to 'en'
@@ -9,7 +9,7 @@ export const structure = (S) => {
   }
 
   // Find the selected language info
-  const selectedLang = LANGUAGES.find(l => l.id === selectedLanguage) || LANGUAGES[0];
+  const selectedLang = LANGUAGES.find(l => l.id === selectedLanguage) || LANGUAGES[ 0 ];
 
   return S.list()
     .title('Content')
@@ -23,7 +23,7 @@ export const structure = (S) => {
             .title(`Posts - ${selectedLang.flag} ${selectedLang.nativeName || selectedLang.title}`)
             .filter('_type == "post" && locale == $locale')
             .params({ locale: selectedLanguage })
-            .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+            .defaultOrdering([ { field: 'publishedAt', direction: 'desc' } ])
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(

@@ -1,4 +1,4 @@
-import { allLanguages, defaultLocale } from '../config/i18n';
+import { allLanguages, defaultLocale } from '@/sanity/config/i18n';
 
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'FindRedirect';
 export const APP_LOGO = process.env.NEXT_PUBLIC_APP_LOGO || '/logo.png';
