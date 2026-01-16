@@ -211,6 +211,11 @@ export default function PostPage({ postData, pages = [] }) {
           />
         )}
 
+        <link
+          key="canonical"
+          rel="canonical"
+          href={getHrefForLocale(locale ?? LOCALE, asPath)}
+        />
         {postData.availableTranslations &&
           postData.availableTranslations.map((translation) => (
             <link
@@ -355,7 +360,7 @@ export async function getStaticPaths() {
     const posts = await client.fetch(SLUGS_QUERY);
 
     const paths = posts.map((post) => ({
-      params: { blog: [post.slug] },
+      params: { blog: [ post.slug ] },
       locale: post.locale || "en",
     }));
 
@@ -373,7 +378,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params, locale }) {
-  const slug = params.blog ? params.blog[0] : null;
+  const slug = params.blog ? params.blog[ 0 ] : null;
 
   if (!slug) {
     return {
@@ -456,10 +461,10 @@ export async function getStaticProps({ params, locale }) {
 
     const relatedPosts = postData.tags && postData.tags.length > 0
       ? await client.fetch(RELATED_POSTS_QUERY, {
-          postId: postData._id,
-          locale: locale || 'en',
-          tags: postData.tags,
-        })
+        postId: postData._id,
+        locale: locale || 'en',
+        tags: postData.tags,
+      })
       : [];
 
     const pages = await fetchAllPagesForFooter(locale || 'en');
@@ -473,7 +478,7 @@ export async function getStaticProps({ params, locale }) {
           relatedPosts: relatedPosts || [],
         },
         pages,
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, [ "common" ])),
       },
       revalidate: 60,
     };
