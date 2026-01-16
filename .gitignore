@@ -39,5 +39,5 @@ next-env.d.ts
 
 # public
 public/locales
-public/robots.txt
+# public/robots.txt
 public/sitemap*.xml
