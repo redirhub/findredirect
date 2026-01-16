@@ -34,7 +34,7 @@ module.exports = {
         backends: isBrowser ? [ NoLoadHttpBackend ] : [],
     },
     partialBundledLanguages: isBrowser && true,
-    use: isBrowser ? [ ChainedBackend ] : [],
+    // use: isBrowser ? [ ChainedBackend ] : [],
     debug: isDev,
     localePath: path.resolve(process.cwd(), 'public/locales'),
     revalidate: isDev,

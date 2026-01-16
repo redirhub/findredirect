@@ -11,7 +11,6 @@
     "prepare": "husky",
     "generate-locales": "node scripts/generate-locales.js",
     "generate-sitemap": "node scripts/generate-sitemap.js",
-    "postbuild": "next-sitemap",
     "migrate:remove-baseSlug": "node scripts/remove-baseSlug.js",
     "migrate:wp": "node scripts/migrate-wordpress-to-sanity.js"
   },
