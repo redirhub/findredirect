@@ -53,7 +53,7 @@ export default function FAQSection({
     <Box {...styles.container}>
       <VStack spacing={8} align="stretch">
         <Heading
-          as="h2"
+          as="p"
           fontSize={{ base: "2xl", md: "3xl" }}
           fontWeight="bold"
           textAlign="left"
@@ -87,15 +87,15 @@ export default function FAQSection({
                       px={6}
                       _hover={{ bg: hoverBgColor }}
                     >
-                      {/* Question as Text, NOT Heading */}
-                      <Text
+                      <Heading
+                        as="h2"
                         flex="1"
                         textAlign="left"
                         fontSize={{ base: "md", md: "lg" }}
                         fontWeight="semibold"
                       >
                         {faq.question}
-                      </Text>
+                      </Heading>
 
                       {/* Plus/Minus Icons */}
                       <Icon
