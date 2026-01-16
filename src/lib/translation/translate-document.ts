@@ -117,6 +117,11 @@ async function translateMetadata(
     metadata.heroHeading = sourceDoc.heroHeading || ''
     metadata.heroDescription = sourceDoc.heroDescription || ''
     metadata.faqs = sourceDoc.faqs || []
+
+    // Include widgetConfig for translation
+    if (sourceDoc.widgetConfig && Array.isArray(sourceDoc.widgetConfig)) {
+      metadata.widgetConfig = sourceDoc.widgetConfig
+    }
   }
 
   const openai = getOpenAIClient()
@@ -125,7 +130,11 @@ async function translateMetadata(
     messages: [
       {
         role: 'system',
-        content: `You are a professional translator. Translate the following document metadata to ${targetLanguage}. Maintain the tone, style, and context. Return ONLY a valid JSON object with the same structure, containing the translations. Do not add any explanations or markdown formatting.`,
+        content: `You are a professional translator. Translate the following document metadata to ${targetLanguage}. Maintain the tone, style, and context.
+
+For the widgetConfig array, only translate the "value" field when the "key" ends with "Text". Keep all other values unchanged.
+
+Return ONLY a valid JSON object with the same structure, containing the translations. Do not add any explanations or markdown formatting.`,
       },
       {
         role: 'user',
@@ -264,7 +273,7 @@ async function createTranslatedDocument(
       faqs: translatedMetadata.faqs,
       category: sourceDoc.category, // Preserve, not translated
       widget: sourceDoc.widget, // Preserve, not translated
-      widgetConfig: sourceDoc.widgetConfig, // Preserve, not translated
+      widgetConfig: translatedMetadata.widgetConfig || sourceDoc.widgetConfig, // AI translates Text values
     }
   }
 
