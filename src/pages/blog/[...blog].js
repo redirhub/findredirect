@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import MainLayout from "@/layouts/MainLayout";
 import { urlFor } from "@/sanity/lib/image";
-import { APP_NAME } from "@/configs/constant";
+import { APP_NAME, LOCALE } from "@/configs/constant";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PostHeader from "@/components/blog/PostHeader";
 import TableOfContents from "@/components/blog/TableOfContents";
@@ -23,6 +23,7 @@ import RelatedArticles from "@/components/blog/RelatedArticles";
 import FAQSection from "@/components/common/FAQSection";
 import { createPortableTextComponents } from "@/components/common/PortableTextComponents";
 import { fetchAllPagesForFooter } from "@/services/pageService";
+import { getHrefForLocale } from "@/utils";
 
 const WORDS_PER_MINUTE = 200;
 
@@ -47,7 +48,7 @@ const calculateReadTimeMinutes = (content) => {
 
 export default function PostPage({ postData, pages = [] }) {
   const router = useRouter();
-  const { asPath } = router;
+  const { locale, asPath } = router;
   const currentHeadingIndexRef = useRef(-1);
 
   if (!postData) {
@@ -214,7 +215,7 @@ export default function PostPage({ postData, pages = [] }) {
         <link
           key="canonical"
           rel="canonical"
-          href={getHrefForLocale(locale ?? LOCALE, asPath)}
+          href={getHrefForLocale(locale, asPath)}
         />
         {postData.availableTranslations &&
           postData.availableTranslations.map((translation) => (
