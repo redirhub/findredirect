@@ -13,6 +13,7 @@ export default function SiteLinks({ url, token, official }) {
         <Button
           as={Link}
           href={`https://updown.io/${token}`}
+          rel="nofollow"
           target="_blank"
           size={{ base: "xs", sm: "sm" }}
           colorScheme="blue"
@@ -29,6 +30,7 @@ export default function SiteLinks({ url, token, official }) {
           as={Link}
           href={official}
           target="_blank"
+          rel="nofollow"
           size={{ base: "xs", sm: "sm" }}
           colorScheme="green"
           leftIcon={<FaExternalLinkAlt />}
