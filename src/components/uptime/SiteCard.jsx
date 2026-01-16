@@ -55,7 +55,7 @@ const SiteTitle = ({ alias, name, url, isFastest, t }) => (
       maxWidth={{ base: "100%" }}
     >
       <Heading
-        as="h4"
+        as="span"
         fontSize={{ base: "lg", sm: getFluidFontSize(20, 24) }}
         fontWeight="600"
         whiteSpace="nowrap"

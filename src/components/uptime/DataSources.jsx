@@ -9,7 +9,7 @@ export default function DataSources({ sitesData = {} }) {
     <>
       <Box maxW="90%" mx="auto" mt="50px" p="20px">
         <Stack>
-          <Heading fontSize={getFluidFontSize(20, 26)} fontWeight="500">
+          <Heading as={'p'} fontSize={getFluidFontSize(20, 26)} fontWeight="500">
             {t('tool.uptime-data-sources', 'Data Sources')}
           </Heading>
           <Text>
