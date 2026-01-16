@@ -43,7 +43,7 @@ export default function PonponManiaCard({ post, reverse = false }) {
         >
           <Box flex="1">
             <Heading
-              as="span"
+              as="h2"
               fontSize={{ base: "24px", md: "28px", lg: "32px" }}
               fontWeight="700"
               lineHeight="1.3"

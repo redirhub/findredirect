@@ -42,7 +42,7 @@ const SocialButton = ({ children, label, href }) => {
 const ListHeader = ({ children }) => {
     return (
         <Heading
-            as="h4"
+            as="p"
             fontSize={"sm"}
             fontWeight={"700"}
             textTransform={"uppercase"}
@@ -98,7 +98,7 @@ export default function FooterWithLinks({ pages = [] }) {
 
     // Further categorize tool pages by slug patterns for better organization
     const mainTools = toolPages.filter(page =>
-        ['redirect', 'expander', 'block'].includes(page.slug)
+        [ 'redirect', 'expander', 'block' ].includes(page.slug)
     );
 
     const redirectTypeTools = toolPages.filter(page =>

@@ -9,6 +9,7 @@ import {
   AccordionButton,
   AccordionPanel,
   Icon,
+  Heading,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { FaQuestionCircle } from "react-icons/fa";
@@ -51,15 +52,15 @@ export default function FAQSection({
   return (
     <Box {...styles.container}>
       <VStack spacing={8} align="stretch">
-        {/* Section Title - NOT a heading tag for better SEO */}
-        <Text
+        <Heading
+          as="h2"
           fontSize={{ base: "2xl", md: "3xl" }}
           fontWeight="bold"
           textAlign="left"
           mb={6}
         >
           {displayTitle}
-        </Text>
+        </Heading>
 
         {/* Single Column Accordion */}
         <VStack spacing={4} align="stretch" w="full">
