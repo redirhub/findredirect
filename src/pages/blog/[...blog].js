@@ -223,8 +223,7 @@ export default function PostPage({ postData, pages = [] }) {
               key={translation.locale}
               rel="alternate"
               hrefLang={translation.locale}
-              href={`${process.env.NEXT_PUBLIC_SITE_URL}/${translation.locale === "en" ? "" : `${translation.locale}/`
-                }blog/${translation.slug}`}
+              href={getHrefForLocale(translation.locale, asPath)}
             />
           ))}
 
