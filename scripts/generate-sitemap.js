@@ -1,13 +1,21 @@
 
 // Load environment variables
-require('dotenv').config();
+require('dotenv').config({ path: '.env.development' });
 
-const { client } = require('@/sanity/lib/client');
-const { APP_BASE_URL } = require('@/configs/constant');
+const { createClient } = require('@sanity/client');
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = APP_BASE_URL;
+// Sanity client configuration
+const writeClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-12-09',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+});
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
 async function generateSitemap() {
   const query = `*[
@@ -19,7 +27,7 @@ async function generateSitemap() {
 
   try {
     // Fetch slugs from Sanity
-    const slugs = await client.fetch(query);
+    const slugs = await writeClient.fetch(query);
 
     // Generate XML for each URL
     const urls = slugs.map(({ slug, _type }) => {
