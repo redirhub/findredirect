@@ -41,3 +41,6 @@ next-env.d.ts
 public/locales
 # public/robots.txt
 public/sitemap*.xml
+
+PROJECT_KNOWLEDGEBASE.md
+DEBUG_FIXES_SUMMARY.md
