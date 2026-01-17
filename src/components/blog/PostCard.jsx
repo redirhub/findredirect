@@ -69,7 +69,7 @@ export default function PostCard({ post }) {
 
         {/* Title */}
         <Heading
-          as="h3"
+          as="h2"
           fontSize={{ base: "xl", md: "2xl" }}
           fontWeight="700"
           lineHeight="1.3"
