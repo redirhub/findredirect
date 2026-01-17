@@ -174,27 +174,26 @@ async function translatePortableText(
   const translatedBlocks = await Promise.all(
     content.map(async (block) => {
       if (block._type === 'block' && block.children) {
-        const textToTranslate = block.children
-          .filter((child: any) => child._type === 'span' && child.text)
-          .map((child: any) => child.text)
-          .join(' ')
-
-        if (textToTranslate.trim()) {
-          const translatedText = await translateText(
-            textToTranslate,
-            targetLocale
-          )
-
-          return {
-            ...block,
-            children: [
-              {
-                _type: 'span',
+        // Translate each span individually to preserve structure, marks, and URL properties
+        const translatedChildren = await Promise.all(
+          block.children.map(async (child: any) => {
+            if (child._type === 'span' && child.text) {
+              // Translate the text only
+              const translatedText = await translateText(child.text, targetLocale)
+              
+              // Return the child with translated text, preserving all other properties
+              return {
+                ...child,
                 text: translatedText,
-                marks: [],
-              },
-            ],
-          }
+              }
+            }
+            return child
+          })
+        )
+
+        return {
+          ...block,
+          children: translatedChildren,
         }
       }
       return block
