@@ -134,6 +134,9 @@ export default function FooterWithLinks({ pages = [] }) {
                         <FooterLink href="/expander">
                             {t('footer.url-expander', 'URL Expander')}
                         </FooterLink>
+                        <FooterLink href="/uptime">
+                            {t('footer.compare-providers', 'Compare providers')}
+                        </FooterLink>
                     </Stack>
 
                     {/* Redirect Types */}
