@@ -180,15 +180,7 @@ async function translatePortableText(
             if (child._type === 'span' && child.text) {
               // Translate the text only
               const translatedText = await translateText(child.text, targetLocale)
-              
-              // Localize URL if present (add language prefix for non-English locales)
-              let url = child.url
-              console.log('Translating link URL:', url, 'to locale:', targetLocale)
-              if (url && targetLocale !== 'en') {
-                // Remove leading slash if present, then add locale prefix
-                const urlPath = url.startsWith('/') ? url.substring(1) : url
-                url = `/${targetLocale}/${urlPath}`
-              }
+              const url = child.url || undefined // Preserve URL if exists
               
               // Return the child with translated text and localized URL, preserving all other properties
               return {

@@ -229,7 +229,7 @@ export default function ToolPage({ toolData, pages = [] }) {
               {toolData.contentAfterWidget && toolData.contentAfterWidget.length > 0 && (
                 <Box mt={8} sx={contentStyles}>
                   <PortableText
-                    value={transformPortableTextLinks(toolData.contentAfterWidget)}
+                    value={transformPortableTextLinks(toolData.contentAfterWidget, locale)}
                     components={toolPageComponents}
                   />
                 </Box>
@@ -249,7 +249,7 @@ export default function ToolPage({ toolData, pages = [] }) {
               {toolData.contentBeforeWidget && toolData.contentBeforeWidget.length > 0 && (
                 <Box maxW="800px" mx="auto" sx={contentStyles}>
                   <PortableText
-                    value={transformPortableTextLinks(toolData.contentBeforeWidget)}
+                    value={transformPortableTextLinks(toolData.contentBeforeWidget, locale)}
                     components={toolPageComponents}
                   />
                 </Box>
@@ -259,7 +259,7 @@ export default function ToolPage({ toolData, pages = [] }) {
               {toolData.contentAfterWidget && toolData.contentAfterWidget.length > 0 && (
                 <Box maxW="800px" mx="auto" mt={8} sx={contentStyles}>
                   <PortableText
-                    value={transformPortableTextLinks(toolData.contentAfterWidget)}
+                    value={transformPortableTextLinks(toolData.contentAfterWidget, locale)}
                     components={toolPageComponents}
                   />
                 </Box>

@@ -17,7 +17,7 @@ const genKey = () => {
  * Output: { _type: 'span', marks: ['link-abc123'], text: '...' }
  * With markDefs: [{ _key: 'link-abc123', _type: 'link', href: '/path' }]
  */
-export const transformPortableTextLinks = (content) => {
+export const transformPortableTextLinks = (content, targetLocale = 'en') => {
   if (!Array.isArray(content)) return content;
 
   return content.map(block => {
@@ -32,7 +32,7 @@ export const transformPortableTextLinks = (content) => {
       markDefs.push({
         _key: linkKey,
         _type: 'link',
-        href: child.url
+        href: targetLocale !== 'en' ? `/${targetLocale}${child.url}` : child.url,
       });
 
       // Return the child with url removed and mark reference added
@@ -95,7 +95,7 @@ export const createPortableTextComponents = (options = {}) => {
       },
       // Handle span blocks (inline content)
       span: ({ value, children }) => {
-          return <Text as="span">{children}</Text>;
+          return <Text as="span"> {children} </Text>;
         },
     },
     marks: {
@@ -127,6 +127,7 @@ export const createPortableTextComponents = (options = {}) => {
             target={target}
             rel={rel}
             color="blue.600"
+            px={1}
             textDecoration="underline"
             _hover={{ color: "blue.700" }}
           >
