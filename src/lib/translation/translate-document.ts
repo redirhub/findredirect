@@ -182,7 +182,7 @@ async function translatePortableText(
               const translatedText = await translateText(child.text, targetLocale)
               const url = child.url || undefined // Preserve URL if exists
               
-              // Return the child with translated text and localized URL, preserving all other properties
+              // Return the child with translated text and preserving all other properties
               return {
                 ...child,
                 text: translatedText,
