@@ -29,17 +29,35 @@ async function generateSitemap() {
     // Fetch slugs from Sanity
     const slugs = await writeClient.fetch(query);
 
+    // Manually add blog index page
+    const staticUrls = [
+      {
+        loc: `${BASE_URL}/blog`,
+        changefreq: 'weekly',
+        priority: '0.9',
+      },
+    ];
+
     // Generate XML for each URL
-    const urls = slugs.map(({ slug, _type }) => {
-      const path = _type === 'post' ? `/blog/${slug}` : `/${slug}`;
-      return `
+    const urls = [
+      ...staticUrls.map(({ loc, changefreq, priority }) => `
         <url>
-          <loc>${BASE_URL}${path}</loc>
-          <changefreq>weekly</changefreq>
-          <priority>0.8</priority>
+          <loc>${loc}</loc>
+          <changefreq>${changefreq}</changefreq>
+          <priority>${priority}</priority>
         </url>
-      `;
-    });
+      `),
+      ...slugs.map(({ slug, _type }) => {
+        const path = _type === 'post' ? `/blog/${slug}` : `/${slug}`;
+        return `
+          <url>
+            <loc>${BASE_URL}${path}</loc>
+            <changefreq>weekly</changefreq>
+            <priority>0.8</priority>
+          </url>
+        `;
+      }),
+    ];
 
     // Combine into a full XML sitemap
     const sitemapXML = `<?xml version="1.0" encoding="UTF-8"?>
