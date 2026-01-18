@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '.env.development' });
 const fs = require('fs');
 const path = require('path');
 const https = require('https'); // Required for https.Agent

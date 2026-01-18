@@ -2,12 +2,20 @@
 // Load environment variables
 require('dotenv').config();
 
-const { client } = require('@/sanity/lib/client');
-const { APP_BASE_URL } = require('@/configs/constant');
+const { createClient } = require('@sanity/client');
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = APP_BASE_URL;
+// Sanity client configuration
+const writeClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-12-09',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+});
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
 async function generateSitemap() {
   const query = `*[
@@ -19,19 +27,37 @@ async function generateSitemap() {
 
   try {
     // Fetch slugs from Sanity
-    const slugs = await client.fetch(query);
+    const slugs = await writeClient.fetch(query);
+
+    // Manually add blog index page
+    const staticUrls = [
+      {
+        loc: `${BASE_URL}/blog`,
+        changefreq: 'weekly',
+        priority: '0.9',
+      },
+    ];
 
     // Generate XML for each URL
-    const urls = slugs.map(({ slug, _type }) => {
-      const path = _type === 'post' ? `/blog/${slug}` : `/${slug}`;
-      return `
+    const urls = [
+      ...staticUrls.map(({ loc, changefreq, priority }) => `
         <url>
-          <loc>${BASE_URL}${path}</loc>
-          <changefreq>weekly</changefreq>
-          <priority>0.8</priority>
+          <loc>${loc}</loc>
+          <changefreq>${changefreq}</changefreq>
+          <priority>${priority}</priority>
         </url>
-      `;
-    });
+      `),
+      ...slugs.map(({ slug, _type }) => {
+        const path = _type === 'post' ? `/blog/${slug}` : `/${slug}`;
+        return `
+          <url>
+            <loc>${BASE_URL}${path}</loc>
+            <changefreq>weekly</changefreq>
+            <priority>0.8</priority>
+          </url>
+        `;
+      }),
+    ];
 
     // Combine into a full XML sitemap
     const sitemapXML = `<?xml version="1.0" encoding="UTF-8"?>

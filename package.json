@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "yarn run generate-locales && next build",
+    "postbuild": "yarn run generate-sitemap",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint . --ext .js,.jsx --fix",

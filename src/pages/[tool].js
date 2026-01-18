@@ -7,7 +7,7 @@ import { AppContainer } from "@/components/common/AppContainer";
 import RedirectChecker from "@/components/redirect-check/RedirectChecker";
 import BlockChecker from "@/components/block-check/BlockChecker";
 import UptimeWidget from "@/components/uptime/UptimeWidget";
-import { toolPageComponents } from "@/components/common/PortableTextComponents";
+import { createPortableTextComponents, transformPortableTextLinks } from "@/components/common/PortableTextComponents";
 import { APP_NAME } from "@/configs/constant";
 import { FaLink, FaBan, FaSearch, FaExternalLinkAlt, FaServer, FaShieldAlt, FaNetworkWired, FaClock, FaCheckCircle, FaCloud } from "react-icons/fa";
 import { styles } from "@/configs/checker";
@@ -57,6 +57,12 @@ function parseWidgetConfig(config) {
 export default function ToolPage({ toolData, pages = [] }) {
   const router = useRouter();
   const { locale, asPath } = router;
+
+  // Create PortableText components with locale
+  const toolPageComponents = createPortableTextComponents({
+    enableHeadings: false,
+    locale,
+  });
 
   // Content styles for rich text with dark mode support
   const contentStyles = {
@@ -138,6 +144,15 @@ export default function ToolPage({ toolData, pages = [] }) {
   // Prepare FAQ data for schema
   const faqData = toolData.faqs || [];
 
+  // return (
+  //   <MainLayout pages={pages}>
+  //     <AppContainer>
+  //       <Box textAlign="center" py={20}>
+  //         <Heading size="2xl">Development Mode</Heading>
+  //       </Box>
+  //     </AppContainer>
+  //   </MainLayout>
+  // );
 
   return (
     <MainLayout pages={pages}>
@@ -189,7 +204,10 @@ export default function ToolPage({ toolData, pages = [] }) {
               {/* Content Before Widget */}
               {toolData.contentBeforeWidget && toolData.contentBeforeWidget.length > 0 && (
                 <Box mb={8} sx={contentStyles}>
-                  <PortableText value={toolData.contentBeforeWidget} components={toolPageComponents} />
+                  <PortableText
+                    value={toolData.contentBeforeWidget}
+                    components={toolPageComponents}
+                  />
                 </Box>
               )}
 
@@ -216,7 +234,10 @@ export default function ToolPage({ toolData, pages = [] }) {
               {/* Content After Widget */}
               {toolData.contentAfterWidget && toolData.contentAfterWidget.length > 0 && (
                 <Box mt={8} sx={contentStyles}>
-                  <PortableText value={toolData.contentAfterWidget} components={toolPageComponents} />
+                  <PortableText
+                    value={transformPortableTextLinks(toolData.contentAfterWidget)}
+                    components={toolPageComponents}
+                  />
                 </Box>
               )}
             </>
@@ -233,14 +254,20 @@ export default function ToolPage({ toolData, pages = [] }) {
               {/* Main Content */}
               {toolData.contentBeforeWidget && toolData.contentBeforeWidget.length > 0 && (
                 <Box maxW="800px" mx="auto" sx={contentStyles}>
-                  <PortableText value={toolData.contentBeforeWidget} components={toolPageComponents} />
+                  <PortableText
+                    value={transformPortableTextLinks(toolData.contentBeforeWidget)}
+                    components={toolPageComponents}
+                  />
                 </Box>
               )}
 
               {/* Additional Content */}
               {toolData.contentAfterWidget && toolData.contentAfterWidget.length > 0 && (
                 <Box maxW="800px" mx="auto" mt={8} sx={contentStyles}>
-                  <PortableText value={toolData.contentAfterWidget} components={toolPageComponents} />
+                  <PortableText
+                    value={transformPortableTextLinks(toolData.contentAfterWidget, locale)}
+                    components={toolPageComponents}
+                  />
                 </Box>
               )}
             </>
