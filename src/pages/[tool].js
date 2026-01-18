@@ -138,6 +138,16 @@ export default function ToolPage({ toolData, pages = [] }) {
   // Prepare FAQ data for schema
   const faqData = toolData.faqs || [];
 
+  // return (
+  //   <MainLayout pages={pages}>
+  //     <AppContainer>
+  //       <Box textAlign="center" py={20}>
+  //         <Heading size="2xl">Development Mode</Heading>
+  //       </Box>
+  //     </AppContainer>
+  //   </MainLayout>
+  // );
+
   return (
     <MainLayout pages={pages}>
       <Head>

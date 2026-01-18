@@ -1,6 +1,10 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { fetchAllPagesForFooter, fetchPageBySlug } from "@/services/pageService";
+
+import MainLayout from "@/layouts/MainLayout";
+import { Box, Heading } from "@chakra-ui/react";
 import ToolPage from "./[tool]";
+import { AppContainer } from '@/components/common/AppContainer';
 
 const Home = ({ homeData, pages = [] }) => {
   // If homepage exists in CMS with slug "home", use it
