@@ -125,9 +125,9 @@ export const createPortableTextComponents = (options = {}) => {
         const target = value?.href?.startsWith('http') ? '_blank' : undefined;
         const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
 
-        // href is already prefixed with locale from transformPortableTextLinks
-        // But we can also use the locale from options if needed
-        const href = value?.href;
+        const href = !value?.href?.includes(locale) && locale !== 'en'
+          ? `/${locale}${value?.href}`
+          : value?.href;
 
         return (
           <ChakraLink
