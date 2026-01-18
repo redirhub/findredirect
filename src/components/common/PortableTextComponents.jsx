@@ -61,7 +61,8 @@ export const createPortableTextComponents = (options = {}) => {
   const {
     postData,
     enableHeadings = false,
-    currentHeadingIndexRef = { current: -1 }
+    currentHeadingIndexRef = { current: -1 },
+    locale = 'en'
   } = options;
 
   return {
@@ -104,10 +105,13 @@ export const createPortableTextComponents = (options = {}) => {
         const slug = value?.reference?.slug?.current;
         if (!slug) return <>{children}</>;
 
+        // Prefix internal links with locale if not English
+        const href = locale !== 'en' ? `/${locale}/${slug}` : `/${slug}`;
+
         return (
           <ChakraLink
             as={Link}
-            href={`/${slug}`}
+            href={href}
             color="blue.600"
             textDecoration="underline"
             _hover={{ color: "blue.700" }}
@@ -121,13 +125,17 @@ export const createPortableTextComponents = (options = {}) => {
         const target = value?.href?.startsWith('http') ? '_blank' : undefined;
         const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
 
+        // href is already prefixed with locale from transformPortableTextLinks
+        // But we can also use the locale from options if needed
+        const href = value?.href;
+
         return (
           <ChakraLink
-            href={value?.href}
+            href={href}
             target={target}
             rel={rel}
             color="blue.600"
-            px={1}
+            pl={locale !== 'en' && href?.startsWith('/') ? 1 : 0}
             textDecoration="underline"
             _hover={{ color: "blue.700" }}
           >
@@ -203,6 +211,7 @@ export const createPortableTextComponents = (options = {}) => {
  * Simple PortableText components for tool pages
  * No heading customization needed
  */
-export const toolPageComponents = createPortableTextComponents({
+export const toolPageComponents = (locale = 'en') => createPortableTextComponents({
   enableHeadings: false,
+  locale,
 });
