@@ -128,14 +128,11 @@ export default function FooterWithLinks({ pages = [] }) {
                     {/* Main Tools */}
                     <Stack align={"flex-start"}>
                         <ListHeader>{t('footer.tools', 'Tools')}</ListHeader>
-                        <FooterLink href="/redirect">
+                        <FooterLink href="/">
                             {t('footer.redirect-checker', 'Redirect Checker')}
                         </FooterLink>
                         <FooterLink href="/expander">
                             {t('footer.url-expander', 'URL Expander')}
-                        </FooterLink>
-                        <FooterLink href="/block">
-                            {t('footer.block-checker', 'Block Checker')}
                         </FooterLink>
                     </Stack>
 

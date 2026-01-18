@@ -48,7 +48,13 @@ async function generateSitemap() {
         </url>
       `),
       ...slugs.map(({ slug, _type }) => {
-        const path = _type === 'post' ? `/blog/${slug}` : `/${slug}`;
+        const normalizedSlug = slug === 'home' ? '' : slug;
+        const path =
+          _type === 'post'
+            ? `/blog/${normalizedSlug}`
+            : normalizedSlug
+              ? `/${normalizedSlug}`
+              : '/';
         return `
           <url>
             <loc>${BASE_URL}${path}</loc>
