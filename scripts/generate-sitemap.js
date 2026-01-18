@@ -1,6 +1,6 @@
 
 // Load environment variables
-require('dotenv').config({ path: '.env.development' });
+require('dotenv').config();
 
 const { createClient } = require('@sanity/client');
 const fs = require('fs');
