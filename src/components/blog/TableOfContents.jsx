@@ -81,7 +81,7 @@ export default function TableOfContents({ content }) {
       }}
     >
       <Heading
-        as="h3"
+        as="p"
         fontSize="sm"
         fontWeight="700"
         textTransform="uppercase"

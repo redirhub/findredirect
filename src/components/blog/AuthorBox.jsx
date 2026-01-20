@@ -32,7 +32,7 @@ export default function AuthorBox({ author }) {
           <Flex justify="space-between" align="start" mb={2}>
             <Box>
               <Heading
-                as="h3"
+                as="p"
                 fontSize={{ base: "xl", md: "2xl" }}
                 fontWeight="700"
                 color="gray.900"
