@@ -156,8 +156,8 @@ export const pageType = defineType({
     defineField({
       name: 'contentBeforeWidget',
       type: 'array',
-      title: 'Content Before Widget / Main Content',
-      description: 'For tool pages: content before widget. For content pages: main page content',
+      title: 'Internal notes',
+      description: 'Not displayed on the page. can be AI prompts or reminders for content editors.',
       of: [
         { type: 'block' },
         {
@@ -181,8 +181,8 @@ export const pageType = defineType({
     defineField({
       name: 'contentAfterWidget',
       type: 'array',
-      title: 'Content After Widget',
-      description: 'Optional content to display after the widget',
+      title: 'Main Content',
+      description: 'Main content to display after the widget',
       of: [
         { type: 'block' },
         {
