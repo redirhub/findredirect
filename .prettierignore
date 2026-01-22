@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Assets
+public/
+*.svg
+*.png
+*.jpg
+
+# Config files you might want to leave alone
+package-lock.json
+.eslintrc.json
