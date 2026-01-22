@@ -157,7 +157,7 @@ export const pageType = defineType({
       name: 'contentBeforeWidget',
       type: 'array',
       title: 'Internal notes',
-      description: 'Not displayed on the page. can be AI prompts or reminders for content editors.',
+      description: 'Not displayed on the page. can be AI prompts, outlines or reminders for content editors.',
       of: [
         { type: 'block' },
         {
