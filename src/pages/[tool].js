@@ -144,16 +144,6 @@ export default function ToolPage({ toolData, pages = [] }) {
   // Prepare FAQ data for schema
   const faqData = toolData.faqs || [];
 
-  // return (
-  //   <MainLayout pages={pages}>
-  //     <AppContainer>
-  //       <Box textAlign="center" py={20}>
-  //         <Heading size="2xl">Development Mode</Heading>
-  //       </Box>
-  //     </AppContainer>
-  //   </MainLayout>
-  // );
-
   return (
     <MainLayout pages={pages}>
       <Head>
@@ -163,27 +153,6 @@ export default function ToolPage({ toolData, pages = [] }) {
 
         {/* hreflangs and canonical tag */}
         {generateHrefLangsAndCanonicalTag(locale, asPath)}
-
-        {/* FAQ Schema */}
-        {faqData.length > 0 && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": faqData.map(({ question, answer }) => ({
-                  "@type": "Question",
-                  "name": question,
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": answer
-                  }
-                }))
-              })
-            }}
-          />
-        )}
 
         {/* Custom Structured Data if provided */}
         {toolData.customStructuredData && (
