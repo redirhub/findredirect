@@ -29,10 +29,16 @@ export const transformPortableTextLinks = (content, targetLocale = 'en') => {
 
       // Create a new mark definition for this URL
       const linkKey = genKey();
+
+      const external = child.url?.startsWith('http');
+
+        const href = external ? child.url : (targetLocale !== 'en' ? `/${targetLocale}${child.url}` : child.url);
+
+
       markDefs.push({
         _key: linkKey,
         _type: 'link',
-        href: targetLocale !== 'en' ? `/${targetLocale}${child.url}` : child.url,
+        href,
       });
 
       // Return the child with url removed and mark reference added
