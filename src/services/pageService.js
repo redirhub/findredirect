@@ -57,7 +57,6 @@ export async function fetchPageBySlug(slug, locale = 'en') {
       widgetConfig,
       buttonText,
       exampleUrls,
-      contentBeforeWidget,
       contentAfterWidget,
       faqs,
       locale,

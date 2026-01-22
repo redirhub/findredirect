@@ -201,16 +201,6 @@ export default function ToolPage({ toolData, pages = [] }) {
           {/* For pages with widgets (tool pages) */}
           {hasWidget && (
             <>
-              {/* Content Before Widget */}
-              {toolData.contentBeforeWidget && toolData.contentBeforeWidget.length > 0 && (
-                <Box mb={8} sx={contentStyles}>
-                  <PortableText
-                    value={toolData.contentBeforeWidget}
-                    components={toolPageComponents}
-                  />
-                </Box>
-              )}
-
               {/* Widget Section */}
               <WidgetComponent
                 {...config}
@@ -252,20 +242,10 @@ export default function ToolPage({ toolData, pages = [] }) {
               </Heading>
 
               {/* Main Content */}
-              {toolData.contentBeforeWidget && toolData.contentBeforeWidget.length > 0 && (
+              {toolData.contentAfterWidget && toolData.contentAfterWidget.length > 0 && (
                 <Box maxW="800px" mx="auto" sx={contentStyles}>
                   <PortableText
-                    value={transformPortableTextLinks(toolData.contentBeforeWidget)}
-                    components={toolPageComponents}
-                  />
-                </Box>
-              )}
-
-              {/* Additional Content */}
-              {toolData.contentAfterWidget && toolData.contentAfterWidget.length > 0 && (
-                <Box maxW="800px" mx="auto" mt={8} sx={contentStyles}>
-                  <PortableText
-                    value={transformPortableTextLinks(toolData.contentAfterWidget, locale)}
+                    value={transformPortableTextLinks(toolData.contentAfterWidget)}
                     components={toolPageComponents}
                   />
                 </Box>
