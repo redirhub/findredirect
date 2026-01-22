@@ -154,7 +154,7 @@ export const pageType = defineType({
       ],
     }),
     defineField({
-      name: 'contentBeforeWidget',
+      name: 'note',
       type: 'array',
       title: 'Internal notes',
       description: 'Not displayed on the page. can be AI prompts, outlines or reminders for content editors.',
