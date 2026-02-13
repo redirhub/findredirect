@@ -1,4 +1,4 @@
-import { APP_NAME, GITHUB_URL, LINKEDIN_URL, TELEGRAM_URL, X_URL } from "@/configs/constant";
+import { APP_NAME, GITHUB_URL, LINKEDIN_URL, TELEGRAM_URL, X_URL } from '@/configs/constant';
 import {
     Box,
     Container,
@@ -8,28 +8,28 @@ import {
     Link,
     Heading,
     useColorModeValue,
-} from "@chakra-ui/react";
-import { FaTwitter, FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa";
-import NextLink from "next/link";
-import { useTranslation } from "next-i18next";
-import { LanguageMenu } from "./LanguageMenu";
+} from '@chakra-ui/react';
+import { FaTwitter, FaGithub, FaLinkedin, FaTelegram } from 'react-icons/fa';
+import NextLink from 'next/link';
+import { useTranslation } from 'next-i18next';
+import { LanguageMenu } from './LanguageMenu';
 
 const SocialButton = ({ children, label, href }) => {
     return (
         <Link
-            bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-            rounded={"full"}
+            bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+            rounded={'full'}
             w={8}
             h={8}
-            cursor={"pointer"}
-            as={"a"}
+            cursor={'pointer'}
+            as={'a'}
             href={href}
-            display={"inline-flex"}
-            alignItems={"center"}
-            justifyContent={"center"}
-            transition={"background 0.3s ease"}
+            display={'inline-flex'}
+            alignItems={'center'}
+            justifyContent={'center'}
+            transition={'background 0.3s ease'}
             _hover={{
-                bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
+                bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
             }}
             target="_blank"
             rel="noopener noreferrer"
@@ -43,11 +43,11 @@ const ListHeader = ({ children }) => {
     return (
         <Heading
             as="p"
-            fontSize={"sm"}
-            fontWeight={"700"}
-            textTransform={"uppercase"}
+            fontSize={'sm'}
+            fontWeight={'700'}
+            textTransform={'uppercase'}
             mb={4}
-            color={useColorModeValue("gray.800", "gray.200")}
+            color={useColorModeValue('gray.800', 'gray.200')}
         >
             {children}
         </Heading>
@@ -55,15 +55,15 @@ const ListHeader = ({ children }) => {
 };
 
 const FooterLink = ({ href, children, isExternal = false }) => {
-    const linkColor = useColorModeValue("gray.600", "gray.400");
-    const hoverColor = useColorModeValue("purple.600", "purple.300");
+    const linkColor = useColorModeValue('gray.600', 'gray.400');
+    const hoverColor = useColorModeValue('purple.600', 'purple.300');
 
     if (isExternal) {
         return (
             <Link
                 href={href}
                 color={linkColor}
-                _hover={{ color: hoverColor, textDecoration: "none" }}
+                _hover={{ color: hoverColor, textDecoration: 'none' }}
                 fontSize="sm"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -78,7 +78,7 @@ const FooterLink = ({ href, children, isExternal = false }) => {
             as={NextLink}
             href={href}
             color={linkColor}
-            _hover={{ color: hoverColor, textDecoration: "none" }}
+            _hover={{ color: hoverColor, textDecoration: 'none' }}
             fontSize="sm"
         >
             {children}
@@ -88,8 +88,8 @@ const FooterLink = ({ href, children, isExternal = false }) => {
 
 export default function FooterWithLinks({ pages = [] }) {
     const { t } = useTranslation();
-    const bgColor = useColorModeValue("gray.50", "gray.900");
-    const borderColor = useColorModeValue("gray.200", "gray.700");
+    const bgColor = useColorModeValue('gray.50', 'gray.900');
+    const borderColor = useColorModeValue('gray.200', 'gray.700');
 
     // Categorize pages by category field
     const toolPages = pages.filter(page => (page.category || 'tools') === 'tools');
@@ -117,16 +117,19 @@ export default function FooterWithLinks({ pages = [] }) {
         page.slug && (
             page.slug.includes('wordpress') ||
             page.slug.includes('shopify') ||
-            page.slug.includes('wix')
+            page.slug.includes('wix') ||
+            page.slug === 'bitly-link-expander' ||
+            page.slug === 'tco-url-expander' ||
+            page.slug === 'rebrandly-expander'
         )
     );
 
     return (
-        <Box bg={bgColor} color={useColorModeValue("gray.700", "gray.200")}>
-            <Container as={Stack} maxW={"6xl"} py={10}>
+        <Box bg={bgColor} color={useColorModeValue('gray.700', 'gray.200')}>
+            <Container as={Stack} maxW={'6xl'} py={10}>
                 <SimpleGrid columns={{ base: 1, sm: 2, md: 5 }} spacing={8}>
                     {/* Main Tools */}
-                    <Stack align={"flex-start"}>
+                    <Stack align={'flex-start'}>
                         <ListHeader>{t('footer.tools', 'Tools')}</ListHeader>
                         <FooterLink href="/">
                             {t('footer.redirect-checker', 'Redirect Checker')}
@@ -141,7 +144,7 @@ export default function FooterWithLinks({ pages = [] }) {
 
                     {/* Redirect Types */}
                     {redirectTypeTools.length > 0 && (
-                        <Stack align={"flex-start"}>
+                        <Stack align={'flex-start'}>
                             <ListHeader>{t('footer.redirect-types', 'By Redirect Type')}</ListHeader>
                             {redirectTypeTools.map((tool) => (
                                 <FooterLink key={tool.slug} href={`/${tool.slug}`}>
@@ -153,7 +156,7 @@ export default function FooterWithLinks({ pages = [] }) {
 
                     {/* Use Cases */}
                     {(useCaseTools.length > 0 || platformTools.length > 0) && (
-                        <Stack align={"flex-start"}>
+                        <Stack align={'flex-start'}>
                             <ListHeader>{t('footer.use-cases', 'By Use Case')}</ListHeader>
                             {useCaseTools.map((tool) => (
                                 <FooterLink key={tool.slug} href={`/${tool.slug}`}>
@@ -165,7 +168,7 @@ export default function FooterWithLinks({ pages = [] }) {
 
                     {/* Platforms */}
                     {platformTools.length > 0 && (
-                        <Stack align={"flex-start"}>
+                        <Stack align={'flex-start'}>
                             <ListHeader>{t('footer.platforms', 'By Platform')}</ListHeader>
                             {platformTools.map((tool) => (
                                 <FooterLink key={tool.slug} href={`/${tool.slug}`}>
@@ -176,7 +179,7 @@ export default function FooterWithLinks({ pages = [] }) {
                     )}
 
                     {/* Company - Read from CMS if available, otherwise fallback to hardcoded */}
-                    <Stack align={"flex-start"}>
+                    <Stack align={'flex-start'}>
                         <ListHeader>{t('footer.company', 'Company')}</ListHeader>
                         {companyPages.length > 0 ? (
                             companyPages.map((page) => (
@@ -211,35 +214,35 @@ export default function FooterWithLinks({ pages = [] }) {
             <Box borderTopWidth={1} borderColor={borderColor}>
                 <Container
                     as={Stack}
-                    maxW={"6xl"}
+                    maxW={'6xl'}
                     py={6}
-                    direction={{ base: "column", md: "row" }}
+                    direction={{ base: 'column', md: 'row' }}
                     spacing={{ base: 4, md: 4 }}
-                    justify={{ base: "center", md: "space-between" }}
-                    align={{ base: "center", md: "center" }}
+                    justify={{ base: 'center', md: 'space-between' }}
+                    align={{ base: 'center', md: 'center' }}
                 >
-                    <Text fontSize="sm" textAlign={{ base: "center", md: "left" }}>
+                    <Text fontSize="sm" textAlign={{ base: 'center', md: 'left' }}>
                         © {new Date().getFullYear()} {APP_NAME}. {t('footer.rights', 'All rights reserved')}
                     </Text>
                     <LanguageMenu />
-                    <Stack direction={"row"} spacing={{ base: 4, md: 6 }}>
+                    <Stack direction={'row'} spacing={{ base: 4, md: 6 }}>
                         {X_URL && (
-                            <SocialButton label={"Twitter"} href={X_URL}>
+                            <SocialButton label={'Twitter'} href={X_URL}>
                                 <FaTwitter />
                             </SocialButton>
                         )}
                         {GITHUB_URL && (
-                            <SocialButton label={"GitHub"} href={GITHUB_URL}>
+                            <SocialButton label={'GitHub'} href={GITHUB_URL}>
                                 <FaGithub />
                             </SocialButton>
                         )}
                         {LINKEDIN_URL && (
-                            <SocialButton label={"LinkedIn"} href={LINKEDIN_URL}>
+                            <SocialButton label={'LinkedIn'} href={LINKEDIN_URL}>
                                 <FaLinkedin />
                             </SocialButton>
                         )}
                         {TELEGRAM_URL && (
-                            <SocialButton label={"Telegram"} href={TELEGRAM_URL}>
+                            <SocialButton label={'Telegram'} href={TELEGRAM_URL}>
                                 <FaTelegram />
                             </SocialButton>
                         )}
