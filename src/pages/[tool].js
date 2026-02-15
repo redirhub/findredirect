@@ -15,7 +15,7 @@ import FAQSection from '@/components/common/FAQSection';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { generateHrefLangsAndCanonicalTag } from '@/utils';
-import { fetchAllPagesForFooter, fetchPageBySlug, fetchAllPageSlugs } from '@/services/pageService';
+import { fetchAllPagesForFooter, fetchPageBySlug, fetchAllPageSlugs, fetchRelatedPages } from '@/services/pageService';
 import { allLanguages } from '@/sanity/config/i18n';
 import RelatedPages from '@/components/common/RelatedPages';
 
@@ -313,10 +313,7 @@ export async function getStaticProps({ params, locale }) {
     }
 
     const relatedPages = toolData.tags?.length
-        ? await sanityClient.fetch(relatedPagesQuery, {
-            currentPageId: toolData._id,
-            currentTags: toolData.tags
-        })
+        ? await fetchRelatedPages(toolData._id, toolData.tags)
         : [];
 
     // Fetch all pages for footer links (categorized)
