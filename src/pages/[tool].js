@@ -15,7 +15,7 @@ import FAQSection from '@/components/common/FAQSection';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { generateHrefLangsAndCanonicalTag } from '@/utils';
-import { fetchAllPagesForFooter, fetchPageBySlug, fetchAllPageSlugs, fetchRelatedPages } from '@/services/pageService';
+import { fetchAllPagesForFooter, fetchPageBySlug, fetchAllPageSlugs } from '@/services/pageService';
 import { allLanguages } from '@/sanity/config/i18n';
 import RelatedPages from '@/components/common/RelatedPages';
 
@@ -55,7 +55,7 @@ function parseWidgetConfig(config) {
     return config;
 }
 
-export default function ToolPage({ toolData, pages = [], relatedPages = [] }) {
+export default function ToolPage({ toolData, pages = [] }) {
     const router = useRouter();
     const { locale, asPath } = router;
 
@@ -144,16 +144,7 @@ export default function ToolPage({ toolData, pages = [], relatedPages = [] }) {
 
     // Prepare FAQ data for schema
     const faqData = toolData.faqs || [];
-
-    // return (
-    //   <MainLayout pages={pages}>
-    //     <AppContainer>
-    //       <Box textAlign="center" py={20}>
-    //         <Heading size="2xl">Development Mode</Heading>
-    //       </Box>
-    //     </AppContainer>
-    //   </MainLayout>
-    // );
+    const relatedPages = toolData.relatedPages || [];
 
     return (
         <MainLayout pages={pages}>
@@ -302,10 +293,6 @@ export async function getStaticProps({ params, locale }) {
         };
     }
 
-    const relatedPages = toolData.tags?.length
-        ? await fetchRelatedPages(toolData._id, toolData.tags, locale || 'en')
-        : [];
-
     // Fetch all pages for footer links (categorized)
     const pages = await fetchAllPagesForFooter(locale || 'en');
 
@@ -313,7 +300,6 @@ export async function getStaticProps({ params, locale }) {
         props: {
             toolData,
             pages,
-            relatedPages,
             ...(await serverSideTranslations(locale, [ 'common' ])),
         },
         revalidate: 3600, // Revalidate every hour

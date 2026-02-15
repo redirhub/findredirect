@@ -59,6 +59,13 @@ export async function fetchPageBySlug(slug, locale = 'en') {
       exampleUrls,
       contentAfterWidget,
       faqs,
+      "relatedPages": *[_type == "page" && _id != ^._id && locale == $locale && count(tags[@ in ^.tags]) > 0]
+        | order(count(tags[@ in ^.tags]) desc)[0...10]{
+          _id,
+          title,
+          "slug": slug.current,
+          tags
+        }
       locale,
       publishedAt,
       customStructuredData
@@ -205,40 +212,6 @@ export async function fetchCompanyPages(locale = 'en') {
         return pages || [];
     } catch (error) {
         console.error('Error fetching company pages:', error);
-        return [];
-    }
-}
-
-/**
- * Fetch related pages by tags
- *
- * @param {string} currentPageId - The _id of the current page
- * @param {Array<string>} tags - Tags of the current page
- * @param {string} locale - The locale to fetch (default: 'en')
- * @returns {Promise<Array>} - Array of related pages
- */
-export async function fetchRelatedPages(currentPageId, tags, locale = 'en') {
-    if (!tags || tags.length === 0) {
-        return [];
-    }
-    try {
-    // GROQ: Match at least one tag, exclude current page, sort by number of matching tags desc, limit 10
-        const query = `*[
-      _type == "page" &&
-      _id != $currentPageId &&
-      locale == $locale &&
-      defined(slug.current) &&
-      count(tags[@ in $tags]) > 0
-    ] | order(count(tags[@ in $tags]) desc)[0...10]{
-      _id,
-      title,
-      "slug": slug.current,
-      tags
-    }`;
-        const relatedPages = await client.fetch(query, { currentPageId, tags, locale });
-        return relatedPages || [];
-    } catch (error) {
-        console.error('Error fetching related pages:', error);
         return [];
     }
 }
