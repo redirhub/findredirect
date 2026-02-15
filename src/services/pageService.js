@@ -65,7 +65,7 @@ export async function fetchPageBySlug(slug, locale = 'en') {
           title,
           "slug": slug.current,
           tags
-        }
+        },
       locale,
       publishedAt,
       customStructuredData
