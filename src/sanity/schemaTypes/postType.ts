@@ -63,6 +63,11 @@ export const postType = defineType({
       type: 'array',
       title: 'Tags',
       of: [ { type: 'string' } ],
+      initialValue: (document) => {
+        const slug = document?.slug?.current || '';
+        if (!slug) return [];
+        return slug.split(/[-\s]+/).map(tag => tag.toLowerCase());
+      },
     }),
     defineField({
       name: 'content',
