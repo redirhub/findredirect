@@ -296,16 +296,6 @@ export async function getStaticProps({ params, locale }) {
 
     const toolData = await fetchPageBySlug(slug, locale || 'en');
 
-    // Fetch related pages (up to 10)
-    const relatedPagesQuery = `
-    *[_type == "page" && _id != $currentPageId && count(tags[][@ in $currentTags]) > 0] | order(count(tags[][@ in $currentTags]) desc)[0...10]{
-      _id,
-      title,
-      slug,
-      tags
-    }
-  `;
-
     if (!toolData) {
         return {
             notFound: true,
@@ -313,7 +303,7 @@ export async function getStaticProps({ params, locale }) {
     }
 
     const relatedPages = toolData.tags?.length
-        ? await fetchRelatedPages(toolData._id, toolData.tags)
+        ? await fetchRelatedPages(toolData._id, toolData.tags, locale || 'en')
         : [];
 
     // Fetch all pages for footer links (categorized)
