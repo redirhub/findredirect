@@ -4,7 +4,7 @@
  * Handles all data fetching operations for pages from Sanity CMS
  */
 
-import { client } from "@/sanity/lib/client";
+import { client } from '@/sanity/lib/client';
 
 /**
  * Fetch all published pages for footer links
@@ -13,8 +13,8 @@ import { client } from "@/sanity/lib/client";
  * @returns {Promise<Array>} - Array of pages with title and slug
  */
 export async function fetchToolPagesForFooter(locale = 'en') {
-  try {
-    const query = `*[
+    try {
+        const query = `*[
       _type == "page" &&
       defined(slug.current) &&
       locale == $locale
@@ -23,12 +23,12 @@ export async function fetchToolPagesForFooter(locale = 'en') {
       "slug": slug.current
     }`;
 
-    const pages = await client.fetch(query, { locale });
-    return pages || [];
-  } catch (error) {
-    console.error('Error fetching pages for footer:', error);
-    return [];
-  }
+        const pages = await client.fetch(query, { locale });
+        return pages || [];
+    } catch (error) {
+        console.error('Error fetching pages for footer:', error);
+        return [];
+    }
 }
 
 /**
@@ -39,8 +39,8 @@ export async function fetchToolPagesForFooter(locale = 'en') {
  * @returns {Promise<Object|null>} - Page data or null if not found
  */
 export async function fetchPageBySlug(slug, locale = 'en') {
-  try {
-    const query = `*[
+    try {
+        const query = `*[
       _type == "page" &&
       slug.current == $slug &&
       locale == $locale
@@ -59,23 +59,30 @@ export async function fetchPageBySlug(slug, locale = 'en') {
       exampleUrls,
       contentAfterWidget,
       faqs,
+      "relatedPages": *[_type == "page" && _id != ^._id && locale == $locale && count(tags[@ in ^.tags]) > 0]
+        | order(count(tags[@ in ^.tags]) desc)[0...10]{
+          _id,
+          title,
+          "slug": slug.current,
+          tags
+        },
       locale,
       publishedAt,
       customStructuredData
     }`;
 
-    let page = await client.fetch(query, { slug, locale });
+        let page = await client.fetch(query, { slug, locale });
 
-    // Fallback to English if not found in current locale
-    if (!page && locale !== 'en') {
-      page = await client.fetch(query, { slug, locale: 'en' });
+        // Fallback to English if not found in current locale
+        if (!page && locale !== 'en') {
+            page = await client.fetch(query, { slug, locale: 'en' });
+        }
+
+        return page;
+    } catch (error) {
+        console.error('Error fetching page by slug:', error);
+        return null;
     }
-
-    return page;
-  } catch (error) {
-    console.error('Error fetching page by slug:', error);
-    return null;
-  }
 }
 
 /**
@@ -84,20 +91,20 @@ export async function fetchPageBySlug(slug, locale = 'en') {
  * @returns {Promise<Array>} - Array of objects with slug and locale
  */
 export async function fetchAllPageSlugs() {
-  try {
-    const query = `*[
+    try {
+        const query = `*[
       _type == "page" && defined(slug.current)
     ] {
       "slug": slug.current,
       locale
     }`;
 
-    const slugs = await client.fetch(query);
-    return slugs || [];
-  } catch (error) {
-    console.error('Error fetching page slugs:', error);
-    return [];
-  }
+        const slugs = await client.fetch(query);
+        return slugs || [];
+    } catch (error) {
+        console.error('Error fetching page slugs:', error);
+        return [];
+    }
 }
 
 /**
@@ -108,8 +115,8 @@ export async function fetchAllPageSlugs() {
  * @returns {Promise<Array>} - Array of pages
  */
 export async function fetchToolPagesByWidget(widgetType, locale = 'en') {
-  try {
-    const query = `*[
+    try {
+        const query = `*[
       _type == "page" &&
       widget == $widgetType &&
       locale == $locale &&
@@ -121,12 +128,12 @@ export async function fetchToolPagesByWidget(widgetType, locale = 'en') {
       publishedAt
     }`;
 
-    const pages = await client.fetch(query, { widgetType, locale });
-    return pages || [];
-  } catch (error) {
-    console.error('Error fetching pages by widget:', error);
-    return [];
-  }
+        const pages = await client.fetch(query, { widgetType, locale });
+        return pages || [];
+    } catch (error) {
+        console.error('Error fetching pages by widget:', error);
+        return [];
+    }
 }
 
 /**
@@ -137,8 +144,8 @@ export async function fetchToolPagesByWidget(widgetType, locale = 'en') {
  * @returns {Promise<Array>} - Array of recent pages
  */
 export async function fetchRecentToolPages(limit = 5, locale = 'en') {
-  try {
-    const query = `*[
+    try {
+        const query = `*[
       _type == "page" &&
       locale == $locale &&
       defined(slug.current)
@@ -149,12 +156,12 @@ export async function fetchRecentToolPages(limit = 5, locale = 'en') {
       publishedAt
     }`;
 
-    const pages = await client.fetch(query, { locale });
-    return pages || [];
-  } catch (error) {
-    console.error('Error fetching recent pages:', error);
-    return [];
-  }
+        const pages = await client.fetch(query, { locale });
+        return pages || [];
+    } catch (error) {
+        console.error('Error fetching recent pages:', error);
+        return [];
+    }
 }
 
 /**
@@ -164,8 +171,8 @@ export async function fetchRecentToolPages(limit = 5, locale = 'en') {
  * @returns {Promise<Array>} - Array of all pages
  */
 export async function fetchAllPagesForFooter(locale = 'en') {
-  try {
-    const query = `*[
+    try {
+        const query = `*[
       _type == "page" &&
       defined(slug.current) &&
       locale == $locale
@@ -175,12 +182,12 @@ export async function fetchAllPagesForFooter(locale = 'en') {
       category
     }`;
 
-    const pages = await client.fetch(query, { locale });
-    return pages || [];
-  } catch (error) {
-    console.error('Error fetching all pages for footer:', error);
-    return [];
-  }
+        const pages = await client.fetch(query, { locale });
+        return pages || [];
+    } catch (error) {
+        console.error('Error fetching all pages for footer:', error);
+        return [];
+    }
 }
 
 /**
@@ -190,8 +197,8 @@ export async function fetchAllPagesForFooter(locale = 'en') {
  * @returns {Promise<Array>} - Array of company pages
  */
 export async function fetchCompanyPages(locale = 'en') {
-  try {
-    const query = `*[
+    try {
+        const query = `*[
       _type == "page" &&
       widget == "none" &&
       locale == $locale &&
@@ -201,10 +208,10 @@ export async function fetchCompanyPages(locale = 'en') {
       "slug": slug.current
     }`;
 
-    const pages = await client.fetch(query, { locale });
-    return pages || [];
-  } catch (error) {
-    console.error('Error fetching company pages:', error);
-    return [];
-  }
+        const pages = await client.fetch(query, { locale });
+        return pages || [];
+    } catch (error) {
+        console.error('Error fetching company pages:', error);
+        return [];
+    }
 }
