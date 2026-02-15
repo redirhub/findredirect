@@ -1,35 +1,35 @@
-import { defineField, defineType } from 'sanity'
-import { LANGUAGES, defaultLocale, getLocaleLabel } from '@/sanity/config/i18n'
+import { defineField, defineType } from "sanity";
+import { LANGUAGES, defaultLocale, getLocaleLabel } from "@/sanity/config/i18n";
 
 export const pageType = defineType({
-  name: 'page',
-  title: 'Page',
-  type: 'document',
+  name: "page",
+  title: "Page",
+  type: "document",
   fields: [
     defineField({
-      name: 'title',
-      type: 'string',
-      title: 'Page Title',
-      description: 'Main H1 title for the tool page',
+      name: "title",
+      type: "string",
+      title: "Page Title",
+      description: "Main H1 title for the tool page",
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
-      title: 'URL Slug',
+      name: "slug",
+      type: "slug",
+      title: "URL Slug",
       description: 'URL path (e.g., "redirect-checker" becomes /redirect-checker)',
       options: {
-        source: 'title',
+        source: "title",
         isUnique: (slug, context) => {
           const { document, getClient } = context;
-          const locale = document?.locale || 'en';
-          const docId = document?._id || '';
+          const locale = document?.locale || "en";
+          const docId = document?._id || "";
 
           // Handle both draft and published IDs
-          const publishedId = docId.replace(/^drafts\./, '');
+          const publishedId = docId.replace(/^drafts\./, "");
           const draftId = `drafts.${publishedId}`;
 
-          const client = getClient({ apiVersion: '2024-01-01' });
+          const client = getClient({ apiVersion: "2024-01-01" });
 
           const query = `
             !defined(*[
@@ -46,194 +46,193 @@ export const pageType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'metaTitle',
-      type: 'string',
-      title: 'Meta Title',
-      description: 'SEO meta title (appears in search results)',
-      validation: (rule) => rule.max(60).warning('Should be 60 characters or less'),
+      name: "metaTitle",
+      type: "string",
+      title: "Meta Title",
+      description: "SEO meta title (appears in search results)",
+      validation: (rule) => rule.max(60).warning("Should be 60 characters or less"),
     }),
     defineField({
-      name: 'metaDescription',
-      type: 'text',
-      title: 'Meta Description',
-      description: 'SEO meta description (appears in search results)',
-      validation: (rule) => rule.max(160).warning('Should be 160 characters or less'),
+      name: "metaDescription",
+      type: "text",
+      title: "Meta Description",
+      description: "SEO meta description (appears in search results)",
+      validation: (rule) => rule.max(160).warning("Should be 160 characters or less"),
     }),
     defineField({
-      name: 'category',
-      type: 'string',
-      title: 'Category',
-      description: 'Page category for organizing footer links',
+      name: "category",
+      type: "string",
+      title: "Category",
+      description: "Page category for organizing footer links",
       options: {
         list: [
-          { title: 'Tools', value: 'tools' },
-          { title: 'Company', value: 'company' },
-          { title: 'Resources', value: 'resources' },
+          { title: "Tools", value: "tools" },
+          { title: "Company", value: "company" },
+          { title: "Resources", value: "resources" },
         ],
-        layout: 'radio',
+        layout: "radio",
       },
-      initialValue: 'tools',
+      initialValue: "tools",
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'widget',
-      type: 'string',
-      title: 'Widget Type',
+      name: "widget",
+      type: "string",
+      title: "Widget Type",
       description: 'Which tool widget to display (select "None" for regular content pages)',
       options: {
         list: [
-          { title: 'Redirect Checker', value: 'redirect' },
-          { title: 'Block Checker', value: 'block' },
-          { title: 'Uptime Comparison', value: 'uptime' },
-          { title: 'None (Content Page)', value: 'none' },
+          { title: "Redirect Checker", value: "redirect" },
+          { title: "Block Checker", value: "block" },
+          { title: "Uptime Comparison", value: "uptime" },
+          { title: "None (Content Page)", value: "none" },
         ],
-        layout: 'radio',
+        layout: "radio",
       },
-      initialValue: 'none',
+      initialValue: "none",
     }),
     defineField({
-      name: 'heroIcon',
-      type: 'string',
-      title: 'Hero Icon',
-      description: 'React icon name (e.g., FaLink, FaBan) - Only for tool pages',
-      initialValue: 'FaLink',
-      hidden: ({ document }) => document?.widget === 'none',
+      name: "heroIcon",
+      type: "string",
+      title: "Hero Icon",
+      description: "React icon name (e.g., FaLink, FaBan) - Only for tool pages",
+      initialValue: "FaLink",
+      hidden: ({ document }) => document?.widget === "none",
     }),
     defineField({
-      name: 'heroHeading',
-      type: 'string',
-      title: 'Hero Heading',
-      description: 'Main heading displayed above the widget - Only for tool pages',
-      hidden: ({ document }) => document?.widget === 'none',
+      name: "heroHeading",
+      type: "string",
+      title: "Hero Heading",
+      description: "Main heading displayed above the widget - Only for tool pages",
+      hidden: ({ document }) => document?.widget === "none",
     }),
     defineField({
-      name: 'heroDescription',
-      type: 'text',
-      title: 'Hero Description',
-      description: 'Description text displayed below the hero heading - Only for tool pages',
-      hidden: ({ document }) => document?.widget === 'none',
+      name: "heroDescription",
+      type: "text",
+      title: "Hero Description",
+      description: "Description text displayed below the hero heading - Only for tool pages",
+      hidden: ({ document }) => document?.widget === "none",
     }),
     defineField({
-      name: 'widgetConfig',
-      type: 'array',
-      title: 'Widget Configuration',
-      description: 'Key-value configuration for the widget. Examples:\n' +
+      name: "widgetConfig",
+      type: "array",
+      title: "Widget Configuration",
+      description:
+        "Key-value configuration for the widget. Examples:\n" +
         '• Redirect/Block: key="buttonText", value="Check Now" | key="examples", value="url1,url2,url3"\n' +
         '• Uptime: key="services", value="yy6y,ps0k,peet" (empty=all) | key="showDataSources", value="true" | key="ctaUrl", value="https://..." | key="ctaText", value="Get Started"',
-      hidden: ({ document }) => document?.widget === 'none',
+      hidden: ({ document }) => document?.widget === "none",
       of: [
         {
-          type: 'object',
+          type: "object",
           fields: [
             {
-              name: 'key',
-              type: 'string',
-              title: 'Key',
-              description: 'Configuration key (e.g., buttonText, examples, placeholder)',
+              name: "key",
+              type: "string",
+              title: "Key",
+              description: "Configuration key (e.g., buttonText, examples, placeholder)",
               validation: (rule) => rule.required(),
             },
             {
-              name: 'value',
-              type: 'text',
-              title: 'Value',
-              description: 'Configuration value (use comma-separated for lists)',
+              name: "value",
+              type: "text",
+              title: "Value",
+              description: "Configuration value (use comma-separated for lists)",
               rows: 2,
               validation: (rule) => rule.required(),
             },
           ],
           preview: {
-            select: { key: 'key', value: 'value' },
+            select: { key: "key", value: "value" },
             prepare({ key, value }) {
               return {
                 title: key,
-                subtitle: value?.length > 60 ? value.substring(0, 60) + '...' : value
-              }
+                subtitle: value?.length > 60 ? value.substring(0, 60) + "..." : value,
+              };
             },
           },
         },
       ],
     }),
     defineField({
-      name: 'note',
-      type: 'array',
-      title: 'Internal notes',
-      description: 'Not displayed on the page. can be AI prompts, outlines or reminders for content editors.',
+      name: "note",
+      type: "array",
+      title: "Internal notes",
+      description: "Not displayed on the page. can be AI prompts, outlines or reminders for content editors.",
       of: [
-        { type: 'block' },
+        { type: "block" },
         {
-          type: 'image',
+          type: "image",
           options: { hotspot: true },
           fields: [
             {
-              name: 'alt',
-              type: 'string',
-              title: 'Alt text',
+              name: "alt",
+              type: "string",
+              title: "Alt text",
             },
             {
-              name: 'caption',
-              type: 'string',
-              title: 'Caption',
+              name: "caption",
+              type: "string",
+              title: "Caption",
             },
           ],
         },
       ],
     }),
     defineField({
-      name: 'contentAfterWidget',
-      type: 'array',
-      title: 'Main Content',
-      description: 'Main content to display after the widget',
+      name: "contentAfterWidget",
+      type: "array",
+      title: "Main Content",
+      description: "Main content to display after the widget",
       of: [
-        { type: 'block' },
+        { type: "block" },
         {
-          type: 'image',
+          type: "image",
           options: { hotspot: true },
           fields: [
             {
-              name: 'alt',
-              type: 'string',
-              title: 'Alt text',
+              name: "alt",
+              type: "string",
+              title: "Alt text",
             },
             {
-              name: 'caption',
-              type: 'string',
-              title: 'Caption',
+              name: "caption",
+              type: "string",
+              title: "Caption",
             },
           ],
         },
       ],
     }),
     defineField({
-      name: 'faqs',
-      title: 'FAQs (Optional)',
-      type: 'array',
-      description: 'Frequently Asked Questions (recommended: 5-10 for tool pages, optional for content pages)',
+      name: "faqs",
+      title: "FAQs (Optional)",
+      type: "array",
+      description: "Frequently Asked Questions (recommended: 5-10 for tool pages, optional for content pages)",
       of: [
         {
-          type: 'object',
+          type: "object",
           fields: [
             {
-              name: 'question',
-              type: 'string',
-              title: 'Question',
+              name: "question",
+              type: "string",
+              title: "Question",
               validation: (rule) => rule.required(),
             },
             {
-              name: 'answer',
-              type: 'text',
-              title: 'Answer',
+              name: "answer",
+              type: "text",
+              title: "Answer",
               validation: (rule) => rule.required(),
             },
           ],
           preview: {
-            select: { title: 'question', subtitle: 'answer' },
+            select: { title: "question", subtitle: "answer" },
             prepare({ title, subtitle }) {
               return {
                 title,
-                subtitle: subtitle?.length > 80
-                  ? subtitle.substring(0, 80) + '...'
-                  : subtitle
-              }
+                subtitle: subtitle?.length > 80 ? subtitle.substring(0, 80) + "..." : subtitle,
+              };
             },
           },
         },
@@ -241,55 +240,63 @@ export const pageType = defineType({
       validation: (rule) => rule.max(15),
     }),
     defineField({
-      name: 'locale',
-      type: 'string',
-      title: 'Language',
-      description: 'Language of this tool page',
+      name: "locale",
+      type: "string",
+      title: "Language",
+      description: "Language of this tool page",
       options: {
-        list: LANGUAGES.map(lang => ({
+        list: LANGUAGES.map((lang) => ({
           title: lang.nativeName || lang.title,
           value: lang.id,
         })),
-        layout: 'dropdown',
+        layout: "dropdown",
       },
       initialValue: defaultLocale,
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      title: 'Published At',
+      name: "publishedAt",
+      type: "datetime",
+      title: "Published At",
       initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'customStructuredData',
-      type: 'text',
-      title: 'Custom Structured Data (JSON-LD)',
-      description: 'Optional: Custom schema.org JSON-LD (advanced use only)',
+      name: "customStructuredData",
+      type: "text",
+      title: "Custom Structured Data (JSON-LD)",
+      description: "Optional: Custom schema.org JSON-LD (advanced use only)",
       rows: 10,
     }),
     defineField({
-      name: 'needsTranslation',
-      type: 'boolean',
-      title: 'Needs Translation',
-      description: 'Auto translate page in background',
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+      description: "Tags for automatic internal linking, order = priority",
+    }),
+    defineField({
+      name: "needsTranslation",
+      type: "boolean",
+      title: "Needs Translation",
+      description: "Auto translate page in background",
       initialValue: false,
-      hidden: ({ document }) => document?.locale !== 'en',
+      hidden: ({ document }) => document?.locale !== "en",
     }),
   ],
   preview: {
     select: {
-      title: 'title',
-      slug: 'slug',
-      locale: 'locale',
-      category: 'category',
+      title: "title",
+      slug: "slug",
+      locale: "locale",
+      category: "category",
     },
     prepare({ title, slug, locale, category }) {
       return {
         title: title,
-        subtitle: `${getLocaleLabel(locale)} • /${slug?.current || slug} • ${category || 'tools'}`,
-      }
+        subtitle: `${getLocaleLabel(locale)} • /${slug?.current || slug} • ${category || "tools"}`,
+      };
     },
   },
-})
+});
