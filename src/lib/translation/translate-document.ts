@@ -242,6 +242,7 @@ async function createTranslatedDocument(
 
   // Build translated document based on type
   let translatedDoc: any = {
+    ...sourceDoc,
     _type: sourceDoc._type,
     locale: targetLocale,
     title: translatedMetadata.title,
